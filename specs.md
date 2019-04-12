@@ -11,7 +11,9 @@ This document specifies the  queries and response formats of 2.0 version of the 
 
 References
 [https://www.dst.dk/en/Statistik/statistikbanken/api](https://www.dst.dk/en/Statistik/statistikbanken/api)
+
 [http://api.statbank.dk/console#data](http://api.statbank.dk/console#data)
+
 [https://www.vinaysahni.com/best-practices-for-a-pragmatic-restful-api](https://www.vinaysahni.com/best-practices-for-a-pragmatic-restful-api)
 
 #Information model for a Table
@@ -56,8 +58,11 @@ Proposal: Look at Json-Stat collections
 
 ## Configuration endpoint
 **url:** `http://my-site.com/api/v2/config`
+
 **HTTP method:** GET|POST
+
 See the configuration of the API
+
 **Response**
 ```json
 {
@@ -81,9 +86,12 @@ See the configuration of the API
 
 ## Database (is Subject a better name?) endpoint 
 **url:** `http://my-site.com/api/v2/database`
+
 **HTTP method:** GET|POST
+
 Browse the database structure.
 There are two types *l* and *t* i.e. level or table. 
+
 **Response**
 ```json
 [
@@ -129,8 +137,11 @@ Same selection rules as in the current API.
 ## Table  endpoint
 ### List all tables
 **url:** `/api/v2/tables/`
+
 **HTTP method:** GET|POST
+
 List all tables in the database
+
 **Response**
 ```json
 [
@@ -209,8 +220,11 @@ D = The table is no longer updated but is accessible to all
 
 ### List metadata for a table
 **url:** `/api/v2/tables/<table-id>`
+
 **HTTP method:** GET|POST
+
 List metadata for the specified table
+
 **Response**
 ```json
 {
@@ -309,15 +323,20 @@ We need to rethink. All valuesets and aggregations shall be listed.
 
 ### Get data for a specific table
 **url:** `/api/v2/tables/<table-id>/data/<format>`
+
 **HTTP method:** GET|POST
+
 Retrieves data for a the specified table in the format specified. The available formats are listed in the configuration end point see 4.1 Configuration endpoint.
 #### Parameters
 The variables of the table can be used to subquery a part of the data see 6 Data selection parameters for how to specify these parameters.
 
 ### List all streams for a table
 **url:** `/api/v2/tables/<table-id>/streams`
+
 **HTTP method:** GET|POST
+
 List all streams that are associated with the table.
+
 **Response**
 ```json
 [
@@ -344,8 +363,11 @@ List all streams that are associated with the table.
 ```
 ### List metadata for a stream
 **url:** `/api/v2/tables/<table-id>/streams/<stream-id>/`
+
 **HTTP method:** GET|POST
+
 List metadata for the specified stream
+
 **Response**
 ```json
 {
@@ -414,7 +436,9 @@ List metadata for the specified stream
 
 ### Get data via a stream
 **url:** `/api/v2/tables/<table-id>/streams/<stream-id>/data/<format>`
+
 **HTTP method:** GET|POST
+
 List metadata for the specified table
 Retrieves data for a the specified table in the format specified. The available formats are listed in the configuration end point see 4.1 Configuration endpoint.
 #### Parameters
@@ -425,8 +449,11 @@ Question: Is it possible to get data without specifying any selection? Would thi
 
 ### List all filters for a table
 **url:** `/api/v2/tables/<table-id>/filters`
+
 **HTTP method:** GET|POST
+
 List all filters for specified table
+
 **Response**
 ```json
 TODO: Make an example of the response.
@@ -434,8 +461,10 @@ TODO: Make an example of the response.
 
 ### Get filter specification
 **url:** `/api/v2/tables/<table-id>/filters/<filter-id>/`
+
 **HTTP method:** GET|POST
 List the filter specification.
+
 **Response**
 ```json
 {
