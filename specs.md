@@ -533,7 +533,9 @@ Question: Will this be possible for other variables than the time variable?
 Proposal: Look in Lucene.Net for more ideas for selection syntax.
 We want “?” as wildcard for one character. Shoudl be ok
 
-The variable time can also prefix the code it >, >=, <, <= indicating a matching of all time values that are greater, greater or equal, less, less or equal to the value
+Should be able to combine ? and *
+
+~~The variable time can also prefix the code it >, >=, <, <= indicating a matching of all time values that are greater, greater or equal, less, less or equal to the value~~
 
 **Example**
 ```
@@ -546,7 +548,14 @@ We will try to make it work
 -	2000K2
 -	2000H2
 Filtered variables can have filters specified. In such cases when a filter is applied the values that are referred in the selection is the values of the filter
-
+**Example**
+```
+Time=>1980.. From 
+      1980..1990 Interval
+      ..1980 To
+Sortera alfabestiskt på kod och välj därefter.
+Man måste ange koderna precist (inga ? och *)
+```
 ## Filters
 There is two type of filters: selection and transformation. The selection filters are used to make the selection easier. Imagine you have a variable, *Country*, with values for all countries and that you also have a filter, *agg_continents*, that group all countries to continents. You would like to select all European countries but you do not want to select each individual country (and they can vary over time). What you will do is that you specify that the table query for Country should use the selection filter and that the values that are specified are the filter values. It could look something like this 
 ```
@@ -557,7 +566,7 @@ Imagine the same variable as above but you actually do not want each individual 
 Country@agg_continents=EUROPE   
 ```
 Question: Will this work also for valuesets?
--No
+-No orYes
 Proposal: Look how Denmark has implemented this
 They do not have aggregtions when streaming
 
