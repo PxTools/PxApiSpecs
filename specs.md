@@ -9,7 +9,8 @@ This document specifies the  queries and response formats of 2.0 version of the 
 - *table* a multidimensional table containing statistical measures and metadata about these measures stored in a PX-File or a database using the CNMM.
 - *CNMM* the Common Nordic Meta Model which is the database structure that is used and maintained by Statistics Sweden, Norway and Denmark.
 
-References
+**References**
+
 [https://www.dst.dk/en/Statistik/statistikbanken/api](https://www.dst.dk/en/Statistik/statistikbanken/api)
 
 [http://api.statbank.dk/console#data](http://api.statbank.dk/console#data)
@@ -84,7 +85,7 @@ See the configuration of the API
 }
 ```
 
-## Database (is Subject a better name?) endpoint 
+## Database (is Subject a better name?) navigate? endpoint 
 **url:** `http://my-site.com/api/v2/database`
 
 **HTTP method:** GET|POST
@@ -133,6 +134,9 @@ Question:
 Will http://my-site.com/api/v2/tables/TAB0001/data return default values or is it necessary to also specify variables and values to this URL to get data? 
 -	Yes, if the number of resulting cells is lower than the max cell limit.
 Same selection rules as in the current API.
+Do not make it the whole url ony specify the nodeid like
+http://my-site.com/api/v2/database/BE and http://my-site.com/api/v2/database/BE0401
+and not http://my-site.com/api/v2/database/BE/BE0401.. OK (ge exempel på PX fil fallet)
 
 ## Table  endpoint
 ### List all tables
@@ -182,21 +186,21 @@ Question: Which date in the database/PX-file shall we check against?
 -	PX-file: LAST-UPDATED
 -	CNMM: Published
 
-##### updatedSince
+~~##### updatedSince
 Selects only tables that was updated after and including the date specified by the parameter updatedSince.
 ```
 http://my-site.com/api/v2/tables?updatedSince=2018-01-15
 ```
 Question: Which date in the database/PX-file shall we check against?
--	PX-file: LAST-UPDATED
--	CNMM: Published
+-	PX-file: LAST-UPDATEDCNMM: Published~~
 
-##### search (is query a better name?)
+##### query
 Selects only tables that that matches a criteria which is specified by the search parameter.
 ```
-http://my-site.com/api/v2/tables?search=befolkning
+http://my-site.com/api/v2/tables?query=befolkning
 ```
 Question: Which metadata shall we check against?
+Exempel på hur man kan begränsa till en viss egenskap i sökindex.
 Search index match against:
 -	Table id
 -	Table title
@@ -217,6 +221,7 @@ From documentation:
 D = The table is no longer updated but is accessible to all
 -	PXModel needs to be extended
 -	No support for this in PX-files (new keyword needed?)
+-	Notering om att det kan skilja sig mellan och PX fil baserade databaser.
 
 ### List metadata for a table
 **url:** `/api/v2/tables/<table-id>`
@@ -242,7 +247,7 @@ List metadata for the specified table
                 text: "Befolkning",  (is title, name or label better?)
                 elimination: false,
                 type: CONTENTS,
-                values: [ {id: "A", text: "Befolkning", unit: "antal"}]},
+                values: [ {id: "A", text: "Befolkning", unit: "antal"}]}, (is title, name or label better?) Maybe lable to be more in line with json-stat Vi kör på label
 
               {
                 id: "region",
@@ -320,6 +325,7 @@ List metadata for the specified table
 
 Question: domain exists in PX-files but not in CNMM. Is domain really needed? Could we use only filter instead?
 We need to rethink. All valuesets and aggregations shall be listed.
+The idea behind domain was to have a way to select which map to use when displaying the data on a map. In the CNMM case the domain should be the name of the valueset but when we show all the values for all subtables we can not specify the domain. Maybe it should be a different attribute but the problem still remains.
 
 ### Get data for a specific table
 **url:** `/api/v2/tables/<table-id>/data/<format>`
@@ -446,6 +452,7 @@ The variables of the table can be used to subquery a part of the data see 6 Data
 
 Question: Is it possible to get data without specifying any selection? Would this give me the whole table?
 -	Yes! If you don´t make any selection you will get all. Same rules as in the Danish API:
+Default kanske man ska begränsa default till de senast tider och värden. 
 
 ### List all filters for a table
 **url:** `/api/v2/tables/<table-id>/filters`
@@ -481,7 +488,7 @@ List the filter specification.
 }
 ```
 Question: The above example must be a grouping. How would a valueset look like?
-TODO: Make examples for valueset and for aggregation.
+~~TODO: Make examples for valueset and for aggregation.~~
 
 # General parameters
 ## Language
@@ -524,7 +531,7 @@ This will select
 Question: Will this be possible for other variables than the time variable?
 -	Yes. Will work for all variables
 Proposal: Look in Lucene.Net for more ideas for selection syntax.
-We want “?” as wildcard for one character.
+We want “?” as wildcard for one character. Shoudl be ok
 
 The variable time can also prefix the code it >, >=, <, <= indicating a matching of all time values that are greater, greater or equal, less, less or equal to the value
 
@@ -552,6 +559,7 @@ Country@agg_continents=EUROPE
 Question: Will this work also for valuesets?
 -No
 Proposal: Look how Denmark has implemented this
+They do not have aggregtions when streaming
 
 ```
 Streams cannot have filters and therefor filters cannot be used in table query’s for stream data.   
