@@ -2,7 +2,7 @@
 
 # Readers guide
 ## What this instruction covers
-This document specifies the  queries and response formats of 2.0 version of the PX web API.
+This document specifies the  queries and response formats and also the endpoints for the 2.0 version of the PX web API.
 
 ## Terminology
 - *Paxiom* the object model representing a statistical cube
@@ -17,13 +17,17 @@ This document specifies the  queries and response formats of 2.0 version of the 
 
 [https://www.vinaysahni.com/best-practices-for-a-pragmatic-restful-api](https://www.vinaysahni.com/best-practices-for-a-pragmatic-restful-api)
 
-#Information model for a Table
+# Information model for a Table
+TODO
 
-## Mapping
+## Model mappings
 ### Mapping to Paxiom
 Table = PXModel
+
 Value = Value
+
 FilterableVariable = Variable
+
 Filter = ValueSet or Grouping (bad name, what shall we have instead???)
 
 ### PX-file database
@@ -41,16 +45,15 @@ Some restrictions in the 2.0 version of the API
 -	**Names of aggregation files must be unique** – names of the aggregation files within a database must be unique since they will serve as the id of the aggregation filter.
 -	VARIABLETYPE must be formalized.
 -	Initially only support for PX, JSON-STAT, CSV,TSV, Excel and JSON-STAT2 (this should be possible to configure) 
--	Client should accept new properties in the responses without breaking.
+-	~~Client should accept new properties in the responses without breaking.~~
 
 # API endpoints
-All the endpoints are able to handle GET and POST HTTP request. GET is the preferred method in most cases. They result in the same response which is not very RESTful instead it is a pragmatically solution. All the examples bellow uses the GET method if you wish to do a POST request you will do it to the same url but instead of specifying query string parameters you could specify the same parameters as a JSON object having the same name as the parameter and sending that JSON object as the content of the POST request.
+~~All the endpoints are able to handle GET and POST HTTP request. GET is the preferred method in most cases. They result in the same response which is not very RESTful instead it is a pragmatically solution. All the examples bellow uses the GET method if you wish to do a POST request you will do it to the same url but instead of specifying query string parameters you could specify the same parameters as a JSON object having the same name as the parameter and sending that JSON object as the content of the POST request.~~
 
 **Example**
 ```json
 {
-  lang: "en",
-  Tid: [">1968","<1977"]
+  "lang": "en",
 }
 ```
 POST is primarily intended to be used when fetching data since the query to select the data can in some cases become very large. So large that it can extends come web browser limits on url’s .
@@ -67,26 +70,30 @@ See the configuration of the API
 **Response**
 ```json
 {
-   apiVersion: "2.0",
-   languages: [{id: "sv", 
-                name: "Svenska", 
-                defaultLanguage: true},
-               {id: "en", 
-                name: "English"}],
-   maxDataCells: 10000,
-   maxCalls: 30,
-   timeWindow: 10,
-   CORS: true,
-   dataFormats: ["px", "json-stat", "csv", "tsv"],
-   defaultDataFormat: "px",	
-   streamingFormats: ["csv", "tsv"],
-   defaultStreamingFormat: "csv",
-   etc ...
+   "apiVersion": "2.0",
+   "languages": [{"id": "sv", 
+                "label": "Svenska"},
+               {"id": "en", 
+                "label": "English"}],
+   "defaultLanguage": "sv",
+   "maxDataCells": 10000,
+   "maxCalls": 30,
+   "timeWindow": 10,
+   "features": [{
+      "id": "CORS",
+      "params": [
+        {"key":"enabled", "value":"true"}
+      ]
+   }],
+   "dataFormats": ["px", "json-stat", "csv", "tsv"],
+   "defaultDataFormat": "px",	
+   "streamingFormats": ["csv", "tsv"],
+   "defaultStreamingFormat": "csv",
 }
 ```
 
-## Database (is Subject a better name?) navigate? endpoint 
-**url:** `http://my-site.com/api/v2/database`
+## Navigate endpoint 
+**url:** `http://my-site.com/api/v2/navigate`
 
 **HTTP method:** GET|POST
 
@@ -97,31 +104,31 @@ There are two types *l* and *t* i.e. level or table.
 ```json
 [
    {
-     id: "BE0101",
-     type: "l",
-     text: "Befolkningsstatistik"
-     links: [{
-               rel: "data",
-               href: "http://my-site.com/api/v2/database/BE/BE0101"}]
+     "id": "BE0101",
+     "type": "level",
+     "label": "Befolkningsstatistik",
+     "links": [{
+               "rel": "data",
+               "href": "http://my-site.com/api/v2/navigate/BE0101"}]
    },
    {
-     id: "BE0401",
-     type: "l",
-     text: "Befolkningsframskrivningar"
-     links: [{
-               rel: "data",
-               href: "http://my-site.com/api/v2/database/BE/BE0401"}]
+     "id": "BE0401",
+     "type": "level",
+     "label": "Befolkningsframskrivningar",
+     "links": [{
+               "rel": "data",
+               "href": "http://my-site.com/api/v2/navigate/BE0401"}]
    },
    {
-     id: "TAB0001",
-     type: "t",
-     text: "Tabell A"
-     links: [{
-               rel: "metadata",
-               href: "http://my-site.com/api/v2/tables/TAB0001"},
+     "id": "TAB0001",
+     "type": "table",
+     "label": "Tabell A",
+     "links": [{
+               "rel": "metadata",
+               "href": "http://my-site.com/api/v2/tables/TAB0001"},
              {
-               rel: "data",
-               href: "http://my-site.com/api/v2/tables/TAB0001/data"}]
+               "rel": "data",
+               "href": "http://my-site.com/api/v2/tables/TAB0001/data"}]
    }
 
 ]
@@ -150,26 +157,26 @@ List all tables in the database
 ```json
 [
    {
-     id: "TAB0001",
-     text: "Tabell A",
-     updated: "2018-01-01T09:30:00"
-     links: [{
-               rel="metadata",
-               href: "http://my-site.com/api/v2/tables/TAB0001"},
+     "id": "TAB0001",
+     "text": "Tabell A",
+     "updated": "2018-01-01T09:30:00",
+     "links": [{
+               "rel": "metadata",
+               "href": "http://my-site.com/api/v2/tables/TAB0001"},
              {
-               rel="data",
-               href: "http://my-site.com/api/v2/tables/TAB0001/data"}]
+               "rel":"data",
+               "href": "http://my-site.com/api/v2/tables/TAB0001/data"}]
    },
    {
-     id: "TAB0002",
-     text: "Tabell B",
-     updated: "2018-01-22T09:30:00"
-     links: [{
-               rel="metadata",
-               href: "http://my-site.com/api/v2/tables/TAB0002"},
+     "id": "TAB0002",
+     "text": "Tabell B",
+     "updated": "2018-01-22T09:30:00",
+     "links": [{
+               "rel": "metadata",
+               "href": "http://my-site.com/api/v2/tables/TAB0002"},
              {
-               rel="data",
-               href: "http://my-site.com/api/v2/tables/TAB0002/data"}]
+               "rel": "data",
+               "href": "http://my-site.com/api/v2/tables/TAB0002/data"}]
 
    }
 ]
@@ -233,90 +240,91 @@ List metadata for the specified table
 **Response**
 ```json
 {
-  id: "TAB0001",
-  text: "Befolkning",
-  description: "Befolkning efter region, kön och år",
-  updated: "2019-02-21T09:30:00",
-  footnotes: [""],
-  contacts: [{
-               name: "Inga Svensson",
-               phone: "+46111111111",
-               mail: "inga.svensson@my-site.com"}],
-  variables: [{
-                id: "CONTENTS",
-                text: "Befolkning",  (is title, name or label better?)
-                elimination: false,
-                type: CONTENTS,
-                values: [ {id: "A", text: "Befolkning", unit: "antal"}]}, (is title, name or label better?) Maybe lable to be more in line with json-stat Vi kör på label
+  "version": "1.0",
+  "id": "TAB0001",
+  "label": "Befolkning",
+  "description": "Befolkning efter region, kön och år",
+  "updated": "2019-02-21T09:30:00",
+  "footnotes": [""],
+  "contacts": [{
+               "name": "Inga Svensson",
+               "phone": "+46111111111",
+               "mail": "inga.svensson@my-site.com"}],
+  "variables": [{
+                "id": "CONTENTS",
+                "label": "Befolkning",  
+                "elimination": false,
+                "type": "CONTENTS",
+                "values": [ {"id": "A", "text": "Befolkning", "unit": "antal"}]}, 
 
               {
-                id: "region",
-                text: "region",
-                elimination: true,
-                type: GEO,
-                domain: "kommun2017", (see question below) 
-                filters: [{id: "vs_lan", text: "län", 
-                           links: [
-                       {rel="metadata" 
-                        href: "http://my-site.com/api/v2/tables/TAB0001/filters/vs_lan"}
+                "id": "region",
+                "label": "region",
+                "elimination": true,
+                "type": "GEO",
+                "domain": "kommun2017",
+                "filters": [{"id": "vs_lan", "label": "län", 
+                           "links": [
+                       {"rel": "metadata",
+                        "href": "http://my-site.com/api/v2/tables/TAB0001/filters/vs_lan"}
                                   ]}],
-                values: [ {id: "0000", text: "Alla kommuner", eliminationValue: true},
-                          {id: "0114", text: "Upplands Väsby"},
-                          {id: "0115", text: "Vallentuna"},
+                "values": [ {"id": "0000", "text": "Alla kommuner", "eliminationValue": true},
+                          {"id": "0114", "text": "Upplands Väsby"},
+                          {"id": "0115", "text": "Vallentuna"},
                           .
                           .
                           .
-                          {id: "2584", text: "Kiruna"}
+                          {"id": "2584", "text": "Kiruna"}
                         ]},
               {
-                id: "kon",
-                text: "kön",
-                elimination: true,
-                type: N,
-                domain: "kon",
-                values: [
-                          {id: "1", text: "män"},
-                          {id: "2", text: "kvinnor"}
+                "id": "kon",
+                "label": "kön",
+                "elimination": true,
+                "type": "GENERIC",
+                "domain": "kon",
+                "values": [
+                          {"id": "1", "text": "män"},
+                          {"id": "2", "text": "kvinnor"}
                         ]},
               {
-                id: "Tid",
-                text: "år",
-                elimination: false,
-                type: TIME,
-                domain: "år",
-                values: [
-                          {id: "2000", text: "2000"},
-                          {id: "2001", text: "2001"},
+                "id": "Tid",
+                "label": "år",
+                "elimination": false,
+                "type": "TIME",
+                "domain": "år",
+                "values": [
+                          {"id": "2000", "text": "2000"},
+                          {"id": "2001", "text": "2001"},
                           .
                           .
                           .
-                          {id: "2017", text: "2017"}
+                          {"id": "2017", "text": "2017"}
 
                         ]}],
-  streams: [
+  "streams": [
              {
-               id: "K1", 
-               text: " Befolkning efter kommun, kön och år "
-               links: [
-                      {rel="metadata" 
-                       href: "http://my-site.com/api/v2/tables/TAB0001/streams/K1"},
-                      {rel="data" 
-                       href: "http://my-site.com/api/v2/tables/TAB0001/streams/K1/data"}
+               "id": "K1", 
+               "label": "Befolkning efter kommun, kön och år ",
+               "links": [
+                      {"rel": "metadata",
+                       "href": "http://my-site.com/api/v2/tables/TAB0001/streams/K1"},
+                      {"rel": "data", 
+                       "href": "http://my-site.com/api/v2/tables/TAB0001/streams/K1/data"}
                        ]},
              {
-               id: "L1", 
-               text: " Befolkning efter län, kön och år "
-               links: [
-                      {rel="metadata" 
-                       href: "http://my-site.com/api/v2/tables/TAB0001/streams/L1"},
-                      {rel="data" 
-                       href: "http://my-site.com/api/v2/tables/TAB0001/streams/L1/data"}
+               "id": "L1", 
+               "label": " Befolkning efter län, kön och år ",
+               "links": [
+                      {"rel": "metadata", 
+                       "href": "http://my-site.com/api/v2/tables/TAB0001/streams/L1"},
+                      {"rel": "data", 
+                       "href": "http://my-site.com/api/v2/tables/TAB0001/streams/L1/data"}
                        ]}]
              }
            ],
    links: [{
-             rel="data",
-             href: "http://my-site.com/api/v2/tables/TAB0001/data"}]
+             "rel": "data",
+             "href": "http://my-site.com/api/v2/tables/TAB0001/data"}]
 
    }
 
@@ -347,22 +355,22 @@ List all streams that are associated with the table.
 ```json
 [
   {
-    id: "K1", 
-    text: "Befolkning efter kommun, kön och år"
-    links: [
-           {rel="metadata" 
-            href: "http://my-site.com/api/v2/tables/TAB0001/streams/K1"},
-           {rel="data" 
-            href: "http://my-site.com/api/v2/tables/TAB0001/streams/K1/stream"}
+    "id": "K1", 
+    "text": "Befolkning efter kommun, kön och år",
+    "links": [
+           {"rel": "metadata" ,
+            "href": "http://my-site.com/api/v2/tables/TAB0001/streams/K1"},
+           {"rel": "data", 
+            "href": "http://my-site.com/api/v2/tables/TAB0001/streams/K1/stream"}
             ]},
   {
-    id: "L1", 
-    text: "Befolkning efter län, kön och år"
-    links: [
-           {rel="metadata" 
-            href: "http://my-site.com/api/v2/tables/TAB0001/streams/L1"},
-           {rel="data" 
-            href: "http://my-site.com/api/v2/tables/TAB0001/streams/L1/data"}
+    "id": "L1", 
+    "text": "Befolkning efter län, kön och år",
+    "links": [
+           {"rel": "metadata",
+            "href": "http://my-site.com/api/v2/tables/TAB0001/streams/L1"},
+           {"rel": "data",
+            "href": "http://my-site.com/api/v2/tables/TAB0001/streams/L1/data"}
             ]}]
   }
 ]
@@ -377,63 +385,63 @@ List metadata for the specified stream
 **Response**
 ```json
 {
-  id: "K1",
-  text: "Befolkning",
-  description: "Befolkning efter kommun, kön och år",
-  updated: "2019-02-21T09:30:00",
-  footnotes: [""],
-  contacts: [{
-               name: "Inga Svensson",
-               phone: "+46111111111",
-               mail: "inga.svensson@my-site.com"}],
-  variables: [{
-                id: "CONTENTS",
-                text: "Befolkning",
-                elimination: false,
-                type: CONTENTS,
-                values: [ {id: "A", text: "Befolkning", unit: "antal"}]},
+  "id": "K1",
+  "text": "Befolkning",
+  "description": "Befolkning efter kommun, kön och år",
+  "updated": "2019-02-21T09:30:00",
+  "footnotes": [""],
+  "contacts": [{
+               "name": "Inga Svensson",
+               "phone": "+46111111111",
+               "mail": "inga.svensson@my-site.com"}],
+  "variables": [{
+                "id": "CONTENTS",
+                "text": "Befolkning",
+                "elimination": false,
+                "type": "CONTENTS",
+                "values": [ {"id": "A", "text": "Befolkning", "unit": "antal"}]},
 
               {
-                id: "region",
-                text: "kommun",
-                elimination: true,
-                type: GEO,
-                domain: "kommun2017",
-                values: [ {id: "0114", text: "Upplands Väsby"},
-                          {id: "0115", text: "Vallentuna"},
+                "id": "region",
+                "text": "kommun",
+                "elimination": true,
+                "type": "GEO",
+                ~~"domain": "kommun2017",~~
+                "values": [ {"id": "0114", "text": "Upplands Väsby"},
+                          {"id": "0115", "text": "Vallentuna"},
                           .
                           .
                           .
-                          {id: "2584", text: "Kiruna"}
+                          {"id": "2584", "text": "Kiruna"}
                         ]},
               {
-                id: "kon",
-                text: "kön",
-                elimination: true,
-                type: N,
-                domain: "kon",
-                values: [
-                          {id: "1", text: "män"},
-                          {id: "2", text: "kvinnor"}
+                "id": "kon",
+                "text": "kön",
+                "elimination": true,
+                "type": "GENERIC",
+                "domain": "kon",
+                "values": [
+                          {"id": "1", "text": "män"},
+                          {"id": "2", "text": "kvinnor"}
                         ]},
               {
-                id: "Tid",
-                text: "år",
-                elimination: false,
-                type: TIME,
-                domain: "år",
-                values: [
-                          {id: "2000", text: "2000"},
-                          {id: "2001", text: "2001"},
+                "id": "Tid",
+                "text": "år",
+                "elimination": false,
+                "type": "TIME",
+                "domain": "år",
+                "values": [
+                          {"id": "2000", "text": "2000"},
+                          {"id": "2001", "text": "2001"},
                           .
                           .
                           .
-                          {id: "2017", text: "2017"}
+                          {"id": "2017", "text": "2017"}
 
                         ]}],
-   links: [{
-             rel="data",
-             href: "http://my-site.com/api/v2/tables/TAB0001/streams/K1/data"}]
+   "links": [{
+             "rel": "data",
+             "href": "http://my-site.com/api/v2/tables/TAB0001/streams/K1/data"}]
 
    }
 
@@ -475,14 +483,14 @@ List the filter specification.
 **Response**
 ```json
 {
-  id: "vs_lan",
-  values: [
-    {id: "01", text: "Stockholm", map: ["0114","0115", … "0192"]}
-    {id: "02", text: "Uppsala", map: ["0305","0319", … "0382"]}
+  "id": "vs_lan",
+  "values": [
+    {"id": "01", "text": "Stockholm", "map": ["0114","0115", … "0192"]}
+    {"id": "02", "text": "Uppsala", "map": ["0305","0319", … "0382"]}
     .
     .
     .
-    {id: "25", text: "Norrbotten", map: ["2505","2506", … "2584"]}
+    {"id": "25", "text": "Norrbotten", "map": ["2505","2506", … "2584"]}
 
   ]
 }
@@ -576,3 +584,8 @@ Streams cannot have filters and therefor filters cannot be used in table query�
 
 ## Elimination
 If elimination is set to true the variable can be eliminated and nothing have to be selected for this variable and the result will not contain that variable. If the variable have a value that states that it is the elimination value then that value will be selected to eliminate the variable. If no elimination value is specified the variable will be eliminated from the result by summing up all data points for the all values of that variable. If a variable has elimination set to false then at least one value bust be selected for that variable.
+
+# Response codes
+429
+404
+500
