@@ -1,0 +1,361 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema",
+    "title": "Px Api 2.0 Schema",
+    "id": "http://www.scb.se/px/api/schemas/2.0",
+    "description": "This is the schema for the request and response objects for Px Api 2.0",
+
+    "definitions": {
+        "version" : {
+            "type": "string"
+        },
+
+        "response-object": {
+            "description": "Root objects",
+            "type": "object",
+            "properties": {
+                "class" : {
+                    "type": "string",
+                    "enum": ["navigation-structure", "table-list", "table-metadata"]
+                }
+            }
+        },
+
+        "structure": {
+            "type": "object",
+            "description": "Response format for a database query",
+            "properties": {
+                "version" : {
+                    "description": "Response format for the database structure",
+                    "$ref" : "#/definitions/version"
+                },
+                "items" : {
+                    "description": "Sub items for a level",
+                    "type":"array",
+                    "items": {"$ref": "#/definitions/item"}
+                }
+            },
+            "required": ["version", "items"]
+        },
+
+
+        "item": {
+            "type" : "object",
+            "properties": {
+                "id" : { 
+                    "description": "The identifyer for the item", 
+                    "type": "string" },
+                "type" : { 
+                    "description": "", 
+                    "type": "string", "enum": ["level", "table"] },
+                "label" : { 
+                    "description": "", 
+                    "type": "string" },
+                "links" : { 
+                    "description": "", 
+                    "type": "array",
+                    "items": {
+                        "$ref" : "#/definitions/link"
+                    } 
+                },
+                "sub-items" : {
+                    "description": "Sub items for a level",
+                    "type":"array",
+                    "items": {"$ref": "#/definitions/item"}
+                }
+            },
+            "required": ["id", "type", "label"]
+        },
+
+        "link": {
+            "type":"object",
+            "properties": {
+                "rel" : {
+                    "description": "Relation",
+                    "type":"string"
+                },
+                "href": {
+                    "description": "The URL for the link",
+                    "type" : "string",
+                    "format":"uri"
+                }
+            },
+            "required": ["href"]
+        },
+
+        "contact": {
+            "type": "object",
+            "description": "Contact information",
+            "properties": {
+                "name": {
+                    "description": "Fullname for the contact person",
+                    "type":"string"
+                },
+                "phone": {
+                    "description": "Phone number to the contact person",
+                    "type": "string"
+                },
+                "mail": {
+                    "description": "Mail address to the contact person",
+                    "type": "string",
+                    "format":"email"
+                }
+            },
+            "required": ["name"]
+        },
+
+        "table": {
+            "type": "object",
+            "description": "Table response format",
+            "properties": {
+                "version": { "$ref": "#/definitions/version"},
+                "id": {
+                    "description": "The identifier for the table",
+                    "type": "string"
+                },
+                "label": {
+                    "description": "The name/title of a table",
+                    "type": "string"
+                },
+                "description" : {
+                    "description": "A description for the table",
+                    "type": "string"
+                },
+                "updated": {
+                    "description": "Date for when the table was published",
+                    "type":"string",
+                    "format":"date-time"
+                },
+                "footnotes": {
+                    "type": "array",
+                    "items": {"type":"string"}
+                },
+                "contacts": {
+                    "description": "List of contact persons",
+                    "type": "array",
+                    "items": {"$ref": "#/defintions/contact"}
+                }
+            },
+            "required": ["version","id", "label","updated"]
+        },
+
+        "variable" :{
+            "type": "object",
+            "description": "",
+            "properties": {
+                "id" : {
+                    "description": "Identifyer for the variable should be uniqe in the scope of the table",
+                    "type": "string"
+                },
+                "label" : {
+                    "description": "The textual representation of the variable",
+                    "type": "string"
+                },
+                "elimination": {
+                    "description": "States if the variable can be omitted by elimination either by a elimination value or by summing up all values fot the variable",
+                    "type": "boolean",
+                    "default": false
+                },
+                "type": {
+                    "description": "The type of variable",
+                    "type": "string",
+                    "enum": ["GENERIC", "GEO", "TIME", "CONTENT"],
+                    "default": "GENERIC"
+                },
+                "filters": {
+                    "type": "array",
+                    "items": {"$ref": "#/definitions/refobject"}
+                },
+                "values": {
+                    "type": "array",
+                    "items": { "$ref": "#/definitions/value"}
+                },
+                "streams": {
+                    "type": "array",
+                    "items": { "$ref": "#/definitions/refobject"}
+                },
+                "links" :  { 
+                    "description": "", 
+                    "type": "array",
+                    "items": {
+                        "$ref" : "#/definitions/link"
+                    } 
+                }
+            }
+        },
+
+        "value": {
+            "type": "object",
+            "description": "value for the variable",
+            "properties": {
+                "id": {
+                    "description": "The didentifier for the value hat should be uniqe within a variable",
+                    "type": "string"
+                },
+                "label" : {
+                    "description": "The textual representation for the value",
+                    "type": "string"    
+                },
+                "elimination": {
+                    "description": "If the value is the elimination value",
+                    "type": "boolean",
+                    "default": false
+                },
+                "unit": {
+                    "description": "The unit for the value",
+                    "type": "string"
+                },
+                "links" :  { 
+                    "description": "", 
+                    "type": "array",
+                    "items": {
+                        "$ref" : "#/definitions/link"
+                    } 
+                }
+            }
+        },
+
+        "streams" : {
+            "type": "object",
+            "description": "List of streams for a table",
+            "properties": {
+                "version": {
+                    "description": "",
+                    "$ref": "#/definitions/version"
+                },
+                "streams" :  { 
+                    "description": "", 
+                    "type": "array",
+                    "items": {
+                        "$ref" : "#/definitions/link"
+                    } 
+                }
+            }
+        },
+
+        "refobject": {
+            "type": "object",
+            "properties": {
+                "id" : {
+                    "description": "Identifier for the object",
+                    "type": "string"
+                },
+                "label" : {
+                    "description": "Name of the object",
+                    "type": "string"
+                },
+                "links" :  { 
+                    "description": "links for the object", 
+                    "type": "array",
+                    "items": {
+                        "$ref" : "#/definitions/link"
+                    } 
+                }
+            }
+        },
+        "configuration": {
+            "type": "object",
+            "description": "Configuration response object",
+            "properties": {
+                "version": {
+                    "description": "",
+                    "$ref": "#/definitions/version"
+                },                
+                "apiVersion": {
+                    "description": "The version of the API",
+                    "type": "string"
+                },
+                "languages": {
+                    "description": "List of languages that data can be fetched as",
+                    "type": "array",
+                    "items": {"$ref": "#/definitions/refobject"}
+                },
+                "defaultLanguage": {
+                    "description": "Which of the langue that are the default language",
+                    "type": "string"
+                },
+                "maxDataCells": {
+                    "description": "The maximum number of data cells that can be fetch in a single call",
+                    "type": "integer",
+                    "minimum": 1
+                },
+                "maxCalls": {
+                    "description": "Then number of request that can be done in the time span specified by timeWindow",
+                    "type": "integer",
+                    "minimum": 1
+                },
+                "timeWindow": {
+                    "description": "The time window in seconds for the maxCalls restriction function",
+                    "type": "integer",
+                    "minimum": 1
+                },
+                "features": {
+                    "description": "API features"
+                },
+                "dataFormats": {
+                    "description": "A list of data formats that specifies how data can be fetch from the API",
+                    "type":"array",
+                    "items": { "type": "string"}
+                },
+                "defaultDataFormat": {
+                    "description": "Specifies which format should be used if no format is specified in a fetch query",
+                    "type": "string"
+                },
+                "streamingFormats": {
+                    "description": "A list of data formats that specifies how data can be fetch from the API via a stream",
+                    "type":"array",
+                    "items": { "type": "string"}
+                },
+                "defaultStreamingFormat": {
+                    "description": "Specifies which format should be used if no format is specified in a streaming query",
+                    "type": "string"
+                }
+            }
+        },
+        "tablequery": {
+            "type": "object",
+            "description": "A table query object that should be in a post query variant",
+            "properties": {
+                "lang": {
+                    "description": "The prefered language",
+                    "type": "string"
+                },
+                "items": {
+                    "description": "List of selected items per variable",
+                    "type": "array",
+                    "items": {"$ref": "#/definitions/itemsSelection"}
+                },
+                "response": {
+                    "description": "Specifies the respose",
+                    "$ref": "#/definitions/response"
+                }
+            }
+        },
+
+        "itemsSelection" : {
+            "type": "object",
+            "properties": {
+                "variableId": {
+                    "description": "The identifier for the variable",
+                    "type": "string"
+                },
+                "filter": {
+                    "description": "The identifier for the filter",
+                    "type": "string"
+                },
+                "itmes": {
+                    "description": "selection items"
+                }
+            }
+        },
+
+        "response": {
+            "type": "object",
+            "properties": {
+                "format": {
+                    "description": "The response format",
+                    "type": "string"
+                }
+            }
+        }
+    }   
+}
