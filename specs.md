@@ -236,7 +236,7 @@ D = The table is no longer updated but is accessible to all
 **HTTP method:** GET|POST
 
 List metadata for the specified table
-
+Proposal: Add a property lanuage to the response
 **Response**
 ```json
 {
