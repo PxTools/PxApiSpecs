@@ -140,7 +140,7 @@ The querystring parameter recursive=true will return all sub nodes for the speci
 Possible to define number of recursive levels. 
 
 Make the "type": "table" item for a table ( "TableLocator-class" ) the same for this endpoint and for the /tables endpoint 
-         add a link to the cube in a gui  
+         and add a link to the cube in a gui  (What about languages )
 
 Question:
 Will http://my-site.com/api/v2/tables/TAB0001/data return default values or is it necessary to also specify variables and values to this URL to get data? 
