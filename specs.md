@@ -92,7 +92,7 @@ See the configuration of the API
 }
 ```
 
-Proposal: Add an instanceLabel for each label (some thing like "Forecast database from Konjunkturinstitutet") 
+Proposal: Add an instanceLabel for each language (some thing like "Forecast database from Konjunkturinstitutet") 
       
 ## Navigate endpoint 
 **url:** `http://my-site.com/api/v2/navigate`
@@ -138,6 +138,9 @@ There are two types *l* and *t* i.e. level or table.
 Proposal: 
 The querystring parameter recursive=true will return all sub nodes for the specified node.
 Possible to define number of recursive levels. 
+
+Make the "type": "table" item for a table ( "TableLocator-class" ) the same for this endpoint and for the /tables endpoint 
+         add a link to the cube in a gui  
 
 Question:
 Will http://my-site.com/api/v2/tables/TAB0001/data return default values or is it necessary to also specify variables and values to this URL to get data? 
