@@ -92,6 +92,8 @@ See the configuration of the API
 }
 ```
 
+Proposal: Add an instanceLabel for each label (some thing like "Forecast database from Konjunkturinstitutet") 
+      
 ## Navigate endpoint 
 **url:** `http://my-site.com/api/v2/navigate`
 
