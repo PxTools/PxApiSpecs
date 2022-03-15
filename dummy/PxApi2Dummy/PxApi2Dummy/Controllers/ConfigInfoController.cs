@@ -3,40 +3,34 @@ using PxApi2Dummy.Data;
 
 namespace PxApi2Dummy.Controllers
 {
+    /// <summary>
+    /// Controller for the navigate endpoint
+    /// </summary>
     [ApiController]
     [Route("[controller]")]
-    public class ConfigInfoController : ControllerBase
+    public class NavigateController : ControllerBase
     {
         
 
-        private readonly ILogger<ConfigInfoController> _logger;
-
-        public ConfigInfoController(ILogger<ConfigInfoController> logger)
+        private readonly ILogger<NavigateController> _logger;
+        /// <summary>
+        /// Constructor
+        /// </summary>
+        /// <param name="logger"></param>
+        public NavigateController(ILogger<NavigateController> logger)
         {
             _logger = logger;
 
         }
-
-        [HttpGet(Name = "GetConfigInfo")]
-        public ConfigInfo Get()
+        /// <summary>
+        /// Get the menu tree or parts of it
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet(Name = "GetNavigate")]
+        public IEnumerable<MenuItem> Get()
         {
-            return SampleData.SampleConfigInfo.Get();
+            return SampleData.SampleNavigate.Get();
         }
-
-
-        /*
-        [HttpGet(Name = "GetWeatherForecast")]
-        public IEnumerable<WeatherForecast> Get()
-        {
-            return Enumerable.Range(1, 5).Select(index => new WeatherForecast
-            {
-                Date = DateTime.Now.AddDays(index),
-                TemperatureC = Random.Shared.Next(-20, 55),
-                Summary = Summaries[Random.Shared.Next(Summaries.Length)]
-            })
-            .ToArray();
-        }
-         */
 
     }
 }
