@@ -92,7 +92,8 @@ See the configuration of the API
 }
 ```
 
-Proposal: Add an instanceLabel for each language (some thing like "Forecast database from Konjunkturinstitutet") 
+Q: For the "portal use case": we will probably need an instanceLabel for each underlaying "searchable instance" (some thing like "Forecast database from Konjunkturinstitutet")
+   Is this the rigth place?
       
 ## Navigate endpoint 
 **url:** `http://my-site.com/api/v2/navigate`
@@ -139,8 +140,8 @@ Proposal:
 The querystring parameter recursive=true will return all sub nodes for the specified node.
 Possible to define number of recursive levels. 
 
-Make the "type": "table" item for a table ( "TableLocator-class" ) the same for this endpoint and for the /tables endpoint 
-         and add a link to the cube in a gui  (What about languages )
+Q: 1) The "Table-class" differ  for this endpoint and for the /tables endpoint. Should we insert some common class?  item for a table ( "TableLocator-class" ) the same
+   2) Shold we add links to the table in a gui (rel:metadataGui)? 
 
 Question:
 Will http://my-site.com/api/v2/tables/TAB0001/data return default values or is it necessary to also specify variables and values to this URL to get data? 
