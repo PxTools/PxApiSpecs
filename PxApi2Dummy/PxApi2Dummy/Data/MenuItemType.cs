@@ -2,8 +2,13 @@
 {
     public class MenuItemType
     {
-        static List<string> items = new List<string>() {"Level","Table","Heading" };
+        static List<string> items = new List<string>() {"root", "folder-expanded", "folder-closed", "table","heading" };
+        public static string ROOT = "root";
 
+        public static string FOLDER_EXPANDED = "folder-expanded";
+        public static string FOLDER_CLOSED = "folder-closed";
+        public static string TABLE = "table";
+        public static string HEADING = "heading";
 
         public static string Force(string val)
         {

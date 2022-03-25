@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 using PxApi2Dummy.Data;
 
+
 namespace PxApi2Dummy.Controllers
 {
     [ApiController]
@@ -13,8 +14,7 @@ namespace PxApi2Dummy.Controllers
 
         public ConfigInfoController(ILogger<ConfigInfoController> logger)
         {
-            _logger = logger;
-
+            _logger = logger;            
         }
 
         [HttpGet(Name = "GetConfigInfo")]
@@ -22,21 +22,6 @@ namespace PxApi2Dummy.Controllers
         {
             return SampleData.SampleConfigInfo.Get();
         }
-
-
-        /*
-        [HttpGet(Name = "GetWeatherForecast")]
-        public IEnumerable<WeatherForecast> Get()
-        {
-            return Enumerable.Range(1, 5).Select(index => new WeatherForecast
-            {
-                Date = DateTime.Now.AddDays(index),
-                TemperatureC = Random.Shared.Next(-20, 55),
-                Summary = Summaries[Random.Shared.Next(Summaries.Length)]
-            })
-            .ToArray();
-        }
-         */
 
     }
 }
