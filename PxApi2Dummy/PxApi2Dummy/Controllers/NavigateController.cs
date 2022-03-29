@@ -27,29 +27,31 @@ namespace PxApi2Dummy.Controllers
 
         //OpenAPI 3.0 https://swagger.io/specification/#parameterObject
         //path parameters cant be optional, consider adding 2 separate endpoints
-      
 
 
         /// <summary>
-        /// Get the menu tree or parts of it starting from root
+        /// Gets the MenuItem at root
         /// </summary>
+        /// <param name="expandedLevels">Number of levels that are expanded in the response. Minimun 1, but a typical value is 2 - 4 </param>
         /// <returns></returns>
         [HttpGet("tree", Name = "GetNavigateRoot")]
-        public MenuItem Get()
+        public MenuItem Get(int expandedLevels=1)
         {
-            return this.Get("");
+            return this.Get("", expandedLevels);
         }
 
         /// <summary>
-        /// Get the menu tree or parts of it starting from id.
+        ///Gets the MenuItem at id.
         /// </summary>
+        /// <param name="expandedLevels">Number of levels that are expanded in the response. Minimun 1, but a typical value is 2 - 4 </param>
         /// <returns></returns>
-        [HttpGet("tree/{id?}", Name = "GetNavigate")]
-        public MenuItem Get(string? id)
+        [HttpGet("tree/{id}", Name = "GetNavigate")]
+        public MenuItem Get(string id, int expandedLevels=1)
         {
-            string urlToThere= this.Url.RouteUrl("GetNavigateRoot", null, "https");
+            string urlToThere = this.Url.RouteUrl("GetNavigateRoot", null, "https");
+            
 
-            return SampleData.SampleNavigate.GetSampleNavigate(urlToThere).Get(id);
+            return SampleData.SampleNavigate.GetSampleNavigate(urlToThere).Get(id, expandedLevels);
         }
 
       

@@ -118,7 +118,10 @@ namespace PxApi2Dummy.SampleData
             // if inline  MenuItem itemWithOutChildren =  aItemWithOutChildren
             // 
             MenuItem itemWithOutChildren = new MenuItem() { id = aItemWithOutChildren.id, label = aItemWithOutChildren.label, menuItemType = aItemWithOutChildren.menuItemType };
-
+            if(itemWithOutChildren.menuItemType == MenuItemType.FOLDER_CLOSED)
+            {
+                itemWithOutChildren.menuItemType = MenuItemType.FOLDER_EXPANDED;
+            }
 
             if (!(apiV1Data.ContainsKey(itemWithOutChildren.id)))
             {
@@ -138,10 +141,60 @@ namespace PxApi2Dummy.SampleData
             }
         }
 
-        public MenuItem Get(string id)
+        public MenuItem Get(string id, int expandedLevels)
         {
-            return data[id];
+ 
+            MenuItem topItem = data[id];
+            MenuItem myOut = null;
+            if (expandedLevels < 2) {
+                myOut = topItem;
+            } 
+            else
+            {
+                myOut = GetItemWithExpandedChildrenItem(expandedLevels, 0, topItem);
+            }
+            return myOut;
         }
+
+
+        private MenuItem GetItemWithExpandedChildrenItem(int desiredLeveles, int levelIn, MenuItem item)
+        {
+            if(item.menuItemType== MenuItemType.HEADING || item.menuItemType == MenuItemType.TABLE)
+            {
+                return item;
+            } 
+
+            int levelOfChildren = levelIn+1;
+            
+            MenuItem myOut = new MenuItem() { id = item.id, label = item.label };
+            myOut.menuItemType = MenuItemType.FOLDER_EXPANDED;
+
+            List<MenuItem> expandedChildren = new List<MenuItem>();
+            foreach (var childItem in item.children)
+            {
+                if(levelOfChildren <  desiredLeveles )
+                {
+                    if (childItem.menuItemType == MenuItemType.HEADING || childItem.menuItemType == MenuItemType.TABLE)
+                    {
+                        expandedChildren.Add(childItem);
+                    }
+                    else
+                    {
+                        expandedChildren.Add(GetItemWithExpandedChildrenItem(desiredLeveles, levelOfChildren, data[childItem.id]));
+                    }
+                }
+                else
+                {
+                    expandedChildren.Add(childItem);
+                }
+            }
+
+            myOut.children = expandedChildren.ToArray();
+            return myOut;
+        }
+
+
+
 
     }
 }
