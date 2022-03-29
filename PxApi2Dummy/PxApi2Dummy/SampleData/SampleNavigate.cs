@@ -4,99 +4,144 @@ namespace PxApi2Dummy.SampleData
 {
     public class SampleNavigate
     {
-        private static Dictionary<string, MenuItem> data;
+        private Dictionary<string, MenuItem> data;
+        private Dictionary<string, Api1Client.ApiV1MenuItem[]> apiV1Data;
 
-        public static void InitSampleNavigate()
+        private readonly string urlNavTreeFormat;
+        private const string tableHrefFormat = "https://my-site.com/api/v2/tables/{0}";
+
+        public static SampleNavigate GetSampleNavigate(string urlNavTreeFormat)
         {
-            Api1Client.ApiV1Client tmp = new Api1Client.ApiV1Client();
-            var v1Menu = tmp.Properties;
+            if (_instance == null)
+            {
+                _instance = new SampleNavigate(urlNavTreeFormat+ "/{0}");
+            }
+            return _instance;
+        }
+
+        private static SampleNavigate _instance;
+
+        private SampleNavigate(string urlNavTreeFormat)
+        {
+            this.urlNavTreeFormat = urlNavTreeFormat;
+
+            int sortOrder = 1;
+
+
+            apiV1Data = GetOldDataWithNewKeyAndID();
+
             data = new Dictionary<string, MenuItem>();
-            var rootOld = v1Menu[""];
 
 
-            var root= new MenuItem();
-            root.id = "";
-            root.menuItemType = MenuItemType.ROOT;
+            MenuItem root = new MenuItem() { id = "", menuItemType = MenuItemType.ROOT };
 
+            root.children = GetKids(apiV1Data[""]);
+
+            data.Add("", root);
+
+
+            foreach (MenuItem item in root.children)
+            {
+                CrawlChildren(item);
+            }
+            
+        }
+
+
+        private MenuItem[] GetKids(Api1Client.ApiV1MenuItem[] rootOld)
+        {
             List<MenuItem> kids = new List<MenuItem>();
             foreach (var item in rootOld)
             {
+
+                MenuItem temp = new MenuItem() { id = item.id, label = item.text };
+
                 if (item.type == "l")
                 {
-                    MenuItem temp = new MenuItem();
-                    temp.id = item.id;
-                    temp.label = item.text;
                     temp.menuItemType = MenuItemType.FOLDER_CLOSED;
-                    kids.Add(temp);
+                    temp.links = new Link[]
+                         { new Link() { rel = "data", href = String.Format(urlNavTreeFormat , temp.id) } };
                 }
-            } 
-            root.children = kids.ToArray();
+                else if (item.type == "h")
+                {
+                    temp.menuItemType = MenuItemType.HEADING;
+                }
+                else if (item.type == "t")
+                {
+                    temp.menuItemType = MenuItemType.TABLE;
+                    temp.links = new Link[]
+                         { new Link() { rel = "metadata", href = String.Format(tableHrefFormat, temp.id) } };
+                }
+                else
+                {
+                    string a = "sdf";
+                }
 
-            data.Add("",root);
-            
-
+                kids.Add(temp);
+            }
+            var myOut = kids.ToArray();
+            return myOut;
         }
-            
 
-
-        public static MenuItem Get(string urlToController, string id)
+        private Dictionary<string, Api1Client.ApiV1MenuItem[]> GetOldDataWithNewKeyAndID()
         {
-            MenuItem root = new MenuItem();
-            root.id = "tabl "+id;
-            return root;
+            Api1Client.ApiV1Client tmp = new Api1Client.ApiV1Client();
+            Dictionary<string, Api1Client.ApiV1MenuItem[]> myOut = new Dictionary<string, Api1Client.ApiV1MenuItem[]>();
+
+            var old = tmp.Properties;
+
+            foreach (var oldKey in old.Keys)
+            {
+                string newKey = "";
+                Api1Client.ApiV1MenuItem[] theValue = old[oldKey];
+
+                if (!(oldKey == ""))
+                {
+                    newKey = oldKey.Substring(1).Replace("/", "_");
+
+                    foreach (Api1Client.ApiV1MenuItem oldItem in theValue)
+                    {
+                        if (oldItem.type == "l")
+                        {
+                            oldItem.id = newKey + "_" + oldItem.id;
+                        }
+                    }
+                }
+                myOut.Add(newKey, theValue);
+            }
+
+            return myOut;
         }
 
-
-
-            public static MenuItem Get(string urlToController)
+        private void CrawlChildren(MenuItem aItemWithOutChildren)
         {
-            MenuItem root = data[""];
-            return root;
-            
-            /*
-            int sortOrder = 1;
-
-            string hrefFormat = urlToController+"/{0}";
-            string tableHrefFormat = "http://my-site.com/api/v2/tables/{0}";
-
-            List<MenuItem> myOut = new List<MenuItem>();
+            // if inline  MenuItem itemWithOutChildren =  aItemWithOutChildren
+            // 
+            MenuItem itemWithOutChildren = new MenuItem() { id = aItemWithOutChildren.id, label = aItemWithOutChildren.label, menuItemType = aItemWithOutChildren.menuItemType };
 
 
-            temp.sortOrder = sortOrder++;
-            List<Link> tempLinks = new List<Link>();
-            tempLinks.Add(new Link() { rel = "data", href = String.Format(hrefFormat, temp.id) });
-            temp.links = tempLinks.ToArray();
-            myOut.Add(temp);
+            if (!(apiV1Data.ContainsKey(itemWithOutChildren.id)))
+            {
+                string hmm = "hhm";
+            }
 
-            temp = new MenuItem();
-            temp.id = "bef";
-            temp.menuItemType = MenuItemType.TABLE;
-            temp.label = "Befolkningsframskrivningar";
-            temp.sortOrder = sortOrder++;
-            tempLinks = new List<Link>();
-            tempLinks.Add(new Link() { rel = "data", href = String.Format(hrefFormat, temp.id) });
-            temp.links = tempLinks.ToArray();
+            itemWithOutChildren.children = GetKids(apiV1Data[itemWithOutChildren.id]);
+            data.Add(itemWithOutChildren.id, itemWithOutChildren);
 
-            myOut.Add(temp);
+            foreach (MenuItem item in itemWithOutChildren.children)
+            {
+                if (item.menuItemType.Equals(MenuItemType.HEADING) || item.menuItemType.Equals(MenuItemType.TABLE))
+                {
+                    continue;
+                }
+                CrawlChildren(item);
+            }
+        }
 
-
-            temp = new MenuItem();
-            temp.id = "TAB0001";
-            temp.menuItemType = MenuItemType.TABLE;
-            temp.label = "Tabell A";
-            temp.sortOrder = sortOrder++;
-            tempLinks = new List<Link>();
-            tempLinks.Add(new Link() { rel = "metadata", href = String.Format(tableHrefFormat, temp.id) });
-            tempLinks.Add(new Link() { rel = "data", href = String.Format(tableHrefFormat, temp.id+"/data") });
-            temp.links = tempLinks.ToArray();
-
-            myOut.Add(temp);
-
-            root.children = myOut.ToArray();
-            return root;
-            */
-
-        } 
+        public MenuItem Get(string id)
+        {
+            return data[id];
+        }
 
     }
 }
