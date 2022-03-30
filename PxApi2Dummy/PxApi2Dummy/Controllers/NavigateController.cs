@@ -30,29 +30,38 @@ namespace PxApi2Dummy.Controllers
 
 
         /// <summary>
-        /// Gets the MenuItem at root
+        /// The menutree starts here. Gets the MenuItem at the root node
         /// </summary>
         /// <param name="expandedLevels">Number of levels that are expanded in the response. Minimun 1, but a typical value is 2 - 4 </param>
+        /// <param name="lang">Not implemented</param>
         /// <returns></returns>
         [HttpGet("tree", Name = "GetNavigateRoot")]
-        public MenuItem Get(int expandedLevels=1)
+        public MenuItem Get([FromQuery] int expandedLevels = 1, [FromQuery] string? lang = null)
         {
-            return this.Get("", expandedLevels);
+            string urlToThere = this.Url.RouteUrl("GetNavigateRoot", null, "https");
+
+
+            return SampleData.SampleNavigate.GetSampleNavigate(urlToThere).Get("", expandedLevels);
         }
 
         /// <summary>
-        ///Gets the MenuItem at id.
+        ///Gets the MenuItem for the node with the given id. 
         /// </summary>
+        /// <param name="id">The id of the desired node</param>
         /// <param name="expandedLevels">Number of levels that are expanded in the response. Minimun 1, but a typical value is 2 - 4 </param>
+        /// <param name="lang">Not implemented</param>
         /// <returns></returns>
         [HttpGet("tree/{id}", Name = "GetNavigate")]
-        public MenuItem Get(string id, int expandedLevels=1)
+        public MenuItem Get([FromRoute] string id, [FromQuery] int expandedLevels=1, [FromQuery]string? lang = null)
         {
             string urlToThere = this.Url.RouteUrl("GetNavigateRoot", null, "https");
-            
 
             return SampleData.SampleNavigate.GetSampleNavigate(urlToThere).Get(id, expandedLevels);
         }
+
+
+
+
 
       
     }

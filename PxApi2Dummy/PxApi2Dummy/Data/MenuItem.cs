@@ -15,6 +15,11 @@
         public string label { get; set; }
         public int sortOrder { get; set; }
 
+        /// <summary>
+        /// For menuItemType "table"
+        /// </summary>
+        public DateTime? updated { get; set; }
+
         public Link[] links { get; set; }
         public MenuItem[] children { get; set; }
 
