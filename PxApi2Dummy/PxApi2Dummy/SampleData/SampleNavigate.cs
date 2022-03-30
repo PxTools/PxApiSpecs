@@ -7,6 +7,8 @@ namespace PxApi2Dummy.SampleData
         private Dictionary<string, MenuItem> data;
         private Dictionary<string, Api1Client.ApiV1MenuItem[]> apiV1Data;
 
+        int sortOrder = 42;
+
         private readonly string urlNavTreeFormat;
         private const string tableHrefFormat = "https://my-site.com/api/v2/tables/{0}";
 
@@ -25,7 +27,7 @@ namespace PxApi2Dummy.SampleData
         {
             this.urlNavTreeFormat = urlNavTreeFormat;
 
-            int sortOrder = 1;
+           
 
 
             apiV1Data = GetOldDataWithNewKeyAndID();
@@ -33,7 +35,7 @@ namespace PxApi2Dummy.SampleData
             data = new Dictionary<string, MenuItem>();
 
 
-            MenuItem root = new MenuItem() { id = "", menuItemType = MenuItemType.ROOT };
+            MenuItem root = new MenuItem() { id = "", menuItemType = MenuItemType.ROOT , sortOrder= sortOrder++ };
 
             root.children = GetKids(apiV1Data[""]);
 
@@ -54,7 +56,7 @@ namespace PxApi2Dummy.SampleData
             foreach (var item in rootOld)
             {
 
-                MenuItem temp = new MenuItem() { id = item.id, label = item.text };
+                MenuItem temp = new MenuItem() { id = item.id, label = item.text, sortOrder = sortOrder++ };
 
                 if (item.type == "l")
                 {
@@ -117,7 +119,7 @@ namespace PxApi2Dummy.SampleData
         {
             // if inline  MenuItem itemWithOutChildren =  aItemWithOutChildren
             // 
-            MenuItem itemWithOutChildren = new MenuItem() { id = aItemWithOutChildren.id, label = aItemWithOutChildren.label, menuItemType = aItemWithOutChildren.menuItemType };
+            MenuItem itemWithOutChildren = new MenuItem() { id = aItemWithOutChildren.id, label = aItemWithOutChildren.label, menuItemType = aItemWithOutChildren.menuItemType , sortOrder=aItemWithOutChildren.sortOrder};
             if(itemWithOutChildren.menuItemType == MenuItemType.FOLDER_CLOSED)
             {
                 itemWithOutChildren.menuItemType = MenuItemType.FOLDER_EXPANDED;
@@ -166,7 +168,7 @@ namespace PxApi2Dummy.SampleData
 
             int levelOfChildren = levelIn+1;
             
-            MenuItem myOut = new MenuItem() { id = item.id, label = item.label };
+            MenuItem myOut = new MenuItem() { id = item.id, label = item.label , sortOrder=item.sortOrder};
             myOut.menuItemType = MenuItemType.FOLDER_EXPANDED;
 
             List<MenuItem> expandedChildren = new List<MenuItem>();
