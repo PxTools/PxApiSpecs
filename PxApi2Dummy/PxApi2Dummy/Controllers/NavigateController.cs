@@ -1,5 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
-using PxApi2Dummy.Data;
+using PxApi2Dummy.Models;
 
 namespace PxApi2Dummy.Controllers
 {
@@ -29,7 +29,7 @@ namespace PxApi2Dummy.Controllers
         //path parameters cant be optional, consider adding 2 separate endpoints
 
 
-        /// <summary>
+        /// <summary>Should folder expansing be put in an include part in stead of nested?
         /// The menutree starts here. Gets the MenuItem at the root node
         /// </summary>
         /// <param name="expandedLevels">Number of levels that are expanded in the response. Minimun 1, but a typical value is 2 - 4 </param>
@@ -55,14 +55,8 @@ namespace PxApi2Dummy.Controllers
         public MenuItem Get([FromRoute] string id, [FromQuery] int expandedLevels=1, [FromQuery]string? lang = null)
         {
             string urlToThere = this.Url.RouteUrl("GetNavigateRoot", null, "https");
-
             return SampleData.SampleNavigate.GetSampleNavigate(urlToThere).Get(id, expandedLevels);
         }
 
-
-
-
-
-      
     }
 }

@@ -1,5 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
-using PxApi2Dummy.Data;
+using PxApi2Dummy.Models;
 
 namespace PxApi2Dummy.Controllers
 {
@@ -27,7 +27,7 @@ namespace PxApi2Dummy.Controllers
         /// Gets data for table
         /// </summary>
         /// <returns></returns>
-        [HttpGet("{id}", Name = "GetTable")]
+        [HttpGet("{id}/metadata", Name = "GetTableM")]
         public Table Get(string id)
         {
             return SampleData.SampleTables.Get();
