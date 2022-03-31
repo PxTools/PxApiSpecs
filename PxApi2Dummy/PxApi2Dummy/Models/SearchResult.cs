@@ -3,6 +3,6 @@
     public class SearchResult
     {
         public string paginationStuff { get; set; }
-        public MenuItem[] data { get; set; }
+        public SearchResultItem[] data { get; set; }
     }
 }

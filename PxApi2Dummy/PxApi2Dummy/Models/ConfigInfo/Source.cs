@@ -6,6 +6,8 @@
         public string apiVersjon { get; set; }
         public Dictionary<string,string> Name { get; set; }
         public Dictionary<string, string> SearchUrl { get; set; }
+        public Dictionary<string, string> SearchToTableFormat { get; set; }
+
 
     }
 }

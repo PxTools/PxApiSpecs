@@ -1,5 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 using PxApi2Dummy.Models;
+using PxApi2Dummy.Search;
+using Swashbuckle.AspNetCore.Annotations;
 
 namespace PxApi2Dummy.Controllers
 {
@@ -8,6 +10,7 @@ namespace PxApi2Dummy.Controllers
     /// </summary>
     [ApiController]
     [Route("navigate/[controller]")]
+    [SwaggerTag("Hello from SearchController!")]
     public class SearchController : ControllerBase
     {
         
@@ -26,13 +29,13 @@ namespace PxApi2Dummy.Controllers
         //path parameters cant be optional, consider adding 2 separate endpoints
 
         [HttpGet("search", Name = "Search")]
-        public MenuItem Get([FromQuery] string? searchText= "Uføre*", [FromQuery] string? lang = null)
+        public SearchResult Get([FromQuery] string? searchText= "title:uføretryg*", [FromQuery] string? lang = null)
         {
             //string urlToThere = this.Url.RouteUrl("GetNavigateRoot", null, "https");
 
 
             //return SampleData.SampleNavigate.GetSampleNavigate(urlToThere).Get("", expandedLevels);
-            return null;
+            return DoSearch.Get(searchText);
         }
 
 

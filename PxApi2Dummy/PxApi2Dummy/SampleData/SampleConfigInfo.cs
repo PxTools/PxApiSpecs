@@ -36,6 +36,13 @@ namespace PxApi2Dummy.SampleData
                 { "en", "https://data.qa.ssb.no/api/v0/en/table/?query=" }
             };
 
+            tempSource.SearchToTableFormat = new()
+            {
+                { "no", "https://data.qa.ssb.no/api/v0/no/table/{1}" },
+                { "en", "https://data.qa.ssb.no/api/v0/en/table/{1}" }
+            };
+
+
             //https://data.qa.ssb.no/api/v0/no/table/?query=*&filter=*
 
             var tempSource2 = new Source();
@@ -50,6 +57,12 @@ namespace PxApi2Dummy.SampleData
             {
                 { "no", "https://www.qa.ssb.no/navbank/api/v0/no/nav/?query=" },
                 { "en", "https://www.qa.ssb.no/navbank/api/v0/en/nav/?query=" }
+            };
+
+            tempSource2.SearchToTableFormat = new()
+            {
+                { "no", "https://www.qa.ssb.no/navbank/api/v0/no/nav/{0}/{1}" },
+                { "en", "https://www.qa.ssb.no/navbank/api/v0/en/nav/{0}/{1}" }
             };
 
             myOut.sources = new Source[] { tempSource, tempSource2 };
