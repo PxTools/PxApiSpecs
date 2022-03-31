@@ -1,4 +1,4 @@
-﻿namespace PxApi2Dummy.Data
+﻿namespace PxApi2Dummy.Models
 {
     public enum XMenuItemType
     {
