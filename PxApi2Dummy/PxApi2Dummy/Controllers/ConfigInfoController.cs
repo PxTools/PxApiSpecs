@@ -1,5 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
-using PxApi2Dummy.Data;
+using PxApi2Dummy.Models;
 
 
 namespace PxApi2Dummy.Controllers

@@ -1,4 +1,4 @@
-﻿namespace PxApi2Dummy.Data
+﻿namespace PxApi2Dummy.Models
 {
     public class ConfigInfo
     {
@@ -27,6 +27,11 @@
         /// </summary>
         public bool isMultiSource { get; set; }
 
+
+        /// <summary>
+        /// List of languages that data can be fetched as
+        /// </summary>
+        public Source[] sources { get; set; }
 
 
 
