@@ -7,12 +7,12 @@ namespace PxApi2Dummy.Controllers
     /// Controller for the navigate endpoint
     /// </summary>
     [ApiController]
-    [Route("[controller]")]
-    public class NavigateController : ControllerBase
+    [Route("navigate/[controller]")]
+    public class TreeController : ControllerBase
     {
         
 
-        private readonly ILogger<NavigateController> _logger;
+        private readonly ILogger<TreeController> _logger;
 
         private static bool first = true;
 
@@ -20,7 +20,7 @@ namespace PxApi2Dummy.Controllers
         /// Constructor
         /// </summary>
         /// <param name="logger"></param>
-        public NavigateController(ILogger<NavigateController> logger)
+        public TreeController(ILogger<TreeController> logger)
         {
             _logger = logger;
         }
@@ -35,7 +35,7 @@ namespace PxApi2Dummy.Controllers
         /// <param name="expandedLevels">Number of levels that are expanded in the response. Minimun 1, but a typical value is 2 - 4 </param>
         /// <param name="lang">Not implemented</param>
         /// <returns></returns>
-        [HttpGet("tree", Name = "GetNavigateRoot")]
+        [HttpGet("", Name = "GetNavigateRoot")]
         public MenuItem Get([FromQuery] int expandedLevels = 1, [FromQuery] string? lang = null)
         {
             string urlToThere = this.Url.RouteUrl("GetNavigateRoot", null, "https");
@@ -51,7 +51,7 @@ namespace PxApi2Dummy.Controllers
         /// <param name="expandedLevels">Number of levels that are expanded in the response. Minimun 1, but a typical value is 2 - 4 </param>
         /// <param name="lang">Not implemented</param>
         /// <returns></returns>
-        [HttpGet("tree/{id}", Name = "GetNavigate")]
+        [HttpGet("{id}", Name = "GetNavigate")]
         public MenuItem Get([FromRoute] string id, [FromQuery] int expandedLevels=1, [FromQuery]string? lang = null)
         {
             string urlToThere = this.Url.RouteUrl("GetNavigateRoot", null, "https");
