@@ -28,14 +28,14 @@ namespace PxApi2Dummy.Controllers
         //OpenAPI 3.0 https://swagger.io/specification/#parameterObject
         //path parameters cant be optional, consider adding 2 separate endpoints
 
-        [HttpGet("search", Name = "Search")]
-        public SearchResult Get([FromQuery] string? searchText= "title:uføretryg*", [FromQuery] string? lang = null)
+        [HttpGet(Name = "multiSearch")]
+        public TablesResult Get([FromQuery] string? searchText= "title:uføretryg*", [FromQuery] string? lang = null)
         {
             //string urlToThere = this.Url.RouteUrl("GetNavigateRoot", null, "https");
-
+            LangHolder myLang = new LangHolder(lang);
 
             //return SampleData.SampleNavigate.GetSampleNavigate(urlToThere).Get("", expandedLevels);
-            return DoSearch.Get(searchText);
+            return DoSearch.Get(searchText, myLang);
         }
 
 

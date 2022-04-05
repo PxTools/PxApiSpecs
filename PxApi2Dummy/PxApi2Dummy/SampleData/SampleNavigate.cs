@@ -27,9 +27,6 @@ namespace PxApi2Dummy.SampleData
         {
             this.urlNavTreeFormat = urlNavTreeFormat;
 
-           
-
-
             apiV1Data = GetOldDataWithNewKeyAndID();
 
             data = new Dictionary<string, MenuItem>();

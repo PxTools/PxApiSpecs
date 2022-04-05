@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 using PxApi2Dummy.Models;
+using Swashbuckle.AspNetCore.Annotations;
 
 namespace PxApi2Dummy.Controllers
 {
@@ -7,12 +8,13 @@ namespace PxApi2Dummy.Controllers
     /// Controller for the navigate endpoint
     /// </summary>
     [ApiController]
-    [Route("[controller]")]
-    public class NavigateController : ControllerBase
+    [Route("navigate/[controller]")]
+    [SwaggerTag("Endpoints for getting the menutree.")]
+    public class TreeController : ControllerBase
     {
         
 
-        private readonly ILogger<NavigateController> _logger;
+        private readonly ILogger<TreeController> _logger;
 
         private static bool first = true;
 
@@ -20,7 +22,7 @@ namespace PxApi2Dummy.Controllers
         /// Constructor
         /// </summary>
         /// <param name="logger"></param>
-        public NavigateController(ILogger<NavigateController> logger)
+        public TreeController(ILogger<TreeController> logger)
         {
             _logger = logger;
         }
@@ -29,19 +31,19 @@ namespace PxApi2Dummy.Controllers
         //path parameters cant be optional, consider adding 2 separate endpoints
 
 
-        /// <summary>Should folder expansing be put in an include part in stead of nested?
+        /// <summary>Should folder expanding be solved by putting elements in an include part in stead of nested?
         /// The menutree starts here. Gets the MenuItem at the root node
         /// </summary>
         /// <param name="expandedLevels">Number of levels that are expanded in the response. Minimun 1, but a typical value is 2 - 4 </param>
         /// <param name="lang">Not implemented</param>
         /// <returns></returns>
-        [HttpGet("tree", Name = "GetNavigateRoot")]
-        public MenuItem Get([FromQuery] int expandedLevels = 1, [FromQuery] string? lang = null)
+        [HttpGet("", Name = "GetNavigateRoot")]
+        public Response<MenuItem> Get([FromQuery] int expandedLevels = 1, [FromQuery] string? lang = null)
         {
             string urlToThere = this.Url.RouteUrl("GetNavigateRoot", null, "https");
 
 
-            return SampleData.SampleNavigate.GetSampleNavigate(urlToThere).Get("", expandedLevels);
+            return new Response<MenuItem> { Data = SampleData.SampleNavigate.GetSampleNavigate(urlToThere).Get("", expandedLevels) };
         }
 
         /// <summary>
@@ -51,11 +53,11 @@ namespace PxApi2Dummy.Controllers
         /// <param name="expandedLevels">Number of levels that are expanded in the response. Minimun 1, but a typical value is 2 - 4 </param>
         /// <param name="lang">Not implemented</param>
         /// <returns></returns>
-        [HttpGet("tree/{id}", Name = "GetNavigate")]
-        public MenuItem Get([FromRoute] string id, [FromQuery] int expandedLevels=1, [FromQuery]string? lang = null)
+        [HttpGet("{id}", Name = "GetNavigate")]
+        public Response<MenuItem> Get([FromRoute] string id, [FromQuery] int expandedLevels=1, [FromQuery]string? lang = null)
         {
             string urlToThere = this.Url.RouteUrl("GetNavigateRoot", null, "https");
-            return SampleData.SampleNavigate.GetSampleNavigate(urlToThere).Get(id, expandedLevels);
+            return new Response<MenuItem> { Data = SampleData.SampleNavigate.GetSampleNavigate(urlToThere).Get(id, expandedLevels) };
         }
 
     }
