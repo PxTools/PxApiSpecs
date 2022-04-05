@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 using PxApi2Dummy.Models;
+using Swashbuckle.AspNetCore.Annotations;
 
 namespace PxApi2Dummy.Controllers
 {
@@ -8,6 +9,7 @@ namespace PxApi2Dummy.Controllers
     /// </summary>
     [ApiController]
     [Route("navigate/[controller]")]
+    [SwaggerTag("Endpoints for getting the menutree.")]
     public class TreeController : ControllerBase
     {
         
@@ -36,12 +38,12 @@ namespace PxApi2Dummy.Controllers
         /// <param name="lang">Not implemented</param>
         /// <returns></returns>
         [HttpGet("", Name = "GetNavigateRoot")]
-        public MenuItem Get([FromQuery] int expandedLevels = 1, [FromQuery] string? lang = null)
+        public Response<MenuItem> Get([FromQuery] int expandedLevels = 1, [FromQuery] string? lang = null)
         {
             string urlToThere = this.Url.RouteUrl("GetNavigateRoot", null, "https");
 
 
-            return SampleData.SampleNavigate.GetSampleNavigate(urlToThere).Get("", expandedLevels);
+            return new Response<MenuItem> { Data = SampleData.SampleNavigate.GetSampleNavigate(urlToThere).Get("", expandedLevels) };
         }
 
         /// <summary>
@@ -52,10 +54,10 @@ namespace PxApi2Dummy.Controllers
         /// <param name="lang">Not implemented</param>
         /// <returns></returns>
         [HttpGet("{id}", Name = "GetNavigate")]
-        public MenuItem Get([FromRoute] string id, [FromQuery] int expandedLevels=1, [FromQuery]string? lang = null)
+        public Response<MenuItem> Get([FromRoute] string id, [FromQuery] int expandedLevels=1, [FromQuery]string? lang = null)
         {
             string urlToThere = this.Url.RouteUrl("GetNavigateRoot", null, "https");
-            return SampleData.SampleNavigate.GetSampleNavigate(urlToThere).Get(id, expandedLevels);
+            return new Response<MenuItem> { Data = SampleData.SampleNavigate.GetSampleNavigate(urlToThere).Get(id, expandedLevels) };
         }
 
     }

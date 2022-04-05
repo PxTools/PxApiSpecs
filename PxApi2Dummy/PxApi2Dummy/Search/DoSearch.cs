@@ -5,9 +5,9 @@ namespace PxApi2Dummy.Search
     public class DoSearch
     {
 
-        public static SearchResult Get(string searchText, LangHolder myLang)
+        public static TablesResult Get(string searchText, LangHolder myLang)
         {
-            SearchResult myOut = new SearchResult();
+            TablesResult myOut = new TablesResult();
             myOut.paginationStuff = "do to";
             
             string lang = myLang.GetDataLang();
