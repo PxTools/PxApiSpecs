@@ -29,7 +29,7 @@ namespace PxApi2Dummy.Controllers
         //path parameters cant be optional, consider adding 2 separate endpoints
 
 
-        /// <summary>Should folder expansing be put in an include part in stead of nested?
+        /// <summary>Should folder expanding be solved by putting elements in an include part in stead of nested?
         /// The menutree starts here. Gets the MenuItem at the root node
         /// </summary>
         /// <param name="expandedLevels">Number of levels that are expanded in the response. Minimun 1, but a typical value is 2 - 4 </param>

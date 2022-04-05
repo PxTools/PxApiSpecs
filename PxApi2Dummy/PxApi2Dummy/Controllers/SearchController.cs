@@ -32,9 +32,10 @@ namespace PxApi2Dummy.Controllers
         public SearchResult Get([FromQuery] string? searchText= "title:uføretryg*", [FromQuery] string? lang = null)
         {
             //string urlToThere = this.Url.RouteUrl("GetNavigateRoot", null, "https");
+            LangHolder myLang = new LangHolder(lang);
 
             //return SampleData.SampleNavigate.GetSampleNavigate(urlToThere).Get("", expandedLevels);
-            return DoSearch.Get(searchText);
+            return DoSearch.Get(searchText, myLang);
         }
 
 
