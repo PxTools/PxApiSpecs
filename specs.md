@@ -145,6 +145,21 @@ Do not make it the whole url ony specify the nodeid like
 http://my-site.com/api/v2/database/BE and http://my-site.com/api/v2/database/BE0401
 and not http://my-site.com/api/v2/database/BE/BE0401.. OK (ge exempel på PX fil fallet)
 
+Should not LINK and HEADLINE menu types be included? Suggestion is to skip the LINK type.
+
+Suggested properties for all types
+* Id
+* Label
+* Description
+
+Suggested properties for table type
+* LastUpdated
+* Published
+* TableCategory (PresCategory)
+
+
+
+
 ## Table  endpoint
 ### List all tables
 **url:** `/api/v2/tables/`
