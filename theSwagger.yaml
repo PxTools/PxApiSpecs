@@ -1,0 +1,505 @@
+openapi: 3.0.3
+info:
+  title: PxApi
+  version: '1.0'
+  description: "This api is part of the PX-family.\r\n Q: Should the tables and the navigate endpoint have different backends(Lucene vs sql)?"
+paths:
+  /configinfo:
+    get:
+      tags:
+        - ConfigInfo
+      operationId: GetConfigInfo
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseConfigInfo'
+  /navigate/treealt2:
+    get:
+      tags:
+        - TreeAlt2
+      summary: "This has an include part, in stead of nested elements. \r\n The menutree starts here. Gets the MenuItem at the root node"
+      operationId: GetNavigateAlt2Root
+      parameters:
+        - $ref: '#/components/parameters/prefetchedLevelsParam'
+        - $ref: '#/components/parameters/langParam'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseMenuItem'
+  /navigate/treealt2/{id}:
+    get:
+      tags:
+        - TreeAlt2
+      summary: Gets the MenuItem for the node with the given id.
+      operationId: GetNavigateAlt2
+      parameters:
+        - $ref: '#/components/parameters/prefetchedLevelsParam'
+        - $ref: '#/components/parameters/menuIdParam'
+        - $ref: '#/components/parameters/langParam'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseMenuItem'
+  /tables:
+    get:
+      tags:
+        - Tables
+      summary: "Paginated. List of \"table-locators\" from all sources.  Lucene is backend(?). On/off param for depricated tables. Query parameter."
+      operationId: search
+      parameters:
+        - $ref: '#/components/parameters/langParam'
+        - name: searchText
+          in: query
+          description: ''
+          schema:
+            type: string
+            default: title:uføretryg*
+        - name: skipDepricated
+          in: query
+          description: 'Set this to true if you dont want depricated(discontinued) tables.'
+          schema:
+            type: boolean
+            default: false
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseSearchResultItemArrayPaginated'
+  /tables/pastdays:
+    get:
+      tags:
+        - Tables
+      summary: Or is it cleaner to keep in "after the ?"  This way shows the possibillity clearer in swagger, but thats just one tool...
+      operationId: search2Id
+      parameters:
+        - $ref: '#/components/parameters/langParam'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseToDo'
+  /tables/{id}:
+    get:
+      tags:
+        - Tables
+      summary: Perhaps not much use for this, but should be here for consistency. Just give the linke tables/{id}/* endpoints
+      operationId: tablesId
+      parameters:
+        - $ref: '#/components/parameters/tableIdParam'
+        - $ref: '#/components/parameters/langParam'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseTableLocator'
+  /tables/{id}/metadata:
+    get:
+      tags:
+        - Tables
+      summary: "Gets metadata for table."
+      operationId: GetTableM
+      parameters:
+        - $ref: '#/components/parameters/tableIdParam'
+        - $ref: '#/components/parameters/langParam'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseToDo'
+  /tables/{id}/data:
+    get:
+      tags:
+        - Tables
+      summary: Gets data for table
+      operationId: GetTableD
+      parameters:
+        - $ref: '#/components/parameters/tableIdParam'
+        - $ref: '#/components/parameters/langParam'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseToDo'
+  /tables/{id}/filters:
+    get:
+      tags:
+        - Tables
+      summary: "Gets list of filters for table\r\n Q1: Should this be Paginated? \r\n Q2: The term Filters, will this lead to search-filter confusion? Could we use another name, cube-filter?" 
+      operationId: GetTableF
+      parameters:
+        - $ref: '#/components/parameters/tableIdParam'
+        - $ref: '#/components/parameters/langParam'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseToDo'
+  /tables/{id}/filters/{filterId}:
+    get:
+      tags:
+        - Tables
+      summary: Gets a filter for table. (  ? )
+      operationId: GetTableFid
+      parameters:
+        - $ref: '#/components/parameters/tableIdParam'
+        - $ref: '#/components/parameters/langParam'
+        - name: filterId
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseToDo'
+
+components:
+  parameters:
+    langParam:
+      name: lang
+      in: "query"
+      description: "The language if the default is not what you want."
+      required: false
+      schema:
+        type: string
+      examples:
+        X1:
+          value: "en"
+          summary: "For english"
+        X2:
+          value: "dk"
+          summary: "For danish"
+    tableIdParam:
+          name: id
+          in: path
+          description:  If this is an endpoint of a \"Portal site\", how will we know if the \"real\" metadata is at /nav/api/tables/{id}/metadata or at /ssb/api/tables/{id}/metadata ?\r\nShould these ids have an internal structure like ssb:17?  And local:22 where local is magic and means go to PX/CNMM-database.  Or put it \"behind the ?\", but that separates the twins :-)
+          required: true
+          schema:
+            type: string 
+    menuIdParam:
+          name: id
+          in: path
+          description: 'The menu-id of the desired node'
+          required: true
+          schema:
+            type: string         
+    prefetchedLevelsParam:       
+          name: prefetchedLevels
+          in: query
+          description: Number of levels that are prefetched in the response. Minimun 0, but a typical value is 1 - 3
+          schema:
+            type: integer
+            format: int32
+            default: 1     
+  schemas:
+    BaseResponse:
+      type: object
+      description: "Common properties for all responses. Abstract class."
+      properties:
+        error:
+          type: string
+          description: "Errors will come here"
+          nullable: true
+        info:
+          type: string
+          description: "Messages on planed maintainence willl come here."
+          nullable: true
+      example:
+        error: "The id cant be found"
+        info: "Closed on mondays"
+    ResponseConfigInfo:
+      allOf:
+        - $ref: '#/components/schemas/BaseResponse'
+        - type: object
+          properties:
+            data:
+              $ref: '#/components/schemas/ConfigInfo'
+      description: This holds information about the config of the api.
+    ResponseMenuItem:
+       allOf:
+        - $ref: '#/components/schemas/BaseResponse'
+        - type: object
+          properties:
+            data:
+              $ref: '#/components/schemas/MenuItem'
+       description: This holds information about the menutree of the api.
+    ResponseToDo:
+       allOf:
+        - $ref: '#/components/schemas/BaseResponse'
+        - type: object
+          properties:
+            data:
+              $ref: '#/components/schemas/ToDo'          
+    ResponseTableLocator:
+       allOf:
+        - $ref: '#/components/schemas/BaseResponse'
+        - type: object
+          properties:
+            data:
+              $ref: '#/components/schemas/TableLocator'
+       description: This holds links for one table. To data, metadata the api and or to another application(a gui).
+    ResponseSearchResultItemArrayPaginated:
+      allOf:
+        - $ref: '#/components/schemas/BaseResponse'
+        - type: object
+          properties:
+            data:
+              type: array
+              items:
+                $ref: '#/components/schemas/SearchResultItem'
+              nullable: true
+        - $ref: '#/components/schemas/Pagination'
+      additionalProperties: false
+      description: Response to a seach, status 200 may be empty if no match is found.
+    Pagination:
+      type: object
+      properties:
+         pagination:
+            type: object
+            properties:
+               offset:
+                 type: integer
+                 format: int32
+               size:
+                 type: integer
+                 format: int32
+                 example: 33
+               firstPage:
+                 type: string
+                 format: uri
+                 nullable: true
+                 description: "Do we need this?"
+               lastPage:
+                 type: string
+                 format: uri
+                 nullable: true
+                 description: "Do we need this?"
+               totalRecords:
+                 type: integer
+                 format: int32
+               nextPage:
+                 type: string
+                 format: uri
+                 nullable: true
+               previousPage:
+                 type: string
+                 format: uri
+                 nullable: true
+    ConfigInfo:
+      type: object
+      properties:
+        apiVersion:
+          type: string
+          description: The version of the specification this api conforms to(?).
+          nullable: true
+          example:
+            x1:
+            value: "2.0"
+        languages:
+          type: array
+          items:
+            $ref: '#/components/schemas/Language'
+          description: List of languages that data can be fetched as
+          nullable: true
+        defaultLanguage:
+          type: string
+          description: Which of the langue that are the default language.
+          nullable: true
+        dataRetrieval:
+          $ref: '#/components/schemas/DataRetrieval'
+        isMultiSource:
+          type: boolean
+          description: Does this api have more that one source.
+        sources:
+          type: array
+          items:
+            $ref: '#/components/schemas/Source'
+          description: List of languages that data can be fetched as in this source
+          nullable: true
+      additionalProperties: false
+    DataRetrieval:
+      type: object
+      properties:
+        maxDataCells:
+          type: integer
+          description: Comment on field maxDataCells
+          format: int32
+      additionalProperties: false
+      description: Comment on class DataRetrieval
+    Language:
+      type: object
+      properties:
+        id:
+          type: string
+          nullable: true
+        label:
+          type: string
+          nullable: true
+      additionalProperties: false
+    Link:
+      type: object
+      properties:
+        rel:
+          type: string
+          nullable: true
+        href:
+          type: string
+          nullable: true
+      additionalProperties: false
+    MenuItem:
+      type: object
+      properties:
+        id:
+          type: string
+          nullable: true
+        menuItemType:
+          type: string
+          nullable: true
+          description: "One of heading, table, folder-open or folder-closed. The x in folder-x is not the state, but should be read as infomation needed to display a folder when it is X."
+        label:
+          type: string
+          nullable: true
+          description: "Display text"
+        sortOrder:
+          type: integer
+          format: int32
+        links:
+          type: array
+          items:
+            $ref: '#/components/schemas/Link'
+          description: Not for Heading
+          nullable: true
+        updated:
+          type: string
+          description: For menuItemType "table"
+          format: date-time
+          nullable: true
+        folderContent:
+          type: array
+          items:
+            $ref: '#/components/schemas/MenuItem'
+          nullable: true
+        included:
+          type: array
+          items:
+            $ref: '#/components/schemas/MenuItem'
+          nullable: true
+          description: Holds the prefetched items.
+      additionalProperties: false
+    SearchResultItem:
+      type: object
+      properties:
+        id:
+          type: string
+          description: '{instance}:{tableID}'
+          nullable: true
+          example: scb:22
+        label:
+          type: string
+          nullable: true
+        updated:
+          type: string
+          format: date-time
+          nullable: true
+        links:
+          type: array
+          items:
+            $ref: '#/components/schemas/Link'
+          nullable: true
+        sourceId:
+          type: string
+          description: Id of source application instance where the table is found.
+          nullable: true
+        score:
+          type: number
+          description: Search score (relevance of search)
+          format: float
+      additionalProperties: false
+      example: 
+         id: "scb:23"
+    Source:
+      type: object
+      properties:
+        id:
+          type: string
+          nullable: true
+        apiVersjon:
+          type: string
+          nullable: true
+        sourceType:
+          type: string
+          description: PX or SSB? :-)
+          nullable: true
+        name:
+          type: object
+          additionalProperties:
+            type: string
+          nullable: true
+        searchUrlFormat:
+          type: string
+          nullable: true
+        searchToTableFormat:
+          type: object
+          additionalProperties:
+            type: string
+          nullable: true
+      additionalProperties: false
+    TableLocator:
+      type: object
+      properties:
+        id:
+          type: string
+          description: '{instance}:{tableID}'
+          nullable: true
+        label:
+          type: string
+          nullable: true
+        updated:
+          type: string
+          format: date-time
+          nullable: true
+        links:
+          type: array
+          items:
+            $ref: '#/components/schemas/Link'
+          nullable: true
+      additionalProperties: false
+      description: Should hold the info needed to decide if this is interesting or not.
+    ToDo:
+      type: object
+      properties:
+        something:
+          type: string
+          nullable: true
+      additionalProperties: false
+tags:
+  - name: TreeAlt2
+    description: Endpoints for the menutree.
+  - name: Tables
+    description: Endpoints for the tables
+  - name: ConfigInfo
+    description: Endpoints for getting information about config.
