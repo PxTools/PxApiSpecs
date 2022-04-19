@@ -53,7 +53,7 @@ paths:
     get:
       tags:
         - Tables
-      summary: "Paginated. List of \"table-locators\" from all sources.  Lucene is backend(?). On/off param for depricated tables. Query parameter."
+      summary: Paginated. List of "table-locators" from all sources.  Lucene is backend(?). On/off param for depricated tables. Query parameter.
       operationId: search
       parameters:
         - $ref: '#/components/parameters/langParam'
@@ -65,7 +65,7 @@ paths:
             default: title:uføretryg*
         - name: skipDepricated
           in: query
-          description: 'Set this to true if you dont want depricated(discontinued) tables.'
+          description: Set this to true if you dont want depricated(discontinued) tables.
           schema:
             type: boolean
             default: false
@@ -77,7 +77,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/ResponseSearchResultItemArrayPaginated'
         '429':
-           $ref: '#/components/responses/ErrorResponse429'
+          $ref: '#/components/responses/ErrorResponse429'
   /tables/pastdays:
     get:
       tags:
@@ -94,7 +94,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/ResponseToDo'
         '429':
-           $ref: '#/components/responses/ErrorResponse429'
+          $ref: '#/components/responses/ErrorResponse429'
   /tables/{id}:
     get:
       tags:
@@ -112,12 +112,12 @@ paths:
               schema:
                 $ref: '#/components/schemas/ResponseTableLocator'
         '429':
-           $ref: '#/components/responses/ErrorResponse429'
+          $ref: '#/components/responses/ErrorResponse429'
   /tables/{id}/metadata:
     get:
       tags:
         - Tables
-      summary: "Gets metadata for table."
+      summary: Gets metadata for table.
       operationId: GetTableM
       parameters:
         - $ref: '#/components/parameters/tableIdParam'
@@ -149,7 +149,7 @@ paths:
     get:
       tags:
         - Tables
-      summary: "Gets list of filters for table\r\n Q1: Should this be Paginated? \r\n Q2: The term Filters, will this lead to search-filter confusion? Could we use another name, cube-filter?" 
+      summary: "Gets list of filters for table\r\n Q1: Should this be Paginated? \r\n Q2: The term Filters, will this lead to search-filter confusion? Could we use another name, cube-filter?"
       operationId: GetTableF
       parameters:
         - $ref: '#/components/parameters/tableIdParam'
@@ -182,61 +182,60 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ResponseToDo'
-
 components:
   parameters:
     langParam:
       name: lang
-      in: "query"
-      description: "The language if the default is not what you want."
+      in: query
+      description: The language if the default is not what you want.
       required: false
       schema:
         type: string
       examples:
         X1:
-          value: "en"
-          summary: "For english"
+          value: en
+          summary: For english
         X2:
-          value: "dk"
-          summary: "For danish"
+          value: dk
+          summary: For danish
     tableIdParam:
-          name: id
-          in: path
-          description:  If this is an endpoint of a \"Portal site\", how will we know if the \"real\" metadata is at /nav/api/tables/{id}/metadata or at /ssb/api/tables/{id}/metadata ?\r\nShould these ids have an internal structure like ssb:17?  And local:22 where local is magic and means go to PX/CNMM-database.  Or put it \"behind the ?\", but that separates the twins :-)
-          required: true
-          schema:
-            type: string 
+      name: id
+      in: path
+      description: If this is an endpoint of a \"Portal site\", how will we know if the \"real\" metadata is at /nav/api/tables/{id}/metadata or at /ssb/api/tables/{id}/metadata ?\r\nShould these ids have an internal structure like ssb:17?  And local:22 where local is magic and means go to PX/CNMM-database.  Or put it \"behind the ?\", but that separates the twins :-)
+      required: true
+      schema:
+        type: string
     menuIdParam:
-          name: id
-          in: path
-          description: 'The menu-id of the desired node'
-          required: true
-          schema:
-            type: string         
-    prefetchedLevelsParam:       
-          name: prefetchedLevels
-          in: query
-          description: Number of levels that are prefetched in the response. Minimun 0, but a typical value is 1 - 3
-          schema:
-            type: integer
-            format: int32
-            default: 1     
+      name: id
+      in: path
+      description: The menu-id of the desired node
+      required: true
+      schema:
+        type: string
+    prefetchedLevelsParam:
+      name: prefetchedLevels
+      in: query
+      description: Number of levels that are prefetched in the response. Minimun 0, but a typical value is 1 - 3
+      schema:
+        type: integer
+        format: int32
+        default: 1
   schemas:
     BaseResponse:
       type: object
-      description: "Common properties for all responses. Abstract class."
+      description: Common properties for all responses. Abstract class.
       properties:
         error:
           type: string
-          description: "Errors will come here"
+          description: Errors will come here
           nullable: true
         info:
           type: string
-          description: "Messages on planed maintainence willl come here."
+          description: Messages on planed maintainence willl come here.
           nullable: true
       example:
-        error: "The id cant be found"
-        info: "Closed on mondays"
+        error: The id cant be found
+        info: Closed on mondays
     ResponseConfigInfo:
       allOf:
         - $ref: '#/components/schemas/BaseResponse'
@@ -246,34 +245,85 @@ components:
               $ref: '#/components/schemas/ConfigInfo'
       description: This holds information about the config of the api.
     ResponseMenuItem:
-       allOf:
+      allOf:
         - $ref: '#/components/schemas/BaseResponse'
         - type: object
           properties:
             data:
               $ref: '#/components/schemas/MenuItem'
-       description: This holds information about the menutree of the api.
+      description: This holds information about the menutree of the api.
+      example:
+        data:
+          id: ''
+          menuItemType: open-folder
+          label: null
+          sortOrder: 42
+          links: null
+          folderContent:
+            - id: al
+              menuItemType: closed-folder
+              label: Folder 1
+              sortOrder: 43
+              links:
+                - rel: included_data
+                  href: '#/included/al'
+            - id: AKUAarNY
+              menuItemType: table
+              label: '05111: Table in root folder'
+              sortOrder: 44
+              links:
+                - rel: metadata
+                  href: https://my-site.com/api/v2/tables/AKUAarNY
+          included:
+            - id: al
+              menuItemType: open-folder
+              label: Folder 1
+              sortOrder: 43
+              links: null
+              folderContent:
+                - id: al_al03
+                  menuItemType: closed-folder
+                  label: Folder 1 1
+                  sortOrder: 45
+                  links:
+                    - rel: data
+                      href: https://localhost:7067/navigate/treealt2/al_al03
+                - id: ForstgenArbNye
+                  menuItemType: table
+                  label: '07116: Table in Folder 1'
+                  sortOrder: 46
+                  links:
+                    - rel: metadata
+                      href: https://my-site.com/api/v2/tables/ForstgenArbNye
+                - id: al_al04
+                  menuItemType: closed-folder
+                  label: Folder 1 2
+                  sortOrder: 47
+                  links:
+                    - rel: data
+                      href: https://localhost:7067/navigate/treealt2/al_al04
+        error: null
+        info: null
     ResponseToDo:
-       allOf:
+      allOf:
         - $ref: '#/components/schemas/BaseResponse'
         - type: object
           properties:
             data:
-              $ref: '#/components/schemas/ToDo'          
+              $ref: '#/components/schemas/ToDo'
     ResponseTableLocator:
-       allOf:
+      allOf:
         - $ref: '#/components/schemas/BaseResponse'
         - type: object
           properties:
             data:
               $ref: '#/components/schemas/TableLocator'
-       description: This holds links for one table. To data, metadata the api and or to another application(a gui).
+      description: This holds links for one table. To data, metadata the api and or to another application(a gui).
     ResponseSearchResultItemArrayPaginated:
       allOf:
-      - $ref: '#/components/schemas/BaseResponse'
-      - $ref: '#/components/schemas/SearchResultData'
-
-      - $ref: '#/components/schemas/Pagination'
+        - $ref: '#/components/schemas/BaseResponse'
+        - $ref: '#/components/schemas/SearchResultData'
+        - $ref: '#/components/schemas/Pagination'
       additionalProperties: false
       description: Response to a seach, status 200 may be empty if no match is found.
     SearchResultData:
@@ -285,49 +335,49 @@ components:
             $ref: '#/components/schemas/SearchResultItem'
       example:
         data:
-        - id: "scb:23"
-          label: "Navn etter kjønn og alder"
-          updated: "2022-04-19T08:49:22.618Z"
-          score: 1.99
-        - id: "scb:24"
-          label: "Navn etter kjønn og alder"
-          updated: "2022-04-19T08:49:22.618Z"
-          score: 1.99
-          nullable: true
+          - id: scb:23
+            label: Navn etter kjønn og alder
+            updated: '2022-04-19T08:49:22.618Z'
+            score: 1.99
+          - id: scb:24
+            label: Navn etter kjønn og alder
+            updated: '2022-04-19T08:49:22.618Z'
+            score: 1.99
+            nullable: true
     Pagination:
       type: object
       properties:
-         pagination:
-            type: object
-            properties:
-               pageOffset:
-                 type: integer
-                 format: int32
-               pageSize:
-                 type: integer
-                 format: int32
-                 example: 33
-               firstPage:
-                 type: string
-                 format: uri
-                 nullable: true
-                 description: "Do we need this?"
-               lastPage:
-                 type: string
-                 format: uri
-                 nullable: true
-                 description: "Do we need this?"
-               totalRecords:
-                 type: integer
-                 format: int32
-               nextPage:
-                 type: string
-                 format: uri
-                 nullable: true
-               previousPage:
-                 type: string
-                 format: uri
-                 nullable: true
+        pagination:
+          type: object
+          properties:
+            pageOffset:
+              type: integer
+              format: int32
+            pageSize:
+              type: integer
+              format: int32
+              example: 33
+            firstPage:
+              type: string
+              format: uri
+              nullable: true
+              description: Do we need this?
+            lastPage:
+              type: string
+              format: uri
+              nullable: true
+              description: Do we need this?
+            totalRecords:
+              type: integer
+              format: int32
+            nextPage:
+              type: string
+              format: uri
+              nullable: true
+            previousPage:
+              type: string
+              format: uri
+              nullable: true
       example:
         pageOffset: 10
         pageSize: 100
@@ -344,8 +394,8 @@ components:
           description: The version of the specification this api conforms to(?).
           nullable: true
           example:
-            x1:
-            value: "2.0"
+            x1: null
+            value: '2.0'
         languages:
           type: array
           items:
@@ -406,11 +456,11 @@ components:
         menuItemType:
           type: string
           nullable: true
-          description: "One of heading, table, folder-open or folder-closed. The x in folder-x is not the state, but should be read as infomation needed to display a folder when it is X."
+          description: One of heading, table, folder-open or folder-closed. The x in folder-x is not the state, but should be read as infomation needed to display a folder when it is X.
         label:
           type: string
           nullable: true
-          description: "Display text"
+          description: Display text
         sortOrder:
           type: integer
           format: int32
@@ -466,8 +516,8 @@ components:
           description: Search score (relevance of search)
           format: float
       additionalProperties: false
-      example: 
-         id: "scb:23"
+      example:
+        id: scb:23
     Problem:
       type: object
       properties:
@@ -574,7 +624,6 @@ components:
             title: Too many requests
             status: 429
             detail: You have reach the threshold for request limiting. 30 request per minute.
-
 tags:
   - name: TreeAlt2
     description: Endpoints for the menutree.
