@@ -1,0 +1,111 @@
+{
+  "data": {
+    "id": "",
+    "menuItemType": "folder",
+    "label": null,
+    "sortOrder": 42,
+    "links": null,
+    "folderContent": [
+      {
+        "id": "al",
+        "menuItemType": "folder",
+        "label": "Folder 1",
+        "sortOrder": 43,
+        "folderContent":  [
+            {
+                "id": "al_al03",
+                "menuItemType": "folder",
+                "label": "Folder 1 1",
+                "sortOrder": 45,
+                "links": [
+                {
+                    "rel": "data",
+                    "href": "https://localhost:7067/topictree/al_al03"
+                }
+                ]
+            },
+            {
+                "id": "ForstgenArbNye",
+                "menuItemType": "table",
+                "label": "07116: Table in Folder 1",
+                "sortOrder": 46,
+                "links": [
+                  {
+                    "rel": "metadata",
+                    "href": "https://my-site.com/api/v2/tables/ForstgenArbNye"
+                  }
+                ]
+              }
+      ,
+      {
+        "id": "00001",
+        "menuItemType": "table",
+        "label": "00001: Table in root folder",
+        "sortOrder": 44,
+        "links": [
+          {
+            "rel": "tables",
+            "href": "https://my-site.com/api/v2/tables/00001"
+          },
+          {
+            "rel": "metadata",
+            "href": "https://my-site.com/api/v2/tables/00001/metadata"
+          },
+          { 
+            "rel": "data",
+            "href": "https://my-site.com/api/v2/tables/00001/data"
+          }
+        ]
+      }
+    ],
+    "included": [
+      {
+        "id": "al",
+        "menuItemType": "folder",
+        "label": "Folder 1",
+        "sortOrder": 43,
+        "links": null,
+        "folderContent": [
+          {
+            "id": "al_al03",
+            "menuItemType": "closed-folder",
+            "label": "Folder 1 1",
+            "sortOrder": 45,
+            "links": [
+              {
+                "rel": "data",
+                "href": "https://localhost:7067/navigate/treealt2/al_al03"
+              }
+            ]
+          },
+          {
+            "id": "ForstgenArbNye",
+            "menuItemType": "table",
+            "label": "07116: Table in Folder 1",
+            "sortOrder": 46,
+            "links": [
+              {
+                "rel": "metadata",
+                "href": "https://my-site.com/api/v2/tables/ForstgenArbNye"
+              }
+            ]
+          },
+          {
+            "id": "al_al04",
+            "menuItemType": "closed-folder",
+            "label": "Folder 1 2",
+            "sortOrder": 47,
+            "links": [
+              {
+                "rel": "data",
+                "href": "https://localhost:7067/navigate/treealt2/al_al04"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "error": null,
+  "info": null
+}
