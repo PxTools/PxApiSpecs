@@ -16,14 +16,14 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ResponseConfigInfo'
-  /navigate/treealt2:
+  /topictree:
     get:
       tags:
-        - TreeAlt2
+        - topictree
       summary: "This has an include part, in stead of nested elements. \r\n The menutree starts here. Gets the MenuItem at the root node"
       operationId: GetNavigateAlt2Root
       parameters:
-        - $ref: '#/components/parameters/prefetchedLevelsParam'
+        - $ref: '#/components/parameters/levelsParam'
         - $ref: '#/components/parameters/langParam'
       responses:
         '200':
@@ -32,14 +32,16 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ResponseMenuItem'
-  /navigate/treealt2/{id}:
+        '429':
+          $ref: '#/components/responses/ErrorResponse429'
+  /topictree/{id}:
     get:
       tags:
-        - TreeAlt2
+        - topictree
       summary: Gets the MenuItem for the node with the given id.
       operationId: GetNavigateAlt2
       parameters:
-        - $ref: '#/components/parameters/prefetchedLevelsParam'
+        - $ref: '#/components/parameters/levelsParam'
         - $ref: '#/components/parameters/menuIdParam'
         - $ref: '#/components/parameters/langParam'
       responses:
@@ -212,14 +214,15 @@ components:
       required: true
       schema:
         type: string
-    prefetchedLevelsParam:
-      name: prefetchedLevels
+    levelsParam:
+      name: levels
       in: query
-      description: Number of levels that are prefetched in the response. Minimun 0, but a typical value is 1 - 3
+      description: Number of levels that are fetched in the response. Minimun 0, which will fetch all levels in the menutree.
       schema:
         type: integer
         format: int32
         default: 1
+        minimum: 0
   schemas:
     BaseResponse:
       type: object
@@ -250,18 +253,18 @@ components:
         - type: object
           properties:
             data:
-              $ref: '#/components/schemas/MenuItem'
+              $ref: '#/components/schemas/BaseMenuItem'
       description: This holds information about the menutree of the api.
       example:
         data:
           id: ''
-          menuItemType: open-folder
+          menuItemType: folder
           label: null
           sortOrder: 42
           links: null
           folderContent:
             - id: al
-              menuItemType: closed-folder
+              menuItemType: folder
               label: Folder 1
               sortOrder: 43
               links:
@@ -272,11 +275,11 @@ components:
               label: '05111: Table in root folder'
               sortOrder: 44
               links:
-                - rel: metadata
+                - rel: tables
                   href: https://my-site.com/api/v2/tables/AKUAarNY
           included:
             - id: al
-              menuItemType: open-folder
+              menuItemType: folder
               label: Folder 1
               sortOrder: 43
               links: null
@@ -456,11 +459,21 @@ components:
         menuItemType:
           type: string
           nullable: true
-          description: One of heading, table, folder-open or folder-closed. The x in folder-x is not the state, but should be read as infomation needed to display a folder when it is X.
+          description: One of heading, table or folder
         label:
           type: string
           nullable: true
           description: Display text
+        description:
+          type: string
+          nullable: true
+          description: Longer text describing menu item.
+        tags:
+          type: array
+          items:
+            type: string
+            description: tag for menu item
+          nullable: true
         sortOrder:
           type: integer
           format: int32
@@ -486,6 +499,24 @@ components:
             $ref: '#/components/schemas/MenuItem'
           nullable: true
           description: Holds the prefetched items.
+        category:
+          type: string
+          description: Mostly for internal use. Which category table belongs to. internal, official, private or section. I, O, P, S
+          default: official
+          enum:
+          - internal
+          - official
+          - private
+          - section     
+        hasPart:
+          type: array
+          items:
+            $ref: '#/components/schemas/MenuItem'
+          nullable: true
+          description: Holds the prefetched items.
+        isPartOf:
+          type: object
+          $ref: '#/components/schemas/MenuItem'
       additionalProperties: false
     SearchResultItem:
       type: object
@@ -613,6 +644,109 @@ components:
           type: string
           nullable: true
       additionalProperties: false
+    BaseMenuItem:
+      type: object
+      properties:
+        id:
+          type: string
+          nullable: true
+        menuItemType:
+          type: string
+          nullable: true
+          description: One of heading, table or folder
+        label:
+          type: string
+          nullable: true
+          description: Display text
+        description:
+          type: string
+          nullable: true
+          description: Longer text describing menu item.
+        sortOrder:
+          type: string
+          description: Sort order.
+      discriminator:
+         propertyName:  menuItemType
+         mapping:
+           table: '#/components/schemas/TableMenuItem'
+           heading: '#/components/schemas/HeadingMenuItem'
+           folder: '#/components/schemas/FolderItem'
+      anyOf:
+        - $ref: '#/components/schemas/TableMenuItem'
+        - $ref: '#/components/schemas/HeadingMenuItem'
+        - $ref: '#/components/schemas/FolderItem'
+        
+    TableMenuItem:
+      allOf:
+        - $ref: '#/components/schemas/BaseMenuItem'
+        - type: object
+          description: Table menu item
+          properties:
+            updated:
+              type: string
+              description: For menuItemType "table"
+              format: date-time
+              nullable: true
+            tags:
+              type: array
+              items:
+                type: string
+                description: tag for menu item
+              nullable: true
+            category:
+              type: string
+              description: Mostly for internal use. Which category table belongs to. internal, official, private or section. I, O, P, S
+              default: official
+              enum:
+              - internal
+              - official
+              - private
+              - section     
+            links:
+              type: array
+              items:
+                $ref: '#/components/schemas/Link'
+              description: Not for Heading
+              nullable: true
+    FolderItem:
+      allOf:
+        - $ref: '#/components/schemas/BaseMenuItem'
+        - type: object
+          description: Folder item
+          properties:
+            tags:
+              type: array
+              items:
+                type: string
+                description: tag for menu item
+              nullable: true
+            folderContent:
+              type: array
+              items:
+                $ref: '#/components/schemas/BaseMenuItem'
+              nullable: true
+            included:
+              type: array
+              items:
+                $ref: '#/components/schemas/BaseMenuItem'
+              nullable: true
+              description: Holds the prefetched items.
+            links:
+              type: array
+              items:
+                $ref: '#/components/schemas/Link'
+              description: Not for Heading
+              nullable: true
+    HeadingMenuItem:
+      allOf:
+        - $ref: '#/components/schemas/BaseMenuItem'
+        - type: object
+          description: Pedaled Vehicle
+          properties:
+             maxSpeed:
+               description: The top speed in kilometers per hour rounded to the nearest integer.
+               type: integer
+               example: 83         
   responses:
     ErrorResponse429:
       description: Error respsone for 429
