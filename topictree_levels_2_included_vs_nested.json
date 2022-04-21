@@ -1,5 +1,8 @@
 [{"******* https://www.ssb.no/statbank/  menu "}]
 [{"******* topictree/  (for root) levels=2 "}]
+
+[{"******* we must choose included vs nested for the api"}]
+
 [{"******* included:"}]
 {
   "data": {
