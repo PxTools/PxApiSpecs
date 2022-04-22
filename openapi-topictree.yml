@@ -8,7 +8,7 @@ paths:
     get:
       tags:
         - TopicTree
-      summary: "This has an include part, in stead of nested elements. \r\n The menutree starts here. Gets the MenuItem at the root node"
+      summary: "This has an include part, in stead of nested elements. \r\n The topictree starts here. Gets the treenode at the root node"
       operationId: GetTopics
       parameters:
         - $ref: '#/components/parameters/levelsParam'
@@ -19,18 +19,18 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ResponseMenuItem'
+                $ref: '#/components/schemas/ResponseTreeNode'
         '429':
           $ref: '#/components/responses/ErrorResponse429'
   /topictree/{id}:
     get:
       tags:
         - TopicTree
-      summary: Gets the MenuItem for the node with the given id.
+      summary: Gets the TreeNode for the node with the given id.
       operationId: GetTopicsById
       parameters:
         - $ref: '#/components/parameters/levelsParam'
-        - $ref: '#/components/parameters/menuIdParam'
+        - $ref: '#/components/parameters/treenodeIdParam'
         - $ref: '#/components/parameters/langParam'
       responses:
         '200':
@@ -38,7 +38,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ResponseMenuItem'
+                $ref: '#/components/schemas/ResponseTreeNode'
 components:
   parameters:
     langParam:
@@ -55,17 +55,17 @@ components:
         X2:
           value: dk
           summary: For danish
-    menuIdParam:
+    treenodeIdParam:
       name: id
       in: path
-      description: The menu-id of the desired node
+      description: The TreeNode-id of the desired node
       required: true
       schema:
         type: string
     levelsParam:
       name: levels
       in: query
-      description: Number of levels that are fetched in the response. Minimun 0, which will fetch all levels in the menutree.
+      description: Number of levels that are fetched in the response. Minimun 0, which will fetch all levels in the topictree.
       schema:
         type: integer
         format: int32
@@ -87,73 +87,14 @@ components:
       example:
         error: The id cant be found
         info: Closed on mondays
-    ResponseMenuItem:
+    ResponseTreeNode:
       allOf:
         - $ref: '#/components/schemas/BaseResponse'
         - type: object
           properties:
             data:
-              $ref: '#/components/schemas/BaseMenuItem'
-      description: This holds information about the menutree of the api.
-      example:
-        data:
-          id: ''
-          menuItemType: folder
-          label: null
-          sortOrder: 42
-          links: null
-          folderContent:
-            - id: al
-              menuItemType: folder
-              label: Folder 1
-              sortOrder: 43
-              links:
-                - rel: included_data
-                  href: '#/included/al'
-            - id: AKUAarNY
-              menuItemType: table
-              label: '05111: Table in root folder'
-              sortOrder: 44
-              links:
-                - rel: tables
-                  href: https://my-site.com/api/v2/tables/AKUAarNY
-          included:
-            - id: al
-              menuItemType: folder
-              label: Folder 1
-              sortOrder: 43
-              links: null
-              folderContent:
-                - id: al_al03
-                  menuItemType: closed-folder
-                  label: Folder 1 1
-                  sortOrder: 45
-                  links:
-                    - rel: data
-                      href: https://localhost:7067/navigate/treealt2/al_al03
-                - id: ForstgenArbNye
-                  menuItemType: table
-                  label: '07116: Table in Folder 1'
-                  sortOrder: 46
-                  links:
-                    - rel: metadata
-                      href: https://my-site.com/api/v2/tables/ForstgenArbNye
-                - id: al_al04
-                  menuItemType: closed-folder
-                  label: Folder 1 2
-                  sortOrder: 47
-                  links:
-                    - rel: data
-                      href: https://localhost:7067/navigate/treealt2/al_al04
-        error: null
-        info: null
-    ResponseToDo:
-      allOf:
-        - $ref: '#/components/schemas/BaseResponse'
-        - type: object
-          properties:
-            data:
-              $ref: '#/components/schemas/ToDo'
+              $ref: '#/components/schemas/BaseTreeNode'
+      description: This holds information about the topictree of the api.
     Link:
       type: object
       properties:
@@ -163,65 +104,6 @@ components:
         href:
           type: string
           nullable: true
-      additionalProperties: false
-    MenuItem:
-      type: object
-      properties:
-        id:
-          type: string
-          nullable: true
-        menuItemType:
-          type: string
-          nullable: true
-          description: One of heading, table or folder
-        label:
-          type: string
-          nullable: true
-          description: Display text
-        description:
-          type: string
-          nullable: true
-          description: Longer text describing menu item.
-        tags:
-          type: array
-          items:
-            type: string
-            description: tag for menu item
-          nullable: true
-        sortOrder:
-          type: integer
-          format: int32
-        links:
-          type: array
-          items:
-            $ref: '#/components/schemas/Link'
-          description: Not for Heading
-          nullable: true
-        updated:
-          type: string
-          description: For menuItemType "table"
-          format: date-time
-          nullable: true
-        folderContent:
-          type: array
-          items:
-            $ref: '#/components/schemas/MenuItem'
-          nullable: true
-        included:
-          type: array
-          items:
-            $ref: '#/components/schemas/MenuItem'
-          nullable: true
-          description: Holds the prefetched items.
-        category:
-          type: string
-          description: Mostly for internal use. Which category table belongs to. internal, official, private or section. I, O, P, S
-          default: official
-          enum:
-          - internal
-          - official
-          - private
-          - section     
       additionalProperties: false
     Problem:
       type: object
@@ -263,20 +145,13 @@ components:
           description: |
             An absolute URI that identifies the specific occurrence of the problem.
             It may or may not yield further information if dereferenced.
-    ToDo:
-      type: object
-      properties:
-        something:
-          type: string
-          nullable: true
-      additionalProperties: false
-    BaseMenuItem:
+    BaseTreeNode:
       type: object
       properties:
         id:
           type: string
           nullable: true
-        menuItemType:
+        treeNodeType:
           type: string
           nullable: true
           description: One of heading, table or folder
@@ -287,36 +162,36 @@ components:
         description:
           type: string
           nullable: true
-          description: Longer text describing menu item.
+          description: Longer text describing node.
         sortOrder:
           type: string
           description: Sort order.
       discriminator:
-         propertyName:  menuItemType
+         propertyName:  treeNodeType
          mapping:
-           table: '#/components/schemas/TableMenuItem'
-           heading: '#/components/schemas/HeadingMenuItem'
-           folder: '#/components/schemas/FolderItem'
+           table: '#/components/schemas/TableTreeNode'
+           heading: '#/components/schemas/HeadingTreeNode'
+           folder: '#/components/schemas/FolderTreeNode'
       anyOf:
-        - $ref: '#/components/schemas/TableMenuItem'
-        - $ref: '#/components/schemas/HeadingMenuItem'
-        - $ref: '#/components/schemas/FolderItem'
-    TableMenuItem:
+        - $ref: '#/components/schemas/TableTreeNode'
+        - $ref: '#/components/schemas/HeadingTreeNode'
+        - $ref: '#/components/schemas/FolderTreeNode'
+    TableTreeNode:
       allOf:
-        - $ref: '#/components/schemas/BaseMenuItem'
+        - $ref: '#/components/schemas/BaseTreeNode'
         - type: object
-          description: Table menu item
+          description: Table treeNode
           properties:
             updated:
               type: string
-              description: For menuItemType "table"
+              description: For treeNodeType "table"
               format: date-time
               nullable: true
             tags:
               type: array
               items:
                 type: string
-                description: tag for menu item
+                description: tag for treenode
               nullable: true
             category:
               type: string
@@ -333,38 +208,38 @@ components:
                 $ref: '#/components/schemas/Link'
               description: Not for Heading
               nullable: true
-    FolderItem:
+    FolderTreeNode:
       allOf:
-        - $ref: '#/components/schemas/BaseMenuItem'
+        - $ref: '#/components/schemas/BaseTreeNode'
         - type: object
-          description: Folder item
+          description: Folder node
           properties:
             tags:
               type: array
               items:
                 type: string
-                description: tag for menu item
+                description: tag for TreeNode
               nullable: true
             folderContent:
               type: array
               items:
-                $ref: '#/components/schemas/BaseMenuItem'
+                $ref: '#/components/schemas/BaseTreeNode'
               nullable: true
             included:
               type: array
               items:
-                $ref: '#/components/schemas/BaseMenuItem'
+                $ref: '#/components/schemas/BaseTreeNode'
               nullable: true
-              description: Holds the prefetched items.
+              description: Holds the included (prefetched) nodes.
             links:
               type: array
               items:
                 $ref: '#/components/schemas/Link'
               description: Not for Heading
               nullable: true
-    HeadingMenuItem:
+    HeadingTreeNode:
       allOf:
-        - $ref: '#/components/schemas/BaseMenuItem'
+        - $ref: '#/components/schemas/BaseTreeNode'
         - type: object
           description: Pedaled Vehicle
           properties:
@@ -385,4 +260,4 @@ components:
             detail: You have reach the threshold for request limiting. 30 request per minute.
 tags:
   - name: TopicTree
-    description: Endpoints for the menutree.
+    description: Endpoints for the topictree.
