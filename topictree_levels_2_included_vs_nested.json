@@ -4,6 +4,8 @@
 [{"******* the usecase for topictree is probably only guis, people who just want some data will use the tables/ endpoint"}]
 
 [{"******* we must choose included vs nested for the api"}]
+[{"the data in the included approach is close to data in an sql-database, (but) with the id's of the children in the record."}]
+
 [{"*******included is"},{{"simpler code(?)"},{"easier to read big datasets for humans"},{"Lets you render the first level without reading the whole dataset"}]
 [{"*******nested is"},{"less verbose"},{"easier to read small datasets for humans"} ]
 
@@ -11,48 +13,41 @@
 {
   "data": {
     "id": "",
-    "menuItemType": "folder", "label": null, "sortOrder...tags..etc.": "...", 
-    "links": null, 
+    "menuItemType": "folderAsParent", "label": null, "sortOrder...tags..etc.": "...", 
     "folderContent": 
     [ {
-        "label": "Arbeid og lønn", "id": "folder_1", "menuItemType": "folder", "sortOrder...tags..etc.": "...",
+        "label": "Arbeid og lønn", "id": "folder_1", "menuItemType": "folderAsChild", "sortOrder...tags..etc.": "...",
         "links": 
-        [ { "rel": "withContent", "href": "#/included/folder_1" }
-        ],
-        "folderContent": null 
+        [ { "rel": "asParent", "href": "#/included/folder_1" }
+        ]
       },
       {
-        "label": "Bank og finansmarked", "id": "folder_2", "menuItemType": "folder", "sortOrder...tags..etc.": "...",
+        "label": "Bank og finansmarked", "id": "folder_2", "menuItemType": "folderAsChild", "sortOrder...tags..etc.": "...",
         "links": 
-        [ { "rel": "withContent", "href": "#/included/folder_2" }
-        ],
-        "folderContent": null 
+        [ { "rel": "asParent", "href": "#/included/folder_2" }
+        ]
       },
       {"...":"..."}
     ],
   "included":
     [ {
         "Comment":"This is exactly the response of https://localhost:7067/topictree/folder_1" 
-        "label": "Arbeid og lønn", "id": "folder_1", "menuItemType": "folder", "sortOrder...tags..etc.": "...",
-        "links": null,
+        "label": "Arbeid og lønn", "id": "folder_1", "menuItemType": "folderAsParent", "sortOrder...tags..etc.": "...",
         "folderContent":
-        [ { "label": "Arbeidsledighet", "id": "folder_1_1", "menuItemType": "folder", "sortOrder...tags..etc.": "...",
+        [ { "label": "Arbeidsledighet", "id": "folder_1_1", "menuItemType": "folderAsChild", "sortOrder...tags..etc.": "...",
             "links": 
-            [ { "rel": "withContent", "href": "https://localhost:7067/topictree/folder_1_1" }
-            ],
-            "folderContent": null 
+            [ { "rel": "asParent", "href": "https://localhost:7067/topictree/folder_1_1" }
+            ]
           },
-          { "label": "Arbeidsmiljø, sykefravær og arbeidskonflikter", "id": "folder_1_2", "menuItemType": "folder", "sortOrder...tags..etc.": "...",
+          { "label": "Arbeidsmiljø, sykefravær og arbeidskonflikter", "id": "folder_1_2", "menuItemType": "folderAsChild", "sortOrder...tags..etc.": "...",
             "links": 
-            [ { "rel": "withContent", "href": "https://localhost:7067/topictree/folder_1_2" }
-            ],
-            "folderContent": null 
+            [ { "rel": "asParent", "href": "https://localhost:7067/topictree/folder_1_2" }
+            ]
           },
           {"...":"..."}
       },
       {
-        "label": "Bank og finansmarked", "id": "folder_2", "menuItemType": "folder", "sortOrder...tags..etc.": "...",
-        "links": null,
+        "label": "Bank og finansmarked", "id": "folder_2", "menuItemType": "folderAsParent", "sortOrder...tags..etc.": "...",
         "folderContent":
             [{"...":"..."}]
       }, {"...":"..."}
