@@ -20,6 +20,15 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ResponseTreeNode'
+              examples:
+                oneLevel:
+                  $ref: '#/components/examples/topictree-oneLevel'
+                # twoLevels:
+              #   $ref: '#/components/examples    topictree-twoLevels'
+                threeLevels:
+                  $ref: '#/components/examples/topictree-threeLevels'
+                includedThreeLevels:
+                  $ref: '#/components/examples/included-topictree-threeLevels'
         '429':
           $ref: '#/components/responses/ErrorResponse429'
   /topictree/{id}:
@@ -39,6 +48,13 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ResponseTreeNode'
+              examples:
+                # topictree_al:
+                #   $ref: '#/components/examples/topictree_al-oneLevel'
+                topictree_al_al03-oneLevel:
+                  $ref: '#/components/examples/topictree_al_al03-oneLevel'
+                topictree_al_al03_aku-oneLevel:
+                  $ref: '#/components/examples/topictree_al_al03_aku-oneLevel'
 components:
   parameters:
     langParam:
@@ -258,6 +274,407 @@ components:
             title: Too many requests
             status: 429
             detail: You have reach the threshold for request limiting. 30 request per minute.
+  examples:
+    nestedContent:
+      value:
+        data:
+          id: 'NESTED'
+          treeNodeType: folder
+          label: null
+          sortOrder: 42
+          links: null
+          folderContent:
+            - id: al
+              treeNodeType: folder
+              label: Folder 1
+              sortOrder: 43
+              links:
+                - rel: data?
+                  href: '#/included/al'
+            - id: AKUAarNY
+              treeNodeType: table
+              label: '05111: Table in root folder'
+              sortOrder: 44
+              links:
+                - rel: tables
+                  href: https://my-site.com/api/v2/tables/AKUAarNY
+          included:
+            - id: al
+              treeNodeType: folder
+              label: Folder 1
+              sortOrder: 43
+              links: null
+              folderContent:
+                - id: al_al03
+                  treeNodeType: closed-folder
+                  label: Folder 1 1
+                  sortOrder: 45
+                  links:
+                    - rel: data
+                      href: https://localhost:7067/navigate/treealt2/al_al03
+                - id: ForstgenArbNye
+                  treeNodeType: table
+                  label: '07116: Table in Folder 1'
+                  sortOrder: 46
+                  links:
+                    - rel: metadata
+                      href: https://my-site.com/api/v2/tables/ForstgenArbNye
+                - id: al_al04
+                  treeNodeType: closed-folder
+                  label: Folder 1 2
+                  sortOrder: 47
+                  links:
+                    - rel: data
+                      href: https://localhost:7067/navigate/treealt2/al_al04
+    included-topictree-threeLevels:
+      description: This is an example of included content for three levels
+      value:
+        data:
+          id: 
+          treeNodeType: folder
+          label: 
+          links: 
+          folderContent:
+            - id: al
+              treeNodeType: folder
+              label: Arbeid og lønn
+              tags: 
+                - arbeid
+                - lønn
+                - jobb
+                - inntekt
+              links:
+                - rel: data?
+                  href: '#/included/al'
+            - id: bf
+              treeNodeType: folder
+              label: Bank og finansmarked
+              links:
+                - rel: data?
+                  href: '#/included/bf'
+          included:
+            - id: al
+              treeNodeType: folder
+              label: Arbeid og lønn
+              links:
+              folderContent:
+                - id: al_al03
+                  treeNodeType: folder
+                  label: Arbeidsledighet
+                  links:
+                    - rel: data?
+                      href: '#/included/al_al03'
+                - id: al_al04
+                  treeNodeType: folder
+                  label: Arbeidsmiljø, sykefravær og arbeidskonflikter
+                  description: Streiker, sykefravær og hvordan vi har det på jobb
+                  links:
+                    - rel: data?
+                      href: '#/included/al_al04'
+            - id: al_al03
+              treeNodeType: folder
+              label: Arbeidsledighet
+              description: Inkluderer tall om ledige stillinger
+              links:
+              folderContent:
+                - id: al_al03_aku
+                  treeNodeType: folder
+                  label: Arbeidskraftundersøkelsen
+                  description: 
+                  links:
+                    - rel: data?
+                      href: /api/topictree/al_al03_aku
+                - id: al_al03_innvarbl
+                  treeNodeType: folder
+                  label: Registrerte arbeidsledige blant innvandrere (avsluttet i Statistisk sentralbyrå)
+                  description: 
+                  links:
+                    - rel: data?
+                      href: /api/topictree/al_al03_innvarbl
+            - id: al_al04
+              treeNodeType: folder
+              label: Arbeidsmiljø, sykefravær og arbeidskonflikter
+              description: Streiker, sykefravær og hvordan vi har det på jobb
+              links: 
+              folderContent:
+                - id: al_al04_arbmiljo
+                  treeNodeType: folder
+                  label: Arbeidsmiljø, levekårsundersøkelsen
+                  description: 
+                  links:
+                    - rel: data?
+                      href: /api/topictree/al_al04_arbmiljo
+                - id: al_al04_arborg
+                  treeNodeType: folder
+                  label: Fagforeiningsmedlemmer og streikar
+                  description: 
+                  links:
+                    - rel: data?
+                      href: /api/topictree/al_al04_arborg
+            - id: bf
+              treeNodeType: folder
+              label: Bankk og finansmarked
+              description: 
+              links: 
+              folderContent:
+                - id: bf_bf02
+                  treeNodeType: folder
+                  label: Finansielle indikatorer
+                  description: 
+                  links:
+                    - rel: data?
+                      href: '#/included/bf_bf02'
+            - id: bf_bf02
+              treeNodeType: folder
+              label: Finansielle indikatorer
+              description: Nøkkeltall for finanssektoren
+              links:
+              folderContent:
+                - id: bf_bf02_finsek
+                  treeNodeType: folder
+                  label: Finansielle sektorregnskaper
+                  description: 
+                  links:
+                    - rel: data?
+                      href: /api/topictree/bf_bf02_finsek
+                - id: bf_bf02_konkurs
+                  treeNodeType: folder
+                  label: Opna konkursar
+                  description: 
+                  links:
+                    - rel: data?
+                      href: /api/topictree/ bf_bf02_konkurs
+
+
+    topictree-oneLevel:
+      description: Example for response with query paramter 'Levels' = 1
+      value:
+        data:
+          id: 
+          treeNodeType: folder
+          label: 
+          description:
+          links: 
+          folderContent:
+            - id: al
+              treeNodeType: folder
+              label: Arbeid og lønn
+              tags: 
+                - arbeid
+                - lønn
+                - jobb
+                - inntekt
+              description: 
+              links:
+                - rel: data?
+                  href: /api/topictree/al
+            - id: bf
+              treeNodeType: folder
+              label: Bankk og finansmarked
+              description: 
+              links:
+                - rel: data?
+                  href: /api/topictree/bf
+    topictree-twoLevels:
+      description: Example for response with query paramter `Levels` = 2
+      value:
+        data:
+          id: 
+          treeNodeType: folder
+          label: 
+          description: 
+          folderContent:
+            - id: al
+              treeNodeType: folder
+              label: Arbeid og lønn
+              description: 
+              links:
+              folderContent:
+                - id: al_al03
+                  treeNodeType: folder
+                  label: Arbeidsledighet
+                  description: Inkluderer tall om ledige stillinger
+                  links:
+                    - rel: data?
+                      href: /api/topictree/al_al03
+                - id: al_al04
+                  treeNodeType: folder
+                  label: Arbeidsmiljø, sykefravær og arbeidskonflikter
+                  description: Streiker, sykefravær og hvordan vi har det på jobb
+                  links:
+                    - rel: data?
+                      href: /api/topictree/al_al04
+            - id: bf
+              treeNodeType: folder
+              label: Bankk og finansmarked
+              description: 
+              links: null
+              folderContent:
+                - id: bf_bf02
+                  treeNodeType: folder
+                  label: Finansielle indikatorer
+                  description: 
+                  links:
+                    - rel: data?
+                      href: /api/topictree/bf_bf02
+    topictree-threeLevels:
+      description: Example for response with query paramter 'Levels' = 3
+      value:
+        data:
+          id: 
+          treeNodeType: folder
+          label: 
+          description: 
+          folderContent:
+            - id: al
+              treeNodeType: folder
+              label: Arbeid og lønn
+              tags: 
+                - arbeid
+                - lønn
+                - jobb
+                - inntekt
+              description: 
+              links: 
+              folderContent:
+                - id: al_al03
+                  treeNodeType: folder
+                  label: Arbeidsledighet
+                  description: Inkluderer tall om ledige stillinger
+                  links: 
+                  folderContent:
+                    - id: al_al03_aku
+                      treeNodeType: folder
+                      label: Arbeidskraftundersøkelsen
+                      description: 
+                      links:
+                        - rel: data?
+                          href: /api/topictree/al_al03_aku
+                    - id: al_al03_innvarbl
+                      treeNodeType: folder
+                      label: Registrerte arbeidsledige blant innvandrere (avsluttet i Statistisk sentralbyrå)
+                      description: 
+                      links:
+                        - rel: data?
+                          href: /api/topictree/al_al03_innvarbl
+                - id: al_al04
+                  treeNodeType: folder
+                  label: Arbeidsmiljø, sykefravær og arbeidskonflikter
+                  description: Streiker, sykefravær og hvordan vi har det på jobb
+                  links: 
+                  folderContent:
+                    - id: al_al04_arbmiljo
+                      treeNodeType: folder
+                      label: Arbeidsmiljø, levekårsundersøkelsen
+                      description: 
+                      links:
+                        - rel: data?
+                          href: /api/topictree/al_al04_arbmiljo
+                    - id: al_al04_arborg
+                      treeNodeType: folder
+                      label: Fagforeiningsmedlemmer og streikar
+                      description: 
+                      links:
+                        - rel: data?
+                          href: /api/topictree/al_al04_arborg
+            - id: bf
+              treeNodeType: folder
+              label: Bankk og finansmarked
+              description: 
+              links: null
+              folderContent:
+                - id: bf_bf02
+                  treeNodeType: folder
+                  label: Finansielle indikatorer
+                  description: Nøkkeltall for finanssektoren
+                  links: null
+                  folderContent:
+                    - id: bf_bf02_finsek
+                      treeNodeType: folder
+                      label: Finansielle sektorregnskaper
+                      description: 
+                      links:
+                        - rel: data?
+                          href: /api/topictree/bf_bf02_finsek
+                    - id: bf_bf02_konkurs
+                      treeNodeType: folder
+                      label: Opna konkursar
+                      description: 
+                      links:
+                        - rel: data?
+                          href: /api/topictree/ bf_bf02_konkurs
+    topictree_al-oneLevel:
+      description: Example response for endpoint `topictree/{al}`
+      value:
+        data:
+          id: al
+          treeNodeType: folder
+          label: Arbeid og lønn
+          description: 
+          links: null
+          folderContent:
+            - id: al_al03
+              treeNodeType: folder
+              label: Arbeidsledighet
+              description: Inkluderer tall om ledige stillinger
+              links:
+                - rel: data?
+                  href: /api/topictree/al_al03
+            - id: al_al04
+              treeNodeType: folder
+              label: Arbeidsmiljø, sykefravær og arbeidskonflikter
+              description: Streiker, sykefravær og hvordan vi har det på jobb 
+              links:
+                - rel: data?
+                  href: /api/topictree/al_al04
+    topictree_al_al03-oneLevel:
+      description: Example response for endpoint `topictree/{al_al03}`
+      value:
+        data:
+          id: al_al03
+          treeNodeType: folder
+          label: Arbeidsledighet
+          description: Inkluderer tall om ledige stillinger
+          links: null
+          folderContent:
+            - id: al_al03_aku
+              treeNodeType: folder
+              label: Arbeidskraftundersøkelsen
+              description: 
+              links:
+                - rel: data?
+                  href: /api/topictree/al_al03_aku
+            - id: al_al03_innvarbl
+              treeNodeType: folder
+              label: Registrerte arbeidsledige blant innvandrere (avsluttet i Statistisk sentralbyrå)
+              description: 
+              links:
+                - rel: data?
+                  href: /api/topictree/al_al03_innvarbl
+    topictree_al_al03_aku-oneLevel:
+      description: Example response for endpoint `topictree/{al_al03_aku}`
+      value:
+        data:
+          id: al_al03_aku
+          treeNodeType: folder
+          label: Arbeidskraftundersøkelsen
+          description: 
+          links: null
+          folderContent:
+            - id: al_al03_aku_SBMENU9729
+              treeNodeType: heading
+              label: Bruddjusterte tall
+              description: 
+              links:
+                - rel: data?
+                  href: /api/topictree/al_al03_aku_SBMENU9729
+            - id: al_al03_aku_SyssArbledSes03
+              treeNodeType: table
+              label: "13332: Sysselsetting, arbeidsledighet, arbeidsstyrken og utførte ukeverk, etter kjønn og alder. Brudd- og sesongjustert, 3-måneders glidende gjennomsnitt 2006M02 - 2022M01"
+              description: 
+              links:
+                - rel: data?
+                  href: /api/topictree/al_al03_aku_SyssArbledSes03
 tags:
   - name: TopicTree
     description: Endpoints for the topictree.
