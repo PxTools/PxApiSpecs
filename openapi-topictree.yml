@@ -109,7 +109,7 @@ components:
         - type: object
           properties:
             data:
-              $ref: '#/components/schemas/BaseTreeNode'
+              $ref: '#/components/schemas/ITreeNode'
       description: This holds information about the topictree of the api.
     Link:
       type: object
@@ -161,6 +161,18 @@ components:
           description: |
             An absolute URI that identifies the specific occurrence of the problem.
             It may or may not yield further information if dereferenced.
+    ITreeNode:
+      type: object
+      discriminator:
+         propertyName:  treeNodeType
+         mapping:
+           table: '#/components/schemas/TableTreeNode'
+           heading: '#/components/schemas/HeadingTreeNode'
+           folder: '#/components/schemas/FolderTreeNode'
+      anyOf:
+        - $ref: '#/components/schemas/TableTreeNode'
+        - $ref: '#/components/schemas/HeadingTreeNode'
+        - $ref: '#/components/schemas/FolderTreeNode'
     BaseTreeNode:
       type: object
       properties:
@@ -182,16 +194,6 @@ components:
         sortOrder:
           type: string
           description: Sort order.
-      discriminator:
-         propertyName:  treeNodeType
-         mapping:
-           table: '#/components/schemas/TableTreeNode'
-           heading: '#/components/schemas/HeadingTreeNode'
-           folder: '#/components/schemas/FolderTreeNode'
-      anyOf:
-        - $ref: '#/components/schemas/TableTreeNode'
-        - $ref: '#/components/schemas/HeadingTreeNode'
-        - $ref: '#/components/schemas/FolderTreeNode'
     TableTreeNode:
       allOf:
         - $ref: '#/components/schemas/BaseTreeNode'
@@ -239,12 +241,12 @@ components:
             folderContent:
               type: array
               items:
-                $ref: '#/components/schemas/BaseTreeNode'
+                $ref: '#/components/schemas/ITreeNode'
               nullable: true
             included:
               type: array
               items:
-                $ref: '#/components/schemas/BaseTreeNode'
+                $ref: '#/components/schemas/ITreeNode'
               nullable: true
               description: Holds the included (prefetched) nodes.
             links:
