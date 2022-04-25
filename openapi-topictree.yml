@@ -2,12 +2,23 @@ openapi: 3.0.3
 info:
   title: PxApi
   version: '1.0'
-  description: "This api is part of the PX-family.\r\n Q: Should the tables and the navigate endpoint have different backends(Lucene vs sql)?"
+  description: |
+    This api is part of the PX-family.
+    
+     *Q: Should the tables and the navigate endpoint have different backends(Lucene vs sql)?*
 paths:
   /topictree:
     get:
       tags:
         - TopicTree
+      description:  |
+        
+        **The below table defines the HTTP Status codes that this endpoint may return**
+        
+        | Status Code      | Description | Reason                             |
+        | ---------------- | ------------| -----------------------------------|
+        | `200`              | **Success**     | All good   |
+        | `429`              | **Too many requests** | Too many request whithin a time period       |
       summary: "This has an include part, in stead of nested elements. \r\n The topictree starts here. Gets the treenode at the root node"
       operationId: GetTopics
       parameters:
@@ -15,7 +26,16 @@ paths:
         - $ref: '#/components/parameters/langParam'
       responses:
         '200':
-          description: Success
+          description: |
+            ### Success
+
+            Choose different response examples from dropdownlist below.
+
+            * ### Nested examples
+              - **oneLevel** = `GET topictree?levels=1`
+              - **threeLevels** = `GET topictree?levels=3`
+            * ### Included example
+              - **incluededThreeLevels** = `GET topictree?levels=3`
           content:
             application/json:
               schema:
