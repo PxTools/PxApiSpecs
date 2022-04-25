@@ -35,7 +35,7 @@ paths:
     get:
       tags:
         - TopicTree
-      summary: Gets the TreeNode for the node with the given id.
+      summary: Gets the TreeNode for the folder with the given id. (What should ids that are not folders return? )
       operationId: GetTopicsById
       parameters:
         - $ref: '#/components/parameters/levelsParam'
@@ -163,6 +163,7 @@ components:
             It may or may not yield further information if dereferenced.
     ITreeNode:
       type: object
+      description: Something that is one of 3 TreeNode types.
       discriminator:
          propertyName:  treeNodeType
          mapping:
@@ -175,6 +176,7 @@ components:
         - $ref: '#/components/schemas/FolderTreeNode'
     BaseTreeNode:
       type: object
+      description: Common properties for the 3 TreeNode types.
       properties:
         id:
           type: string
