@@ -1,0 +1,42 @@
+openapi: '3.0.2'
+info:
+  title: API Title
+  version: '1.0'
+servers:
+  - url: https://api.server.test/v1
+paths:
+  /topictree:
+      get:
+        tags:
+          - topictree
+        summary: "This has an include part, in stead of nested elements. \r\n The menutree starts here. Gets the MenuItem at the root node"
+        operationId: GetNavigateAlt2Root
+        parameters:
+          - $ref: '#/components/parameters/levelsParam'
+          - $ref: '#/components/parameters/langParam'
+        responses:
+          '200':
+            description: Success
+            content:
+              application/json:
+                schema:
+                  $ref: '#/components/schemas/ResponseMenuItem'
+          '429':
+            $ref: '#/components/responses/ErrorResponse429'
+    /topictree/{id}:
+      get:
+        tags:
+          - topictree
+        summary: Gets the MenuItem for the node with the given id.
+        operationId: GetNavigateAlt2
+        parameters:
+          - $ref: '#/components/parameters/levelsParam'
+          - $ref: '#/components/parameters/menuIdParam'
+          - $ref: '#/components/parameters/langParam'
+        responses:
+          '200':
+            description: Success
+            content:
+              application/json:
+                schema:
+                  $ref: '#/components/schemas/ResponseMenuItem'
