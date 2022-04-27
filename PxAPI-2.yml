@@ -19,7 +19,7 @@ paths:
             content:
               application/json:
                 schema:
-                  $ref: '#/components/schemas/NavigationItem'
+                  $ref: '#/components/schemas/Folder'
                 examples:
                   NavigateRoot:
                     $ref: '#/components/examples/navigation-root'
@@ -69,6 +69,11 @@ components:
         type: string
   schemas:
     NavigationItem:
+      oneOf:
+        - $ref: '#/components/schemas/Folder'
+        - $ref: '#/components/schemas/Heading'
+        - $ref: '#/components/schemas/Table' 
+    NavigationItemBase:
       type: object
       description: Navigation item.
       properties:
@@ -88,9 +93,16 @@ components:
           type: string
           nullable: true
           description: Longer text describing node.
+      discriminator:
+        propertyName: objectType
+        mapping:
+          folder: '#/components/schemas/Folder'
+          folder-information: '#/components/schemas/FolderInformation'
+          heading: '#/components/schemas/Heading'
+          table: '#/components/schemas/Table'
     Folder:
       allOf:
-        - $ref: '#/components/schemas/NavigationItem'
+        - $ref: '#/components/schemas/NavigationItemBase'
         - type: object
           description: Folder item
           properties:
@@ -103,7 +115,10 @@ components:
             folderContents:
               type: array
               items:
-                $ref: '#/components/schemas/NavigationItem'
+                oneOf:
+                    - $ref: '#/components/schemas/FolderInformation'
+                    - $ref: '#/components/schemas/Heading'
+                    - $ref: '#/components/schemas/Table'
               nullable: true
             links:
               type: array
@@ -113,7 +128,7 @@ components:
               nullable: true
     FolderInformation:
       allOf:
-        - $ref: '#/components/schemas/NavigationItem'
+        - $ref: '#/components/schemas/NavigationItemBase'
         - type: object
           description: Folder information item
           properties:
@@ -131,12 +146,12 @@ components:
               nullable: true
     Heading:
       allOf:
-        - $ref: '#/components/schemas/NavigationItem'
+        - $ref: '#/components/schemas/NavigationItemBase'
         - type: object
           description: Heading item
     Table:
       allOf:
-        - $ref: '#/components/schemas/NavigationItem'
+        - $ref: '#/components/schemas/NavigationItemBase'
         - type: object
           description: Table item
           properties:
