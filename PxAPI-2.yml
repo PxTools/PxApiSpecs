@@ -19,7 +19,7 @@ paths:
             content:
               application/json:
                 schema:
-                  $ref: '#/components/schemas/NavigationItem'
+                  $ref: '#/components/schemas/Folder'
                 examples:
                   NavigateRoot:
                     $ref: '#/components/examples/navigation-root'
@@ -40,10 +40,50 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/NavigationItem'
+                $ref: '#/components/schemas/Folder'
               examples:
                   Navigation-BE:
                     $ref: '#/components/examples/navigation-be'
+  /tables:
+    get:
+      tags:
+        - Table
+      summary: Endpoint for listing tables
+      operationId: ListAllTables
+      parameters:
+        - $ref: '#/components/parameters/query'
+        - $ref: '#/components/parameters/pastDays'
+        - $ref: '#/components/parameters/include_discontinued'
+        - $ref: '#/components/parameters/pageOffset'
+        - $ref: '#/components/parameters/pageSize'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TablesResponse'
+              examples:
+                  tables:
+                    $ref: '#/components/examples/tablesResponse'
+  /tables/{id}:
+    get:
+      tags:
+        - Table
+      summary: Endpoint to get table by {id}
+      operationId: GetTableById
+      parameters:
+        - $ref: '#/components/parameters/id'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Tables'
+              # examples:
+              #     tables:
+              #       $ref: '#/components/examples/table_id'
 components:
   parameters:
     language:
@@ -67,8 +107,56 @@ components:
       required: true
       schema:
         type: string
+    query:
+      name: query
+      in: query
+      description: Selects only tables that that matches a criteria which is specified by the search parameter.
+      required: false
+      schema:
+        type: string
+      examples:
+        X1:
+          value: befolkning
+          summary: Search for tables with name `befolkning`
+    pastDays:
+      name: pastDays
+      in: query
+      description: Selects only tables that was updated from the time of execution going back number of days stated by the parameter pastDays. Valid values for past days are integers between 1 and ?
+      required: false
+      schema:
+        type: integer
+        minimum: 1
+      examples:
+        X1:
+          value: 5
+          summary: Search for tables which has been updated in the last 5 days
+    include_discontinued:
+      name: includeDiscontinued
+      in: query
+      description: Decides if discontinued tables are included in response.
+      required: false
+      schema:
+        type: boolean
+        default: false
+        example: false
+    pageOffset:
+      name: pageOffset
+      in: query
+      description: "Pagination: Decides which page number to return"
+      required: false
+      schema:
+        type: integer
+        default: 1
+    pageSize:
+      name: pageSize
+      in: query
+      description: "Pagination: Decides how many tables per page"
+      required: false
+      schema:
+        type: integer
+        #Default value depends on site?
   schemas:
-    NavigationItem:
+    FolderContentItem:
       type: object
       description: Navigation item.
       properties:
@@ -87,33 +175,47 @@ components:
         description:
           type: string
           nullable: true
-          description: Longer text describing node.
+          description: Longer text describing node. If no longer text exist, same as label
     Folder:
-      allOf:
-        - $ref: '#/components/schemas/NavigationItem'
-        - type: object
-          description: Folder item
-          properties:
-            tags:
-              type: array
-              items:
-                type: string
-                description: tag for folder
-              nullable: true
-            folderContents:
-              type: array
-              items:
-                $ref: '#/components/schemas/NavigationItem'
-              nullable: true
-            links:
-              type: array
-              items:
-                $ref: '#/components/schemas/Link'
-              description: Links to ...
-              nullable: true
+      type: object
+      description: Folder item
+      properties:
+        id:
+          type: string
+          nullable: true
+          #nullable = true beacause root is empty
+        objectType:
+          type: string
+          nullable: false
+          description: One of heading, table, folder or folder-information
+        label:
+          type: string
+          nullable: true
+          description: Display text
+        description:
+          type: string
+          nullable: true
+          description: Longer text describing node.
+        tags:
+          type: array
+          items:
+            type: string
+            description: tag for folder
+          nullable: true
+        folderContents:
+          type: array
+          items:
+            $ref: '#/components/schemas/FolderContentItem'
+          nullable: true
+        links:
+          type: array
+          items:
+            $ref: '#/components/schemas/Link'
+          description: Links to ...
+          nullable: true
     FolderInformation:
       allOf:
-        - $ref: '#/components/schemas/NavigationItem'
+        - $ref: '#/components/schemas/FolderContentItem'
         - type: object
           description: Folder information item
           properties:
@@ -131,12 +233,12 @@ components:
               nullable: true
     Heading:
       allOf:
-        - $ref: '#/components/schemas/NavigationItem'
+        - $ref: '#/components/schemas/FolderContentItem'
         - type: object
           description: Heading item
     Table:
       allOf:
-        - $ref: '#/components/schemas/NavigationItem'
+        - $ref: '#/components/schemas/FolderContentItem'
         - type: object
           description: Table item
           properties:
@@ -165,6 +267,64 @@ components:
               items:
                 $ref: '#/components/schemas/Link'
               description: Links to ...
+              nullable: true
+            variablesName:
+              type: array
+              description: List of varibles name
+              items:
+                type: string
+            firstPeriod:
+              type: string
+              description: First period
+              example: 2017
+            lastPeriod:
+              type: string
+              description: Last period
+              example: 2022
+            discontinued:
+              type: boolean
+    TablesResponse:
+      allOf:
+        - $ref: '#/components/schemas/Pagination'
+        - type: object
+          properties:
+            tables:
+              type: array
+              items:
+                 $ref: '#/components/schemas/Table'
+    Pagination:
+      type: object
+      properties:
+        pagination:
+          type: object
+          properties:
+            pageOffset:
+              type: integer
+              format: int32
+            pageSize:
+              type: integer
+              format: int32
+              example: 33
+            firstPage:
+              type: string
+              format: uri
+              nullable: true
+              description: Link to first page
+            lastPage:
+              type: string
+              format: uri
+              nullable: true
+              description: Link to last page
+            totalRecords:
+              type: integer
+              format: int32
+            nextPage:
+              type: string
+              format: uri
+              nullable: true
+            previousPage:
+              type: string
+              format: uri
               nullable: true
     Link:
       type: object
@@ -241,62 +401,57 @@ components:
         id: 
         objectType: folder
         label: 
-        description:
+        description: 
         links:
         - rel: self
           href: https://my-site.com/api/v2/navigation
         folderContents:
-        - id: AM
+        - id: JO
           objectType: folder
-          label: Arbetsmarknad
-          description: Beskrivning av arbetsmarknad
+          label: Agriculture, forestry and fishery
+          description: Animals, economy, employment, production, and more.
           links:
           - rel: self
-            href: https://my-site.com/api/v2/navigation/AM
-        - id: BE
+            href: https://my-site.com/api/v2/navigation/JO
+        - id: NV
           objectType: folder
-          label: Befolkning
-          description: Folkmängd, in- och utvanding, medellivslängd, namn, prognoser mm
+          label: Financial markets
+          description: Assets, banks, insurance companies, liabilities, shares, and more.
           links:
           - rel: self
-            href: https://my-site.com/api/v2/navigation/BE
+            href: https://my-site.com/api/v2/navigation/NV
 
     navigation-be:
       description: Example for 200 response for navigation endpoint
       value:
-        id: BE
+        id: BE0101
         objectType: folder
-        label: Befolkning
-        description: Folkmängd, in- och utvanding, medellivslängd, namn, prognoser mm
+        label: Balance statistics
+        description: Balance statistics
         links:
         - rel: self
-          href: https://my-site.com/api/v2/navigation/BE
+          href: https://my-site.com/api/v2/navigation/BE0101
         folderContents:
-        - id: BE0101
+        - id: "01"
           objectType: folder-information
-          label: Befolkningsstatistik
-          description: Folkmängd, in- och utvanding, medellivslängd, namn, prognoser mm
+          label: Annual statistics
+          description: Annual statistics
           links:
           - rel: folder
-            href: https://my-site.com/api/v2/navigation/BE0101
-        - id: BE0401
-          objectType: folder-information
-          label: Befolkningsframskrivningar
-          description: Folkmängd, in- och utvanding, medellivslängd, namn, prognoser mm
-          links:
-          - rel: folder
-            href: https://my-site.com/api/v2/navigation/BE0401
+            href: https://my-site.com/api/v2/navigation/01
         - id: BEH1
           objectType: heading
-          label: Intressanta siffror
-          description: XYZ
+          label: I am heading
+          description: I am heading
         - id: TAB0001
           objectType: table
-          label: Tabell A
-          description: Folkmängd, in- och utvanding, medellivslängd, namn, prognoser mm
-          updated: ''
-          categoy: ''
-          tags: []
+          label: Corporations Financial Assets and Liabilities. Quarterly 1998K2 - 2021K4
+          description: Corporations Financial Assets and Liabilities by item. Quarterly 1998K2 - 2021K4 [2022-03-11]
+          updated: 2017-09-08T19:01:55.714942+03:00
+          categoy: 'O'
+          tags: 
+          - Money
+          - Gold
           links:
           - rel: self
             href: https://my-site.com/api/v2/tables/TAB0001
@@ -304,4 +459,66 @@ components:
             href: https://my-site.com/api/v2/tables/TAB0001/metadata
           - rel: data
             href: https://my-site.com/api/v2/tables/TAB0001/data
-
+          variablesName:
+            - observations
+            - region
+            - marital status
+            - age
+          firstPeriod: 1998K2
+          lastPeriod: 2021K4
+          discontinued: false
+    tablesResponse:
+      description: List all tables with pagination
+      value:
+        tables: 
+          - id: TAB0001
+            objectType: table
+            label: Population. Year 1968 - 2021
+            description: Population by region, marital status, age and sex. Year 1968 - 2021
+            updated: 2017-09-08T19:01:55.714942+03:00
+            categoy: 'O'
+            tags: []
+            links:
+            - rel: self
+              href: https://my-site.com/api/v2/tables/TAB0001
+            - rel: metadata
+              href: https://my-site.com/api/v2/tables/TAB0001/metadata
+            - rel: data
+              href: https://my-site.com/api/v2/tables/TAB0001/data
+            variablesName:
+              - observations
+              - region
+              - marital status
+              - age
+            firstPeriod: 1968
+            lastPeriod: 2021
+            discontinued: false
+          - id: TAB0001
+            objectType: table
+            label: Tabell A
+            description: Folkmängd, in- och utvanding, medellivslängd, namn, prognoser mm
+            updated: 2017-09-08T19:01:55.714942+03:00
+            categoy: 'O'
+            tags: []
+            links:
+            - rel: self
+              href: https://my-site.com/api/v2/tables/TAB0001
+            - rel: metadata
+              href: https://my-site.com/api/v2/tables/TAB0001/metadata
+            - rel: data
+              href: https://my-site.com/api/v2/tables/TAB0001/data
+            variablesName:
+              - observations
+              - region
+              - marital status
+              - age
+            firstPeriod: 2017
+            lastPeriod: 2022
+            discontinued: false
+        pageOffset: 10
+        pageSize: 100
+        firstPage: https://my-site.com/api/v2/tables/?pageOffset=1
+        lastPage: https://my-site.com/api/v2/tables/?pageOffset=70
+        totalRecords: 7000
+        nextPage: https://my-site.com/api/v2/tables/?pageOffset=11
+        previousPage: https://my-site.com/api/v2/tables/?pageOffset=9
