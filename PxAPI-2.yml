@@ -54,7 +54,7 @@ paths:
         - $ref: '#/components/parameters/query'
         - $ref: '#/components/parameters/pastDays'
         - $ref: '#/components/parameters/include_discontinued'
-        - $ref: '#/components/parameters/pageOffset'
+        - $ref: '#/components/parameters/pageNumber'
         - $ref: '#/components/parameters/pageSize'
       responses:
         '200':
@@ -136,8 +136,8 @@ components:
         type: boolean
         default: false
         example: false
-    pageOffset:
-      name: pageOffset
+    pageNumber:
+      name: pageNumber
       in: query
       description: "Pagination: Decides which page number to return"
       required: false
@@ -282,47 +282,38 @@ components:
               type: boolean
     TablesResponse:
       allOf:
-        - $ref: '#/components/schemas/Pagination'
         - type: object
           properties:
             tables:
               type: array
               items:
                  $ref: '#/components/schemas/Table'
-    Pagination:
+        - $ref: '#/components/schemas/Page'
+        - type: object
+          properties:
+            links:
+              type: array
+              items:
+                 $ref: '#/components/schemas/Link'
+    Page:
       type: object
       properties:
-        pagination:
+        page:
           type: object
           properties:
-            pageOffset:
+            pageNumber:
               type: integer
               format: int32
             pageSize:
               type: integer
               format: int32
               example: 33
-            firstPage:
-              type: string
-              format: uri
-              nullable: true
-              description: Link to first page
-            lastPage:
-              type: string
-              format: uri
-              nullable: true
-              description: Link to last page
-            totalRecords:
+            totalElements:
               type: integer
               format: int32
-            nextPage:
-              type: string
-              format: uri
-              nullable: true
-            previousPage:
-              type: string
-              format: uri
-              nullable: true
+            totalPages:
+              type: integer
+              format: int32
     Link:
       type: object
       properties:
@@ -512,10 +503,19 @@ components:
             firstPeriod: 2017
             lastPeriod: 2022
             discontinued: false
-        pageOffset: 10
-        pageSize: 100
-        firstPage: https://my-site.com/api/v2/tables/?pageOffset=1
-        lastPage: https://my-site.com/api/v2/tables/?pageOffset=70
-        totalRecords: 7000
-        nextPage: https://my-site.com/api/v2/tables/?pageOffset=11
-        previousPage: https://my-site.com/api/v2/tables/?pageOffset=9
+        page:
+          pageNumber: 10
+          pageSize: 100
+          totalElements: 7000
+          totalPages: 70
+        links:
+          - rel: self
+            href: https://my-site.com/api/v2/tables/?pageNumber=10
+          - rel: first
+            href: https://my-site.com/api/v2/tables/?pageNumber=1
+          - rel: last
+            href: https://my-site.com/api/v2/tables/?pageNumber=70
+          - rel: next
+            href: https://my-site.com/api/v2/tables/?pageNumber=11
+          - rel: prev
+            href: https://my-site.com/api/v2/tables/?pageNumber=9  
