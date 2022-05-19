@@ -3,7 +3,7 @@ info:
   title: PxApi
   version: '2.0'
 servers:
-  - url: https://api.server.test/v1
+  - url: https://api.server.test/api/v2
 paths:
   /navigation:
       get:
