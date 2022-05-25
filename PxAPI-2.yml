@@ -81,6 +81,21 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Table'
+  /tables/{id}/metadata:
+    get:
+      tags:
+        - Table
+      summary: Endpoint to get metadata about table by {id}
+      operationId: GetMetadataById
+      parameters:
+        - $ref: '#/components/parameters/id'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TableMetadata'
 components:
   parameters:
     language:
@@ -173,6 +188,9 @@ components:
           type: string
           nullable: true
           description: Longer text describing node. If no longer text exist, same as label
+        sortCode:
+          type: string
+          description: String for sorting the contents in folder
     Folder:
       type: object
       description: Folder item
@@ -295,6 +313,206 @@ components:
               type: array
               items:
                  $ref: '#/components/schemas/Link'
+    TableMetadata:
+      type: object
+      properties:
+        agregationPossible:
+          type: boolean
+        id:
+          type: string
+          example: "TAB0001"
+        label:
+          type: string
+          example: Corporations Financial Assets and Liabilities. Quarterly 1998K2 - 2021K4
+        description:
+          type: string
+          example: Corporations Financial Assets and Liabilities by item. Quarterly 1998K2 - 2021K4 [2022-03-11]
+        officalStatistics:
+          type: boolean
+        source:
+          type: string
+          example: SCB
+        tags:
+          type: array
+          items:
+            type: string
+        updated:
+              type: string
+              description: Updated time
+              format: date-time
+              nullable: true
+        notes: 
+          type: array
+          items:
+            $ref: '#/components/schemas/Note'
+        contacts: 
+          type: array
+          items: 
+            $ref: '#/components/schemas/Contact'
+        variables: 
+          type: array
+          items:
+            $ref: '#/components/schemas/Variable'
+        links: 
+          type: array
+          items:
+            $ref: '#/components/schemas/Link'
+    Variable:
+      type: object
+      properties:
+        id:
+          type: string
+          example: impex01
+        label:
+          type: string
+          example: Import and export
+        type: 
+          type: string
+          enum:
+          - ContentsVariable
+          - TimeVariable
+          - FilterVariable
+      oneOf:
+      - $ref: '#/components/schemas/TimeVariable'
+      - $ref: '#/components/schemas/FilterVariable'
+      - $ref: '#/components/schemas/ContentsVariable'
+        notes: 
+          type: array
+          items:
+            $ref: '#/components/schemas/Note'
+        links: 
+          type: array
+          items:
+            $ref: '#/components/schemas/Link'
+    Note:
+      type: object
+      properties:
+        mandatory:
+          type: boolean
+          description: Must be shown to end user if true
+        text:
+          type: string
+    ClassificationVariable:
+      allOf:
+        - $ref: '#/components/schemas/Variable'
+        - type: object
+          description: Classification variable
+    TimeVariable:
+      allOf:
+        - $ref: '#/components/schemas/Variable'
+        - type: object
+          description: Time variable
+    ContentsVariable:
+      description: Content variable
+      allOf:
+        - $ref: '#/components/schemas/Variable'
+        - type: object
+          properties:
+            values:
+              type: array
+              items:
+                $ref: '#/components/schemas/ContentValue'
+    FilterVariable:
+      description: Filter variable
+      allOf:
+      - $ref: '#/components/schemas/Variable'
+      type: object
+      properties:
+        elimination:
+          type: boolean
+        eliminationValueCode:
+          type: string
+        filters:
+          type: array
+          items:
+            $ref: '#/components/schemas/Filter'
+        values:
+          type: array
+          items:
+            $ref: '#/components/schemas/Value'
+    GeographicalVariable:
+      allOf:
+      - $ref: '#/components/schemas/FilterVariable'
+      type: object
+      properties:
+        map:
+          type: string
+    RegularVariable:
+      allOf:
+      - $ref: '#/components/schemas/FilterVariable'
+      type: object
+    Filter:
+      type: object
+      properties:
+        id:
+          type: integer
+        label:
+          type: string
+        links: 
+          type: array
+          items:
+            $ref: '#/components/schemas/Link'
+    Value:
+      type: object
+      properties:
+        code: 
+          type: string
+        label:
+          type: string
+        notes: 
+          type: array
+          items:
+            $ref: '#/components/schemas/Note'
+        links: 
+          type: array
+          items:
+            $ref: '#/components/schemas/Link'
+    ContentValue:
+      allOf:
+        - $ref: '#/components/schemas/Value'
+        - type: object
+          description: Content value
+          required:
+            - unit
+            - adjustment
+          properties:
+            baseperiod:
+              type: string
+            adjustment:
+              type: string
+              enum:
+              - None
+              - SesOnly
+              - WorkOnly
+              - WorkAndSes
+            MeasuringType:
+              type: string
+              enum:
+              - Stock
+              - Flow
+              - Average
+              - Other?
+            preferedNumberOfDecimals:
+              type: integer
+            priceType:
+              type: string
+              enum:
+              - Current
+              - Fixed
+            unit:
+              type: string
+    Contact:
+      type: object
+      properties:
+        name: 
+          type: string
+          example: Inga Svensson
+        phone:
+          type: string
+          example: "+46101111111"
+        mail:
+          type: string
+          example: testmail@testmail.com
     Page:
       type: object
       properties:
