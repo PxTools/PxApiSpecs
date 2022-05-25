@@ -306,7 +306,24 @@ components:
               type: array
               items:
                  $ref: '#/components/schemas/Table'
-        - $ref: '#/components/schemas/Page'
+        - type: object
+          properties:
+           page:
+            type: object
+            properties:
+             pageNumber:
+              type: integer
+              format: int32
+             pageSize:
+              type: integer
+              format: int32
+              example: 33
+             totalElements:
+              type: integer
+              format: int32
+             totalPages:
+              type: integer
+              format: int32
         - type: object
           properties:
             links:
@@ -525,25 +542,6 @@ components:
         mail:
           type: string
           example: testmail@testmail.com
-    Page:
-      type: object
-      properties:
-        page:
-          type: object
-          properties:
-            pageNumber:
-              type: integer
-              format: int32
-            pageSize:
-              type: integer
-              format: int32
-              example: 33
-            totalElements:
-              type: integer
-              format: int32
-            totalPages:
-              type: integer
-              format: int32
     Link:
       type: object
       properties:
