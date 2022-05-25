@@ -315,6 +315,9 @@ components:
                  $ref: '#/components/schemas/Link'
     TableMetadata:
       type: object
+      required: 
+        - id
+        - label
       properties:
         agregationPossible:
           type: boolean
@@ -349,16 +352,32 @@ components:
           type: array
           items: 
             $ref: '#/components/schemas/Contact'
-        variables: 
+        contentsVariable:
+          $ref: '#/components/schemas/ContentsVariable'
+        timeVariable:
+          $ref: '#/components/schemas/TimeVariable'
+        geoVariables: 
           type: array
           items:
-            $ref: '#/components/schemas/Variable'
+            $ref: '#/components/schemas/GeographicalVariable'
+        regularVariables: 
+          type: array
+          items:
+            $ref: '#/components/schemas/RegularVariable'
+        variablesDisplayOrder:
+          type: array
+          items:
+            type: string
         links: 
           type: array
           items:
             $ref: '#/components/schemas/Link'
-    Variable:
+    AbstractVariable:
       type: object
+      required: 
+        - id
+        - label
+        - type
       properties:
         id:
           type: string
@@ -371,11 +390,8 @@ components:
           enum:
           - ContentsVariable
           - TimeVariable
-          - FilterVariable
-      oneOf:
-      - $ref: '#/components/schemas/TimeVariable'
-      - $ref: '#/components/schemas/FilterVariable'
-      - $ref: '#/components/schemas/ContentsVariable'
+          - GeographicalVariable
+          - RegularVariable
         notes: 
           type: array
           items:
@@ -384,6 +400,7 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/Link'
+      
     Note:
       type: object
       properties:
@@ -392,30 +409,25 @@ components:
           description: Must be shown to end user if true
         text:
           type: string
-    ClassificationVariable:
-      allOf:
-        - $ref: '#/components/schemas/Variable'
-        - type: object
-          description: Classification variable
     TimeVariable:
       allOf:
-        - $ref: '#/components/schemas/Variable'
+        - $ref: '#/components/schemas/AbstractVariable'
         - type: object
           description: Time variable
     ContentsVariable:
       description: Content variable
       allOf:
-        - $ref: '#/components/schemas/Variable'
+        - $ref: '#/components/schemas/AbstractVariable'
         - type: object
           properties:
             values:
               type: array
               items:
                 $ref: '#/components/schemas/ContentValue'
-    FilterVariable:
+    AbstractFilterVariable:
       description: Filter variable
       allOf:
-      - $ref: '#/components/schemas/Variable'
+      - $ref: '#/components/schemas/AbstractVariable'
       type: object
       properties:
         elimination:
@@ -432,14 +444,14 @@ components:
             $ref: '#/components/schemas/Value'
     GeographicalVariable:
       allOf:
-      - $ref: '#/components/schemas/FilterVariable'
+      - $ref: '#/components/schemas/AbstractFilterVariable'
       type: object
       properties:
         map:
           type: string
     RegularVariable:
       allOf:
-      - $ref: '#/components/schemas/FilterVariable'
+      - $ref: '#/components/schemas/AbstractFilterVariable'
       type: object
     Filter:
       type: object
