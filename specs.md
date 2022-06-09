@@ -70,21 +70,43 @@ See the configuration of the API
 **Response**
 ```json
 {
-   "apiVersion": "2.0",
-   "languages": [{"id": "sv", 
-                "label": "Svenska"},
-               {"id": "en", 
-                "label": "English"}],
-   "defaultLanguage": "sv",
-   "maxDataCells": 10000,
-   "maxCalls": 30,
-   "timeWindow": 10,
-   "features": [{
-      "id": "CORS",
-      "params": [
-        {"key":"enabled", "value":"true"}
-      ]
-   }],
+    "apiVersion": "2.0",
+    "languages": [
+        {
+            "id": "sv",
+            "lable": "Svenska"
+        },
+        {
+            "id": "en",
+            "lable": "English"
+        }
+    ],
+    "defaultLanguage": "sv",
+    "maxDataCells": 10000,
+    "maxCalls": 30,
+    "timeWindow": 10,
+    "sourceReferences": [
+        {
+            "language": "sv",
+            "text": "Källa: SCB"
+        },
+        {
+            "language": "en",
+            "text": "Source: Statistics Sweden"
+        }
+    ],
+    "license": "https://creativecommons.org/share-your-work/public-domain/cc0/",
+    "features": [
+        {
+            "id": "CORS",
+            "params": [
+                {
+                    "key": "enabled",
+                    "value": "True"
+                }
+            ]
+        }
+    ],
    "dataFormats": ["px", "json-stat", "csv", "tsv"],
    "defaultDataFormat": "px",	
    "streamingFormats": ["csv", "tsv"],
