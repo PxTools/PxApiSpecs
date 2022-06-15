@@ -30,17 +30,17 @@
             "tableid": "TAB638",
             "decimals": 0
         },
-        "id": "TAB638",
-        "lang": "EN",
-        "category": "BE",
+        "id": "TAB638", // same as excisting tableid, so one should be removed
+        "language": "sv",
+        "category": "BE", // where does this come from?
         "description": "",
         "tags": [
             ""
         ],
-        "discontinued": false,
         "frequency": "A",
         "officialStatistics": true,
         "aggregationPossible": false,
+        "discontinued": false,
         "contacts": [
             {
                 "name": "Tomas Johansson, SCB",
