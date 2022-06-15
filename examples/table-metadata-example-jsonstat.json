@@ -988,7 +988,7 @@
                 "describedby": [
                     {
                         "extension": {
-                            "Alder": "Ålder"
+                            "Alder": "Ålder" // this is from metaid
                         }
                     }
                 ]
@@ -1013,7 +1013,7 @@
                 "describedby": [
                     {
                         "extension": {
-                            "Kon": "Kön" // SCB metaid
+                            "Kon": "Kön" // this is from metaid
                         }
                     }
                 ]
@@ -1056,9 +1056,9 @@
             "label": "år",
             "extension": {
                 "elimination": false,
-                "frequency": "Y",
-                "firstPeriod": "1968",
-                "lastPeriod": "2021"
+                "frequency": "Y",        // not i SCB example
+                "firstPeriod": "1968",   // not i SCB example
+                "lastPeriod": "2021"     // not i SCB example
             },
             "category": {
                 "index": {
