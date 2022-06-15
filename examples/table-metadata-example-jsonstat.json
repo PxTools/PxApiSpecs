@@ -32,7 +32,7 @@
         },
         "id": "TAB638", // same as excisting tableid, so one should be removed
         "language": "sv",
-        "category": "BE", // where does this come from?
+        "category": "BE", // not i SCB example
         "description": "",
         "tags": [
             ""
@@ -53,8 +53,8 @@
                 "mail": "information@scb.se"
             }
         ],
-        "refperiod": "31 December each year",
-        "copyright": "CC-0"
+        "refperiod": "31 December each year", // not i SCB example
+        "copyright": "CC-0" // not i SCB example
     },
     "role": {
         "time": [
