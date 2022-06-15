@@ -907,8 +907,7 @@
         "Civilstand": {
             "label": "civilstånd",
             "extension": {
-                "elimination": true,
-                "eliminationValueCode": "00"
+                "elimination": true
             },
             "category": {
                 "index": {
@@ -929,6 +928,7 @@
             "label": "ålder",
             "extension": {
                 "elimination": true,
+                "eliminationValueCode": "tot",
                 "filters": {
                     "vs": [
                         {
