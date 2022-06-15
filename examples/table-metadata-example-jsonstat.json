@@ -60,6 +60,9 @@
         "time": [
             "Tid"
         ],
+        "geo": [
+            "Region"
+        ],
         "metric": [
             "ContentsCode"
         ]
