@@ -83,16 +83,37 @@
         2,
         1
     ],
+    "note": [ // from NOTEX
+        "Fr o m 2007-01-01 överförs Heby kommun från Västmanlands län till Uppsala län. Hebys kommunkod ändras från 1917 till 0331. ",
+        "Registrerat partnerskap reglerade parförhållanden mellan personer av samma kön och fanns från 1995 till 2009. Registrerade partners räknas som Gifta, Separerade partners som Skilda och Efterlevande partners som Änka/änklingar.",
+        "Fr o m 2007-01-01 utökas Uppsala län med Heby kommun. Observera att länssiffrorna inte är jämförbara med länssiffrorna bakåt i tiden."
+    ],
     "dimension": {
         "Region": {
             "label": "region",
+            "note": [
+                "År 1968-1998 redovisas enligt regional indelning 1998-01-01."
+            ], // from NOTE
             "category": {
                 "note": {
-                    "03": [ // TODO
-                        "Fr o m 2007-01-01 överförs Heby kommun från Västmanlands län till Uppsala län. Hebys kommunkod ändras från 1917 till 0331. ",
-                        "Registrerat partnerskap reglerade parförhållanden mellan personer av samma kön och fanns från 1995 till 2009. Registrerade partners räknas som Gifta, Separerade partners som Skilda och Efterlevande partners som Änka/änklingar.",
-                        "Fr o m 2007-01-01 utökas Uppsala län med Heby kommun. Observera att länssiffrorna inte är jämförbara med länssiffrorna bakåt i tiden."
-                    ]
+                    "0580": [ // from VALUENOTEX
+                        "Från och med 2011-01-01 tillhör Storholmen Lidingö (0186) som tidigare tillhörde Vaxholm (0187)."
+                    ],
+                    "0187": [ // from VALUENOTEX
+                        "Från och med 2011-01-01 tillhör Storholmen Lidingö (0186) som tidigare tillhörde Vaxholm (0187)."
+                    ],
+                    "0330": [ // from VALUENOTEX
+                        "Ny regional indelning fr.o.m. 2003-01-01. Delar av Uppsala kommun bildar en ny kommun benämnd Knivsta kommun."
+                    ],
+                    "0380": [ // from VALUENOTEX
+                        "Ny regional indelning fr.o.m. 2003-01-01. Delar av Uppsala kommun bildar en ny kommun benämnd Knivsta kommun."
+                    ],
+                    "0140": [ // from VALUENOTE
+                        "Ny regional indelning fr.o.m. 1999-01-01. Delar av Södertälje kommun (kod 0181) bildar en ny kommun benämnd Nykvarn (kod 0140)."
+                    ],
+                    "0181": [ // from VALUENOTE
+                        "Ny regional indelning fr.o.m. 1999-01-01. Delar av Södertälje kommun (kod 0181) bildar en ny kommun benämnd Nykvarn (kod 0140)."
+                    ],
                 },
                 "index": {
                     "00": 0,
@@ -1026,10 +1047,11 @@
             },
             "category": {
                 "note": {
-                    "03": [
-                        "Fr o m 2007-01-01 överförs Heby kommun från Västmanlands län till Uppsala län. Hebys kommunkod ändras från 1917 till 0331. ",
-                        "Registrerat partnerskap reglerade parförhållanden mellan personer av samma kön och fanns från 1995 till 2009. Registrerade partners räknas som Gifta, Separerade partners som Skilda och Efterlevande partners som Änka/änklingar.",
-                        "Fr o m 2007-01-01 utökas Uppsala län med Heby kommun. Observera att länssiffrorna inte är jämförbara med länssiffrorna bakåt i tiden."
+                    "BE0101N1": [ // from VALUENOTEX
+                        "Uppgifterna avser förhållandena den 31 december för valt/valda år enligt den regionala indelning som gäller den 1 januari året efter."
+                    ],
+                    "BE0101N2": [ // from VALUENOTE
+                        "Folkökningen definieras som skillnaden mellan folkmängden vid årets början och årets slut."
                     ]
                 },
                 "index": {
