@@ -1078,9 +1078,9 @@
             "label": "år",
             "extension": {
                 "elimination": false,
-                "frequency": "Y",        // not i SCB example
-                "firstPeriod": "1968",   // not i SCB example
-                "lastPeriod": "2021"     // not i SCB example
+                "frequency": "Y", // not i SCB example
+                "firstPeriod": "1968", // not i SCB example
+                "lastPeriod": "2021" // not i SCB example
             },
             "category": {
                 "index": {
