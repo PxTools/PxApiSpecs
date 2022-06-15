@@ -25,10 +25,11 @@
         ]
     },
     "extension": {
-      "px": {
-        "infofile": "BE0101",
-        "tableid": "TAB638",
-        "decimals": 0,
+        "px": { // under px we find px keywords
+            "infofile": "BE0101",
+            "tableid": "TAB638",
+            "decimals": 0
+        },
         "id": "TAB638",
         "lang": "EN",
         "category": "BE",
