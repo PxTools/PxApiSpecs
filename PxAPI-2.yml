@@ -81,6 +81,21 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Table'
+  /tables/{id}/metadata:
+    get:
+      tags:
+        - Table
+      summary: Endpoint to get metadata about table by {id}
+      operationId: GetMetadataById
+      parameters:
+        - $ref: '#/components/parameters/id'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Dataset'
 components:
   parameters:
     language:
@@ -367,6 +382,275 @@ components:
           description: |
             An absolute URI that identifies the specific occurrence of the problem.
             It may or may not yield further information if dereferenced.
+    strarray:
+      type: array
+      items:
+        type: string
+      uniqueItems: true
+    version:
+      type: string
+      enum:
+        - "2.0"
+    updated:
+      oneOf:
+        - type: string
+          format: date-time
+        - type: string
+          pattern: "^((19|20)\\d\\d)\\-(0?[1-9]|1[012])\\-(0?[1-9]|[12][0-9]|3[01])$"
+    href:
+      type: string
+      format: uri
+    label:
+      type: string
+    source:
+      type: string
+    extension:
+      type: object
+    error:
+      type: array
+      items:
+        type: string
+    note:
+      "$ref": "#/components/schemas/strarray"
+    category:
+      type: object
+      properties:
+        index:
+          oneOf:
+            - "$ref": "#/components/schemas/strarray"
+            - type: object
+              additionalProperties:
+                type: number
+        label:
+          type: object
+          minProperties: 1
+          additionalProperties:
+            type: string
+        note:
+          type: object
+          additionalProperties:
+            "$ref": "#/components/schemas/strarray"
+        unit:
+          type: object
+          additionalProperties:
+            type: object
+            properties:
+              label:
+                "$ref": "#/components/schemas/label"
+              decimals:
+                type: integer
+              position:
+                type: string
+                enum:
+                  - start
+                  - end
+#        coordinates:
+#          type: object
+#          additionalProperties:
+#            type: array
+#            items:
+#              - type: number
+#              - type: number
+#            additionalItems: false
+        child:
+          type: object
+          additionalProperties:
+            "$ref": "#/components/schemas/strarray"
+      additionalProperties: false
+    link:
+      type: object
+      x-patternProperties:
+        ? "^(about|alternate|appendix|archives|author|blocked-by|bookmark|canonical|chapter|collection|contents|copyright|create-form|current|derivedfrom|describedby|describes|disclosure|dns-prefetch|duplicate|edit|edit-form|edit-media|enclosure|first|glossary|help|hosts|hub|icon|index|item|last|latest-version|license|lrdd|memento|monitor|monitor-group|next|next-archive|nofollow|noreferrer|original|payment|pingback|preconnect|predecessor-version|prefetch|preload|prerender|prev|preview|previous|prev-archive|privacy-policy|profile|related|replies|search|section|self|service|start|stylesheet|subsection|successor-version|tag|terms-of-service|timegate|timemap|type|up|version-history|via|webmention|working-copy|working-copy-of)$"
+        : type: array
+          items:
+            type: object
+            properties:
+              type:
+                type: string
+              class:
+                type: string
+                enum:
+                  - dataset
+                  - collection
+                  - dimension
+              href:
+                "$ref": "#/components/schemas/href"
+              label:
+                "$ref": "#/components/schemas/label"
+              note:
+                "$ref": "#/components/schemas/note"
+              link:
+                "$ref": "#/components/schemas/link"
+              updated:
+                "$ref": "#/components/schemas/updated"
+              source:
+                "$ref": "#/components/schemas/source"
+              extension:
+                "$ref": "#/components/schemas/extension"
+              category:
+                "$ref": "#/components/schemas/category"
+              id:
+                "$ref": "#/components/schemas/strarray"
+              size:
+                type: array
+                items:
+                  type: integer
+              role:
+                type: object
+                properties:
+                  time:
+                    "$ref": "#/components/schemas/strarray"
+                  geo:
+                    "$ref": "#/components/schemas/strarray"
+                  metric:
+                    "$ref": "#/components/schemas/strarray"
+                additionalProperties: false
+              dimension:
+                type: object
+                additionalProperties:
+                  type: object
+                  properties:
+                    href:
+                      "$ref": "#/components/schemas/href"
+                    label:
+                      "$ref": "#/components/schemas/label"
+                    note:
+                      "$ref": "#/components/schemas/note"
+                    link:
+                      "$ref": "#/components/schemas/link"
+                    extension:
+                      "$ref": "#/components/schemas/extension"
+                    category:
+                      "$ref": "#/components/schemas/category"
+                  additionalProperties: false
+                  required:
+                    - category
+              value:
+                oneOf:
+                  - type: array
+                    items:
+                      anyOf:
+                        - type: number
+                        - type: "null"
+                        - type: string
+                  - type: object
+                    additionalProperties:
+                      anyOf:
+                        - type: number
+                        - type: "null"
+                        - type: string
+              status:
+                oneOf:
+                  - type: string
+                  - type: array
+                    items:
+                      type:
+                        - string
+                        - "null"
+                  - type: object
+                    additionalProperties:
+                      type: string
+            additionalProperties: false
+      additionalProperties: false
+    Dataset:
+      title: JSON-stat 2.0 Dataset Schema
+      description:
+        This is version 1.04 of the JSON-stat 2.0 Dataset Schema (2018-09-05
+        10:55)
+      type: object
+      properties:
+        class:
+          type: string
+          enum:
+            - dataset
+        version:
+          "$ref": "#/components/schemas/version"
+        href:
+          "$ref": "#/components/schemas/href"
+        label:
+          "$ref": "#/components/schemas/label"
+        note:
+          "$ref": "#/components/schemas/note"
+        link:
+          "$ref": "#/components/schemas/link"
+        updated:
+          "$ref": "#/components/schemas/updated"
+        source:
+          "$ref": "#/components/schemas/source"
+        error:
+          "$ref": "#/components/schemas/error"
+        extension:
+          "$ref": "#/components/schemas/extension"
+        id:
+          "$ref": "#/components/schemas/strarray"
+        size:
+          type: array
+          items:
+            type: integer
+        role:
+          type: object
+          properties:
+            time:
+              "$ref": "#/components/schemas/strarray"
+            geo:
+              "$ref": "#/components/schemas/strarray"
+            metric:
+              "$ref": "#/components/schemas/strarray"
+          additionalProperties: false
+        dimension:
+          type: object
+          additionalProperties:
+            type: object
+            properties:
+              href:
+                "$ref": "#/components/schemas/href"
+              label:
+                "$ref": "#/components/schemas/label"
+              note:
+                "$ref": "#/components/schemas/note"
+              link:
+                "$ref": "#/components/schemas/link"
+              extension:
+                "$ref": "#/components/schemas/extension"
+              category:
+                "$ref": "#/components/schemas/category"
+            additionalProperties: false
+            required:
+              - category
+        value:
+          oneOf:
+            - type: array
+              items:
+                anyOf:
+                  - type: number
+                  - nullable: true
+                  - type: string
+            - type: object
+              additionalProperties:
+                anyOf:
+                  - type: number
+                  - nullable: true
+                  - type: string
+        status:
+          oneOf:
+            - type: string
+            - type: array
+              items:
+                type: string
+                nullable: true
+            - type: object
+              additionalProperties:
+                type: string
+      additionalProperties: false
+      required:
+        - version
+        - class
+        - value
+        - id
+        - size
+        - dimension
+
+    
   responses:
     ErrorResponse429:
       description: Error respsone for 429
