@@ -132,7 +132,7 @@
                 "contacts": {
                     "description": "List of contact persons",
                     "type": "array",
-                    "items": {"$ref": "#/defintions/contact"}
+                    "items": {"$ref": "#/definitions/contact"}
                 }
             },
             "required": ["version","id", "label","updated"]
