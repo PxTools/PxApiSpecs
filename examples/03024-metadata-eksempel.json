@@ -1,0 +1,73 @@
+{
+  "version": "1.0",
+  "id": "03024",
+  "language" : "en",
+  "category": "ut",
+  "label": "03024: Export of salmon, fresh and frozen, fish-farm bred 2000U01 - 2022U19",
+  "contents": "Contents in PX - dynamic seed of table title",
+  "description": {
+    "label": "About the statistics",
+    "href": "https://www.ssb.no/en/laks#om-statistikken"
+  },
+  "frequency": "W",
+  "firstPeriod": "2000W01",
+  "lastPeriod": "2020W19",
+  "tags": [""],
+  "discontinued": false,
+  "updated": "2022-05-19T06:00:00Z",
+  "decimals" : 2,
+  "footnotes": [""],
+  "contacts": [{
+               "name": "Utenrikshandel, Statistics Norway",
+               "phone": "+47 2109 4753",
+               "mail": "utenrikshandel@ssb.no"},
+              {
+               "name": "Øyvind Hagen, Statistics Norway",
+               "phone": "+47 409 02 696",
+               "mail": "oyh@ssb.no"}
+                ],
+  "variables": [{
+                "id": "ContentsCode",
+                "label": "commodity group",
+                "elimination": false,
+                "type": "CONTENTS",
+                "values": [
+                  {"id": "Vekt", "text": "Weight (tonnes)", "unit": "tonnes", "describedby": "urn:ssb:conceptvariable:vardok:2982"
+                  },
+                  {"id": "Vekt", "text": "Price per kilo (NOK)", "unit": "NOK", "decimals": 2
+                  }
+                ]},
+              {
+                "id": "VareGrupper2",
+                "label": "region",
+                "elimination": false,
+                "type": "GENERIC",
+                "values": [
+                  {"id": "01", "text": "Fish-farm bred salmon, fresh or chilled"},
+                  {"id": "02", "text": "Fish-farm bred salmon, frozen"}
+                ]},
+              {
+                "id": "Tid",
+                "label": "week",
+                "elimination": false,
+                "type": "TIME",
+                "domain": "TLIST(W1)???",
+                "values": [
+                          {"id": "2000U01", "text": "2000W01"},
+                          {"id": "2000U02", "text": "2022W02"},
+                          //.
+                          //.
+                          //.
+                          {"id": "2022U17", "text": "2022W17"},
+                          {"id": "2022U18", "text": "2022W18"}
+                        ]}],
+  links: [{
+           "rel": "metadata",
+           "href": "https://data.ssb.no/api/v0/en/table/03024/"},
+           {
+            "rel": "dataset",
+           "href": "https://data.ssb.no/api/v0/en/table/03024/????.json"
+           }
+           ]
+}
+

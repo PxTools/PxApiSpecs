@@ -81,6 +81,21 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Table'
+  /tables/{id}/metadata:
+    get:
+      tags:
+        - Table
+      summary: Endpoint to get metadata about table by {id}
+      operationId: GetMetadataById
+      parameters:
+        - $ref: '#/components/parameters/id'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TableMetadata'
 components:
   parameters:
     language:
@@ -174,6 +189,9 @@ components:
           type: string
           nullable: true
           description: Longer text describing node. If no longer text exist, same as label
+        sortCode:
+          type: string
+          description: String for sorting the contents in folder
     Folder:
       type: object
       description: Folder item
@@ -289,32 +307,242 @@ components:
               type: array
               items:
                  $ref: '#/components/schemas/Table'
-        - $ref: '#/components/schemas/Page'
+        - type: object
+          properties:
+           page:
+            type: object
+            properties:
+             pageNumber:
+              type: integer
+              format: int32
+             pageSize:
+              type: integer
+              format: int32
+              example: 33
+             totalElements:
+              type: integer
+              format: int32
+             totalPages:
+              type: integer
+              format: int32
         - type: object
           properties:
             links:
               type: array
               items:
                  $ref: '#/components/schemas/Link'
-    Page:
+    TableMetadata:
+      type: object
+      required: 
+        - id
+        - label
+      properties:
+        agregationPossible:
+          type: boolean
+        id:
+          type: string
+          example: "TAB0001"
+        label:
+          type: string
+          example: Corporations Financial Assets and Liabilities. Quarterly 1998K2 - 2021K4
+        description:
+          type: string
+          example: Corporations Financial Assets and Liabilities by item. Quarterly 1998K2 - 2021K4 [2022-03-11]
+        officalStatistics:
+          type: boolean
+        source:
+          type: string
+          example: SCB
+        tags:
+          type: array
+          items:
+            type: string
+        updated:
+              type: string
+              description: Updated time
+              format: date-time
+              nullable: true
+        notes: 
+          type: array
+          items:
+            $ref: '#/components/schemas/Note'
+        contacts: 
+          type: array
+          items: 
+            $ref: '#/components/schemas/Contact'
+        contentsVariable:
+          $ref: '#/components/schemas/ContentsVariable'
+        timeVariable:
+          $ref: '#/components/schemas/TimeVariable'
+        geoVariables: 
+          type: array
+          items:
+            $ref: '#/components/schemas/GeographicalVariable'
+        regularVariables: 
+          type: array
+          items:
+            $ref: '#/components/schemas/RegularVariable'
+        variablesDisplayOrder:
+          type: array
+          items:
+            type: string
+        links: 
+          type: array
+          items:
+            $ref: '#/components/schemas/Link'
+    AbstractVariable:
+      type: object
+      required: 
+        - id
+        - label
+        - type
+      properties:
+        id:
+          type: string
+          example: impex01
+        label:
+          type: string
+          example: Import and export
+        type: 
+          type: string
+          enum:
+          - ContentsVariable
+          - TimeVariable
+          - GeographicalVariable
+          - RegularVariable
+        notes: 
+          type: array
+          items:
+            $ref: '#/components/schemas/Note'
+        links: 
+          type: array
+          items:
+            $ref: '#/components/schemas/Link'
+      
+    Note:
       type: object
       properties:
-        page:
-          type: object
+        mandatory:
+          type: boolean
+          description: Must be shown to end user if true
+        text:
+          type: string
+    TimeVariable:
+      allOf:
+        - $ref: '#/components/schemas/AbstractVariable'
+        - type: object
+          description: Time variable
+    ContentsVariable:
+      description: Content variable
+      allOf:
+        - $ref: '#/components/schemas/AbstractVariable'
+        - type: object
           properties:
-            pageNumber:
+            values:
+              type: array
+              items:
+                $ref: '#/components/schemas/ContentValue'
+    AbstractFilterVariable:
+      description: Filter variable
+      allOf:
+      - $ref: '#/components/schemas/AbstractVariable'
+      type: object
+      properties:
+        elimination:
+          type: boolean
+        eliminationValueCode:
+          type: string
+        filters:
+          type: array
+          items:
+            $ref: '#/components/schemas/Filter'
+        values:
+          type: array
+          items:
+            $ref: '#/components/schemas/Value'
+    GeographicalVariable:
+      allOf:
+      - $ref: '#/components/schemas/AbstractFilterVariable'
+      type: object
+      properties:
+        map:
+          type: string
+    RegularVariable:
+      allOf:
+      - $ref: '#/components/schemas/AbstractFilterVariable'
+      type: object
+    Filter:
+      type: object
+      properties:
+        id:
+          type: integer
+        label:
+          type: string
+        links: 
+          type: array
+          items:
+            $ref: '#/components/schemas/Link'
+    Value:
+      type: object
+      properties:
+        code: 
+          type: string
+        label:
+          type: string
+        notes: 
+          type: array
+          items:
+            $ref: '#/components/schemas/Note'
+        links: 
+          type: array
+          items:
+            $ref: '#/components/schemas/Link'
+    ContentValue:
+      allOf:
+        - $ref: '#/components/schemas/Value'
+        - type: object
+          description: Content value
+          required:
+            - unit
+            - adjustment
+          properties:
+            baseperiod:
+              type: string
+            adjustment:
+              type: string
+              enum:
+              - None
+              - SesOnly
+              - WorkOnly
+              - WorkAndSes
+            MeasuringType:
+              type: string
+              enum:
+              - Stock
+              - Flow
+              - Average
+              - Other?
+            preferedNumberOfDecimals:
               type: integer
-              format: int32
-            pageSize:
-              type: integer
-              format: int32
-              example: 33
-            totalElements:
-              type: integer
-              format: int32
-            totalPages:
-              type: integer
-              format: int32
+            priceType:
+              type: string
+              enum:
+              - Current
+              - Fixed
+            unit:
+              type: string
+    Contact:
+      type: object
+      properties:
+        name: 
+          type: string
+          example: Inga Svensson
+        phone:
+          type: string
+          example: "+46101111111"
+        mail:
+          type: string
+          example: testmail@testmail.com
     Link:
       type: object
       properties:
