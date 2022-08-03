@@ -90,6 +90,7 @@ components:
       required: false
       schema:
         type: string
+        nullable: true
       examples:
         X1:
           value: en
