@@ -114,46 +114,70 @@ See the configuration of the API
 }
 ```
 
-## Navigate endpoint 
-**url:** `http://my-site.com/api/v2/navigate`
+## Navigation endpoint 
+**url:** `http://my-site.com/api/v2/navigation`
 
 **HTTP method:** GET|POST
 
 Browse the database structure.
-There are two types *l* and *t* i.e. level or table. 
+There are three values for objectType *Folder*, *FolderInformation* and *Table*. 
 
 **Response**
 ```json
-[
-   {
-     "id": "BE0101",
-     "type": "level",
-     "label": "Befolkningsstatistik",
-     "links": [{
-               "rel": "data",
-               "href": "http://my-site.com/api/v2/navigate/BE0101"}]
-   },
-   {
-     "id": "BE0401",
-     "type": "level",
-     "label": "Befolkningsframskrivningar",
-     "links": [{
-               "rel": "data",
-               "href": "http://my-site.com/api/v2/navigate/BE0401"}]
-   },
-   {
-     "id": "TAB0001",
-     "type": "table",
-     "label": "Tabell A",
-     "links": [{
-               "rel": "metadata",
-               "href": "http://my-site.com/api/v2/tables/TAB0001"},
-             {
-               "rel": "data",
-               "href": "http://my-site.com/api/v2/tables/TAB0001/data"}]
-   }
-
-]
+{
+  "id": "BE0101",
+  "objectType": "Folder",
+  "label": "Population statistics",
+  "description": "",
+  "tags": null,
+  "links": [
+    {
+      "rel": "self",
+      "href": "http://my-site.com/api/v2/navigation/BE0101"
+    }
+  ],
+  "folderContents": [
+    {
+      "id": "BE0101A",
+      "objectType": "FolderInformation",
+      "label": "Number of inhabitants",
+      "description": "",
+      "tags": null,
+      "links": [
+        {
+          "rel": "folder",
+          "href": "http://my-site.com/api/v2/navigation/BE0101A"
+        }
+      ]
+    },
+    {
+      "id": "BefolkningNy",
+      "objectType": "Table",
+      "label": "Population by region, marital status, age and sex.  Year",
+      "description": "",
+      "updated": "2019-02-21T09:30:00",
+      "category": "official",
+      "firstPeriod": "1968",
+      "lastPeriod": "2018",
+      "discontinued": false,
+      "tags": null,
+      "links": [
+        {
+          "rel": "self",
+          "href": "http://my-site.com/api/v2/tables/BefolkningNy"
+        },
+        {
+          "rel": "metadata",
+          "href": "http://my-site.com/api/v2/tables/BefolkningNy/metadata"
+        },
+        {
+          "rel": "data",
+          "href": "http://my-site.com/api/v2/tables/BefolkningNy/data"
+        }
+      ]
+    }
+  ]
+}
 ```
 Proposal: 
 The querystring parameter recursive=true will return all sub nodes for the specified node.
