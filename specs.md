@@ -63,7 +63,7 @@ Proposal: Look at Json-Stat collections
 ## Configuration endpoint
 **url:** `http://my-site.com/api/v2/config`
 
-**HTTP method:** GET|POST
+**HTTP method:** GET
 
 See the configuration of the API
 
@@ -115,14 +115,22 @@ See the configuration of the API
 ```
 
 ## Navigation endpoint 
-**url:** `http://my-site.com/api/v2/navigation`
-
-**HTTP method:** GET|POST
 
 Browse the database structure.
-There are three values for objectType *Folder*, *FolderInformation* and *Table*. 
+
+**url:** `http://my-site.com/api/v2/navigation`
+
+Returns the database root node.
+
+**url:** `http://my-site.com/api/v2/navigation/{id}`
+
+Returns the database node *id*.
+
+**HTTP method:** GET
 
 **Response**
+
+The following response example returns the folder BE0101 which contains the subfolder BE0101A and the table BefolkningNy.
 ```json
 {
   "id": "BE0101",
@@ -179,6 +187,44 @@ There are three values for objectType *Folder*, *FolderInformation* and *Table*.
   ]
 }
 ```
+**Response described**
+
+The Navigation endpoint returns a *Folder* object, i.e *objectType* = *Folder*.
+
+There are three possible values for *objectType*:
+
+***Folder*** 
+
+A fully loaded folder with information about folder metadata together with the contents of the folder. Folder content objetcs have *objectType* = *FolderInformation* or *objectType* = *Table*.
+
+***FolderInformation***
+
+Holds only information about folder metadata. No information about folder contents.
+
+***Table***
+
+Metadata about a statistical table.
+
+**Folder metadata**
+
+*id* - Folder id
+
+*objectType* - Can have one of two possible values:
+- *Folder* (Fully loaded folder with metadata and folder contents)
+- *FolderInformation* (only folder metadata)
+
+*label* - Folder text
+
+*description* - Folder description
+
+*tags* - Folder tags (not implemented yet)
+
+*links* - How to navigate to the folder
+
+**Table metadata**
+
+**More ...**
+
 Proposal: 
 The querystring parameter recursive=true will return all sub nodes for the specified node.
 Possible to define number of recursive levels. 
