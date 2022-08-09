@@ -120,17 +120,17 @@ Browse the database structure.
 
 **url:** `http://my-site.com/api/v2/navigation`
 
-Returns the database root node.
+Returns the database root folder.
 
 **url:** `http://my-site.com/api/v2/navigation/{id}`
 
-Returns the database node *id*.
+Returns the database folder identified by *id*.
 
 **HTTP method:** GET
 
-**Response**
+**Response example**
 
-The following response example returns the folder BE0101 which contains the subfolder BE0101A and the table BefolkningNy.
+The following example shows the response of the API request `http://my-site.com/api/v2/navigation/BE0101`. Metadata about the folder BE0101 is returned together with the folder contents of the BE0101 folder, which is a subfolder BE0101A and the statistical table BefolkningNy.
 ```json
 {
   "id": "BE0101",
@@ -189,29 +189,25 @@ The following response example returns the folder BE0101 which contains the subf
 ```
 **Response described**
 
-The Navigation endpoint returns a *Folder* object, i.e *objectType* = *Folder*.
+The Navigation endpoint returns two objects:
+1. A *Folder* object containing metadata about the folder asked for
+2. An array *folderContents* containing the contents of the folder (subfolders and statistical tables)
 
 There are three possible values for *objectType*:
 
-***Folder*** 
+1. *Folder* - The folder asked for in the API request.
 
-A fully loaded folder with information about folder metadata together with the contents of the folder. Folder content objetcs have *objectType* = *FolderInformation* or *objectType* = *Table*.
+2. *FolderInformation* - A subfolder to the *Folder* object.
 
-***FolderInformation***
-
-Holds only information about folder metadata. No information about folder contents.
-
-***Table***
-
-Metadata about a statistical table.
+3. *Table* - A statistical table located in the folder.
 
 **Folder metadata**
 
 *id* - Folder id
 
 *objectType* - Can have one of two possible values:
-- *Folder* (Fully loaded folder with metadata and folder contents)
-- *FolderInformation* (only folder metadata)
+- *Folder* (the folder asked for in the API request)
+- *FolderInformation* (subfolder)
 
 *label* - Folder text
 
