@@ -61,11 +61,11 @@ POST is primarily intended to be used when fetching data since the query to sele
 Proposal: Look at Json-Stat collections 
 
 ## Configuration endpoint
+Get the configuration of the API
+
 **url:** `http://my-site.com/api/v2/config`
 
 **HTTP method:** GET
-
-See the configuration of the API
 
 **Response**
 ```json
@@ -222,6 +222,36 @@ Metadata about a statistical table.
 *links* - How to navigate to the folder
 
 **Table metadata**
+
+*id* - Table id
+
+*objectType* - Will have the value "Table"
+
+*label* - Table text
+
+*description* - Table description
+
+*updated* - When the table was last updated
+
+*category* - Presentation category for the table. Possible values are:
+- internal
+- official
+- private
+- section
+
+*firstPeriod* - The first data time period in the table
+
+*lastPeriod* - The last data time period in the table
+
+*discontinued* - If the table will be updated with new data or not
+
+*tags* - Table tags (not implemented yet)
+
+*links* - How to navigate to the table. For tables there are three links:
+
+- self - How to navigate to the table
+- metadata - How to navigate to the table metadata
+- data - How to navigate to the table data
 
 **More ...**
 
