@@ -1,0 +1,127 @@
+{
+  "class": "dataset",
+  "label": "03024: Export of salmon, fresh and frozen, fish-farm bred 2000U01 - 2022U19",
+  "source": "Statistics Norway",
+  "extension": {
+  	  "id": "03024",
+  	  "lang": "EN",
+      "category": "al",
+      //describedby
+  	  "description": {
+  	  	"label" : "About the statistics",
+  	  	"href" : "https://www.ssb.no/en/laks#om-statistikken"
+  	  },
+      "tags": [""],
+      "discontinued": false,
+      "contacts": [
+		  	{
+	           "name": "Utenrikshandel, Statistics Norway",
+	           "phone": "+47 2109 4753",
+	           "mail": "utenrikshandel@ssb.no"
+	           },
+	        {
+	           "name": "Øyvind Hagen, Statistics Norway",
+	           "phone": "+47 409 02 696",
+	           "mail": "oyh@ssb.no"
+	       	}
+        ],
+  	  "refperiod" : "End of week",
+  	  "copyright": "CC-BY 4.0"
+	},
+  "updated": "2022-05-19T06:00:00Z",
+  "id": [
+    "VareGrupper2",
+    "ContentsCode",
+    "Tid"
+  ],
+  "size": [
+    2,
+    2,
+    1167
+  ],
+  "role": {
+    "time": [
+      "Tid"
+    ],
+    "metric": [
+      "ContentsCode"
+    ]
+  },
+  "dimension": {
+    "VareGrupper2": {
+      "label": "commodity group",
+      "category": {
+        "index": {
+          "01": 0,
+          "02": 1
+        },
+        "label": {
+          "01": "Fish-farm bred salmon, fresh or chilled",
+          "02": "Fish-farm bred salmon, frozen"
+        }
+      }
+    },
+    "ContentsCode": {
+      "label": "contents",
+      "extension": {
+      	"elimination": false,
+        //if true "elimationvalue": "Sum or code"
+      },
+      "category": {
+        "index": {
+          "Vekt": 0,
+          "Kilopris": 1
+        },
+        "label": {
+          "Vekt": "Weight (tonnes)",
+          "Kilopris": "Price per kilo (NOK)"
+        },
+        "unit": {
+          "Vekt": {
+            "base": "tonnes",
+            "decimals": 0
+          },
+          "Kilopris": {
+            "base": "NOK",
+            "decimals": 2
+          }
+        }
+      },
+      "link": {
+        "describedby": [
+          {
+            "extension": {
+              "Vekt": "urn:ssb:conceptvariable:vardok:2982"
+            }
+          }
+        ]
+      }
+    },
+    "Tid": {
+      "label": "week",
+      "extension": {
+      	"elimination": false,
+        "frequency": "W",
+        //"timeval": "W1"
+        "firstPeriod": "2000W01",
+        "lastPeriod": "2020W19",
+      },
+      "category": {
+        "index": {
+        	..
+        	..
+          "2022U17": 0,
+          "2022U18": 1,
+          "2022U19": 2
+        },
+        "label": {
+        	..
+          "2022U17": "2022U17",
+          "2022U18": "2022U18",
+          "2022U19": "2022U19"
+        }
+      }
+    },
+  },
+  "version": "2.0"
+}

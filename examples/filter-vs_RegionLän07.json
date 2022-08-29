@@ -1,0 +1,27 @@
+{
+    "id": "vs_RegionLän07",
+    "label": "Län",
+    "values":  [
+        { "code": "01", "label": "Stockholms län", "valueMap": ["01"]},
+        { "code": "03", "label": "Uppsala län", "valueMap": ["03"]},
+        { "code": "04", "label": "Södermanlands län", "valueMap": ["04"]},
+        { "code": "05", "label": "Östergötlands län", "valueMap": ["05"]},
+        { "code": "06", "label": "Jönköpings län", "valueMap": ["06"]},
+        { "code": "07", "label": "Kronobergs län", "valueMap": ["07"]},
+        { "code": "08", "label": "Kalmar län", "valueMap": ["08"]},
+        { "code": "09", "label": "Gotlands län", "valueMap": ["09"]},
+        { "code": "10", "label": "Blekinge län", "valueMap": ["10"]},
+        { "code": "12", "label": "Skåne län", "valueMap": ["12"]},
+        { "code": "13", "label": "Hallands län", "valueMap": ["13"]},
+        { "code": "14", "label": "Västra Götalands län", "valueMap": ["14"]},
+        { "code": "17", "label": "Värmlands län", "valueMap": ["17"]},
+        { "code": "18", "label": "Örebro län", "valueMap": ["18"]},
+        { "code": "19", "label": "Västmanlands län", "valueMap": ["19"]},
+        { "code": "20", "label": "Dalarnas län", "valueMap": ["20"]},
+        { "code": "21", "label": "Gävleborgs län", "valueMap": ["21"]},
+        { "code": "22", "label": "Västernorrlands län", "valueMap": ["22"]},
+        { "code": "23", "label": "Jämtlands län", "valueMap": ["23"]},
+        { "code": "24", "label": "Västerbottens län", "valueMap": ["24"]},
+        { "code": "25", "label": "Norrbottens län", "valueMap": ["25"]}
+    ]
+}

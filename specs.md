@@ -61,11 +61,11 @@ POST is primarily intended to be used when fetching data since the query to sele
 Proposal: Look at Json-Stat collections 
 
 ## Configuration endpoint
+Get the configuration of the API
+
 **url:** `http://my-site.com/api/v2/config`
 
-**HTTP method:** GET|POST
-
-See the configuration of the API
+**HTTP method:** GET
 
 **Response**
 ```json
@@ -114,47 +114,143 @@ See the configuration of the API
 }
 ```
 
-## Navigate endpoint 
-**url:** `http://my-site.com/api/v2/navigate`
-
-**HTTP method:** GET|POST
+## Navigation endpoint 
 
 Browse the database structure.
-There are two types *l* and *t* i.e. level or table. 
 
-**Response**
+**url:** `http://my-site.com/api/v2/navigation`
+
+Returns the database root folder.
+
+**url:** `http://my-site.com/api/v2/navigation/{id}`
+
+Returns the database folder identified by *id*.
+
+**HTTP method:** GET
+
+**Response example**
+
+The following example shows the response of the API request `http://my-site.com/api/v2/navigation/BE0101`. Metadata about the folder BE0101 is returned together with the folder contents of the BE0101 folder, which is a subfolder BE0101A and the statistical table BefolkningNy.
 ```json
-[
-   {
-     "id": "BE0101",
-     "type": "level",
-     "label": "Befolkningsstatistik",
-     "links": [{
-               "rel": "data",
-               "href": "http://my-site.com/api/v2/navigate/BE0101"}]
-   },
-   {
-     "id": "BE0401",
-     "type": "level",
-     "label": "Befolkningsframskrivningar",
-     "links": [{
-               "rel": "data",
-               "href": "http://my-site.com/api/v2/navigate/BE0401"}]
-   },
-   {
-     "id": "TAB0001",
-     "type": "table",
-     "label": "Tabell A",
-     "links": [{
-               "rel": "metadata",
-               "href": "http://my-site.com/api/v2/tables/TAB0001"},
-             {
-               "rel": "data",
-               "href": "http://my-site.com/api/v2/tables/TAB0001/data"}]
-   }
-
-]
+{
+  "id": "BE0101",
+  "objectType": "Folder",
+  "label": "Population statistics",
+  "description": "",
+  "tags": null,
+  "links": [
+    {
+      "rel": "self",
+      "href": "http://my-site.com/api/v2/navigation/BE0101"
+    }
+  ],
+  "folderContents": [
+    {
+      "id": "BE0101A",
+      "objectType": "FolderInformation",
+      "label": "Number of inhabitants",
+      "description": "",
+      "tags": null,
+      "links": [
+        {
+          "rel": "folder",
+          "href": "http://my-site.com/api/v2/navigation/BE0101A"
+        }
+      ]
+    },
+    {
+      "id": "BefolkningNy",
+      "objectType": "Table",
+      "label": "Population by region, marital status, age and sex.  Year",
+      "description": "",
+      "updated": "2019-02-21T09:30:00",
+      "category": "official",
+      "firstPeriod": "1968",
+      "lastPeriod": "2018",
+      "discontinued": false,
+      "tags": null,
+      "links": [
+        {
+          "rel": "self",
+          "href": "http://my-site.com/api/v2/tables/BefolkningNy"
+        },
+        {
+          "rel": "metadata",
+          "href": "http://my-site.com/api/v2/tables/BefolkningNy/metadata"
+        },
+        {
+          "rel": "data",
+          "href": "http://my-site.com/api/v2/tables/BefolkningNy/data"
+        }
+      ]
+    }
+  ]
+}
 ```
+**Response described**
+
+The Navigation endpoint returns two objects:
+1. A *Folder* object containing metadata about the folder asked for
+2. An array *folderContents* containing the contents of the folder (subfolders and statistical tables)
+
+There are three possible values for *objectType*:
+
+1. *Folder* - The folder asked for in the API request.
+
+2. *FolderInformation* - A subfolder to the *Folder* object.
+
+3. *Table* - A statistical table located in the folder.
+
+**Folder metadata**
+
+*id* - Folder id
+
+*objectType* - Can have one of two possible values:
+- *Folder* (the folder asked for in the API request)
+- *FolderInformation* (subfolder)
+
+*label* - Folder text
+
+*description* - Folder description
+
+*tags* - Folder tags (not implemented yet)
+
+*links* - How to navigate to the folder
+
+**Table metadata**
+
+*id* - Table id
+
+*objectType* - Will have the value "Table"
+
+*label* - Table text
+
+*description* - Table description
+
+*updated* - When the table was last updated
+
+*category* - Presentation category for the table. Possible values are:
+- internal
+- official
+- private
+- section
+
+*firstPeriod* - The first data time period in the table
+
+*lastPeriod* - The last data time period in the table
+
+*discontinued* - If the table will be updated with new data or not
+
+*tags* - Table tags (not implemented yet)
+
+*links* - How to navigate to the table. For tables there are three links:
+
+- self - How to navigate to the table
+- metadata - How to navigate to the table metadata
+- data - How to navigate to the table data
+
+**More ...**
+
 Proposal: 
 The querystring parameter recursive=true will return all sub nodes for the specified node.
 Possible to define number of recursive levels. 
@@ -166,6 +262,21 @@ Same selection rules as in the current API.
 Do not make it the whole url ony specify the nodeid like
 http://my-site.com/api/v2/database/BE and http://my-site.com/api/v2/database/BE0401
 and not http://my-site.com/api/v2/database/BE/BE0401.. OK (ge exempel på PX fil fallet)
+
+Should not LINK and HEADLINE menu types be included? Suggestion is to skip the LINK type.
+
+Suggested properties for all types
+* Id
+* Label
+* Description
+
+Suggested properties for table type
+* LastUpdated
+* Published
+* TableCategory (PresCategory)
+
+
+
 
 ## Table  endpoint
 ### List all tables
