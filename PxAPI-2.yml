@@ -170,6 +170,12 @@ components:
         #Default value depends on site?
   schemas:
     FolderContentItem:
+      discriminator:
+        propertyName: objectType
+        mapping:
+          heading: "#/components/schemas/Heading"
+          folderinformation: "#/components/schemas/FolderInformation"
+          table: "#/components/schemas/Table"
       type: object
       description: Navigation item.
       properties:
@@ -221,12 +227,7 @@ components:
         folderContents:
           type: array
           items:
-            anyOf:
-              - $ref: '#/components/schemas/FolderInformation'
-              - $ref: '#/components/schemas/Heading'
-              - $ref: '#/components/schemas/Table'
-            discriminator:
-              propertyName: objectType
+            $ref: '#/components/schemas/FolderContentItem'
           nullable: true
         links:
           type: array
