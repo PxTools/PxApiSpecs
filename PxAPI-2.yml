@@ -221,7 +221,12 @@ components:
         folderContents:
           type: array
           items:
-            $ref: '#/components/schemas/FolderContentItem'
+            anyOf:
+              - $ref: '#/components/schemas/FolderInformation'
+              - $ref: '#/components/schemas/Heading'
+              - $ref: '#/components/schemas/Table'
+            discriminator:
+              propertyName: objectType
           nullable: true
         links:
           type: array
