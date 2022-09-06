@@ -299,6 +299,7 @@ components:
               example: 2022
             discontinued:
               type: boolean
+              nullable: true
     TablesResponse:
       allOf:
         - type: object
