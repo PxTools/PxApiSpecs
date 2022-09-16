@@ -492,7 +492,7 @@ components:
         filters:
           type: array
           items:
-            $ref: '#/components/schemas/Filter'
+            $ref: '#/components/schemas/CodeListInformation'
         values:
           type: array
           items:
@@ -508,15 +508,18 @@ components:
       allOf:
       - $ref: '#/components/schemas/AbstractFilterVariable'
       type: object
-    Filter:
+    CodeListInformation:
       type: object
       properties:
         id:
-          type: integer
+          type: string
+          description: The identity of the CodeList
         label:
           type: string
+          description: A textual name for the CodeList
         links: 
           type: array
+          description: Links to associated information about the code list
           items:
             $ref: '#/components/schemas/Link'
     Value:
