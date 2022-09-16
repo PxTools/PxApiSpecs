@@ -380,7 +380,7 @@ components:
           type: array
           description: A list of notes associated with the table as a whole or a specific area of the table
           items:
-            $ref: '#/components/schemas/Note'
+            $ref: '#/components/schemas/CellNote'
         contacts: 
           type: array
           description: A list of contacts associated with the table.
@@ -443,6 +443,27 @@ components:
           description: Must be shown to end user if true
         text:
           type: string
+    CellNote:
+      allOf:
+        - $ref: '#/components/schemas/Note'
+        - type: object
+          description: Note for a table
+          properties:
+            conditions:
+              type: array
+              description: A set of condition that must be fulfilled for the note to be valid. 
+              items:
+                $ref: '#/components/schemas/Condition'
+              nullable: true
+    Condition:
+      type: object
+      properties:
+        variableCode:
+          type: string
+          description: The code of the variable
+        valueCode:
+          type: string
+          description: The code of the value
     TimeVariable:
       allOf:
         - $ref: '#/components/schemas/AbstractVariable'
