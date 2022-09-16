@@ -344,37 +344,46 @@ components:
         - id
         - label
       properties:
-        agregationPossible:
-          type: boolean
         id:
           type: string
+          description: Identifyer for the table.
           example: "TAB0001"
         label:
           type: string
+          description: A title for the table that describes the content of it.
           example: Corporations Financial Assets and Liabilities. Quarterly 1998K2 - 2021K4
         description:
           type: string
+          description: A description of the table.
           example: Corporations Financial Assets and Liabilities by item. Quarterly 1998K2 - 2021K4 [2022-03-11]
+        agregationPossible:
+          type: boolean
+          description: If the content of the table can be aggregated.
         officalStatistics:
           type: boolean
+          description: A marker if the table is a part of the national official statistics.
         source:
           type: string
+          description: The name of the organization responsible for the table.
           example: SCB
         tags:
           type: array
+          description: A list of strings/tags associated with the table
           items:
             type: string
         updated:
-              type: string
-              description: Updated time
-              format: date-time
-              nullable: true
+            type: string
+            description: A date and time when the table was last updated
+            format: date-time
+            nullable: true
         notes: 
           type: array
+          description: A list of notes associated with the table as a whole or a specific area of the table
           items:
             $ref: '#/components/schemas/Note'
         contacts: 
           type: array
+          description: A list of contacts associated with the table.
           items: 
             $ref: '#/components/schemas/Contact'
         contentsVariable:
