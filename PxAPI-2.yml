@@ -407,6 +407,13 @@ components:
           items:
             $ref: '#/components/schemas/Link'
     AbstractVariable:
+      discriminator:
+        propertyName: type
+        mapping:
+          ContentsVariable: "#/components/schemas/ContentsVariable"
+          TimeVariable: "#/components/schemas/TimeVariable"
+          GeographicalVariable: "#/components/schemas/GeographicalVariable"
+          RegularVariable: "#/components/schemas/RegularVariable"          
       type: object
       required: 
         - id
@@ -485,7 +492,7 @@ components:
               type: array
               items:
                 $ref: '#/components/schemas/ContentValue'
-    AbstractFilterVariable:
+    AbstractEncodedVariable:
       description: Filter variable
       allOf:
       - $ref: '#/components/schemas/AbstractVariable'
@@ -504,15 +511,17 @@ components:
           items:
             $ref: '#/components/schemas/Value'
     GeographicalVariable:
+      required:
+        - "map"
       allOf:
-      - $ref: '#/components/schemas/AbstractFilterVariable'
+      - $ref: '#/components/schemas/AbstractEncodedVariable'
       type: object
       properties:
         map:
           type: string
     RegularVariable:
       allOf:
-      - $ref: '#/components/schemas/AbstractFilterVariable'
+      - $ref: '#/components/schemas/AbstractEncodedVariable'
       type: object
     CodeListInformation:
       type: object
