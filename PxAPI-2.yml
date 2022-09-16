@@ -437,9 +437,12 @@ components:
       
     Note:
       type: object
+      required:
+        - "text"
       properties:
         mandatory:
           type: boolean
+          default: false
           description: Must be shown to end user if true
         text:
           type: string
@@ -457,6 +460,9 @@ components:
               nullable: true
     Condition:
       type: object
+      required:
+        - "variableCode"
+        - "valueCode"
       properties:
         variableCode:
           type: string
