@@ -595,6 +595,8 @@ components:
               nullable: true
             unit:
               type: string
+            refrencePeriod:
+              type: string
     Contact:
       type: object
       properties:
