@@ -96,6 +96,10 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/TableMetadata'
+            application/vnd.json-stat2+json:
+              schema:
+                externalDocs:
+                  url: "https://json-stat.org/schema/"
 components:
   parameters:
     language:
