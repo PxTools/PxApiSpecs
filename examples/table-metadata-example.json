@@ -5,8 +5,9 @@
     "description": "",
     "Source": "SCB",
     "tags" : [""],
-    "frequency": "A",
     "officialStatistics": true,
+    "category": "BE",
+    "copyright": "CC0-1.0",
     "aggregationPossible": false,
     "discontinued": false,
     "variables": [
@@ -631,6 +632,9 @@
             "id": "Tid",
             "label": "år",
             "type": "TIME",
+            "frequency": "A",
+            "firstPeriod": "1968",
+            "lastPeriod": "2021",
             "values": [
                 { "code": "1968", "label": "1968" },
                 { "code": "1969", "label": "1969" },

@@ -362,10 +362,18 @@ components:
         officalStatistics:
           type: boolean
           description: A marker if the table is a part of the national official statistics.
+        category:
+          type: string
+          description: The code for the subject area that the table belongs to.
+          example: BE
         source:
           type: string
           description: The name of the organization responsible for the table.
           example: SCB
+        copyright:
+          type: string
+          description: A copyright statement for the data it could also be SPDX (https://spdx.org/licenses/) identifyer
+          example: CC0-1.0
         tags:
           type: array
           description: A list of strings/tags associated with the table
@@ -482,6 +490,13 @@ components:
         - $ref: '#/components/schemas/AbstractVariable'
         - type: object
           description: Time variable
+      properties:
+        frequency:
+          type: string
+        firstPeriod:
+          type: string
+        lastPeriod:
+          type: string
     ContentsVariable:
       description: Content variable
       allOf:
