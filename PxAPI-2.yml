@@ -242,9 +242,9 @@ components:
     FolderInformation:
       allOf:
         - $ref: '#/components/schemas/FolderContentItem'
-        - type: object
-          description: Folder information item
-          properties:
+      type: object
+      description: Folder information item
+      properties:
             tags:
               type: array
               items:
@@ -260,14 +260,14 @@ components:
     Heading:
       allOf:
         - $ref: '#/components/schemas/FolderContentItem'
-        - type: object
-          description: Heading item
+      type: object
+      description: Heading item
     Table:
       allOf:
         - $ref: '#/components/schemas/FolderContentItem'
-        - type: object
-          description: Table item
-          properties:
+      type: object
+      description: Table item
+      properties:
             tags:
               type: array
               items:
@@ -310,19 +310,14 @@ components:
             discontinued:
               type: boolean
               nullable: true
-    TablesResponse:
-      allOf:
-        - type: object
+    Paginated:
+      type: object
+      properties:
+        page:
+          description: Pagination properties
+          title: PaginationProperties
+          type: object
           properties:
-            tables:
-              type: array
-              items:
-                 $ref: '#/components/schemas/Table'
-        - type: object
-          properties:
-           page:
-            type: object
-            properties:
              pageNumber:
               type: integer
               format: int32
@@ -336,12 +331,19 @@ components:
              totalPages:
               type: integer
               format: int32
-        - type: object
-          properties:
-            links:
+        links:
+          type: array
+          items:
+             $ref: '#/components/schemas/Link'
+    TablesResponse:
+      allOf:
+        - $ref: '#/components/schemas/Paginated'
+      type: object
+      properties:
+         tables:
               type: array
               items:
-                 $ref: '#/components/schemas/Link'
+                 $ref: '#/components/schemas/Table'    
     TableMetadata:
       type: object
       required: 
