@@ -470,9 +470,9 @@ components:
     CellNote:
       allOf:
         - $ref: '#/components/schemas/Note'
-        - type: object
-          description: Note for a table
-          properties:
+      type: object
+      description: Note for a table
+      properties:
             conditions:
               type: array
               description: A set of condition that must be fulfilled for the note to be valid. 
@@ -480,6 +480,7 @@ components:
                 $ref: '#/components/schemas/Condition'
               nullable: true
     Condition:
+      description: Condition determining to what the CellNote applies
       type: object
       required:
         - "variableCode"
@@ -492,10 +493,10 @@ components:
           type: string
           description: The code of the value
     TimeVariable:
+      description: Time variable
       allOf:
         - $ref: '#/components/schemas/AbstractVariable'
-        - type: object
-          description: Time variable
+      type: object
       properties:
         frequency:
           type: string
@@ -507,8 +508,8 @@ components:
       description: Content variable
       allOf:
         - $ref: '#/components/schemas/AbstractVariable'
-        - type: object
-          properties:
+      type: object
+      properties:
             values:
               type: array
               items:
@@ -541,9 +542,9 @@ components:
         map:
           type: string
     RegularVariable:
+      description: Non-geographical Variable
       allOf:
       - $ref: '#/components/schemas/AbstractEncodedVariable'
-      type: object
     CodeListInformation:
       type: object
       properties:
@@ -582,11 +583,11 @@ components:
     ContentValue:
       allOf:
         - $ref: '#/components/schemas/Value'
-        - type: object
-          description: Content value
-          required:
+      type: object
+      description: Content value
+      required:
             - unit
-          properties:
+      properties:
             baseperiod:
               type: string
               nullable: true
