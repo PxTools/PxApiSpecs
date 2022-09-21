@@ -614,7 +614,6 @@ components:
               enum:
               - Current
               - Fixed
-              nullable: true
             unit:
               type: string
             refrencePeriod:
