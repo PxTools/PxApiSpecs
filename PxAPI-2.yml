@@ -511,7 +511,7 @@ components:
               type: array
               items:
                 $ref: '#/components/schemas/ContentValue'
-    AbstractEncodedVariable:
+    AbstractCodeListVariable:
       description: Filter variable
       allOf:
       - $ref: '#/components/schemas/AbstractVariable'
@@ -533,14 +533,14 @@ components:
       required:
         - "map"
       allOf:
-      - $ref: '#/components/schemas/AbstractEncodedVariable'
+      - $ref: '#/components/schemas/AbstractCodeListVariable'
       type: object
       properties:
         map:
           type: string
     RegularVariable:
       allOf:
-      - $ref: '#/components/schemas/AbstractEncodedVariable'
+      - $ref: '#/components/schemas/AbstractCodeListVariable'
       type: object
     CodeListInformation:
       type: object
