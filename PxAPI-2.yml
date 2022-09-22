@@ -338,6 +338,27 @@ components:
               type: array
               items:
                  $ref: '#/components/schemas/Link'
+    PageInfo:
+      type: object
+      properties:
+        pageNumber:
+          type: integer
+          format: int32
+          minimum: 1
+        pageSize:
+          type: integer
+          format: int32
+          example: 20
+          minimum: 5
+          maximum: 500
+        totalElements:
+          type: integer
+          format: int32
+          minimum: 0
+        totalPages:
+          type: integer
+          format: int32
+          minimum: 0
     TableMetadata:
       type: object
       required: 
@@ -434,6 +455,31 @@ components:
           description: Must be shown to end user if true
         text:
           type: string
+    CellNote:
+      description: Note for a table
+      allOf:
+        - $ref: '#/components/schemas/Note'
+        - type: object
+          
+          properties:
+            conditions:
+              type: array
+              description: A set of condition that must be fulfilled for the note to be valid. 
+              items:
+                $ref: '#/components/schemas/Condition'
+              nullable: true
+    Condition:
+      type: object
+      required:
+        - "variableCode"
+        - "valueCode"
+      properties:
+        variableCode:
+          type: string
+          description: The code of the variable
+        valueCode:
+          type: string
+          description: The code of the value
     TimeVariable:
       allOf:
         - $ref: '#/components/schemas/AbstractVariable'
