@@ -96,6 +96,9 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/TableMetadata'
+            application/jsonstat:
+              schema:
+                $ref: '#/components/schemas/Dataset'    
             application/vnd.json-stat2+json:
               schema:
                 externalDocs:
@@ -684,6 +687,136 @@ components:
           description: |
             An absolute URI that identifies the specific occurrence of the problem.
             It may or may not yield further information if dereferenced.
+              
+    strarray:
+      type: array
+      items:
+        type: string
+      uniqueItems: true
+    jsonstat-version:
+      type: string
+      enum:
+        - "2.0"
+    updated:
+      oneOf:
+        - type: string
+          format: date-time
+        - type: string
+          pattern: "^((19|20)\\d\\d)\\-(0?[1-9]|1[012])\\-(0?[1-9]|[12][0-9]|3[01])$"
+    href:
+      type: string
+      format: uri
+    label:
+      type: string
+    source:
+      type: string
+    extension-root:
+      description: extension at root level
+      type: object
+    extension:
+      description: extension at some level
+      type: object  
+      
+    jsonstat-note:
+      "$ref": "#/components/schemas/strarray"
+       
+        
+    jsonstat-link:
+      type: object
+      additionalProperties: 
+         type: array
+         items:
+            type: object
+            properties:
+              type:
+                type: string  
+              href:
+                "$ref": "#/components/schemas/href"
+            additionalProperties: false
+    jsonstat-extension-link:
+      type: object
+      properties:
+        describedby:
+          type: array
+          items:
+            type: object
+            properties:
+              extension:
+                 description: A extension object
+                 type: object
+                 additionalProperties:
+                    description: A string
+                    type: string
+                    
+            additionalProperties: false       
+      additionalProperties: false         
+    category:
+      type: object
+      properties:
+        index:
+          oneOf:
+            - "$ref": "#/components/schemas/strarray"
+            - type: object
+              additionalProperties:
+                type: number          
+    Dataset:
+      title: JSON-stat 2.0 Dataset Schema
+      description:
+        This is version 1.04 of the JSON-stat 2.0 Dataset Schema (2018-09-05 10:55)
+      type: object
+      properties:
+        class:
+          type: string
+          enum:
+            - dataset
+        version:
+          "$ref": "#/components/schemas/jsonstat-version"
+        href:
+          "$ref": "#/components/schemas/href"
+        label:
+          "$ref": "#/components/schemas/label"
+        note:
+          "$ref": "#/components/schemas/jsonstat-note"
+        link:
+          "$ref": "#/components/schemas/jsonstat-link"
+        updated:
+          "$ref": "#/components/schemas/updated"
+        source:
+          "$ref": "#/components/schemas/source"
+        extension:
+          "$ref": "#/components/schemas/extension-root"  
+        id:
+           "$ref": "#/components/schemas/strarray"
+        size:
+          type: array
+          items:
+             type: integer
+        role:
+           type: object
+           properties:
+                  time:
+                    "$ref": "#/components/schemas/strarray"
+                  geo:
+                    "$ref": "#/components/schemas/strarray"
+                  metric:
+                    "$ref": "#/components/schemas/strarray"
+           additionalProperties: false  
+        dimension:
+           type: object
+           additionalProperties:
+              type: object
+              properties:
+                    label:
+                      "$ref": "#/components/schemas/label"
+                    note:
+                      "$ref": "#/components/schemas/jsonstat-note"
+                    link:
+                      "$ref": "#/components/schemas/jsonstat-extension-link"
+                    extension:
+                      "$ref": "#/components/schemas/extension"
+                    category:
+                      "$ref": "#/components/schemas/category"  
+              additionalProperties: false
   responses:
     ErrorResponse429:
       description: Error respsone for 429
