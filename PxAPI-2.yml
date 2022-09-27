@@ -317,21 +317,7 @@ components:
         - type: object
           properties:
            page:
-            type: object
-            properties:
-             pageNumber:
-              type: integer
-              format: int32
-             pageSize:
-              type: integer
-              format: int32
-              example: 33
-             totalElements:
-              type: integer
-              format: int32
-             totalPages:
-              type: integer
-              format: int32
+            $ref: '#/components/schemas/PageInfo'
         - type: object
           properties:
             links:
