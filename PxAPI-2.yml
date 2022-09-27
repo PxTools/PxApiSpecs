@@ -715,12 +715,16 @@ components:
       type: object
     extension:
       description: extension at some level
-      type: object  
-      
+      type: object
     jsonstat-note:
       "$ref": "#/components/schemas/strarray"
-       
-        
+    strarray-by-str-dict:
+       type: object
+       additionalProperties:
+          type: array
+          items:
+            type: string
+          uniqueItems: true  
     jsonstat-link:
       type: object
       additionalProperties: 
@@ -750,15 +754,24 @@ components:
                     
             additionalProperties: false       
       additionalProperties: false         
-    category:
+
+    jsonstat-category:
       type: object
       properties:
         index:
-          oneOf:
-            - "$ref": "#/components/schemas/strarray"
-            - type: object
-              additionalProperties:
-                type: number          
+           type: object
+           additionalProperties:
+                type: number
+        label:
+          type: object
+          minProperties: 1
+          additionalProperties:
+            type: string
+        note:
+           "$ref": "#/components/schemas/strarray-by-str-dict"    
+        child:
+           "$ref": "#/components/schemas/strarray-by-str-dict"    
+      additionalProperties: false            
     Dataset:
       title: JSON-stat 2.0 Dataset Schema
       description:
@@ -815,8 +828,41 @@ components:
                     extension:
                       "$ref": "#/components/schemas/extension"
                     category:
-                      "$ref": "#/components/schemas/category"  
-              additionalProperties: false
+                      "$ref": "#/components/schemas/jsonstat-category"  
+              additionalProperties: false            
+        value:
+          oneOf:
+            - type: array
+              items:
+                anyOf:
+                  - type: number
+                  - nullable: true
+                  - type: string
+            - type: object
+              additionalProperties:
+                anyOf:
+                  - type: number
+                  - nullable: true
+                  - type: string
+        status:
+          oneOf:
+            - type: string
+            - type: array
+              items:
+                type: string
+                nullable: true
+            - type: object
+              additionalProperties:
+                type: string
+      additionalProperties: false
+      required:
+        - version
+        - class
+        - value
+        - id
+        - size
+        - dimension
+                   
   responses:
     ErrorResponse429:
       description: Error respsone for 429
