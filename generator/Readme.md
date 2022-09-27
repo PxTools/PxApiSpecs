@@ -5,5 +5,6 @@ Steps
       A[Change in yaml]-->B[generate code];
       B-->C[change code manually ?];
       C-->D[create examples];
-      D-->E[create nuget];
+      D-->E[push];
+      E-->F[create nuget];
 ```
