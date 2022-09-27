@@ -1,10 +1,11 @@
-Steps
+Steps in changing openapi yaml 
 
 ```mermaid
   graph TD;
-      A[Change in yaml]-->B[generate code];
+      A0[make feature branch]
+      A[Change in yaml-file]-->B[generate code];
       B-->C[change code manually ?];
-      C-->D[create examples];
+      C-->D[create/update external examples];
       D-->E[push];
       E-->F[create nuget];
 ```
