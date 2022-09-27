@@ -170,6 +170,12 @@ components:
         #Default value depends on site?
   schemas:
     FolderContentItem:
+      discriminator:
+        propertyName: objectType
+        mapping:
+          heading: "#/components/schemas/Heading"
+          folderinformation: "#/components/schemas/FolderInformation"
+          table: "#/components/schemas/Table"
       type: object
       description: Navigation item.
       properties:
@@ -299,6 +305,7 @@ components:
               example: 2022
             discontinued:
               type: boolean
+              nullable: true
     TablesResponse:
       allOf:
         - type: object
