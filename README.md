@@ -10,3 +10,5 @@ docker run --rm -v ${PWD}:/local openapitools/openapi-generator-cli generate -i 
 ```
 
 Replace `${PWD}` with `$(pwd)` when running from bash.
+
+docker pull openapitools/openapi-generator-cli:v6.0.0
