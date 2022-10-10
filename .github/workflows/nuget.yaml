@@ -1,0 +1,24 @@
+name: Build server library and deploy to nuget
+on:
+  workflow_dispatch:
+
+jobs:
+  generate-aspnetcore-server:
+    runs-on: ubuntu-latest
+    name: Generate aspnet core server
+    steps:
+      # Checkout your code
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      # Generate your OpenAPI document (if you don't write it manually)
+
+      # Use the action to generate a server library
+      - name: Generate Angular Client
+        uses: openapi-generators/openapitools-generator-action@v1
+        with:
+          generator: aspnetcore
+          openapi-file: PxAPI-2.yml
+          config-file: angular-generator-config.yml
+          command-args: -o ./out
+
