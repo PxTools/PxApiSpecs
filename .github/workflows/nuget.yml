@@ -19,6 +19,6 @@ jobs:
         with:
           generator: aspnetcore
           openapi-file: PxAPI-2.yml
-          config-file: angular-generator-config.yml
+          config-file: aspnetcore-generator-config.yml
           command-args: -o ./out
 
