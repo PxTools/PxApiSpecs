@@ -96,6 +96,10 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/TableMetadata'
+            application/vnd.json-stat2+json:
+              schema:
+                externalDocs:
+                  url: "https://json-stat.org/schema/"
 components:
   parameters:
     language:
@@ -238,9 +242,9 @@ components:
     FolderInformation:
       allOf:
         - $ref: '#/components/schemas/FolderContentItem'
-        - type: object
-          description: Folder information item
-          properties:
+      type: object
+      description: Folder information item
+      properties:
             tags:
               type: array
               items:
@@ -256,14 +260,14 @@ components:
     Heading:
       allOf:
         - $ref: '#/components/schemas/FolderContentItem'
-        - type: object
-          description: Heading item
+      type: object
+      description: Heading item
     Table:
       allOf:
         - $ref: '#/components/schemas/FolderContentItem'
-        - type: object
-          description: Table item
-          properties:
+      type: object
+      description: Table item
+      properties:
             tags:
               type: array
               items:
@@ -306,24 +310,7 @@ components:
             discontinued:
               type: boolean
               nullable: true
-    TablesResponse:
-      allOf:
-        - type: object
-          properties:
-            tables:
-              type: array
-              items:
-                 $ref: '#/components/schemas/Table'
-        - type: object
-          properties:
-           page:
-            $ref: '#/components/schemas/PageInfo'
-        - type: object
-          properties:
-            links:
-              type: array
-              items:
-                 $ref: '#/components/schemas/Link'
+
     PageInfo:
       type: object
       properties:
@@ -345,43 +332,71 @@ components:
           type: integer
           format: int32
           minimum: 0
+
+    TablesResponse:
+      type: object
+      properties:
+        page:
+          $ref: '#/components/schemas/PageInfo'
+        tables:
+          type: array
+          items:
+              $ref: '#/components/schemas/Table'    
+              
     TableMetadata:
       type: object
       required: 
         - id
         - label
       properties:
-        agregationPossible:
-          type: boolean
         id:
           type: string
+          description: Identifyer for the table.
           example: "TAB0001"
         label:
           type: string
+          description: A title for the table that describes the content of it.
           example: Corporations Financial Assets and Liabilities. Quarterly 1998K2 - 2021K4
         description:
           type: string
+          description: A description of the table.
           example: Corporations Financial Assets and Liabilities by item. Quarterly 1998K2 - 2021K4 [2022-03-11]
+        agregationPossible:
+          type: boolean
+          description: If the content of the table can be aggregated.
         officalStatistics:
           type: boolean
+          description: A marker if the table is a part of the national official statistics.
+        category:
+          type: string
+          description: The code for the subject area that the table belongs to.
+          example: BE
         source:
           type: string
+          description: The name of the organization responsible for the table.
           example: SCB
+        copyright:
+          type: string
+          description: A copyright statement for the data it could also be SPDX (https://spdx.org/licenses/) identifyer
+          example: CC0-1.0
         tags:
           type: array
+          description: A list of strings/tags associated with the table
           items:
             type: string
         updated:
-              type: string
-              description: Updated time
-              format: date-time
-              nullable: true
+            type: string
+            description: A date and time when the table was last updated
+            format: date-time
+            nullable: true
         notes: 
           type: array
+          description: A list of notes associated with the table as a whole or a specific area of the table
           items:
-            $ref: '#/components/schemas/Note'
+            $ref: '#/components/schemas/CellNote'
         contacts: 
           type: array
+          description: A list of contacts associated with the table.
           items: 
             $ref: '#/components/schemas/Contact'
         contentsVariable:
@@ -405,6 +420,13 @@ components:
           items:
             $ref: '#/components/schemas/Link'
     AbstractVariable:
+      discriminator:
+        propertyName: type
+        mapping:
+          ContentsVariable: "#/components/schemas/ContentsVariable"
+          TimeVariable: "#/components/schemas/TimeVariable"
+          GeographicalVariable: "#/components/schemas/GeographicalVariable"
+          RegularVariable: "#/components/schemas/RegularVariable"          
       type: object
       required: 
         - id
@@ -435,26 +457,29 @@ components:
       
     Note:
       type: object
+      required:
+        - "text"
       properties:
         mandatory:
           type: boolean
+          default: false
           description: Must be shown to end user if true
         text:
           type: string
     CellNote:
-      description: Note for a table
       allOf:
         - $ref: '#/components/schemas/Note'
-        - type: object
-          
-          properties:
-            conditions:
-              type: array
-              description: A set of condition that must be fulfilled for the note to be valid. 
-              items:
-                $ref: '#/components/schemas/Condition'
-              nullable: true
+      type: object
+      description: Note for a table
+      properties:
+        conditions:
+          type: array
+          description: A set of condition that must be fulfilled for the note to be valid. 
+          items:
+            $ref: '#/components/schemas/Condition'
+          nullable: true
     Condition:
+      description: Condition determining to what the CellNote applies
       type: object
       required:
         - "variableCode"
@@ -467,21 +492,28 @@ components:
           type: string
           description: The code of the value
     TimeVariable:
+      description: Time variable
       allOf:
         - $ref: '#/components/schemas/AbstractVariable'
-        - type: object
-          description: Time variable
+      type: object
+      properties:
+        frequency:
+          type: string
+        firstPeriod:
+          type: string
+        lastPeriod:
+          type: string
     ContentsVariable:
       description: Content variable
       allOf:
         - $ref: '#/components/schemas/AbstractVariable'
-        - type: object
-          properties:
+      type: object
+      properties:
             values:
               type: array
               items:
                 $ref: '#/components/schemas/ContentValue'
-    AbstractFilterVariable:
+    AbstractCodeListVariable:
       description: Filter variable
       allOf:
       - $ref: '#/components/schemas/AbstractVariable'
@@ -494,42 +526,54 @@ components:
         filters:
           type: array
           items:
-            $ref: '#/components/schemas/Filter'
+            $ref: '#/components/schemas/CodeListInformation'
         values:
           type: array
           items:
             $ref: '#/components/schemas/Value'
     GeographicalVariable:
+      required:
+        - "map"
       allOf:
-      - $ref: '#/components/schemas/AbstractFilterVariable'
+      - $ref: '#/components/schemas/AbstractCodeListVariable'
       type: object
       properties:
         map:
           type: string
     RegularVariable:
+      description: Non-geographical Variable
       allOf:
-      - $ref: '#/components/schemas/AbstractFilterVariable'
+      - $ref: '#/components/schemas/AbstractCodeListVariable'
       type: object
-    Filter:
+    CodeListInformation:
       type: object
       properties:
         id:
-          type: integer
+          type: string
+          description: The identity of the CodeList
         label:
           type: string
+          description: A textual name for the CodeList
         links: 
           type: array
+          description: Links to associated information about the code list
           items:
             $ref: '#/components/schemas/Link'
     Value:
       type: object
+      required:
+        - "code"
+        - "label"
       properties:
         code: 
           type: string
+          description: A code representing the value.
         label:
           type: string
+          description: A Textual name for the value
         notes: 
           type: array
+          description: Optional notes that are associated with the value
           items:
             $ref: '#/components/schemas/Note'
         links: 
@@ -539,28 +583,30 @@ components:
     ContentValue:
       allOf:
         - $ref: '#/components/schemas/Value'
-        - type: object
-          description: Content value
-          required:
+      type: object
+      description: Content value
+      required:
             - unit
-            - adjustment
-          properties:
+      properties:
             baseperiod:
               type: string
+              nullable: true
             adjustment:
               type: string
+              default: None
               enum:
               - None
               - SesOnly
               - WorkOnly
               - WorkAndSes
-            MeasuringType:
+            measuringType:
               type: string
+              default: Other
               enum:
               - Stock
               - Flow
               - Average
-              - Other?
+              - Other
             preferedNumberOfDecimals:
               type: integer
             priceType:
@@ -569,6 +615,8 @@ components:
               - Current
               - Fixed
             unit:
+              type: string
+            refrencePeriod:
               type: string
     Contact:
       type: object
