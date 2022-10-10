@@ -693,16 +693,20 @@ components:
       items:
         type: string
       uniqueItems: true
-    jsonstat-version:
-      type: string
-      enum:
-        - "2.0"
+    # jsonstat-version:
+    #   type: string
+    #   enum:
+    #     - '2.0'
+    #   default: '2.0'
+    # updated:
+    #   oneOf:
+    #     - type: string
+    #       format: date-time
+    #     - type: string
+    #       pattern: "^((19|20)\\d\\d)\\-(0?[1-9]|1[012])\\-(0?[1-9]|[12][0-9]|3[01])$"
     updated:
-      oneOf:
-        - type: string
-          format: date-time
-        - type: string
-          pattern: "^((19|20)\\d\\d)\\-(0?[1-9]|1[012])\\-(0?[1-9]|[12][0-9]|3[01])$"
+        type: string
+        pattern: "^((19|20)\\d\\d)\\-(0?[1-9]|1[012])\\-(0?[1-9]|[12][0-9]|3[01])$"
     href:
       type: string
       format: uri
@@ -713,6 +717,51 @@ components:
     extension-root:
       description: extension at root level
       type: object
+      properties:
+        px:
+          type: object
+          properties:
+            infofile:
+              type: string
+            tableid:
+              type: string
+            decimals:
+              type: integer
+        id:
+          type: string
+        language:
+          type: string
+        category:
+          type: string
+        description:
+          type: string
+        tags:
+          type: array
+          items: 
+            type: string
+        frequency:
+          type: string
+        officialStatistics:
+          type: boolean
+        aggregationPossible:
+          type: boolean
+        discontinued:
+          type: boolean
+        contacts:
+          type: array
+          items:
+            type: object
+            properties:
+              name: 
+                type: string
+              phone: 
+                type: string
+              mail: 
+                type: string
+        refperiod:
+          type: string
+        copyright:
+          type: string
     extension:
       description: extension at some level
       type: object
@@ -761,7 +810,7 @@ components:
         index:
            type: object
            additionalProperties:
-                type: number
+                type: integer
         label:
           type: object
           minProperties: 1
@@ -770,8 +819,39 @@ components:
         note:
            "$ref": "#/components/schemas/strarray-by-str-dict"    
         child:
-           "$ref": "#/components/schemas/strarray-by-str-dict"    
-      additionalProperties: false            
+           "$ref": "#/components/schemas/strarray-by-str-dict"
+        unit:
+          type: object
+          additionalProperties:
+            type: object
+            properties:
+              base:
+                type: string
+              decimals: 
+                type: integer
+      additionalProperties: false
+    filters:
+      type: object
+      properties:
+        vs:
+          type: array
+          items:
+            $ref: '#/components/schemas/filterItem'
+        agg:
+          type: array
+          items:
+            $ref: '#/components/schemas/filterItem'
+    filterItem:
+      type: object
+      properties:
+        id:
+          type: string
+        label:
+          type: string
+        links:
+          type: array
+          items:
+            $ref: '#/components/schemas/Link'
     Dataset:
       title: JSON-stat 2.0 Dataset Schema
       description:
@@ -782,8 +862,13 @@ components:
           type: string
           enum:
             - dataset
+          default: dataset
         version:
-          "$ref": "#/components/schemas/jsonstat-version"
+          type: string
+          enum:
+            - '2.0'
+          default: '2.0'
+          # "$ref": "#/components/schemas/jsonstat-version"
         href:
           "$ref": "#/components/schemas/href"
         label:
