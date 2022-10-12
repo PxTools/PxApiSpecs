@@ -161,7 +161,7 @@ components:
     codeListId:
       name: codeListId
       in: path
-      description: Identiyer for a code 
+      description: Identifier for a code list
       required: true
       schema:
         type: string
