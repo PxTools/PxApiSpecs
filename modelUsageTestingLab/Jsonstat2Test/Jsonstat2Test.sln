@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.1.32319.34
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestProject1", "TestProject1\TestProject1.csproj", "{18E4D3F8-C4D3-4B80-9A87-906F22FB19B0}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PCAxis.OpenAPILib.Models", "..\..\generator\out\src\PCAxis.OpenAPILib.Models\PCAxis.OpenAPILib.Models.csproj", "{EEB8243F-2F3A-4E0F-9669-9CAD6240A54D}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{18E4D3F8-C4D3-4B80-9A87-906F22FB19B0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{18E4D3F8-C4D3-4B80-9A87-906F22FB19B0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{18E4D3F8-C4D3-4B80-9A87-906F22FB19B0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{18E4D3F8-C4D3-4B80-9A87-906F22FB19B0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EEB8243F-2F3A-4E0F-9669-9CAD6240A54D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EEB8243F-2F3A-4E0F-9669-9CAD6240A54D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EEB8243F-2F3A-4E0F-9669-9CAD6240A54D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EEB8243F-2F3A-4E0F-9669-9CAD6240A54D}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {BFCEB58F-5F56-4B10-B36E-57921D0953D4}
+	EndGlobalSection
+EndGlobal
