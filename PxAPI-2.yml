@@ -2,6 +2,7 @@ openapi: '3.0.2'
 info:
   title: PxApi
   version: '2.0'
+  description: This api lets you do 2 things; Find a table(Navigation) and use a table (Table).
 servers:
   - url: https://api.server.test/api/v2
 paths:
@@ -47,7 +48,7 @@ paths:
   /tables:
     get:
       tags:
-        - Table
+        - Navigation
       summary: Endpoint for listing tables
       operationId: ListAllTables
       parameters:
@@ -749,15 +750,9 @@ components:
           type: boolean
         contacts:
           type: array
-          items:
-            type: object
-            properties:
-              name: 
-                type: string
-              phone: 
-                type: string
-              mail: 
-                type: string
+          description: A list of contacts associated with the table.
+          items: 
+            $ref: '#/components/schemas/Contact'
         refperiod:
           type: string
         copyright:
@@ -780,6 +775,7 @@ components:
          type: array
          items:
             type: object
+            title: jsonstatLink
             properties:
               type:
                 type: string  
@@ -793,6 +789,7 @@ components:
           type: array
           items:
             type: object
+            title: DimensionExtension
             properties:
               extension:
                  description: A extension object
@@ -858,37 +855,30 @@ components:
         This is version 1.04 of the JSON-stat 2.0 Dataset Schema (2018-09-05 10:55)
       type: object
       properties:
+        version:
+          type: string
+          enum:
+            - '2.0'
+          default: '2.0'      
         class:
           type: string
           enum:
             - dataset
           default: dataset
-        version:
-          type: string
-          enum:
-            - '2.0'
-          default: '2.0'
           # "$ref": "#/components/schemas/jsonstat-version"
         href:
           "$ref": "#/components/schemas/href"
         label:
           "$ref": "#/components/schemas/label"
-        note:
-          "$ref": "#/components/schemas/jsonstat-note"
-        link:
-          "$ref": "#/components/schemas/jsonstat-link"
-        updated:
-          "$ref": "#/components/schemas/updated"
         source:
           "$ref": "#/components/schemas/source"
+        updated:
+          "$ref": "#/components/schemas/updated"
+        link:
+          "$ref": "#/components/schemas/jsonstat-link"
+
         extension:
           "$ref": "#/components/schemas/extension-root"  
-        id:
-           "$ref": "#/components/schemas/strarray"
-        size:
-          type: array
-          items:
-             type: integer
         role:
            type: object
            properties:
@@ -899,6 +889,14 @@ components:
                   metric:
                     "$ref": "#/components/schemas/strarray"
            additionalProperties: false  
+        id:
+           "$ref": "#/components/schemas/strarray"
+        size:
+          type: array
+          items:
+             type: integer
+        note:
+          "$ref": "#/components/schemas/jsonstat-note"
         dimension:
            type: object
            additionalProperties:
@@ -916,29 +914,12 @@ components:
                       "$ref": "#/components/schemas/jsonstat-category"  
               additionalProperties: false            
         value:
-          oneOf:
-            - type: array
-              items:
-                anyOf:
-                  - type: number
-                  - nullable: true
-                  - type: string
-            - type: object
-              additionalProperties:
-                anyOf:
-                  - type: number
-                  - nullable: true
-                  - type: string
+          type: array
+          nullable: true
+          items:
+            type: number
         status:
-          oneOf:
-            - type: string
-            - type: array
-              items:
-                type: string
-                nullable: true
-            - type: object
-              additionalProperties:
-                type: string
+          type: string
       additionalProperties: false
       required:
         - version
