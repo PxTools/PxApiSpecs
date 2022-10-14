@@ -7,6 +7,8 @@ namespace TestProject1
     [TestClass]
     public class UnitTest1
     {
+        private Helper helper = new Helper();
+
         [TestMethod]
         public void TestMethod1()
         {
@@ -101,7 +103,9 @@ namespace TestProject1
                 "Fr o m 2007-01-01 utökas Uppsala län med Heby kommun. Observera att länssiffrorna inte är jämförbara med länssiffrorna bakåt i tiden." 
             };
 
-        string myOut = ds.ToJson();
+            string myOut = ds.ToJson();
+
+            var jsonExample = helper.GetExampleJsonstat();
 
             string a = "a";
         }
