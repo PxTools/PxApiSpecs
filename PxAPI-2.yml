@@ -760,6 +760,23 @@ components:
     extension:
       description: extension at some level
       type: object
+    extension-dimension:
+      description: extension at dimension
+      type: object
+      properties:
+        eliminination:
+          type: boolean
+        eliminationValueCode:
+          type: string
+        filters:
+         $ref: '#/components/schemas/filters'
+        frequency:
+          type: string
+          description: Hmm, we have this on root as well
+        firstPeriod: 
+          type: string
+        lastPeriod: 
+          type: string
     jsonstat-note:
       "$ref": "#/components/schemas/strarray"
     strarray-by-str-dict:
@@ -833,22 +850,11 @@ components:
         vs:
           type: array
           items:
-            $ref: '#/components/schemas/filterItem'
+            $ref: '#/components/schemas/CodeListInformation'
         agg:
           type: array
           items:
-            $ref: '#/components/schemas/filterItem'
-    filterItem:
-      type: object
-      properties:
-        id:
-          type: string
-        label:
-          type: string
-        links:
-          type: array
-          items:
-            $ref: '#/components/schemas/Link'
+            $ref: '#/components/schemas/CodeListInformation'
     Dataset:
       title: JSON-stat 2.0 Dataset Schema
       description:
@@ -909,7 +915,7 @@ components:
                     link:
                       "$ref": "#/components/schemas/jsonstat-extension-link"
                     extension:
-                      "$ref": "#/components/schemas/extension"
+                      "$ref": "#/components/schemas/extension-dimension"
                     category:
                       "$ref": "#/components/schemas/jsonstat-category"  
               additionalProperties: false            
