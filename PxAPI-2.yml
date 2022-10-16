@@ -100,6 +100,40 @@ paths:
               schema:
                 externalDocs:
                   url: "https://json-stat.org/schema/"
+  /tables/{id}/codelists:
+    get:
+      tags:
+        - Table
+      summary: List all codelists that are associated with the table 
+      operationId: GetTableCodeLists
+      parameters:
+        - $ref: '#/components/parameters/language'
+        - $ref: '#/components/parameters/id'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CodeListsResponse'
+
+  /tables/{id}/codelists/{codeListId}:
+    get:
+      tags:
+        - Table
+      summary: List information about the codelist that is associated with the table.
+      operationId: GetTableCodeListById
+      parameters:
+        - $ref: '#/components/parameters/language'
+        - $ref: '#/components/parameters/id'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CodeList'
+    
 components:
   parameters:
     language:
@@ -121,6 +155,13 @@ components:
       name: id
       in: path
       description: Id
+      required: true
+      schema:
+        type: string
+    codeListId:
+      name: codeListId
+      in: path
+      description: Identifier for a code list
       required: true
       schema:
         type: string
@@ -343,7 +384,7 @@ components:
          tables:
               type: array
               items:
-                 $ref: '#/components/schemas/Table'    
+                 $ref: '#/components/schemas/Table'
     TableMetadata:
       type: object
       required: 
@@ -631,6 +672,77 @@ components:
         mail:
           type: string
           example: testmail@testmail.com
+    CodeListsResponse:
+      type: object
+      properties:
+        language:
+          type: string
+          description: The language code for the language used in this response
+          example: sv
+        codeLists:
+          type: array
+          items:
+            $ref: '#/components/schemas/CodeListMetadata'
+        links: 
+          type: array
+          items:
+            $ref: '#/components/schemas/Link'
+    CodeListMetadata:
+      type: object
+      properties:
+        id: 
+          type: string
+          description: The identiyer for the codelist
+          example: agg_RegionNUTS2_2008
+        label:
+          type: string
+          description: The textual name  for the codelist. 
+          example: NUTS2 fr.o.m 2008
+        links: 
+          type: array
+          items:
+            $ref: '#/components/schemas/Link'
+
+    CodeList: 
+      type: object
+      properties:
+        id: 
+          type: string
+          description: The identiyer for the codelist
+          example: agg_RegionNUTS2_2008
+        label:
+          type: string
+          description: The textual name  for the codelist. 
+          example: NUTS2 fr.o.m 2008 
+        language:
+          type: string
+          description: The language code for the language used in this response
+          example: sv
+        values:
+          type: array
+          items:
+            $ref: '#/components/schemas/ValueMap'
+        links: 
+          type: array
+          items:
+            $ref: '#/components/schemas/Link'
+    ValueMap:
+      type: object
+      properties:
+        code:
+          type: string
+          description: The code for the value.
+          example: "SE22"
+        label: 
+          type: string
+          description: The textual representation for the value
+          example: Sydsverige
+        valueMap:
+          type: array
+          description: An array of codes from the origial codelist for the variable that cand be mapped to this value
+          example: '["10", "12"]'
+          items:
+            type: string
     Link:
       type: object
       properties:
