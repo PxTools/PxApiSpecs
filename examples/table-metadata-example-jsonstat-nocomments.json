@@ -23,32 +23,32 @@
         "px": {
             "infofile": "BE0101",
             "tableid": "TAB638",
-            "decimals": 0
+            "decimals": 0,
+            "official-statistics": true,
+            "aggregallowed": false,
+            "refperiod": "31 December each year",
+            "copyright": "CC-0",
+            "language": "sv",
+            "description": "",
+            "matrix": "TAB638",
+            "subject-code": "BE"                        
         },
-        "id": "TAB638",
-        "language": "sv",
-        "category": "BE",
-        "description": "",
         "tags": [
             ""
         ],
-        "officialStatistics": true,
-        "aggregationPossible": false,
         "discontinued": false,
-        "contacts": [
+        "contact": [
             {
-                "name": "Tomas Johansson, SCB",
+                "name": "Tomas Johansson",
                 "phone": "+46 010-479 64 26",
                 "mail": "tomas.johansson@scb.se"
             },
             {
-                "name": "Statistikservice, SCB",
+                "name": "Statistikservice",
                 "phone": "+46 010-479 50 0",
                 "mail": "information@scb.se"
             }
-        ],
-        "refperiod": "31 December each year",
-        "copyright": "CC-0"
+        ]
     },
     "role": {
         "time": [
@@ -89,26 +89,6 @@
                 "År 1968-1998 redovisas enligt regional indelning 1998-01-01."
             ],
             "category": {
-                "note": {
-                    "0580": [
-                        "Från och med 2011-01-01 tillhör Storholmen Lidingö (0186) som tidigare tillhörde Vaxholm (0187)."
-                    ],
-                    "0187": [
-                        "Från och med 2011-01-01 tillhör Storholmen Lidingö (0186) som tidigare tillhörde Vaxholm (0187)."
-                    ],
-                    "0330": [
-                        "Ny regional indelning fr.o.m. 2003-01-01. Delar av Uppsala kommun bildar en ny kommun benämnd Knivsta kommun."
-                    ],
-                    "0380": [
-                        "Ny regional indelning fr.o.m. 2003-01-01. Delar av Uppsala kommun bildar en ny kommun benämnd Knivsta kommun."
-                    ],
-                    "0140": [
-                        "Ny regional indelning fr.o.m. 1999-01-01. Delar av Södertälje kommun (kod 0181) bildar en ny kommun benämnd Nykvarn (kod 0140)."
-                    ],
-                    "0181": [
-                        "Ny regional indelning fr.o.m. 1999-01-01. Delar av Södertälje kommun (kod 0181) bildar en ny kommun benämnd Nykvarn (kod 0140)."
-                    ]
-                },
                 "index": {
                     "00": 0,
                     "01": 1,
@@ -736,7 +716,27 @@
                     "2582": "Boden",
                     "2583": "Haparanda",
                     "2584": "Kiruna"
-                }
+                },
+                "note": {
+                    "0580": [
+                        "Från och med 2011-01-01 tillhör Storholmen Lidingö (0186) som tidigare tillhörde Vaxholm (0187)."
+                    ],
+                    "0187": [
+                        "Från och med 2011-01-01 tillhör Storholmen Lidingö (0186) som tidigare tillhörde Vaxholm (0187)."
+                    ],
+                    "0330": [
+                        "Ny regional indelning fr.o.m. 2003-01-01. Delar av Uppsala kommun bildar en ny kommun benämnd Knivsta kommun."
+                    ],
+                    "0380": [
+                        "Ny regional indelning fr.o.m. 2003-01-01. Delar av Uppsala kommun bildar en ny kommun benämnd Knivsta kommun."
+                    ],
+                    "0140": [
+                        "Ny regional indelning fr.o.m. 1999-01-01. Delar av Södertälje kommun (kod 0181) bildar en ny kommun benämnd Nykvarn (kod 0140)."
+                    ],
+                    "0181": [
+                        "Ny regional indelning fr.o.m. 1999-01-01. Delar av Södertälje kommun (kod 0181) bildar en ny kommun benämnd Nykvarn (kod 0140)."
+                    ]
+                }                
             },
             "extension": {
                 "eliminination": true,
@@ -1242,14 +1242,6 @@
                 "elimination": false
             },
             "category": {
-                "note": {
-                    "BE0101N1": [
-                        "Uppgifterna avser förhållandena den 31 december för valt/valda år enligt den regionala indelning som gäller den 1 januari året efter."
-                    ],
-                    "BE0101N2": [
-                        "Folkökningen definieras som skillnaden mellan folkmängden vid årets början och årets slut."
-                    ]
-                },
                 "index": {
                     "BE0101N1": 0,
                     "BE0101N2": 1
@@ -1257,6 +1249,14 @@
                 "label": {
                     "BE0101N1": "Folkmängd",
                     "BE0101N2": "Folkökning"
+                },
+                "note": {
+                    "BE0101N1": [
+                        "Uppgifterna avser förhållandena den 31 december för valt/valda år enligt den regionala indelning som gäller den 1 januari året efter."
+                    ],
+                    "BE0101N2": [
+                        "Folkökningen definieras som skillnaden mellan folkmängden vid årets början och årets slut."
+                    ]
                 },
                 "unit": {
                     "BE0101N1": {
