@@ -322,8 +322,7 @@ components:
           type: integer
           format: int32
           example: 20
-          minimum: 5
-          maximum: 500
+          minimum: 1
         totalElements:
           type: integer
           format: int32
