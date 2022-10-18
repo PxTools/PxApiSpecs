@@ -1,4 +1,7 @@
 # PxApiSpecs
+
+https://petstore.swagger.io/?url=https://raw.githubusercontent.com/statisticssweden/PxApiSpecs/master/PxAPI-2.yml
+
 Documentation for the PxApi 
 
 
