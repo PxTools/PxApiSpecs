@@ -728,35 +728,31 @@ components:
               type: string
             decimals:
               type: integer
-        id:
-          type: string
-        language:
-          type: string
-        category:
-          type: string
-        description:
-          type: string
+            official-statistics:
+              type: boolean
+            aggregallowed:
+              type: boolean
+            refperiod:
+              type: string              
+            copyright:
+              type: string
+            description:
+              type: string
+            matrix:
+              type: string
+            subject-code:
+              type: string
         tags:
           type: array
           items: 
             type: string
-        frequency:
-          type: string
-        officialStatistics:
-          type: boolean
-        aggregationPossible:
-          type: boolean
         discontinued:
           type: boolean
-        contacts:
+        contact:
           type: array
           description: A list of contacts associated with the table.
           items: 
             $ref: '#/components/schemas/Contact'
-        refperiod:
-          type: string
-        copyright:
-          type: string
     extension:
       description: extension at some level
       type: object
@@ -777,6 +773,16 @@ components:
           type: string
         lastPeriod: 
           type: string
+        note:
+          type: array
+          items:
+            $ref: '#/components/schemas/Note'
+        valueNote:
+          type: object
+          additionalProperties:
+            type: array
+            items:
+              $ref: '#/components/schemas/Note'
     jsonstat-note:
       "$ref": "#/components/schemas/strarray"
     strarray-by-str-dict:
@@ -910,14 +916,12 @@ components:
               properties:
                     label:
                       "$ref": "#/components/schemas/label"
-                    note:
-                      "$ref": "#/components/schemas/jsonstat-note"
-                    link:
-                      "$ref": "#/components/schemas/jsonstat-extension-link"
-                    extension:
-                      "$ref": "#/components/schemas/extension-dimension"
                     category:
                       "$ref": "#/components/schemas/jsonstat-category"  
+                    extension:
+                      "$ref": "#/components/schemas/extension-dimension"
+                    link:
+                      "$ref": "#/components/schemas/jsonstat-extension-link"
               additionalProperties: false            
         value:
           type: array

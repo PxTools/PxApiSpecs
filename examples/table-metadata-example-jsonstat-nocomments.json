@@ -85,9 +85,6 @@
     "dimension": {
         "Region": {
             "label": "region",
-            "note": [
-                "År 1968-1998 redovisas enligt regional indelning 1998-01-01."
-            ],
             "category": {
                 "index": {
                     "00": 0,
@@ -716,31 +713,32 @@
                     "2582": "Boden",
                     "2583": "Haparanda",
                     "2584": "Kiruna"
-                },
-                "note": {
-                    "0580": [
-                        "Från och med 2011-01-01 tillhör Storholmen Lidingö (0186) som tidigare tillhörde Vaxholm (0187)."
-                    ],
-                    "0187": [
-                        "Från och med 2011-01-01 tillhör Storholmen Lidingö (0186) som tidigare tillhörde Vaxholm (0187)."
-                    ],
-                    "0330": [
-                        "Ny regional indelning fr.o.m. 2003-01-01. Delar av Uppsala kommun bildar en ny kommun benämnd Knivsta kommun."
-                    ],
-                    "0380": [
-                        "Ny regional indelning fr.o.m. 2003-01-01. Delar av Uppsala kommun bildar en ny kommun benämnd Knivsta kommun."
-                    ],
-                    "0140": [
-                        "Ny regional indelning fr.o.m. 1999-01-01. Delar av Södertälje kommun (kod 0181) bildar en ny kommun benämnd Nykvarn (kod 0140)."
-                    ],
-                    "0181": [
-                        "Ny regional indelning fr.o.m. 1999-01-01. Delar av Södertälje kommun (kod 0181) bildar en ny kommun benämnd Nykvarn (kod 0140)."
-                    ]
-                }                
+                }
             },
             "extension": {
                 "eliminination": true,
                 "eliminationValueCode": "00",
+                "note" : [ {"madantory": true, "text": "År 1968-1998 redovisas enligt regional indelning 1998-01-01."}],
+                "valueNote" : {
+                    "0580": [
+                        {"madantory": true, "text": "Från och med 2011-01-01 tillhör Storholmen Lidingö (0186) som tidigare tillhörde Vaxholm (0187)."}
+                    ],
+                    "0187": [
+                        {"madantory": true, "text": "Från och med 2011-01-01 tillhör Storholmen Lidingö (0186) som tidigare tillhörde Vaxholm (0187)."}
+                    ],
+                    "0330": [
+                        {"madantory": true, "text": "Ny regional indelning fr.o.m. 2003-01-01. Delar av Uppsala kommun bildar en ny kommun benämnd Knivsta kommun."}
+                    ],
+                    "0380": [
+                        {"madantory": true, "text": "Ny regional indelning fr.o.m. 2003-01-01. Delar av Uppsala kommun bildar en ny kommun benämnd Knivsta kommun."}
+                    ],
+                    "0140": [
+                        {"madantory": true, "text": "Ny regional indelning fr.o.m. 1999-01-01. Delar av Södertälje kommun (kod 0181) bildar en ny kommun benämnd Nykvarn (kod 0140)."}
+                    ],
+                    "0181": [
+                        {"madantory": true, "text": "Ny regional indelning fr.o.m. 1999-01-01. Delar av Södertälje kommun (kod 0181) bildar en ny kommun benämnd Nykvarn (kod 0140)."}
+                    ]
+                },   
                 "filters": {
                     "vs": [
                         {
@@ -941,56 +939,6 @@
         },
         "Alder": {
             "label": "ålder",
-            "extension": {
-                "elimination": true,
-                "eliminationValueCode": "tot",
-                "filters": {
-                    "vs": [
-                        {
-                            "id": "vs_Ålder1årA",
-                            "label": "Ålder, 1 års-klasser",
-                            "links": [
-                                {
-                                    "rel": "metadata",
-                                    "href": "https://my-site.com/api/v2/tables/TAB638/filters/vs_Ålder1årA"
-                                }
-                            ]
-                        },
-                        {
-                            "id": "vs_ÅlderTotA",
-                            "label": "Ålder, totalt, alla redovisade åldrar",
-                            "links": [
-                                {
-                                    "rel": "metadata",
-                                    "href": "https://my-site.com/api/v2/tables/TAB638/filters/vs_ÅlderTotA"
-                                }
-                            ]
-                        }
-                    ],
-                    "agg": [
-                        {
-                            "id": "agg_Ålder10år",
-                            "label": "10-årsklasser",
-                            "links": [
-                                {
-                                    "rel": "metadata",
-                                    "href": "https://my-site.com/api/v2/tables/TAB638/filters/vs_Ålder10år"
-                                }
-                            ]
-                        },
-                        {
-                            "id": "agg_Ålder5år",
-                            "label": "5-årsklasser",
-                            "links": [
-                                {
-                                    "rel": "metadata",
-                                    "href": "https://my-site.com/api/v2/tables/TAB638/filters/vs_Ålder5år"
-                                }
-                            ]
-                        }
-                    ]
-                }
-            },
             "category": {
                 "index": {
                     "0": 0,
@@ -1201,6 +1149,56 @@
                     "tot": "totalt ålder"
                 }
             },
+            "extension": {
+                "elimination": true,
+                "eliminationValueCode": "tot",
+                "filters": {
+                    "vs": [
+                        {
+                            "id": "vs_Ålder1årA",
+                            "label": "Ålder, 1 års-klasser",
+                            "links": [
+                                {
+                                    "rel": "metadata",
+                                    "href": "https://my-site.com/api/v2/tables/TAB638/filters/vs_Ålder1årA"
+                                }
+                            ]
+                        },
+                        {
+                            "id": "vs_ÅlderTotA",
+                            "label": "Ålder, totalt, alla redovisade åldrar",
+                            "links": [
+                                {
+                                    "rel": "metadata",
+                                    "href": "https://my-site.com/api/v2/tables/TAB638/filters/vs_ÅlderTotA"
+                                }
+                            ]
+                        }
+                    ],
+                    "agg": [
+                        {
+                            "id": "agg_Ålder10år",
+                            "label": "10-årsklasser",
+                            "links": [
+                                {
+                                    "rel": "metadata",
+                                    "href": "https://my-site.com/api/v2/tables/TAB638/filters/vs_Ålder10år"
+                                }
+                            ]
+                        },
+                        {
+                            "id": "agg_Ålder5år",
+                            "label": "5-årsklasser",
+                            "links": [
+                                {
+                                    "rel": "metadata",
+                                    "href": "https://my-site.com/api/v2/tables/TAB638/filters/vs_Ålder5år"
+                                }
+                            ]
+                        }
+                    ]
+                }
+            },
             "link": {
                 "describedby": [
                     {
@@ -1213,9 +1211,6 @@
         },
         "Kon": {
             "label": "kön",
-            "extension": {
-                "elimination": true
-            },
             "category": {
                 "index": {
                     "1": 0,
@@ -1225,6 +1220,9 @@
                     "1": "män",
                     "2": "kvinnor"
                 }
+            },
+            "extension": {
+                "elimination": true
             },
             "link": {
                 "describedby": [
@@ -1238,9 +1236,6 @@
         },
         "ContentsCode": {
             "label": "tabellinnehåll",
-            "extension": {
-                "elimination": false
-            },
             "category": {
                 "index": {
                     "BE0101N1": 0,
@@ -1268,16 +1263,21 @@
                         "decimals": 0
                     }
                 }
+            },
+            "extension": {
+                "elimination": false,
+                "valueNote" : {
+                    "BE0101N1": [
+                        {"madantory": true, "text": "Uppgifterna avser förhållandena den 31 december för valt/valda år enligt den regionala indelning som gäller den 1 januari året efter."}
+                    ],
+                    "BE0101N2": [
+                        {"madantory": true, "text": "Folkökningen definieras som skillnaden mellan folkmängden vid årets början och årets slut."}
+                    ]
+                }  
             }
         },
         "Tid": {
             "label": "år",
-            "extension": {
-                "elimination": false,
-                "frequency": "A",
-                "firstPeriod": "1968",
-                "lastPeriod": "2021"
-            },
             "category": {
                 "index": {
                     "2021": 0
@@ -1285,6 +1285,12 @@
                 "label": {
                     "2021": "2021"
                 }
+            },
+            "extension": {
+                "elimination": false,
+                "frequency": "A",
+                "firstPeriod": "1968",
+                "lastPeriod": "2021"
             }
         }
     },
