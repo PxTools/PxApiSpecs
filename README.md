@@ -1,4 +1,7 @@
 # PxApiSpecs
+
+https://petstore.swagger.io/?url=https://raw.githubusercontent.com/statisticssweden/PxApiSpecs/jsonstat2Hehe/PxAPI-2.yml#/Navigation/GetNavigationRoot
+
 Documentation for the PxApi 
 
 
