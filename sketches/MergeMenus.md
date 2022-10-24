@@ -90,4 +90,6 @@ classDef folder fill:#ffffde,stroke:#aaaa33;
 
 ```
 For usecase 1 the id-string in ..Portal_instance/navigate/{id} calls will probably have to contain both the instanceId and the folderId.
+The config endpoint should probably have a list of instances and the "navigational" endpoints should have an "exclude these instances" parameter.
+The "navigational" endpoints will probably have to manipulate some of the returned urls.  
  
