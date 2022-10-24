@@ -736,6 +736,8 @@ components:
               type: string              
             copyright:
               type: string
+            language:
+              type: string
             description:
               type: string
             matrix:
@@ -760,18 +762,9 @@ components:
       description: extension at dimension
       type: object
       properties:
-        eliminination:
+        elimination:
           type: boolean
         eliminationValueCode:
-          type: string
-        filters:
-         $ref: '#/components/schemas/filters'
-        frequency:
-          type: string
-          description: Hmm, we have this on root as well
-        firstPeriod: 
-          type: string
-        lastPeriod: 
           type: string
         note:
           type: array
@@ -782,7 +775,16 @@ components:
           additionalProperties:
             type: array
             items:
-              $ref: '#/components/schemas/Note'
+              $ref: '#/components/schemas/Note'          
+        filters:
+         $ref: '#/components/schemas/filters'
+        frequency:
+          type: string
+          description: Hmm, we have this on root as well
+        firstPeriod: 
+          type: string
+        lastPeriod: 
+          type: string
     jsonstat-note:
       "$ref": "#/components/schemas/strarray"
     strarray-by-str-dict:
@@ -836,8 +838,6 @@ components:
           minProperties: 1
           additionalProperties:
             type: string
-        note:
-           "$ref": "#/components/schemas/strarray-by-str-dict"    
         child:
            "$ref": "#/components/schemas/strarray-by-str-dict"
         unit:

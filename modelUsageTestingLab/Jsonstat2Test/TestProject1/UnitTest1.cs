@@ -1,4 +1,5 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Newtonsoft.Json;
 using PCAxis.OpenAPILib.Models;
 using System.Collections.Generic;
 using System.IO;
@@ -15,85 +16,7 @@ namespace TestProject1
         [TestMethod]
         public void TestMethod1()
         {
-            Dataset ds = new Dataset();
-
-            //ds.Class = Dataset.ClassEnum.DatasetEnum;
-
-            // defaults : "version": "2.0", "class": "dataset",
-            ds.Label = "Folkmängden efter region, civilstånd, ålder, kön, tabellinnehåll och år";
-            ds.Source = "SCB";
-            ds.Updated = "2022-02-07T14:32:00Z";
-            ds.Link = new Dictionary<string, List<JsonstatLink>>();
-            ds.Href = "https://my-site.com/api/v2/tables/TAB638/metadata";
-
-
-            //ds.AddRootLink(""describes", "https://my-site.com/api/v2/tables/TAB638/data","application/json" );
-            JsonstatLink temp = new JsonstatLink();
-            temp.Href = "https://my-site.com/api/v2/tables/TAB638/data";
-            temp.Type = "application/json";
-            List<JsonstatLink> temp2 = new List<JsonstatLink>();
-            temp2.Add(temp);
-            ds.Link.Add("describes", temp2);
-
-
-            temp = new JsonstatLink();
-            temp.Href = "https://my-other-site.com/definitions/TAB638";
-            temp.Type = "application/json";
-            temp2 = new List<JsonstatLink>();
-            temp2.Add(temp);
-            ds.Link.Add("describedby", temp2);
-
-
-
-
-            ds.Extension = new ExtensionRoot();
-            ds.Extension.Px = new ExtensionRootPx { Infofile = "BE0101", Tableid = "TAB638", Decimals = 0 };
-            ds.Extension.Id = "TAB638";
-            ds.Extension.Language = "sv";
-            ds.Extension.Category = "BE";
-            ds.Extension.Description = "";
-            ds.Extension.Tags = new List<string>();
-            ds.Extension.Tags.Add("");
-            ds.Extension.Frequency = "A";
-            ds.Extension.OfficialStatistics = true;
-            ds.Extension.AggregationPossible = false;
-            ds.Extension.Discontinued = false;
-
-
-            ds.Extension.Contacts = new List<Contact>();
-            ds.Extension.Contacts.Add(new Contact { Name = "Tomas Johansson, SCB", Phone = "+46 010-479 64 26", Mail = "tomas.johansson@scb.se" });
-            ds.Extension.Contacts.Add(new Contact { Name = "Statistikservice, SCB", Phone = "+46 010-479 50 0", Mail = "information@scb.se" });
-
-            ds.Extension.Refperiod = "31 December each year";
-            ds.Extension.Copyright = "CC-0";
-
-            ds.Role = new DatasetRole();
-            ds.Role.Time = new List<string> { "Tid" };
-
-            ds.Role.Geo = new List<string> { "Region" };
-
-            ds.Role.Metric = new List<string> { "ContentsCode" };
-
-            ds.Id = new List<string> { "Region", "Civilstand", "Alder", "Kon", "ContentsCode", "Tid" };
-
-            ds.Size = new List<int> { 312, 4, 1, 2, 2, 1 };
-
-
-            ds.Dimension = new Dictionary<string, DatasetDimensionValue>();
-
-            ds.Dimension.Add("Region", GetRegionDatasetDimensionValue());
-            ds.Dimension.Add("Civilstand", GetCivilstandDatasetDimensionValue());
-            ds.Dimension.Add("Alder",GetAlderDatasetDimensionValue());
-            ds.Dimension.Add("Kon", GetKonDatasetDimensionValue());
-            ds.Dimension.Add("ContentsCode",GetContentsCodeDatasetDimensionValue());
-
-
-           ds.Note = new List<string>
-            {
-                "Fr o m 2007-01-01 överförs Heby kommun från Västmanlands län till Uppsala län. Hebys kommunkod ändras från 1917 till 0331. ",
-                "Registrerat partnerskap reglerade parförhållanden mellan personer av samma kön och fanns från 1995 till 2009. Registrerade partners räknas som Gifta, Separerade partners som Skilda och Efterlevande partners som Änka/änklingar.",
-                "Fr o m 2007-01-01 utökas Uppsala län med Heby kommun. Observera att länssiffrorna inte är jämförbara med länssiffrorna bakåt i tiden."
-            };
+            var ds = GenerateDatasetData();
 
             string myOut = ds.ToJson();
 
@@ -114,6 +37,105 @@ var jsonExample = helper.GetExampleJsonstat();
             string a = "a";
         }
 
+        private Dataset GenerateDatasetData()
+        {
+            Dataset ds = new Dataset();
+
+            ds.Label = "Folkmängden efter region, civilstånd, ålder, kön, tabellinnehåll och år";
+            ds.Source = "SCB";
+            ds.Updated = "2022-02-07T14:32:00Z";
+            ds.Link = new Dictionary<string, List<JsonstatLink>>();
+            ds.Href = "https://my-site.com/api/v2/tables/TAB638/metadata";
+
+            JsonstatLink temp = new JsonstatLink();
+            temp.Href = "https://my-site.com/api/v2/tables/TAB638/data";
+            temp.Type = "application/json";
+            List<JsonstatLink> temp2 = new List<JsonstatLink>();
+            temp2.Add(temp);
+            ds.Link.Add("describes", temp2);
+
+
+            temp = new JsonstatLink();
+            temp.Href = "https://my-other-site.com/definitions/TAB638";
+            temp.Type = "application/json";
+            temp2 = new List<JsonstatLink>();
+            temp2.Add(temp);
+            ds.Link.Add("describedby", temp2);
+
+
+            ds.Extension = new ExtensionRoot();
+            ds.Extension.Px = new ExtensionRootPx
+            {
+                Infofile = "BE0101",
+                Tableid = "TAB638",
+                OfficialStatistics = true,
+                Aggregallowed = false,
+                Refperiod = "31 December each year",
+                Copyright = "CC-0",
+                Language = "sv",
+                Description = "",
+                Matrix = "TAB638",
+                SubjectCode = "BE"
+            };
+
+            ds.Extension.Tags = new List<string>();
+            ds.Extension.Tags.Add("");
+            ds.Extension.Discontinued = false;
+
+
+            ds.Extension.Contact = new List<Contact>();
+            ds.Extension.Contact.Add(new Contact
+                { Name = "Tomas Johansson", Phone = "+46 010-479 64 26", Mail = "tomas.johansson@scb.se" });
+            ds.Extension.Contact.Add(new Contact
+                { Name = "Statistikservice", Phone = "+46 010-479 50 0", Mail = "information@scb.se" });
+
+            ds.Role = new DatasetRole();
+            ds.Role.Time = new List<string> { "Tid" };
+
+            ds.Role.Geo = new List<string> { "Region" };
+
+            ds.Role.Metric = new List<string> { "ContentsCode" };
+
+            ds.Id = new List<string> { "Region", "Civilstand", "Alder", "Kon", "ContentsCode", "Tid" };
+
+            ds.Size = new List<int> { 312, 4, 1, 2, 2, 1 };
+
+
+            ds.Dimension = new Dictionary<string, DatasetDimensionValue>();
+
+            ds.Dimension.Add("Region", GetRegionDatasetDimensionValue());
+            ds.Dimension.Add("Civilstand", GetCivilstandDatasetDimensionValue());
+            ds.Dimension.Add("Alder", GetAlderDatasetDimensionValue());
+            ds.Dimension.Add("Kon", GetKonDatasetDimensionValue());
+            ds.Dimension.Add("ContentsCode", GetContentsCodeDatasetDimensionValue());
+            ds.Dimension.Add("Tid", GetTidDatasetDimensionValue());
+
+
+            ds.Note = new List<string>
+            {
+                "Fr o m 2007-01-01 överförs Heby kommun från Västmanlands län till Uppsala län. Hebys kommunkod ändras från 1917 till 0331. ",
+                "Registrerat partnerskap reglerade parförhållanden mellan personer av samma kön och fanns från 1995 till 2009. Registrerade partners räknas som Gifta, Separerade partners som Skilda och Efterlevande partners som Änka/änklingar.",
+                "Fr o m 2007-01-01 utökas Uppsala län med Heby kommun. Observera att länssiffrorna inte är jämförbara med länssiffrorna bakåt i tiden."
+            };
+
+            ds.Value = new List<decimal>();
+            return ds;
+        }
+
+        [TestMethod]
+        public void CheckIfModelProducesSameJsonOutputAsExampleFile()
+        {
+            //Arrange
+            var ds = GenerateDatasetData();
+            var exampleJsonOutPut = helper.GetExampleJsonstat();
+            
+            //Act
+            var jsonOutPut = ds.ToJson();
+
+            //Assert
+            Assert.AreEqual(exampleJsonOutPut, jsonOutPut);
+        }
+
         private DatasetDimensionValue GetKonDatasetDimensionValue()
         {
             DatasetDimensionValue myOut = new DatasetDimensionValue();
@@ -129,7 +151,7 @@ var jsonExample = helper.GetExampleJsonstat();
             myOut.Category.Label.Add("1", "män");
             myOut.Category.Label.Add("2", "kvinnor");
 
-            myOut.Extension = new ExtensionDimension() { Eliminination = true };
+            myOut.Extension = new ExtensionDimension() { Elimination = true };
 
             myOut.Link = new JsonstatExtensionLink();
             myOut.Link.Describedby = new List<DimensionExtension>() { new DimensionExtension() { Extension = new Dictionary<string, string>() } };
@@ -147,13 +169,13 @@ var jsonExample = helper.GetExampleJsonstat();
             myOut.Category = new JsonstatCategory();
             myOut.Category.Index = new Dictionary<string, int>();
             myOut.Category.Index.Add("2021", 0);
-            myOut.Category.Index.Add("2", 1);
+            //myOut.Category.Index.Add("2", 1);
 
 
             myOut.Category.Label = new Dictionary<string, string>();
             myOut.Category.Label.Add("2021", "2021");
 
-            myOut.Extension = new ExtensionDimension() { Eliminination = false, Frequency = "Y" , FirstPeriod = "1968" , LastPeriod = "2021" };
+            myOut.Extension = new ExtensionDimension() { Elimination = false, Frequency = "A" , FirstPeriod = "1968" , LastPeriod = "2021" };
 
             
 
@@ -166,9 +188,31 @@ var jsonExample = helper.GetExampleJsonstat();
             myOut.Label = "tabellinnehåll";
 
             myOut.Category = new JsonstatCategory();
-            myOut.Category.Note = new Dictionary<string, List<string>>();
-            myOut.Category.Note.Add("BE0101N1", new List<string> { "Uppgifterna avser förhållandena den 31 december för valt/valda år enligt den regionala indelning som gäller den 1 januari året efter." });
-            myOut.Category.Note.Add("BE0101N2", new List<string> { "Folkökningen definieras som skillnaden mellan folkmängden vid årets början och årets slut." });
+            myOut.Extension = new ExtensionDimension();
+            myOut.Extension.Elimination = false;
+            myOut.Extension.ValueNote = new Dictionary<string, List<Note>>();
+
+            myOut.Extension.ValueNote.Add("BE0101N1",
+                new List<Note>()
+                {
+                    new()
+                    {
+                        Mandatory = true,
+                        Text =
+                            "Uppgifterna avser förhållandena den 31 december för valt/valda år enligt den regionala indelning som gäller den 1 januari året efter."
+                    }
+                });
+
+            myOut.Extension.ValueNote.Add("BE0101N2",
+                new List<Note>()
+                {
+                    new()
+                    {
+                        Mandatory = true,
+                        Text =
+                            "Folkökningen definieras som skillnaden mellan folkmängden vid årets början och årets slut."
+                    }
+                });
 
             myOut.Category.Index = new Dictionary<string, int>();
             myOut.Category.Index.Add("BE0101N1", 0);
@@ -183,7 +227,7 @@ var jsonExample = helper.GetExampleJsonstat();
             myOut.Category.Unit.Add("BE0101N1", new JsonstatCategoryUnitValue() { Base = "antal" , Decimals = 0 });
             myOut.Category.Unit.Add("BE0101N2", new JsonstatCategoryUnitValue() { Base = "antal", Decimals = 0 });
 
-            myOut.Extension = new ExtensionDimension() { Eliminination = false };
+            //myOut.Extension = new ExtensionDimension() { Elimination = false };
 
             return myOut;
         }
@@ -207,7 +251,7 @@ var jsonExample = helper.GetExampleJsonstat();
             myOut.Category.Label.Add("SK", "skilda");
             myOut.Category.Label.Add("ÄNKL", "änkor/änklingar");
 
-            myOut.Extension = new ExtensionDimension() { Eliminination = true };
+            myOut.Extension = new ExtensionDimension() { Elimination = true };
             return myOut;
         }
 
@@ -216,16 +260,217 @@ var jsonExample = helper.GetExampleJsonstat();
         {
             DatasetDimensionValue myOut = new DatasetDimensionValue();
             myOut.Label = "ålder";
-           
-
+            
             myOut.Category = new JsonstatCategory();
             myOut.Category.Index = new Dictionary<string, int>();
-            myOut.Category.Index.Add("OG", 0);
+            myOut.Category.Index.Add("0", 0);
+            myOut.Category.Index.Add("1", 1);
+            myOut.Category.Index.Add("2", 2);
+            myOut.Category.Index.Add("3", 3);
+            myOut.Category.Index.Add("4", 4);
+            myOut.Category.Index.Add("5", 5);
+            myOut.Category.Index.Add("6", 6);
+            myOut.Category.Index.Add("7", 7);
+            myOut.Category.Index.Add("8", 8);
+            myOut.Category.Index.Add("9", 9);
+            myOut.Category.Index.Add("10", 10);
+            myOut.Category.Index.Add("11", 11);
+            myOut.Category.Index.Add("12", 12);
+            myOut.Category.Index.Add("13", 13);
+            myOut.Category.Index.Add("14", 14);
+            myOut.Category.Index.Add("15", 15);
+            myOut.Category.Index.Add("16", 16);
+            myOut.Category.Index.Add("17", 17);
+            myOut.Category.Index.Add("18", 18);
+            myOut.Category.Index.Add("19", 19);
+            myOut.Category.Index.Add("20", 20);
+            myOut.Category.Index.Add("21", 21);
+            myOut.Category.Index.Add("22", 22);
+            myOut.Category.Index.Add("23", 23);
+            myOut.Category.Index.Add("24", 24);
+            myOut.Category.Index.Add("25", 25);
+            myOut.Category.Index.Add("26", 26);
+            myOut.Category.Index.Add("27", 27);
+            myOut.Category.Index.Add("28", 28);
+            myOut.Category.Index.Add("29", 29);
+            myOut.Category.Index.Add("30", 30);
+            myOut.Category.Index.Add("31", 31);
+            myOut.Category.Index.Add("32", 32);
+            myOut.Category.Index.Add("33", 33);
+            myOut.Category.Index.Add("34", 34);
+            myOut.Category.Index.Add("35", 35);
+            myOut.Category.Index.Add("36", 36);
+            myOut.Category.Index.Add("37", 37);
+            myOut.Category.Index.Add("38", 38);
+            myOut.Category.Index.Add("39", 39);
+            myOut.Category.Index.Add("40", 40);
+            myOut.Category.Index.Add("41", 41);
+            myOut.Category.Index.Add("42", 42);
+            myOut.Category.Index.Add("43", 43);
+            myOut.Category.Index.Add("44", 44);
+            myOut.Category.Index.Add("45", 45);
+            myOut.Category.Index.Add("46", 46);
+            myOut.Category.Index.Add("47", 47);
+            myOut.Category.Index.Add("48", 48);
+            myOut.Category.Index.Add("49", 49);
+            myOut.Category.Index.Add("50", 50);
+            myOut.Category.Index.Add("51", 51);
+            myOut.Category.Index.Add("52", 52);
+            myOut.Category.Index.Add("53", 53);
+            myOut.Category.Index.Add("54", 54);
+            myOut.Category.Index.Add("55", 55);
+            myOut.Category.Index.Add("56", 56);
+            myOut.Category.Index.Add("57", 57);
+            myOut.Category.Index.Add("58", 58);
+            myOut.Category.Index.Add("59", 59);
+            myOut.Category.Index.Add("60", 60);
+            myOut.Category.Index.Add("61", 61);
+            myOut.Category.Index.Add("62", 62);
+            myOut.Category.Index.Add("63", 63);
+            myOut.Category.Index.Add("64", 64);
+            myOut.Category.Index.Add("65", 65);
+            myOut.Category.Index.Add("66", 66);
+            myOut.Category.Index.Add("67", 67);
+            myOut.Category.Index.Add("68", 68);
+            myOut.Category.Index.Add("69", 69);
+            myOut.Category.Index.Add("70", 70);
+            myOut.Category.Index.Add("71", 71);
+            myOut.Category.Index.Add("72", 72);
+            myOut.Category.Index.Add("73", 73);
+            myOut.Category.Index.Add("74", 74);
+            myOut.Category.Index.Add("75", 75);
+            myOut.Category.Index.Add("76", 76);
+            myOut.Category.Index.Add("77", 77);
+            myOut.Category.Index.Add("78", 78);
+            myOut.Category.Index.Add("79", 79);
+            myOut.Category.Index.Add("80", 80);
+            myOut.Category.Index.Add("81", 81);
+            myOut.Category.Index.Add("82", 82);
+            myOut.Category.Index.Add("83", 83);
+            myOut.Category.Index.Add("84", 84);
+            myOut.Category.Index.Add("85", 85);
+            myOut.Category.Index.Add("86", 86);
+            myOut.Category.Index.Add("87", 87);
+            myOut.Category.Index.Add("88", 88);
+            myOut.Category.Index.Add("89", 89);
+            myOut.Category.Index.Add("90", 90);
+            myOut.Category.Index.Add("91", 91);
+            myOut.Category.Index.Add("92", 92);
+            myOut.Category.Index.Add("93", 93);
+            myOut.Category.Index.Add("94", 94);
+            myOut.Category.Index.Add("95", 95);
+            myOut.Category.Index.Add("96", 96);
+            myOut.Category.Index.Add("97", 97);
+            myOut.Category.Index.Add("98", 98);
+            myOut.Category.Index.Add("99", 99);
+            myOut.Category.Index.Add("100+", 100);
+            myOut.Category.Index.Add("tot", 101);
 
             myOut.Category.Label = new Dictionary<string, string>();
-            myOut.Category.Label.Add("OG", "ogifta");
+            myOut.Category.Label.Add("0", "0 år");
+            myOut.Category.Label.Add("1", "1 år");
+            myOut.Category.Label.Add("2", "2 år");
+            myOut.Category.Label.Add("3", "3 år");
+            myOut.Category.Label.Add("4", "4 år");
+            myOut.Category.Label.Add("5", "5 år");
+            myOut.Category.Label.Add("6", "6 år");
+            myOut.Category.Label.Add("7", "7 år");
+            myOut.Category.Label.Add("8", "8 år");
+            myOut.Category.Label.Add("9", "9 år");
+            myOut.Category.Label.Add("10", "10 år");
+            myOut.Category.Label.Add("11", "11 år");
+            myOut.Category.Label.Add("12", "12 år");
+            myOut.Category.Label.Add("13", "13 år");
+            myOut.Category.Label.Add("14", "14 år");
+            myOut.Category.Label.Add("15", "15 år");
+            myOut.Category.Label.Add("16", "16 år");
+            myOut.Category.Label.Add("17", "17 år");
+            myOut.Category.Label.Add("18", "18 år");
+            myOut.Category.Label.Add("19", "19 år");
+            myOut.Category.Label.Add("20", "20 år");
+            myOut.Category.Label.Add("21", "21 år");
+            myOut.Category.Label.Add("22", "22 år");
+            myOut.Category.Label.Add("23", "23 år");
+            myOut.Category.Label.Add("24", "24 år");
+            myOut.Category.Label.Add("25", "25 år");
+            myOut.Category.Label.Add("26", "26 år");
+            myOut.Category.Label.Add("27", "27 år");
+            myOut.Category.Label.Add("28", "28 år");
+            myOut.Category.Label.Add("29", "29 år");
+            myOut.Category.Label.Add("30", "30 år");
+            myOut.Category.Label.Add("31", "31 år");
+            myOut.Category.Label.Add("32", "32 år");
+            myOut.Category.Label.Add("33", "33 år");
+            myOut.Category.Label.Add("34", "34 år");
+            myOut.Category.Label.Add("35", "35 år");
+            myOut.Category.Label.Add("36", "36 år");
+            myOut.Category.Label.Add("37", "37 år");
+            myOut.Category.Label.Add("38", "38 år");
+            myOut.Category.Label.Add("39", "39 år");
+            myOut.Category.Label.Add("40", "40 år");
+            myOut.Category.Label.Add("41", "41 år");
+            myOut.Category.Label.Add("42", "42 år");
+            myOut.Category.Label.Add("43", "43 år");
+            myOut.Category.Label.Add("44", "44 år");
+            myOut.Category.Label.Add("45", "45 år");
+            myOut.Category.Label.Add("46", "46 år");
+            myOut.Category.Label.Add("47", "47 år");
+            myOut.Category.Label.Add("48", "48 år");
+            myOut.Category.Label.Add("49", "49 år");
+            myOut.Category.Label.Add("50", "50 år");
+            myOut.Category.Label.Add("51", "51 år");
+            myOut.Category.Label.Add("52", "52 år");
+            myOut.Category.Label.Add("53", "53 år");
+            myOut.Category.Label.Add("54", "54 år");
+            myOut.Category.Label.Add("55", "55 år");
+            myOut.Category.Label.Add("56", "56 år");
+            myOut.Category.Label.Add("57", "57 år");
+            myOut.Category.Label.Add("58", "58 år");
+            myOut.Category.Label.Add("59", "59 år");
+            myOut.Category.Label.Add("60", "60 år");
+            myOut.Category.Label.Add("61", "61 år");
+            myOut.Category.Label.Add("62", "62 år");
+            myOut.Category.Label.Add("63", "63 år");
+            myOut.Category.Label.Add("64", "64 år");
+            myOut.Category.Label.Add("65", "65 år");
+            myOut.Category.Label.Add("66", "66 år");
+            myOut.Category.Label.Add("67", "67 år");
+            myOut.Category.Label.Add("68", "68 år");
+            myOut.Category.Label.Add("69", "69 år");
+            myOut.Category.Label.Add("70", "70 år");
+            myOut.Category.Label.Add("71", "71 år");
+            myOut.Category.Label.Add("72", "72 år");
+            myOut.Category.Label.Add("73", "73 år");
+            myOut.Category.Label.Add("74", "74 år");
+            myOut.Category.Label.Add("75", "75 år");
+            myOut.Category.Label.Add("76", "76 år");
+            myOut.Category.Label.Add("77", "77 år");
+            myOut.Category.Label.Add("78", "78 år");
+            myOut.Category.Label.Add("79", "79 år");
+            myOut.Category.Label.Add("80", "80 år");
+            myOut.Category.Label.Add("81", "81 år");
+            myOut.Category.Label.Add("82", "82 år");
+            myOut.Category.Label.Add("83", "83 år");
+            myOut.Category.Label.Add("84", "84 år");
+            myOut.Category.Label.Add("85", "85 år");
+            myOut.Category.Label.Add("86", "86 år");
+            myOut.Category.Label.Add("87", "87 år");
+            myOut.Category.Label.Add("88", "88 år");
+            myOut.Category.Label.Add("89", "89 år");
+            myOut.Category.Label.Add("90", "90 år");
+            myOut.Category.Label.Add("91", "91 år");
+            myOut.Category.Label.Add("92", "92 år");
+            myOut.Category.Label.Add("93", "93 år");
+            myOut.Category.Label.Add("94", "94 år");
+            myOut.Category.Label.Add("95", "95 år");
+            myOut.Category.Label.Add("96", "96 år");
+            myOut.Category.Label.Add("97", "97 år");
+            myOut.Category.Label.Add("98", "98 år");
+            myOut.Category.Label.Add("99", "99 år");
+            myOut.Category.Label.Add("100+", "100+ år");
+            myOut.Category.Label.Add("tot", "totalt ålder");
 
-            myOut.Extension = new ExtensionDimension() { Eliminination = true, EliminationValueCode = "tot" };
+            myOut.Extension = new ExtensionDimension() { Elimination = true, EliminationValueCode = "tot" };
             myOut.Extension.Filters = new Filters();
             myOut.Extension.Filters.Vs = new List<CodeListInformation>();
 
@@ -264,7 +509,6 @@ var jsonExample = helper.GetExampleJsonstat();
 
             myOut.Link.Describedby[0].Extension.Add("Alder", "Ålder");
 
-
             return myOut;
         }
 
@@ -273,17 +517,80 @@ var jsonExample = helper.GetExampleJsonstat();
         {
             DatasetDimensionValue myOut = new DatasetDimensionValue();
             myOut.Label = "region";
-            myOut.Note = new List<string> { "År 1968-1998 redovisas enligt regional indelning 1998-01-01." };
             myOut.Category = new JsonstatCategory();
-            myOut.Category.Note = new Dictionary<string, List<string>>();
-            myOut.Category.Note.Add("0580", new List<string> { "Från och med 2011-01-01 tillhör Storholmen Lidingö (0186) som tidigare tillhörde Vaxholm (0187)." });
+            myOut.Extension = new ExtensionDimension();
+            myOut.Extension.ValueNote = new Dictionary<string, List<Note>>();
+            myOut.Extension.Note = new List<Note>
+            {
+                new()
+                {
+                    Mandatory = true, 
+                    Text = "År 1968-1998 redovisas enligt regional indelning 1998-01-01."
+                }
+            };
 
-            myOut.Category.Note.Add("0187", new List<string> { "Från och med 2011-01-01 tillhör Storholmen Lidingö (0186) som tidigare tillhörde Vaxholm (0187)." });
-            myOut.Category.Note.Add("0330", new List<string> { "Ny regional indelning fr.o.m. 2003-01-01. Delar av Uppsala kommun bildar en ny kommun benämnd Knivsta kommun." });
-            myOut.Category.Note.Add("0380", new List<string> { "Ny regional indelning fr.o.m. 2003-01-01. Delar av Uppsala kommun bildar en ny kommun benämnd Knivsta kommun." });
-            myOut.Category.Note.Add("0140", new List<string> { "Ny regional indelning fr.o.m. 1999-01-01. Delar av Södertälje kommun (kod 0181) bildar en ny kommun benämnd Nykvarn (kod 0140)." });
-            myOut.Category.Note.Add("0181", new List<string> { "Ny regional indelning fr.o.m. 1999-01-01. Delar av Södertälje kommun (kod 0181) bildar en ny kommun benämnd Nykvarn (kod 0140)." });
-            //myOut.Category.Note.Add( , new List<string> { });
+            myOut.Extension.ValueNote.Add("0580",
+                new List<Note>()
+                {
+                    new()
+                    {
+                        Mandatory = true,
+                        Text =
+                            "Från och med 2011-01-01 tillhör Storholmen Lidingö (0186) som tidigare tillhörde Vaxholm (0187)."
+                    }
+                });
+
+            myOut.Extension.ValueNote.Add("0187",
+                new List<Note>()
+                {
+                    new()
+                    {
+                        Mandatory = true,
+                        Text =
+                            "Från och med 2011-01-01 tillhör Storholmen Lidingö (0186) som tidigare tillhörde Vaxholm (0187)."
+                    }
+                });
+            myOut.Extension.ValueNote.Add("0330",
+                new List<Note>()
+                {
+                    new()
+                    {
+                        Mandatory = true,
+                        Text =
+                            "Ny regional indelning fr.o.m. 2003-01-01. Delar av Uppsala kommun bildar en ny kommun benämnd Knivsta kommun."
+                    }
+                });
+            myOut.Extension.ValueNote.Add("0380",
+                new List<Note>()
+                {
+                    new()
+                    {
+                        Mandatory = true,
+                        Text =
+                            "Ny regional indelning fr.o.m. 2003-01-01. Delar av Uppsala kommun bildar en ny kommun benämnd Knivsta kommun."
+                    }
+                });
+            myOut.Extension.ValueNote.Add("0140",
+                new List<Note>()
+                {
+                    new()
+                    {
+                        Mandatory = true,
+                        Text =
+                            "Ny regional indelning fr.o.m. 1999-01-01. Delar av Södertälje kommun (kod 0181) bildar en ny kommun benämnd Nykvarn (kod 0140)."
+                    }
+                });
+            myOut.Extension.ValueNote.Add("0181",
+                new List<Note>()
+                {
+                    new()
+                    {
+                        Mandatory = true,
+                        Text =
+                            "Ny regional indelning fr.o.m. 1999-01-01. Delar av Södertälje kommun (kod 0181) bildar en ny kommun benämnd Nykvarn (kod 0140)."
+                    }
+                });
+
             myOut.Category.Index = new Dictionary<string, int>();
             myOut.Category.Index.Add("00", 0);
             myOut.Category.Index.Add("01", 1);
@@ -913,7 +1220,8 @@ var jsonExample = helper.GetExampleJsonstat();
             myOut.Category.Label.Add("2583", "Haparanda");
             myOut.Category.Label.Add("2584", "Kiruna");
 
-            myOut.Extension = new ExtensionDimension() { Eliminination = true, EliminationValueCode = "00" };
+            myOut.Extension.Elimination = true;
+            myOut.Extension.EliminationValueCode = "00";
             myOut.Extension.Filters = new Filters();
             myOut.Extension.Filters.Vs = new List<CodeListInformation>();
 
@@ -921,21 +1229,21 @@ var jsonExample = helper.GetExampleJsonstat();
             {
                 Id = "vs_RegionKommun07",
                 Label = "Kommuner",
-                Links = new List<Link>() { new Link() { Rel = "metadata", Href = "https://my-site.com/api/v2/tables/TAB638/filters/vs_RegionKommun07" } }
+                Links = new List<Link>() { new() { Rel = "metadata", Href = "https://my-site.com/api/v2/tables/TAB638/filters/vs_RegionKommun07" } }
             });
 
             myOut.Extension.Filters.Vs.Add(new CodeListInformation()
             {
                 Id = "vs_RegionLän07",
                 Label = "Län",
-                Links = new List<Link>() { new Link() { Rel = "metadata", Href = "https://my-site.com/api/v2/tables/TAB638/filters/vs_RegionLän07" } }
+                Links = new List<Link>() { new() { Rel = "metadata", Href = "https://my-site.com/api/v2/tables/TAB638/filters/vs_RegionLän07" } }
             });
 
             myOut.Extension.Filters.Vs.Add(new CodeListInformation()
             {
                 Id = "vs_RegionRiket99",
                 Label = "Riket",
-                Links = new List<Link>() { new Link() { Rel = "metadata", Href = "https://my-site.com/api/v2/tables/TAB638/filters/vs_RegionRiket99" } }
+                Links = new List<Link>() { new() { Rel = "metadata", Href = "https://my-site.com/api/v2/tables/TAB638/filters/vs_RegionRiket99" } }
             });
 
 
@@ -945,34 +1253,14 @@ var jsonExample = helper.GetExampleJsonstat();
             {
                 Id = "agg_RegionA-region_2",
                 Label = "A-regioner",
-                Links = new List<Link>() { new Link() { Rel = "metadata", Href = "https://my-site.com/api/v2/tables/TAB638/filters/agg_RegionA-region_2" } }
+                Links = new List<Link>() { new() { Rel = "metadata", Href = "https://my-site.com/api/v2/tables/TAB638/filters/agg_RegionA-region_2" } }
             });
 
-            myOut.Extension.Filters.Agg.Add(new CodeListInformation()
-            {
-                Id = "agg_RegionA-region_2",
-                Label = "A-regioner",
-                Links = new List<Link>() { new Link()
-                                {
-                                    Rel ="metadata",
-                                   Href ="https://my-site.com/api/v2/tables/TAB638/filters/agg_RegionA-region_2"} }
-            });
-
-
-            myOut.Extension.Filters.Agg.Add(new CodeListInformation()
-            {
-                Id = "agg_RegionA-region_2",
-                Label = "A-regioner",
-                Links = new List<Link>() { new Link()
-                                {
-                                    Rel ="metadata",
-                                   Href ="https://my-site.com/api/v2/tables/TAB638/filters/agg_RegionA-region_2"} }
-            });
             myOut.Extension.Filters.Agg.Add(new CodeListInformation()
             {
                 Id = "agg_RegionKommungrupp2005-_1",
                 Label = "Kommungrupper (SKL:s) 2005",
-                Links = new List<Link>() { new Link()
+                Links = new List<Link>() { new()
                                 {
                                     Rel ="metadata",
                                    Href ="https://my-site.com/api/v2/tables/TAB638/filters/agg_RegionKommungrupp2005-_1"} }
@@ -981,7 +1269,7 @@ var jsonExample = helper.GetExampleJsonstat();
             {
                 Id = "agg_RegionKommungrupp2011-",
                 Label = "Kommungrupper (SKL:s) 2011",
-                Links = new List<Link>() { new Link()
+                Links = new List<Link>() { new()
                                 {
                                     Rel ="metadata",
                                    Href ="https://my-site.com/api/v2/tables/TAB638/filters/agg_RegionKommungrupp2011-"} }
@@ -990,7 +1278,7 @@ var jsonExample = helper.GetExampleJsonstat();
             {
                 Id = "agg_RegionKommungrupp2017-",
                 Label = "Kommungrupper (SKL:s) 2017",
-                Links = new List<Link>() { new Link()
+                Links = new List<Link>() { new()
                                 {
                                     Rel ="metadata",
                                    Href ="https://my-site.com/api/v2/tables/TAB638/filters/agg_RegionKommungrupp2017-"} }
@@ -999,7 +1287,7 @@ var jsonExample = helper.GetExampleJsonstat();
             {
                 Id = "agg_RegionLA1998",
                 Label = "Lokalaarbetsmarknader 1998",
-                Links = new List<Link>() { new Link()
+                Links = new List<Link>() { new()
                                 {
                                     Rel ="metadata",
                                    Href ="https://my-site.com/api/v2/tables/TAB638/filters/agg_RegionLA1998"} }
@@ -1008,7 +1296,7 @@ var jsonExample = helper.GetExampleJsonstat();
             {
                 Id = "agg_RegionLA2003_1",
                 Label = "Lokalaarbetsmarknader 2003",
-                Links = new List<Link>() { new Link()
+                Links = new List<Link>() { new()
                                 {
                                     Rel ="metadata",
                                    Href ="https://my-site.com/api/v2/tables/TAB638/filters/agg_RegionLA2003_1"} }
@@ -1017,7 +1305,7 @@ var jsonExample = helper.GetExampleJsonstat();
             {
                 Id = "agg_RegionLA2008",
                 Label = "Lokalaarbetsmarknader 2008",
-                Links = new List<Link>() { new Link()
+                Links = new List<Link>() { new()
                                 {
                                     Rel ="metadata",
                                    Href ="https://my-site.com/api/v2/tables/TAB638/filters/agg_RegionLA2008"} }
@@ -1026,7 +1314,7 @@ var jsonExample = helper.GetExampleJsonstat();
             {
                 Id = "agg_RegionLA2013",
                 Label = "Lokalaarbetsmarknader 2013",
-                Links = new List<Link>() { new Link()
+                Links = new List<Link>() { new()
                                 {
                                     Rel ="metadata",
                                    Href ="https://my-site.com/api/v2/tables/TAB638/filters/agg_RegionLA2013"} }
@@ -1035,7 +1323,7 @@ var jsonExample = helper.GetExampleJsonstat();
             {
                 Id = "agg_RegionLA2018",
                 Label = "Lokalaarbetsmarknader 2018",
-                Links = new List<Link>() { new Link()
+                Links = new List<Link>() { new()
                                 {
                                     Rel ="metadata",
                                    Href ="https://my-site.com/api/v2/tables/TAB638/filters/agg_Ålder5år"} }
@@ -1044,7 +1332,7 @@ var jsonExample = helper.GetExampleJsonstat();
             {
                 Id = "agg_RegionStoromr-04_2",
                 Label = "Sorstadsområder -2004",
-                Links = new List<Link>() { new Link()
+                Links = new List<Link>() { new()
                                 {
                                     Rel ="metadata",
                                    Href ="https://my-site.com/api/v2/tables/TAB638/filters/agg_RegionStoromr-04_2"} }
@@ -1053,7 +1341,7 @@ var jsonExample = helper.GetExampleJsonstat();
             {
                 Id = "agg_RegionStoromr05-_1",
                 Label = "Sorstadsområder 2005-",
-                Links = new List<Link>() { new Link()
+                Links = new List<Link>() { new()
                                 {
                                     Rel ="metadata",
                                    Href ="https://my-site.com/api/v2/tables/TAB638/filters/agg_RegionStoromr05-_1"} }
@@ -1062,7 +1350,7 @@ var jsonExample = helper.GetExampleJsonstat();
             {
                 Id = "agg_RegionNUTS1_2008",
                 Label = "NUTS1 fr.o.m 2008",
-                Links = new List<Link>() { new Link()
+                Links = new List<Link>() { new()
                                 {
                                     Rel ="metadata",
                                    Href ="https://my-site.com/api/v2/tables/TAB638/filters/agg_RegionNUTS1_2008"} }
@@ -1071,7 +1359,7 @@ var jsonExample = helper.GetExampleJsonstat();
             {
                 Id = "agg_RegionNUTS2_2008",
                 Label = "NUTS2 fr.o.m 2008",
-                Links = new List<Link>() { new Link()
+                Links = new List<Link>() { new()
                                 {
                                     Rel ="metadata",
                                    Href ="https://my-site.com/api/v2/tables/TAB638/filters/agg_RegionNUTS2_2008"} }
@@ -1080,7 +1368,7 @@ var jsonExample = helper.GetExampleJsonstat();
             {
                 Id = "agg_RegionNUTS3_2008",
                 Label = "NUTS3 fr.o.m 2008",
-                Links = new List<Link>() { new Link()
+                Links = new List<Link>() { new()
                                 {
                                     Rel ="metadata",
                                    Href ="https://my-site.com/api/v2/tables/TAB638/filters/agg_RegionNUTS3_2008"} }
