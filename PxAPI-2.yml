@@ -356,40 +356,41 @@ components:
             discontinued:
               type: boolean
               nullable: true
-    Paginated:
+
+    PageInfo:
       type: object
       properties:
-        page:
-          description: Pagination properties
-          title: PaginationProperties
-          type: object
-          properties:
-             pageNumber:
-              type: integer
-              format: int32
-             pageSize:
-              type: integer
-              format: int32
-              example: 33
-             totalElements:
-              type: integer
-              format: int32
-             totalPages:
-              type: integer
-              format: int32
+        pageNumber:
+          type: integer
+          format: int32
+          minimum: 1
+        pageSize:
+          type: integer
+          format: int32
+          example: 20
+          minimum: 1
+        totalElements:
+          type: integer
+          format: int32
+          minimum: 0
+        totalPages:
+          type: integer
+          format: int32
+          minimum: 0
         links:
           type: array
           items:
              $ref: '#/components/schemas/Link'
+
     TablesResponse:
-      allOf:
-        - $ref: '#/components/schemas/Paginated'
       type: object
       properties:
-         tables:
-              type: array
-              items:
-                 $ref: '#/components/schemas/Table'
+        page:
+          $ref: '#/components/schemas/PageInfo'
+        tables:
+          type: array
+          items:
+              $ref: '#/components/schemas/Table'    
     TableMetadata:
       type: object
       required: 
@@ -519,12 +520,12 @@ components:
       type: object
       description: Note for a table
       properties:
-            conditions:
-              type: array
-              description: A set of condition that must be fulfilled for the note to be valid. 
-              items:
-                $ref: '#/components/schemas/Condition'
-              nullable: true
+        conditions:
+          type: array
+          description: A set of condition that must be fulfilled for the note to be valid. 
+          items:
+            $ref: '#/components/schemas/Condition'
+          nullable: true
     Condition:
       description: Condition determining to what the CellNote applies
       type: object
