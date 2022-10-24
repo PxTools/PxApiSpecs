@@ -1,4 +1,7 @@
 # PxApiSpecs
+
+https://petstore.swagger.io/?url=https://raw.githubusercontent.com/statisticssweden/PxApiSpecs/master/PxAPI-2.yml
+
 Documentation for the PxApi 
 
 
@@ -10,3 +13,5 @@ docker run --rm -v ${PWD}:/local openapitools/openapi-generator-cli generate -i 
 ```
 
 Replace `${PWD}` with `$(pwd)` when running from bash.
+
+docker pull openapitools/openapi-generator-cli:v6.0.0
