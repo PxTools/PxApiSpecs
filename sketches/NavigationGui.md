@@ -12,6 +12,11 @@ flowchart LR
     end
     M3("fa:fa-folder Folder 3")
   end
+  subgraph Lastest updates
+      l1[/fa:fa-table tab1/]
+      l2[/fa:fa-table tab2/]
+      l3[/fa:fa-table tab3/]
+  end
   subgraph Include data from
     I1("fa:fa-check-square Instance 1")
     I2("fa:fa-check-square Instance 2")
