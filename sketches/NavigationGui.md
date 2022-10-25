@@ -1,4 +1,4 @@
-If the config says there is only one source the "Include data from" should not be present.
+The config endpoint of the underlying api will tell us if the api has multiple underlying instances. If not then the "Include data from" should not be present.
 All apicalls should have an "exclude_db" parameter with a list of the unchecked instances.
 
 ```mermaid
