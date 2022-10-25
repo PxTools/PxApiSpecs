@@ -6,6 +6,7 @@ sequenceDiagram
     participant GUI as Navigation GUI
     User-->>+GUI:enter
     api_conf-->GUI:get config
+    Note over GUI, api_conf: "api/config/"
     GUI-->api_navigate: get root
     Note over api_conf, api_navigate: "api/navigate/"
     GUI-->>-User: Ready
