@@ -231,7 +231,6 @@ components:
           items:
             type: string
             description: tag for folder
-          nullable: true
         folderContents:
           type: array
           items:
@@ -254,7 +253,6 @@ components:
               items:
                 type: string
                 description: tag for folder
-              nullable: true
             links:
               type: array
               items:
@@ -954,6 +952,7 @@ components:
     navigation-root:
       description: Example for 200 response for navigation endpoint
       value:
+        #generated navigation-root start
         id: 
         objectType: folder
         label: 
@@ -976,10 +975,11 @@ components:
           links:
           - rel: self
             href: https://my-site.com/api/v2/navigation/NV
-
+        #generated navigation-root end
     navigation-be:
       description: Example for 200 response for navigation endpoint
       value:
+        #generated navigation-be start
         id: BE0101
         objectType: folder
         label: Balance statistics
@@ -1023,9 +1023,11 @@ components:
           firstPeriod: 1998K2
           lastPeriod: 2021K4
           discontinued: false
+        #generated navigation-be end          
     tablesResponse:
       description: List all tables with pagination
       value:
+        #generated tablesResponse start       
         tables: 
           - id: TAB0001
             objectType: table
@@ -1087,3 +1089,4 @@ components:
             href: https://my-site.com/api/v2/tables/?pageNumber=11
           - rel: prev
             href: https://my-site.com/api/v2/tables/?pageNumber=9  
+        #generated tablesResponse end
