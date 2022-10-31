@@ -5,6 +5,11 @@ info:
   description: This api lets you do 2 things; Find a table(Navigation) and use a table (Table).
 servers:
   - url: https://api.server.test/api/v2
+tags:
+ - name: Navigation
+   description:  Find a table
+ - name: Table 
+   description: Use a table  
 paths:
   /navigation:
       get:
@@ -104,6 +109,40 @@ paths:
               schema:
                 externalDocs:
                   url: "https://json-stat.org/schema/"
+  /tables/{id}/codelists:
+    get:
+      tags:
+        - Table
+      summary: List all codelists that are associated with the table 
+      operationId: GetTableCodeLists
+      parameters:
+        - $ref: '#/components/parameters/language'
+        - $ref: '#/components/parameters/id'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CodeListsResponse'
+
+  /tables/{id}/codelists/{codeListId}:
+    get:
+      tags:
+        - Table
+      summary: List information about the codelist that is associated with the table.
+      operationId: GetTableCodeListById
+      parameters:
+        - $ref: '#/components/parameters/language'
+        - $ref: '#/components/parameters/id'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CodeList'
+    
 components:
   parameters:
     language:
@@ -125,6 +164,13 @@ components:
       name: id
       in: path
       description: Id
+      required: true
+      schema:
+        type: string
+    codeListId:
+      name: codeListId
+      in: path
+      description: Identifier for a code list
       required: true
       schema:
         type: string
@@ -312,40 +358,41 @@ components:
             discontinued:
               type: boolean
               nullable: true
-    Paginated:
+
+    PageInfo:
       type: object
       properties:
-        page:
-          description: Pagination properties
-          title: PaginationProperties
-          type: object
-          properties:
-             pageNumber:
-              type: integer
-              format: int32
-             pageSize:
-              type: integer
-              format: int32
-              example: 33
-             totalElements:
-              type: integer
-              format: int32
-             totalPages:
-              type: integer
-              format: int32
+        pageNumber:
+          type: integer
+          format: int32
+          minimum: 1
+        pageSize:
+          type: integer
+          format: int32
+          example: 20
+          minimum: 1
+        totalElements:
+          type: integer
+          format: int32
+          minimum: 0
+        totalPages:
+          type: integer
+          format: int32
+          minimum: 0
         links:
           type: array
           items:
              $ref: '#/components/schemas/Link'
+
     TablesResponse:
-      allOf:
-        - $ref: '#/components/schemas/Paginated'
       type: object
       properties:
-         tables:
-              type: array
-              items:
-                 $ref: '#/components/schemas/Table'    
+        page:
+          $ref: '#/components/schemas/PageInfo'
+        tables:
+          type: array
+          items:
+              $ref: '#/components/schemas/Table'    
     TableMetadata:
       type: object
       required: 
@@ -475,12 +522,12 @@ components:
       type: object
       description: Note for a table
       properties:
-            conditions:
-              type: array
-              description: A set of condition that must be fulfilled for the note to be valid. 
-              items:
-                $ref: '#/components/schemas/Condition'
-              nullable: true
+        conditions:
+          type: array
+          description: A set of condition that must be fulfilled for the note to be valid. 
+          items:
+            $ref: '#/components/schemas/Condition'
+          nullable: true
     Condition:
       description: Condition determining to what the CellNote applies
       type: object
@@ -633,6 +680,77 @@ components:
         mail:
           type: string
           example: testmail@testmail.com
+    CodeListsResponse:
+      type: object
+      properties:
+        language:
+          type: string
+          description: The language code for the language used in this response
+          example: sv
+        codeLists:
+          type: array
+          items:
+            $ref: '#/components/schemas/CodeListMetadata'
+        links: 
+          type: array
+          items:
+            $ref: '#/components/schemas/Link'
+    CodeListMetadata:
+      type: object
+      properties:
+        id: 
+          type: string
+          description: The identiyer for the codelist
+          example: agg_RegionNUTS2_2008
+        label:
+          type: string
+          description: The textual name  for the codelist. 
+          example: NUTS2 fr.o.m 2008
+        links: 
+          type: array
+          items:
+            $ref: '#/components/schemas/Link'
+
+    CodeList: 
+      type: object
+      properties:
+        id: 
+          type: string
+          description: The identiyer for the codelist
+          example: agg_RegionNUTS2_2008
+        label:
+          type: string
+          description: The textual name  for the codelist. 
+          example: NUTS2 fr.o.m 2008 
+        language:
+          type: string
+          description: The language code for the language used in this response
+          example: sv
+        values:
+          type: array
+          items:
+            $ref: '#/components/schemas/ValueMap'
+        links: 
+          type: array
+          items:
+            $ref: '#/components/schemas/Link'
+    ValueMap:
+      type: object
+      properties:
+        code:
+          type: string
+          description: The code for the value.
+          example: "SE22"
+        label: 
+          type: string
+          description: The textual representation for the value
+          example: Sydsverige
+        valueMap:
+          type: array
+          description: An array of codes from the origial codelist for the variable that cand be mapped to this value
+          example: '["10", "12"]'
+          items:
+            type: string
     Link:
       type: object
       properties:
@@ -726,35 +844,33 @@ components:
               type: string
             decimals:
               type: integer
-        id:
-          type: string
-        language:
-          type: string
-        category:
-          type: string
-        description:
-          type: string
+            official-statistics:
+              type: boolean
+            aggregallowed:
+              type: boolean
+            refperiod:
+              type: string              
+            copyright:
+              type: string
+            language:
+              type: string
+            description:
+              type: string
+            matrix:
+              type: string
+            subject-code:
+              type: string
         tags:
           type: array
           items: 
             type: string
-        frequency:
-          type: string
-        officialStatistics:
-          type: boolean
-        aggregationPossible:
-          type: boolean
         discontinued:
           type: boolean
-        contacts:
+        contact:
           type: array
           description: A list of contacts associated with the table.
           items: 
             $ref: '#/components/schemas/Contact'
-        refperiod:
-          type: string
-        copyright:
-          type: string
     extension:
       description: extension at some level
       type: object
@@ -762,10 +878,20 @@ components:
       description: extension at dimension
       type: object
       properties:
-        eliminination:
+        elimination:
           type: boolean
         eliminationValueCode:
           type: string
+        note:
+          type: array
+          items:
+            $ref: '#/components/schemas/Note'
+        valueNote:
+          type: object
+          additionalProperties:
+            type: array
+            items:
+              $ref: '#/components/schemas/Note'          
         filters:
          $ref: '#/components/schemas/filters'
         frequency:
@@ -828,8 +954,6 @@ components:
           minProperties: 1
           additionalProperties:
             type: string
-        note:
-           "$ref": "#/components/schemas/strarray-by-str-dict"    
         child:
            "$ref": "#/components/schemas/strarray-by-str-dict"
         unit:
@@ -908,14 +1032,12 @@ components:
               properties:
                     label:
                       "$ref": "#/components/schemas/label"
-                    note:
-                      "$ref": "#/components/schemas/jsonstat-note"
-                    link:
-                      "$ref": "#/components/schemas/jsonstat-extension-link"
-                    extension:
-                      "$ref": "#/components/schemas/extension-dimension"
                     category:
                       "$ref": "#/components/schemas/jsonstat-category"  
+                    extension:
+                      "$ref": "#/components/schemas/extension-dimension"
+                    link:
+                      "$ref": "#/components/schemas/jsonstat-extension-link"
               additionalProperties: false            
         value:
           type: array
