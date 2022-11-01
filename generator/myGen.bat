@@ -25,7 +25,9 @@ rem docker run --rm -v %cd%:/local %gen_oaTool% config-help -g aspnetcore > open
 @echo on
 copy ..\PxAPI-2.yml .\spec.yaml
 
-docker run --rm -v %cd%:/local %gen_oaTool% generate -i %yaml_doc% -g aspnetcore -o /local/out %myProps%  > log.txt
+rem docker run --rm -v %cd%:/local %gen_oaTool% generate -i %yaml_doc% -g aspnetcore -o /local/out %myProps%  > log.txt
+docker run --rm -v %cd%:/local %gen_oaTool% generate -i %yaml_doc% -g aspnetcore -o /local/out -c /local/aspnetcore-generator-config.yml > log.txt
+
 @echo off 
 
 rem docker run --rm -v %cd%:/local %gen_swag% generate -i /local/spec.yaml -l aspnetcore -o /local/out/fra_spec1 --additional-properties=aspnetCoreVersion=6.0 --additional-properties=alalalala=6.0 --additional-properties=nullableReferenceTypes=true  > fra_spec1.txt

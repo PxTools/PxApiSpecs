@@ -102,6 +102,9 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/TableMetadata'
+              examples:
+                  TableMetadata:
+                    $ref: '#/components/examples/tableMetadata'
             application/jsonstat:
               schema:
                 $ref: '#/components/schemas/Dataset'    
@@ -321,7 +324,6 @@ components:
               items:
                 type: string
                 description: tag for table
-              nullable: true
             updated:
               type: string
               description: For treeNodeType "table"
@@ -1149,8 +1151,8 @@ components:
     tablesResponse:
       description: List all tables with pagination
       value:
-        #generated tablesResponse start       
-        tables: 
+        #generated tablesResponse start
+        tables:
           - id: TAB0001
             objectType: table
             label: Population. Year 1968 - 2021
@@ -1212,3 +1214,9 @@ components:
           - rel: prev
             href: https://my-site.com/api/v2/tables/?pageNumber=9  
         #generated tablesResponse end
+    tableMetadata:
+      description: Example for 200 response for navigation endpoint
+      value:
+        #generated tableMetadata start
+        id: "TAB638"
+        #generated tableMetadata end
