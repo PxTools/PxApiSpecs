@@ -2,15 +2,14 @@ Steps in changing openapi yaml
 
 The yaml files has external examples which are files on master. These urls should not be changed, so if they cannot be relative, they should always show master. This means the swagger gui form a feature branch will have "old" examples. 
 ```mermaid      
-  graph TD;
+ graph TD;
       A0[make feature branch]-->A
       A[Change in yaml-file: Paths and schema]-->B[generate code aka modell];
       B-->C[Change code that adds data to the model];
-      C-->D[Run: Update external example files];
-      D-->D10[Run: Update 'inSpec' examples];
-      D10-->D20[Look at diff for spec before commit];
-      D20-->E[push, make beta-nuget];
-      E-->F[ merge back to master, create nuget];
+      C-->D[Run:\n Updates external example files \n and 'inSpec' examples];
+     
+      D-->D20[Look at diffs before commit push ];
+      D20-->F[ merge back to master, create nuget];
 
       
 ```
