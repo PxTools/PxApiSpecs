@@ -4,10 +4,14 @@ The yaml files has external examples which are files on master. These urls shoul
 ```mermaid      
   graph TD;
       A0[make feature branch]-->A
-      A[Change in yaml-file: Paths and schema]-->B[generate code];
-      B-->C[add data to model manually];
-      C-->D[update external examples];
-      D-->D1[correct and run tests];
-      D-->E[push, make beta-nuget];
+      A[Change in yaml-file: Paths and schema]-->B[generate code(modell)];
+      B-->C[Change code that adds data to the model];
+      C-->D[Run: Update external example files];
+      C-->D[Run: Update "inSpec" examples];
+      D-->D1[Look at diff for spec before commit];
+      
+      D1-->E[push, make beta-nuget];
       E-->F[ merge back to master, create nuget];
+
+      
 ```
