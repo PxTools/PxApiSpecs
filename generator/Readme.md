@@ -7,7 +7,7 @@ The yaml files has external examples which are files on master. These urls shoul
       A[Change in yaml-file: Paths and schema]-->B[generate code aka modell];
       B-->C[Change code that adds data to the model];
       C-->D[Run: Update external example files];
-      C-->D[Run: Update "inSpec" examples];
+      C-->D[Run: Update 'inSpec' examples];
       D-->D1[Look at diff for spec before commit];
       
       D1-->E[push, make beta-nuget];
