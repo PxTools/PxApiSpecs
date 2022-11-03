@@ -580,10 +580,8 @@ components:
           type: boolean
         eliminationValueCode:
           type: string
-        filters:
-          type: array
-          items:
-            $ref: '#/components/schemas/CodeListInformation'
+        codeLists:
+          $ref: '#/components/schemas/CodeLists'
     GeographicalVariable:
       required:
         - "map"
@@ -851,8 +849,6 @@ components:
               type: boolean
             aggregallowed:
               type: boolean
-            refperiod:
-              type: string              
             copyright:
               type: string
             language:
@@ -874,6 +870,10 @@ components:
           description: A list of contacts associated with the table.
           items: 
             $ref: '#/components/schemas/Contact'
+        note:
+          type: array
+          items:
+            $ref: '#/components/schemas/Note'
     extension:
       description: extension at some level
       type: object
@@ -885,6 +885,10 @@ components:
           type: boolean
         eliminationValueCode:
           type: string
+        refperiod:
+          type: object
+          additionalProperties:
+            type: string
         note:
           type: array
           items:
@@ -895,8 +899,8 @@ components:
             type: array
             items:
               $ref: '#/components/schemas/Note'          
-        filters:
-         $ref: '#/components/schemas/filters'
+        codeLists:
+         $ref: '#/components/schemas/CodeLists'
         frequency:
           type: string
           description: Hmm, we have this on root as well
@@ -904,8 +908,6 @@ components:
           type: string
         lastPeriod: 
           type: string
-    jsonstat-note:
-      "$ref": "#/components/schemas/strarray"
     strarray-by-str-dict:
        type: object
        additionalProperties:
@@ -969,14 +971,7 @@ components:
               decimals: 
                 type: integer
       additionalProperties: false
-    filters:
-      type: object
-      properties:
-        vs:
-          type: array
-          items:
-            $ref: '#/components/schemas/CodeListInformation'
-        agg:
+    CodeLists:
           type: array
           items:
             $ref: '#/components/schemas/CodeListInformation'
@@ -1026,8 +1021,6 @@ components:
           type: array
           items:
              type: integer
-        note:
-          "$ref": "#/components/schemas/jsonstat-note"
         dimension:
            type: object
            additionalProperties:

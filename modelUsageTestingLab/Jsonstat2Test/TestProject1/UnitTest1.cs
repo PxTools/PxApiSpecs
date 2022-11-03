@@ -70,7 +70,6 @@ var jsonExample = helper.GetExampleJsonstat();
                 Tableid = "TAB638",
                 OfficialStatistics = true,
                 Aggregallowed = false,
-                Refperiod = "31 December each year",
                 Copyright = "CC-0",
                 Language = "sv",
                 Description = "",
@@ -110,13 +109,22 @@ var jsonExample = helper.GetExampleJsonstat();
             ds.Dimension.Add("ContentsCode", GetContentsCodeDatasetDimensionValue());
             ds.Dimension.Add("Tid", GetTidDatasetDimensionValue());
 
-
-            ds.Note = new List<string>
+            ds.Extension.Note = new List<Note>();
+            ds.Extension.Note.Add( new Note()
             {
-                "Fr o m 2007-01-01 överförs Heby kommun från Västmanlands län till Uppsala län. Hebys kommunkod ändras från 1917 till 0331. ",
-                "Registrerat partnerskap reglerade parförhållanden mellan personer av samma kön och fanns från 1995 till 2009. Registrerade partners räknas som Gifta, Separerade partners som Skilda och Efterlevande partners som Änka/änklingar.",
-                "Fr o m 2007-01-01 utökas Uppsala län med Heby kommun. Observera att länssiffrorna inte är jämförbara med länssiffrorna bakåt i tiden."
-            };
+                Mandatory = true,
+                Text = "Fr o m 2007-01-01 överförs Heby kommun från Västmanlands län till Uppsala län. Hebys kommunkod ändras från 1917 till 0331. "
+            });
+            ds.Extension.Note.Add(new Note()
+            {
+                Mandatory = true,
+                Text = "Registrerat partnerskap reglerade parförhållanden mellan personer av samma kön och fanns från 1995 till 2009. Registrerade partners räknas som Gifta, Separerade partners som Skilda och Efterlevande partners som Änka/änklingar."
+            });
+            ds.Extension.Note.Add(new Note()
+            {
+                Mandatory = true,
+                Text = "Fr o m 2007-01-01 utökas Uppsala län med Heby kommun. Observera att länssiffrorna inte är jämförbara med länssiffrorna bakåt i tiden."
+            });
 
             ds.Value = new List<decimal>();
             return ds;
@@ -213,6 +221,10 @@ var jsonExample = helper.GetExampleJsonstat();
                             "Folkökningen definieras som skillnaden mellan folkmängden vid årets början och årets slut."
                     }
                 });
+
+            myOut.Extension.Refperiod = new Dictionary<string, string>();
+            myOut.Extension.Refperiod.Add("BE0101N1", "31 December each year");
+            myOut.Extension.Refperiod.Add("BE0101N2", "31 December each year");
 
             myOut.Category.Index = new Dictionary<string, int>();
             myOut.Category.Index.Add("BE0101N1", 0);
@@ -471,36 +483,34 @@ var jsonExample = helper.GetExampleJsonstat();
             myOut.Category.Label.Add("tot", "totalt ålder");
 
             myOut.Extension = new ExtensionDimension() { Elimination = true, EliminationValueCode = "tot" };
-            myOut.Extension.Filters = new Filters();
-            myOut.Extension.Filters.Vs = new List<CodeListInformation>();
+            myOut.Extension.CodeLists = new List<CodeListInformation>();
 
-            myOut.Extension.Filters.Vs.Add(new CodeListInformation()
+            myOut.Extension.CodeLists.Add(new CodeListInformation()
             {
                 Id = "vs_Ålder1årA",
                 Label = "Ålder, 1 års-klasser",
-                Links = new List<Link>() { new Link() { Rel = "metadata", Href = "https://my-site.com/api/v2/tables/TAB638/filters/vs_Ålder1årA" } }
+                Links = new List<Link>() { new Link() { Rel = "metadata", Href = "https://my-site.com/api/v2/tables/TAB638/codelists/vs_Ålder1årA" } }
             });
 
-            myOut.Extension.Filters.Vs.Add(new CodeListInformation()
+            myOut.Extension.CodeLists.Add(new CodeListInformation()
             {
                 Id = "vs_ÅlderTotA",
                 Label = "Ålder, totalt, alla redovisade åldrar",
-                Links = new List<Link>() { new Link() { Rel = "metadata", Href = "https://my-site.com/api/v2/tables/TAB638/filters/vs_ÅlderTotA" } }
+                Links = new List<Link>() { new Link() { Rel = "metadata", Href = "https://my-site.com/api/v2/tables/TAB638/codelists/vs_ÅlderTotA" } }
             });
-            myOut.Extension.Filters.Agg = new List<CodeListInformation>();
 
-            myOut.Extension.Filters.Agg.Add(new CodeListInformation()
+            myOut.Extension.CodeLists.Add(new CodeListInformation()
             {
                 Id = "agg_Ålder10år",
                 Label = "10-årsklasser",
-                Links = new List<Link>() { new Link() { Rel = "metadata", Href = "https://my-site.com/api/v2/tables/TAB638/filters/agg_Ålder10år" } }
+                Links = new List<Link>() { new Link() { Rel = "metadata", Href = "https://my-site.com/api/v2/tables/TAB638/codelists/agg_Ålder10år" } }
             });
 
-            myOut.Extension.Filters.Agg.Add(new CodeListInformation()
+            myOut.Extension.CodeLists.Add(new CodeListInformation()
             {
                 Id = "agg_Ålder5år",
                 Label = "5-årsklasser",
-                Links = new List<Link>() { new Link() { Rel = "metadata", Href = "https://my-site.com/api/v2/tables/TAB638/filters/agg_Ålder5år" } }
+                Links = new List<Link>() { new Link() { Rel = "metadata", Href = "https://my-site.com/api/v2/tables/TAB638/codelists/agg_Ålder5år" } }
             });
 
             myOut.Link = new JsonstatExtensionLink();
@@ -1222,156 +1232,152 @@ var jsonExample = helper.GetExampleJsonstat();
 
             myOut.Extension.Elimination = true;
             myOut.Extension.EliminationValueCode = "00";
-            myOut.Extension.Filters = new Filters();
-            myOut.Extension.Filters.Vs = new List<CodeListInformation>();
+            myOut.Extension.CodeLists = new List<CodeListInformation>();
 
-            myOut.Extension.Filters.Vs.Add(new CodeListInformation()
+            myOut.Extension.CodeLists.Add(new CodeListInformation()
             {
                 Id = "vs_RegionKommun07",
                 Label = "Kommuner",
-                Links = new List<Link>() { new() { Rel = "metadata", Href = "https://my-site.com/api/v2/tables/TAB638/filters/vs_RegionKommun07" } }
+                Links = new List<Link>() { new() { Rel = "metadata", Href = "https://my-site.com/api/v2/tables/TAB638/codelists/vs_RegionKommun07" } }
             });
 
-            myOut.Extension.Filters.Vs.Add(new CodeListInformation()
+            myOut.Extension.CodeLists.Add(new CodeListInformation()
             {
                 Id = "vs_RegionLän07",
                 Label = "Län",
-                Links = new List<Link>() { new() { Rel = "metadata", Href = "https://my-site.com/api/v2/tables/TAB638/filters/vs_RegionLän07" } }
+                Links = new List<Link>() { new() { Rel = "metadata", Href = "https://my-site.com/api/v2/tables/TAB638/codelists/vs_RegionLän07" } }
             });
 
-            myOut.Extension.Filters.Vs.Add(new CodeListInformation()
+            myOut.Extension.CodeLists.Add(new CodeListInformation()
             {
                 Id = "vs_RegionRiket99",
                 Label = "Riket",
-                Links = new List<Link>() { new() { Rel = "metadata", Href = "https://my-site.com/api/v2/tables/TAB638/filters/vs_RegionRiket99" } }
+                Links = new List<Link>() { new() { Rel = "metadata", Href = "https://my-site.com/api/v2/tables/TAB638/codelists/vs_RegionRiket99" } }
             });
 
-
-            myOut.Extension.Filters.Agg = new List<CodeListInformation>();
-
-            myOut.Extension.Filters.Agg.Add(new CodeListInformation()
+            myOut.Extension.CodeLists.Add(new CodeListInformation()
             {
                 Id = "agg_RegionA-region_2",
                 Label = "A-regioner",
-                Links = new List<Link>() { new() { Rel = "metadata", Href = "https://my-site.com/api/v2/tables/TAB638/filters/agg_RegionA-region_2" } }
+                Links = new List<Link>() { new() { Rel = "metadata", Href = "https://my-site.com/api/v2/tables/TAB638/codelists/agg_RegionA-region_2" } }
             });
 
-            myOut.Extension.Filters.Agg.Add(new CodeListInformation()
+            myOut.Extension.CodeLists.Add(new CodeListInformation()
             {
                 Id = "agg_RegionKommungrupp2005-_1",
                 Label = "Kommungrupper (SKL:s) 2005",
                 Links = new List<Link>() { new()
                                 {
                                     Rel ="metadata",
-                                   Href ="https://my-site.com/api/v2/tables/TAB638/filters/agg_RegionKommungrupp2005-_1"} }
+                                   Href ="https://my-site.com/api/v2/tables/TAB638/codelists/agg_RegionKommungrupp2005-_1"} }
             });
-            myOut.Extension.Filters.Agg.Add(new CodeListInformation()
+            myOut.Extension.CodeLists.Add(new CodeListInformation()
             {
                 Id = "agg_RegionKommungrupp2011-",
                 Label = "Kommungrupper (SKL:s) 2011",
                 Links = new List<Link>() { new()
                                 {
                                     Rel ="metadata",
-                                   Href ="https://my-site.com/api/v2/tables/TAB638/filters/agg_RegionKommungrupp2011-"} }
+                                   Href ="https://my-site.com/api/v2/tables/TAB638/codelists/agg_RegionKommungrupp2011-"} }
             });
-            myOut.Extension.Filters.Agg.Add(new CodeListInformation()
+            myOut.Extension.CodeLists.Add(new CodeListInformation()
             {
                 Id = "agg_RegionKommungrupp2017-",
                 Label = "Kommungrupper (SKL:s) 2017",
                 Links = new List<Link>() { new()
                                 {
                                     Rel ="metadata",
-                                   Href ="https://my-site.com/api/v2/tables/TAB638/filters/agg_RegionKommungrupp2017-"} }
+                                   Href ="https://my-site.com/api/v2/tables/TAB638/codelists/agg_RegionKommungrupp2017-"} }
             });
-            myOut.Extension.Filters.Agg.Add(new CodeListInformation()
+            myOut.Extension.CodeLists.Add(new CodeListInformation()
             {
                 Id = "agg_RegionLA1998",
                 Label = "Lokalaarbetsmarknader 1998",
                 Links = new List<Link>() { new()
                                 {
                                     Rel ="metadata",
-                                   Href ="https://my-site.com/api/v2/tables/TAB638/filters/agg_RegionLA1998"} }
+                                   Href ="https://my-site.com/api/v2/tables/TAB638/codelists/agg_RegionLA1998"} }
             });
-            myOut.Extension.Filters.Agg.Add(new CodeListInformation()
+            myOut.Extension.CodeLists.Add(new CodeListInformation()
             {
                 Id = "agg_RegionLA2003_1",
                 Label = "Lokalaarbetsmarknader 2003",
                 Links = new List<Link>() { new()
                                 {
                                     Rel ="metadata",
-                                   Href ="https://my-site.com/api/v2/tables/TAB638/filters/agg_RegionLA2003_1"} }
+                                   Href ="https://my-site.com/api/v2/tables/TAB638/codelists/agg_RegionLA2003_1"} }
             });
-            myOut.Extension.Filters.Agg.Add(new CodeListInformation()
+            myOut.Extension.CodeLists.Add(new CodeListInformation()
             {
                 Id = "agg_RegionLA2008",
                 Label = "Lokalaarbetsmarknader 2008",
                 Links = new List<Link>() { new()
                                 {
                                     Rel ="metadata",
-                                   Href ="https://my-site.com/api/v2/tables/TAB638/filters/agg_RegionLA2008"} }
+                                   Href ="https://my-site.com/api/v2/tables/TAB638/codelists/agg_RegionLA2008"} }
             });
-            myOut.Extension.Filters.Agg.Add(new CodeListInformation()
+            myOut.Extension.CodeLists.Add(new CodeListInformation()
             {
                 Id = "agg_RegionLA2013",
                 Label = "Lokalaarbetsmarknader 2013",
                 Links = new List<Link>() { new()
                                 {
                                     Rel ="metadata",
-                                   Href ="https://my-site.com/api/v2/tables/TAB638/filters/agg_RegionLA2013"} }
+                                   Href ="https://my-site.com/api/v2/tables/TAB638/codelists/agg_RegionLA2013"} }
             });
-            myOut.Extension.Filters.Agg.Add(new CodeListInformation()
+            myOut.Extension.CodeLists.Add(new CodeListInformation()
             {
                 Id = "agg_RegionLA2018",
                 Label = "Lokalaarbetsmarknader 2018",
                 Links = new List<Link>() { new()
                                 {
                                     Rel ="metadata",
-                                   Href ="https://my-site.com/api/v2/tables/TAB638/filters/agg_Ålder5år"} }
+                                   Href ="https://my-site.com/api/v2/tables/TAB638/codelists/agg_Ålder5år"} }
             });
-            myOut.Extension.Filters.Agg.Add(new CodeListInformation()
+            myOut.Extension.CodeLists.Add(new CodeListInformation()
             {
                 Id = "agg_RegionStoromr-04_2",
                 Label = "Sorstadsområder -2004",
                 Links = new List<Link>() { new()
                                 {
                                     Rel ="metadata",
-                                   Href ="https://my-site.com/api/v2/tables/TAB638/filters/agg_RegionStoromr-04_2"} }
+                                   Href ="https://my-site.com/api/v2/tables/TAB638/codelists/agg_RegionStoromr-04_2"} }
             });
-            myOut.Extension.Filters.Agg.Add(new CodeListInformation()
+            myOut.Extension.CodeLists.Add(new CodeListInformation()
             {
                 Id = "agg_RegionStoromr05-_1",
                 Label = "Sorstadsområder 2005-",
                 Links = new List<Link>() { new()
                                 {
                                     Rel ="metadata",
-                                   Href ="https://my-site.com/api/v2/tables/TAB638/filters/agg_RegionStoromr05-_1"} }
+                                   Href ="https://my-site.com/api/v2/tables/TAB638/codelists/agg_RegionStoromr05-_1"} }
             });
-            myOut.Extension.Filters.Agg.Add(new CodeListInformation()
+            myOut.Extension.CodeLists.Add(new CodeListInformation()
             {
                 Id = "agg_RegionNUTS1_2008",
                 Label = "NUTS1 fr.o.m 2008",
                 Links = new List<Link>() { new()
                                 {
                                     Rel ="metadata",
-                                   Href ="https://my-site.com/api/v2/tables/TAB638/filters/agg_RegionNUTS1_2008"} }
+                                   Href ="https://my-site.com/api/v2/tables/TAB638/codelists/agg_RegionNUTS1_2008"} }
             });
-            myOut.Extension.Filters.Agg.Add(new CodeListInformation()
+            myOut.Extension.CodeLists.Add(new CodeListInformation()
             {
                 Id = "agg_RegionNUTS2_2008",
                 Label = "NUTS2 fr.o.m 2008",
                 Links = new List<Link>() { new()
                                 {
                                     Rel ="metadata",
-                                   Href ="https://my-site.com/api/v2/tables/TAB638/filters/agg_RegionNUTS2_2008"} }
+                                   Href ="https://my-site.com/api/v2/tables/TAB638/codelists/agg_RegionNUTS2_2008"} }
             });
-            myOut.Extension.Filters.Agg.Add(new CodeListInformation()
+            myOut.Extension.CodeLists.Add(new CodeListInformation()
             {
                 Id = "agg_RegionNUTS3_2008",
                 Label = "NUTS3 fr.o.m 2008",
                 Links = new List<Link>() { new()
                                 {
                                     Rel ="metadata",
-                                   Href ="https://my-site.com/api/v2/tables/TAB638/filters/agg_RegionNUTS3_2008"} }
+                                   Href ="https://my-site.com/api/v2/tables/TAB638/codelists/agg_RegionNUTS3_2008"} }
             });
             return myOut;
         }
