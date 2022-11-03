@@ -5,8 +5,9 @@ The yaml files has external examples which are files on master. These urls shoul
   graph TD;
       A0[make feature branch]-->A
       A[Change in yaml-file: Paths and schema]-->B[generate code];
-      B-->C[change code manually ?];
-      C-->D[create/update external examples];
+      B-->C[add data to model manually];
+      C-->D[update external examples];
+      D-->D1[correct and run tests];
       D-->E[push, make beta-nuget];
       E-->F[ merge back to master, create nuget];
 ```
