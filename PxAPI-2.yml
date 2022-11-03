@@ -138,6 +138,7 @@ paths:
       parameters:
         - $ref: '#/components/parameters/language'
         - $ref: '#/components/parameters/id'
+        - $ref: '#/components/parameters/codeListId'
       responses:
         '200':
           description: Success
@@ -498,6 +499,10 @@ components:
           - TimeVariable
           - GeographicalVariable
           - RegularVariable
+        values:
+          type: array
+          items:
+            $ref: '#/components/schemas/Value'
         notes: 
           type: array
           items:
@@ -579,10 +584,6 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/CodeListInformation'
-        values:
-          type: array
-          items:
-            $ref: '#/components/schemas/Value'
     GeographicalVariable:
       required:
         - "map"
