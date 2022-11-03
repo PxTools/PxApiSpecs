@@ -4,7 +4,7 @@ The yaml files has external examples which are files on master. These urls shoul
 ```mermaid      
   graph TD;
       A0[make feature branch]-->A
-      A[Change in yaml-file]-->B[generate code];
+      A[Change in yaml-file: Paths and schema]-->B[generate code];
       B-->C[change code manually ?];
       C-->D[create/update external examples];
       D-->E[push, make beta-nuget];
