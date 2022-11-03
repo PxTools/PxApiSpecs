@@ -6,7 +6,7 @@ The yaml files has external examples which are files on master. These urls shoul
       A0[make feature branch]-->A
       A[Change in yaml-file: Paths and schema]-->B[generate code aka modell];
       B-->C[Change code that adds data to the model];
-      C-->D[Run:\n Updates external example files \n and 'inSpec' examples];
+      C-->D[Run:<br\> Updates external example files <br> and 'inSpec' examples];
      
       D-->D20[Look at diffs before commit push ];
       D20-->F[ merge back to master, create nuget];
