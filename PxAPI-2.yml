@@ -229,15 +229,18 @@ components:
           table: "#/components/schemas/Table"
       type: object
       description: Navigation item.
+      required:
+        - "objectType"
+        - "id"
+        - "label"
       properties:
-        id:
-          type: string
-          nullable: true
-          #nullable = true beacause root is empty
         objectType:
           type: string
           nullable: false
           description: One of heading, table, folder or folder-information
+        id:
+          type: string
+          nullable: false
         label:
           type: string
           nullable: true
@@ -245,22 +248,31 @@ components:
         description:
           type: string
           nullable: true
-          description: Longer text describing node. If no longer text exist, same as label
+          description: Longer text describing node.
         sortCode:
           type: string
           description: String for sorting the contents in folder
     Folder:
       type: object
       description: Folder item
+      required:
+        - "language"
+        - "id"
+        - "label"
+        - "folderContents"
+        - "links"
       properties:
+        objectType:
+          type: string
+          nullable: false
+          description: allways set to folder
+        language:
+          type: string
+          description: The language code (ISO 639) for this response
         id:
           type: string
           nullable: true
           #nullable = true beacause root is empty
-        objectType:
-          type: string
-          nullable: false
-          description: One of heading, table, folder or folder-information
         label:
           type: string
           nullable: true
