@@ -50,6 +50,7 @@ namespace yamlGen
             if (dryRun)
             {
                 File.WriteAllText(specFile + "2", specAsString);
+                Console.WriteLine("Dry run. Does not overwrite spec");
             }
             else
             {

@@ -24,7 +24,7 @@ namespace yamlGen
 
         private TheSpec theSpec;
 
-        public DoIt(string basePath)
+        public DoIt(string basePath, bool dryRun)
         {
             specFile = basePath +"PxAPI-2.yml";
             jsonOutDir = basePath + "examplesAsJson/";
@@ -36,7 +36,7 @@ namespace yamlGen
                 ContractResolver = new BaseFirstContractResolver()
             };
             
-            bool dryRun = true;
+
             theSpec = new TheSpec(specFile,dryRun);
 
             FixOne(models.rootfolder, "folder-root");
