@@ -19,12 +19,16 @@ namespace yamlGen
         private ModelsWithData models;
 
         private JsonSerializerSettings mySettings;
-        private string specFile = @"C:\github.com\statisticssweden\api2Spec\yamlGen\PxApiSpecs\PxAPI-2.yml";
+        private string specFile ;
+        private string jsonOutDir;
 
         private TheSpec theSpec;
 
-        public DoIt()
+        public DoIt(string basePath)
         {
+            specFile = basePath +"PxAPI-2.yml";
+            jsonOutDir = basePath + "examplesAsJson/";
+
             models = new ModelsWithData();
 
             mySettings = new JsonSerializerSettings
@@ -35,17 +39,20 @@ namespace yamlGen
             bool dryRun = true;
             theSpec = new TheSpec(specFile,dryRun);
 
-            FixOne(models.rootfolder, "navigation-root");
-            FixOne(models.befolder, "navigation-be");
+            FixOne(models.rootfolder, "folder-root");
+            FixOne(models.befolder, "folder-be");
             FixOne(models.tablesResponse, "tablesResponse");
             FixOne(models.tableMetadata, "tableMetadata");
+            FixOne(models.dataset, "dataset-meta");
             theSpec.Save();
         }
 
 
-        private void FixOne(Object modelObject,String exampleName)
+        private void FixOne(Object modelObject,string exampleName)
         {
-            var jsonNew = JsonConvert.SerializeObject(modelObject, Formatting.Indented, mySettings);
+            string jsonNew = JsonConvert.SerializeObject(modelObject, Formatting.Indented, mySettings);
+            File.WriteAllText(jsonOutDir+ exampleName + ".json", jsonNew);
+
             string yamlTemp = json2yaml(jsonNew);
             string betterYaml = PrepYaml(yamlTemp, exampleName, 8);
 

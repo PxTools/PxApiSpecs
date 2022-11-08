@@ -74,17 +74,51 @@ namespace yamlGen
 
 
             myOut.TimeVariable = new TimeVariable() { Id="Tid", Label="år", Frequency="A",FirstPeriod="1968",LastPeriod="2021"};
+            myOut.TimeVariable.Values = new List<Value>();
+            for(int n= 1968; n <= 2021; n++)
+            {
+                myOut.TimeVariable.Values.Add(new Value { Code = n.ToString(), Label = n.ToString() });
+            }
+
+            myOut.ContentsVariable = new ContentsVariable() { Id= "ContentsCode", Label= "tabellinnehåll" };
+            myOut.ContentsVariable.Values = new List<ContentValue>();
+            myOut.ContentsVariable.Values.Add(new ContentValue()
+            {
+                Code = "BE0101N1",
+                Label = "Folkmängd",
+                MeasuringType = ContentValue.MeasuringTypeEnum.StockEnum,
+                Adjustment = ContentValue.AdjustmentEnum.NoneEnum,
+                Unit = "antall",
+                PreferedNumberOfDecimals = 0,
+                RefrencePeriod = "31 december repektive år",
+                Notes = new List<Note>() { new() { Mandatory = true, Text = "Uppgifterna avser förhållandena den 31 december för valt/valda år enligt den regionala indelning som gäller den 1 januari året efter." } }
+            });
+            myOut.ContentsVariable.Values.Add(new ContentValue()
+            {
+                Code = "BE0101N2",
+                Label = "Folkökning",
+                MeasuringType = ContentValue.MeasuringTypeEnum.FlowEnum,
+                Adjustment = ContentValue.AdjustmentEnum.NoneEnum,
+                Unit = "antall",
+                PreferedNumberOfDecimals = 0,
+                Notes = new List<Note>() { new() { Mandatory = false, Text = "Folkökningen definieras som skillnaden mellan folkmängden vid årets början och årets slut." } }
+            });
+
+            myOut.RegularVariables = new List<RegularVariable>();
+            myOut.RegularVariables.Add(GetCivilstandRegularVariable());
+            myOut.RegularVariables.Add(GetKonRegularVariable());
+            myOut.RegularVariables.Add(GetAlderRegularVariable());
+            myOut.GeoVariables = new List<GeographicalVariable>();
+            myOut.GeoVariables.Add(GetRegion());
+
+            myOut.VariablesDisplayOrder = new List<string>() { "ContentsCode", "Civilstand", "Alder", "Tid", "Kon" };
 
             return myOut;
-
         }
 
 
-
-
-
         private Folder getBeFolder()
-       {
+        {
            Folder folder = newFolder();
            folder.Id = "BE0101";
           // folder.ObjectType = "folder";
@@ -287,6 +321,657 @@ namespace yamlGen
             ds.Value = new List<decimal>();
             return ds;
         }
+
+
+        private RegularVariable GetKonRegularVariable()
+        {
+           
+            RegularVariable myOut = new RegularVariable() {Id = "Kon",  Label = "kön", Elimination = true };
+            myOut.Values = new List<Value>();
+            myOut.Values.Add(new Value() { Code = "1", Label = "män" });
+            myOut.Values.Add(new Value() { Code = "2", Label = "kvinnor" });
+
+            return myOut;
+        }
+
+        private RegularVariable GetCivilstandRegularVariable()
+        {
+            RegularVariable myOut = new RegularVariable() { Id = "Civilstand", Label = "civilstånd", Elimination = true };
+            myOut.Values = new List<Value>();
+            myOut.Values.Add(new Value() { Code = "OG", Label = "ogifta" });
+            myOut.Values.Add(new Value() { Code = "G", Label = "gifta" });
+            myOut.Values.Add(new Value() { Code = "SK", Label = "skilda" });
+            myOut.Values.Add(new Value() { Code = "ÄNKL", Label = "änkor/änklingar" });
+            return myOut;
+        }
+
+
+        private RegularVariable GetAlderRegularVariable()
+        {
+            RegularVariable myOut = new RegularVariable() { Id = "Alder", Label = "ålder", Elimination = true , EliminationValueCode = "tot"};
+            myOut.Values = new List<Value>();
+            #region values
+
+
+            myOut.Values.Add(new Value() { Code = "0", Label = "0 år" });
+            myOut.Values.Add(new Value() { Code = "1", Label = "1 år" });
+            myOut.Values.Add(new Value() { Code = "2", Label = "2 år" });
+            myOut.Values.Add(new Value() { Code = "3", Label = "3 år" });
+            myOut.Values.Add(new Value() { Code = "4", Label = "4 år" });
+            myOut.Values.Add(new Value() { Code = "5", Label = "5 år" });
+            myOut.Values.Add(new Value() { Code = "6", Label = "6 år" });
+            myOut.Values.Add(new Value() { Code = "7", Label = "7 år" });
+            myOut.Values.Add(new Value() { Code = "8", Label = "8 år" });
+            myOut.Values.Add(new Value() { Code = "9", Label = "9 år" });
+            myOut.Values.Add(new Value() { Code = "10", Label = "10 år" });
+            myOut.Values.Add(new Value() { Code = "11", Label = "11 år" });
+            myOut.Values.Add(new Value() { Code = "12", Label = "12 år" });
+            myOut.Values.Add(new Value() { Code = "13", Label = "13 år" });
+            myOut.Values.Add(new Value() { Code = "14", Label = "14 år" });
+            myOut.Values.Add(new Value() { Code = "15", Label = "15 år" });
+            myOut.Values.Add(new Value() { Code = "16", Label = "16 år" });
+            myOut.Values.Add(new Value() { Code = "17", Label = "17 år" });
+            myOut.Values.Add(new Value() { Code = "18", Label = "18 år" });
+            myOut.Values.Add(new Value() { Code = "19", Label = "19 år" });
+            myOut.Values.Add(new Value() { Code = "20", Label = "20 år" });
+            myOut.Values.Add(new Value() { Code = "21", Label = "21 år" });
+            myOut.Values.Add(new Value() { Code = "22", Label = "22 år" });
+            myOut.Values.Add(new Value() { Code = "23", Label = "23 år" });
+            myOut.Values.Add(new Value() { Code = "24", Label = "24 år" });
+            myOut.Values.Add(new Value() { Code = "25", Label = "25 år" });
+            myOut.Values.Add(new Value() { Code = "26", Label = "26 år" });
+            myOut.Values.Add(new Value() { Code = "27", Label = "27 år" });
+            myOut.Values.Add(new Value() { Code = "28", Label = "28 år" });
+            myOut.Values.Add(new Value() { Code = "29", Label = "29 år" });
+            myOut.Values.Add(new Value() { Code = "30", Label = "30 år" });
+            myOut.Values.Add(new Value() { Code = "31", Label = "31 år" });
+            myOut.Values.Add(new Value() { Code = "32", Label = "32 år" });
+            myOut.Values.Add(new Value() { Code = "33", Label = "33 år" });
+            myOut.Values.Add(new Value() { Code = "34", Label = "34 år" });
+            myOut.Values.Add(new Value() { Code = "35", Label = "35 år" });
+            myOut.Values.Add(new Value() { Code = "36", Label = "36 år" });
+            myOut.Values.Add(new Value() { Code = "37", Label = "37 år" });
+            myOut.Values.Add(new Value() { Code = "38", Label = "38 år" });
+            myOut.Values.Add(new Value() { Code = "39", Label = "39 år" });
+            myOut.Values.Add(new Value() { Code = "40", Label = "40 år" });
+            myOut.Values.Add(new Value() { Code = "41", Label = "41 år" });
+            myOut.Values.Add(new Value() { Code = "42", Label = "42 år" });
+            myOut.Values.Add(new Value() { Code = "43", Label = "43 år" });
+            myOut.Values.Add(new Value() { Code = "44", Label = "44 år" });
+            myOut.Values.Add(new Value() { Code = "45", Label = "45 år" });
+            myOut.Values.Add(new Value() { Code = "46", Label = "46 år" });
+            myOut.Values.Add(new Value() { Code = "47", Label = "47 år" });
+            myOut.Values.Add(new Value() { Code = "48", Label = "48 år" });
+            myOut.Values.Add(new Value() { Code = "49", Label = "49 år" });
+            myOut.Values.Add(new Value() { Code = "50", Label = "50 år" });
+            myOut.Values.Add(new Value() { Code = "51", Label = "51 år" });
+            myOut.Values.Add(new Value() { Code = "52", Label = "52 år" });
+            myOut.Values.Add(new Value() { Code = "53", Label = "53 år" });
+            myOut.Values.Add(new Value() { Code = "54", Label = "54 år" });
+            myOut.Values.Add(new Value() { Code = "55", Label = "55 år" });
+            myOut.Values.Add(new Value() { Code = "56", Label = "56 år" });
+            myOut.Values.Add(new Value() { Code = "57", Label = "57 år" });
+            myOut.Values.Add(new Value() { Code = "58", Label = "58 år" });
+            myOut.Values.Add(new Value() { Code = "59", Label = "59 år" });
+            myOut.Values.Add(new Value() { Code = "60", Label = "60 år" });
+            myOut.Values.Add(new Value() { Code = "61", Label = "61 år" });
+            myOut.Values.Add(new Value() { Code = "62", Label = "62 år" });
+            myOut.Values.Add(new Value() { Code = "63", Label = "63 år" });
+            myOut.Values.Add(new Value() { Code = "64", Label = "64 år" });
+            myOut.Values.Add(new Value() { Code = "65", Label = "65 år" });
+            myOut.Values.Add(new Value() { Code = "66", Label = "66 år" });
+            myOut.Values.Add(new Value() { Code = "67", Label = "67 år" });
+            myOut.Values.Add(new Value() { Code = "68", Label = "68 år" });
+            myOut.Values.Add(new Value() { Code = "69", Label = "69 år" });
+            myOut.Values.Add(new Value() { Code = "70", Label = "70 år" });
+            myOut.Values.Add(new Value() { Code = "71", Label = "71 år" });
+            myOut.Values.Add(new Value() { Code = "72", Label = "72 år" });
+            myOut.Values.Add(new Value() { Code = "73", Label = "73 år" });
+            myOut.Values.Add(new Value() { Code = "74", Label = "74 år" });
+            myOut.Values.Add(new Value() { Code = "75", Label = "75 år" });
+            myOut.Values.Add(new Value() { Code = "76", Label = "76 år" });
+            myOut.Values.Add(new Value() { Code = "77", Label = "77 år" });
+            myOut.Values.Add(new Value() { Code = "78", Label = "78 år" });
+            myOut.Values.Add(new Value() { Code = "79", Label = "79 år" });
+            myOut.Values.Add(new Value() { Code = "80", Label = "80 år" });
+            myOut.Values.Add(new Value() { Code = "81", Label = "81 år" });
+            myOut.Values.Add(new Value() { Code = "82", Label = "82 år" });
+            myOut.Values.Add(new Value() { Code = "83", Label = "83 år" });
+            myOut.Values.Add(new Value() { Code = "84", Label = "84 år" });
+            myOut.Values.Add(new Value() { Code = "85", Label = "85 år" });
+            myOut.Values.Add(new Value() { Code = "86", Label = "86 år" });
+            myOut.Values.Add(new Value() { Code = "87", Label = "87 år" });
+            myOut.Values.Add(new Value() { Code = "88", Label = "88 år" });
+            myOut.Values.Add(new Value() { Code = "89", Label = "89 år" });
+            myOut.Values.Add(new Value() { Code = "90", Label = "90 år" });
+            myOut.Values.Add(new Value() { Code = "91", Label = "91 år" });
+            myOut.Values.Add(new Value() { Code = "92", Label = "92 år" });
+            myOut.Values.Add(new Value() { Code = "93", Label = "93 år" });
+            myOut.Values.Add(new Value() { Code = "94", Label = "94 år" });
+            myOut.Values.Add(new Value() { Code = "95", Label = "95 år" });
+            myOut.Values.Add(new Value() { Code = "96", Label = "96 år" });
+            myOut.Values.Add(new Value() { Code = "97", Label = "97 år" });
+            myOut.Values.Add(new Value() { Code = "98", Label = "98 år" });
+            myOut.Values.Add(new Value() { Code = "99", Label = "99 år" });
+            myOut.Values.Add(new Value() { Code = "100+", Label = "100+ år" });
+            myOut.Values.Add(new Value() { Code = "tot", Label = "totalt ålder" });
+
+            #endregion values
+
+
+            #region codelists
+            myOut.CodeLists = new List<CodeListInformation>();
+
+            myOut.CodeLists.Add(new CodeListInformation()
+            {
+                Id = "vs_Ålder1årA",
+                Label = "Ålder, 1 års-klasser",
+                Links = new List<Link>() { new Link() { Rel = "metadata", Href = "https://my-site.com/api/v2/tables/TAB638/codelists/vs_Ålder1årA" } }
+            });
+
+            myOut.CodeLists.Add(new CodeListInformation()
+            {
+                Id = "vs_ÅlderTotA",
+                Label = "Ålder, totalt, alla redovisade åldrar",
+                Links = new List<Link>() { new Link() { Rel = "metadata", Href = "https://my-site.com/api/v2/tables/TAB638/codelists/vs_ÅlderTotA" } }
+            });
+
+            myOut.CodeLists.Add(new CodeListInformation()
+            {
+                Id = "agg_Ålder10år",
+                Label = "10-årsklasser",
+                Links = new List<Link>() { new Link() { Rel = "metadata", Href = "https://my-site.com/api/v2/tables/TAB638/codelists/agg_Ålder10år" } }
+            });
+
+            myOut.CodeLists.Add(new CodeListInformation()
+            {
+                Id = "agg_Ålder5år",
+                Label = "5-årsklasser",
+                Links = new List<Link>() { new Link() { Rel = "metadata", Href = "https://my-site.com/api/v2/tables/TAB638/codelists/agg_Ålder5år" } }
+            });
+            #endregion codelists
+
+
+
+            return myOut;
+        }
+
+
+        private GeographicalVariable GetRegion()
+        {
+            GeographicalVariable myOut = new GeographicalVariable() { Id = "Region", Label = "region", Elimination = true, EliminationValueCode = "00" };
+            #region values
+            myOut.Values = new List<Value>();
+            myOut.Values.Add(new Value() { Code = "00", Label = "Riket" });
+            myOut.Values.Add(new Value() { Code = "01", Label = "Stockholms län" });
+            myOut.Values.Add(new Value() { Code = "0114", Label = "Upplands Väsby" });
+            myOut.Values.Add(new Value() { Code = "0115", Label = "Vallentuna" });
+            myOut.Values.Add(new Value() { Code = "0117", Label = "Österåker" });
+            myOut.Values.Add(new Value() { Code = "0120", Label = "Värmdö" });
+            myOut.Values.Add(new Value() { Code = "0123", Label = "Järfälla" });
+            myOut.Values.Add(new Value() { Code = "0125", Label = "Ekerö" });
+            myOut.Values.Add(new Value() { Code = "0126", Label = "Huddinge" });
+            myOut.Values.Add(new Value() { Code = "0127", Label = "Botkyrka" });
+            myOut.Values.Add(new Value() { Code = "0128", Label = "Salem" });
+            myOut.Values.Add(new Value() { Code = "0136", Label = "Haninge" });
+            myOut.Values.Add(new Value() { Code = "0138", Label = "Tyresö" });
+            myOut.Values.Add(new Value() { Code = "0139", Label = "Upplands-Bro" });
+            myOut.Values.Add(new Value() { Code = "0140", Label = "Nykvarn", Notes = new List<Note>() { new Note() { Mandatory = true, Text = "Ny regional indelning fr.o.m. 1999-01-01. Delar av Södertälje kommun (kod 0181) bildar en ny kommun benämnd Nykvarn (kod 0140)." } } }); 
+            myOut.Values.Add(new Value() { Code = "0160", Label = "Täby" });
+            myOut.Values.Add(new Value() { Code = "0162", Label = "Danderyd" });
+            myOut.Values.Add(new Value() { Code = "0163", Label = "Sollentuna" });
+            myOut.Values.Add(new Value() { Code = "0180", Label = "Stockholm" });
+            myOut.Values.Add(new Value() { Code = "0181", Label = "Södertälje", Notes = new List<Note>() { new Note() { Mandatory = true, Text = "Ny regional indelning fr.o.m. 1999-01-01. Delar av Södertälje kommun (kod 0181) bildar en ny kommun benämnd Nykvarn (kod 0140)." } } });
+            myOut.Values.Add(new Value() { Code = "0182", Label = "Nacka" });
+            myOut.Values.Add(new Value() { Code = "0183", Label = "Sundbyberg" });
+            myOut.Values.Add(new Value() { Code = "0184", Label = "Solna" });
+            myOut.Values.Add(new Value() { Code = "0186", Label = "Lidingö", Notes = new List<Note>() { new Note() { Mandatory = true, Text = "Från och med 2011-01-01 tillhör Storholmen Lidingö (0186) som tidigare tillhörde Vaxholm (0187)." } } });
+            myOut.Values.Add(new Value() { Code = "0187", Label = "Vaxholm", Notes = new List<Note>() { new Note() { Mandatory = true, Text = "Från och med 2011-01-01 tillhör Storholmen Lidingö (0186) som tidigare tillhörde Vaxholm (0187)." } } });
+            myOut.Values.Add(new Value() { Code = "0188", Label = "Norrtälje" });
+            myOut.Values.Add(new Value() { Code = "0191", Label = "Sigtuna" });
+            myOut.Values.Add(new Value() { Code = "0192", Label = "Nynäshamn" });
+            myOut.Values.Add(new Value() { Code = "03", Label = "Uppsala län" });
+            myOut.Values.Add(new Value() { Code = "0305", Label = "Håbo" });
+            myOut.Values.Add(new Value() { Code = "0319", Label = "Älvkarleby" });
+            myOut.Values.Add(new Value() { Code = "0330", Label = "Knivsta", Notes = new List<Note>() { new Note() { Mandatory = true, Text = "Ny regional indelning fr.o.m. 2003-01-01. Delar av Uppsala kommun bildar en ny kommun benämnd Knivsta kommun." } } });
+            myOut.Values.Add(new Value() { Code = "0331", Label = "Heby" });
+            myOut.Values.Add(new Value() { Code = "0360", Label = "Tierp" });
+            myOut.Values.Add(new Value() { Code = "0380", Label = "Uppsala", Notes = new List<Note>() { new Note() { Mandatory = true, Text = "Ny regional indelning fr.o.m. 2003-01-01. Delar av Uppsala kommun bildar en ny kommun benämnd Knivsta kommun." } } });
+            myOut.Values.Add(new Value() { Code = "0381", Label = "Enköping" });
+            myOut.Values.Add(new Value() { Code = "0382", Label = "Östhammar" });
+            myOut.Values.Add(new Value() { Code = "04", Label = "Södermanlands län" });
+            myOut.Values.Add(new Value() { Code = "0428", Label = "Vingåker" });
+            myOut.Values.Add(new Value() { Code = "0461", Label = "Gnesta" });
+            myOut.Values.Add(new Value() { Code = "0480", Label = "Nyköping" });
+            myOut.Values.Add(new Value() { Code = "0481", Label = "Oxelösund" });
+            myOut.Values.Add(new Value() { Code = "0482", Label = "Flen" });
+            myOut.Values.Add(new Value() { Code = "0483", Label = "Katrineholm" });
+            myOut.Values.Add(new Value() { Code = "0484", Label = "Eskilstuna" });
+            myOut.Values.Add(new Value() { Code = "0486", Label = "Strängnäs" });
+            myOut.Values.Add(new Value() { Code = "0488", Label = "Trosa" });
+            myOut.Values.Add(new Value() { Code = "05", Label = "Östergötlands län" });
+            myOut.Values.Add(new Value() { Code = "0509", Label = "Ödeshög" });
+            myOut.Values.Add(new Value() { Code = "0512", Label = "Ydre" });
+            myOut.Values.Add(new Value() { Code = "0513", Label = "Kinda" });
+            myOut.Values.Add(new Value() { Code = "0560", Label = "Boxholm" });
+            myOut.Values.Add(new Value() { Code = "0561", Label = "Åtvidaberg" });
+            myOut.Values.Add(new Value() { Code = "0562", Label = "Finspång" });
+            myOut.Values.Add(new Value() { Code = "0563", Label = "Valdemarsvik" });
+            myOut.Values.Add(new Value() { Code = "0580", Label = "Linköping" });
+            myOut.Values.Add(new Value() { Code = "0581", Label = "Norrköping" });
+            myOut.Values.Add(new Value() { Code = "0582", Label = "Söderköping" });
+            myOut.Values.Add(new Value() { Code = "0583", Label = "Motala" });
+            myOut.Values.Add(new Value() { Code = "0584", Label = "Vadstena" });
+            myOut.Values.Add(new Value() { Code = "0586", Label = "Mjölby" });
+            myOut.Values.Add(new Value() { Code = "06", Label = "Jönköpings län" });
+            myOut.Values.Add(new Value() { Code = "0604", Label = "Aneby" });
+            myOut.Values.Add(new Value() { Code = "0617", Label = "Gnosjö" });
+            myOut.Values.Add(new Value() { Code = "0642", Label = "Mullsjö" });
+            myOut.Values.Add(new Value() { Code = "0643", Label = "Habo" });
+            myOut.Values.Add(new Value() { Code = "0662", Label = "Gislaved" });
+            myOut.Values.Add(new Value() { Code = "0665", Label = "Vaggeryd" });
+            myOut.Values.Add(new Value() { Code = "0680", Label = "Jönköping" });
+            myOut.Values.Add(new Value() { Code = "0682", Label = "Nässjö" });
+            myOut.Values.Add(new Value() { Code = "0683", Label = "Värnamo" });
+            myOut.Values.Add(new Value() { Code = "0684", Label = "Sävsjö" });
+            myOut.Values.Add(new Value() { Code = "0685", Label = "Vetlanda" });
+            myOut.Values.Add(new Value() { Code = "0686", Label = "Eksjö" });
+            myOut.Values.Add(new Value() { Code = "0687", Label = "Tranås" });
+            myOut.Values.Add(new Value() { Code = "07", Label = "Kronobergs län" });
+            myOut.Values.Add(new Value() { Code = "0760", Label = "Uppvidinge" });
+            myOut.Values.Add(new Value() { Code = "0761", Label = "Lessebo" });
+            myOut.Values.Add(new Value() { Code = "0763", Label = "Tingsryd" });
+            myOut.Values.Add(new Value() { Code = "0764", Label = "Alvesta" });
+            myOut.Values.Add(new Value() { Code = "0765", Label = "Älmhult" });
+            myOut.Values.Add(new Value() { Code = "0767", Label = "Markaryd" });
+            myOut.Values.Add(new Value() { Code = "0780", Label = "Växjö" });
+            myOut.Values.Add(new Value() { Code = "0781", Label = "Ljungby" });
+            myOut.Values.Add(new Value() { Code = "08", Label = "Kalmar län" });
+            myOut.Values.Add(new Value() { Code = "0821", Label = "Högsby" });
+            myOut.Values.Add(new Value() { Code = "0834", Label = "Torsås" });
+            myOut.Values.Add(new Value() { Code = "0840", Label = "Mörbylånga" });
+            myOut.Values.Add(new Value() { Code = "0860", Label = "Hultsfred" });
+            myOut.Values.Add(new Value() { Code = "0861", Label = "Mönsterås" });
+            myOut.Values.Add(new Value() { Code = "0862", Label = "Emmaboda" });
+            myOut.Values.Add(new Value() { Code = "0880", Label = "Kalmar" });
+            myOut.Values.Add(new Value() { Code = "0881", Label = "Nybro" });
+            myOut.Values.Add(new Value() { Code = "0882", Label = "Oskarshamn" });
+            myOut.Values.Add(new Value() { Code = "0883", Label = "Västervik" });
+            myOut.Values.Add(new Value() { Code = "0884", Label = "Vimmerby" });
+            myOut.Values.Add(new Value() { Code = "0885", Label = "Borgholm" });
+            myOut.Values.Add(new Value() { Code = "09", Label = "Gotlands län" });
+            myOut.Values.Add(new Value() { Code = "0980", Label = "Gotland" });
+            myOut.Values.Add(new Value() { Code = "10", Label = "Blekinge län" });
+            myOut.Values.Add(new Value() { Code = "1060", Label = "Olofström" });
+            myOut.Values.Add(new Value() { Code = "1080", Label = "Karlskrona" });
+            myOut.Values.Add(new Value() { Code = "1081", Label = "Ronneby" });
+            myOut.Values.Add(new Value() { Code = "1082", Label = "Karlshamn" });
+            myOut.Values.Add(new Value() { Code = "1083", Label = "Sölvesborg" });
+            myOut.Values.Add(new Value() { Code = "12", Label = "Skåne län" });
+            myOut.Values.Add(new Value() { Code = "1214", Label = "Svalöv" });
+            myOut.Values.Add(new Value() { Code = "1230", Label = "Staffanstorp" });
+            myOut.Values.Add(new Value() { Code = "1231", Label = "Burlöv" });
+            myOut.Values.Add(new Value() { Code = "1233", Label = "Vellinge" });
+            myOut.Values.Add(new Value() { Code = "1256", Label = "Östra Göinge" });
+            myOut.Values.Add(new Value() { Code = "1257", Label = "Örkelljunga" });
+            myOut.Values.Add(new Value() { Code = "1260", Label = "Bjuv" });
+            myOut.Values.Add(new Value() { Code = "1261", Label = "Kävlinge" });
+            myOut.Values.Add(new Value() { Code = "1262", Label = "Lomma" });
+            myOut.Values.Add(new Value() { Code = "1263", Label = "Svedala" });
+            myOut.Values.Add(new Value() { Code = "1264", Label = "Skurup" });
+            myOut.Values.Add(new Value() { Code = "1265", Label = "Sjöbo" });
+            myOut.Values.Add(new Value() { Code = "1266", Label = "Hörby" });
+            myOut.Values.Add(new Value() { Code = "1267", Label = "Höör" });
+            myOut.Values.Add(new Value() { Code = "1270", Label = "Tomelilla" });
+            myOut.Values.Add(new Value() { Code = "1272", Label = "Bromölla" });
+            myOut.Values.Add(new Value() { Code = "1273", Label = "Osby" });
+            myOut.Values.Add(new Value() { Code = "1275", Label = "Perstorp" });
+            myOut.Values.Add(new Value() { Code = "1276", Label = "Klippan" });
+            myOut.Values.Add(new Value() { Code = "1277", Label = "Åstorp" });
+            myOut.Values.Add(new Value() { Code = "1278", Label = "Båstad" });
+            myOut.Values.Add(new Value() { Code = "1280", Label = "Malmö" });
+            myOut.Values.Add(new Value() { Code = "1281", Label = "Lund" });
+            myOut.Values.Add(new Value() { Code = "1282", Label = "Landskrona" });
+            myOut.Values.Add(new Value() { Code = "1283", Label = "Helsingborg" });
+            myOut.Values.Add(new Value() { Code = "1284", Label = "Höganäs" });
+            myOut.Values.Add(new Value() { Code = "1285", Label = "Eslöv" });
+            myOut.Values.Add(new Value() { Code = "1286", Label = "Ystad" });
+            myOut.Values.Add(new Value() { Code = "1287", Label = "Trelleborg" });
+            myOut.Values.Add(new Value() { Code = "1290", Label = "Kristianstad" });
+            myOut.Values.Add(new Value() { Code = "1291", Label = "Simrishamn" });
+            myOut.Values.Add(new Value() { Code = "1292", Label = "Ängelholm" });
+            myOut.Values.Add(new Value() { Code = "1293", Label = "Hässleholm" });
+            myOut.Values.Add(new Value() { Code = "13", Label = "Hallands län" });
+            myOut.Values.Add(new Value() { Code = "1315", Label = "Hylte" });
+            myOut.Values.Add(new Value() { Code = "1380", Label = "Halmstad" });
+            myOut.Values.Add(new Value() { Code = "1381", Label = "Laholm" });
+            myOut.Values.Add(new Value() { Code = "1382", Label = "Falkenberg" });
+            myOut.Values.Add(new Value() { Code = "1383", Label = "Varberg" });
+            myOut.Values.Add(new Value() { Code = "1384", Label = "Kungsbacka" });
+            myOut.Values.Add(new Value() { Code = "14", Label = "Västra Götalands län" });
+            myOut.Values.Add(new Value() { Code = "1401", Label = "Härryda" });
+            myOut.Values.Add(new Value() { Code = "1402", Label = "Partille" });
+            myOut.Values.Add(new Value() { Code = "1407", Label = "Öckerö" });
+            myOut.Values.Add(new Value() { Code = "1415", Label = "Stenungsund" });
+            myOut.Values.Add(new Value() { Code = "1419", Label = "Tjörn" });
+            myOut.Values.Add(new Value() { Code = "1421", Label = "Orust" });
+            myOut.Values.Add(new Value() { Code = "1427", Label = "Sotenäs" });
+            myOut.Values.Add(new Value() { Code = "1430", Label = "Munkedal" });
+            myOut.Values.Add(new Value() { Code = "1435", Label = "Tanum" });
+            myOut.Values.Add(new Value() { Code = "1438", Label = "Dals-Ed" });
+            myOut.Values.Add(new Value() { Code = "1439", Label = "Färgelanda" });
+            myOut.Values.Add(new Value() { Code = "1440", Label = "Ale" });
+            myOut.Values.Add(new Value() { Code = "1441", Label = "Lerum" });
+            myOut.Values.Add(new Value() { Code = "1442", Label = "Vårgårda" });
+            myOut.Values.Add(new Value() { Code = "1443", Label = "Bollebygd" });
+            myOut.Values.Add(new Value() { Code = "1444", Label = "Grästorp" });
+            myOut.Values.Add(new Value() { Code = "1445", Label = "Essunga" });
+            myOut.Values.Add(new Value() { Code = "1446", Label = "Karlsborg" });
+            myOut.Values.Add(new Value() { Code = "1447", Label = "Gullspång" });
+            myOut.Values.Add(new Value() { Code = "1452", Label = "Tranemo" });
+            myOut.Values.Add(new Value() { Code = "1460", Label = "Bengtsfors" });
+            myOut.Values.Add(new Value() { Code = "1461", Label = "Mellerud" });
+            myOut.Values.Add(new Value() { Code = "1462", Label = "Lilla Edet" });
+            myOut.Values.Add(new Value() { Code = "1463", Label = "Mark" });
+            myOut.Values.Add(new Value() { Code = "1465", Label = "Svenljunga" });
+            myOut.Values.Add(new Value() { Code = "1466", Label = "Herrljunga" });
+            myOut.Values.Add(new Value() { Code = "1470", Label = "Vara" });
+            myOut.Values.Add(new Value() { Code = "1471", Label = "Götene" });
+            myOut.Values.Add(new Value() { Code = "1472", Label = "Tibro" });
+            myOut.Values.Add(new Value() { Code = "1473", Label = "Töreboda" });
+            myOut.Values.Add(new Value() { Code = "1480", Label = "Göteborg" });
+            myOut.Values.Add(new Value() { Code = "1481", Label = "Mölndal" });
+            myOut.Values.Add(new Value() { Code = "1482", Label = "Kungälv" });
+            myOut.Values.Add(new Value() { Code = "1484", Label = "Lysekil" });
+            myOut.Values.Add(new Value() { Code = "1485", Label = "Uddevalla" });
+            myOut.Values.Add(new Value() { Code = "1486", Label = "Strömstad" });
+            myOut.Values.Add(new Value() { Code = "1487", Label = "Vänersborg" });
+            myOut.Values.Add(new Value() { Code = "1488", Label = "Trollhättan" });
+            myOut.Values.Add(new Value() { Code = "1489", Label = "Alingsås" });
+            myOut.Values.Add(new Value() { Code = "1490", Label = "Borås" });
+            myOut.Values.Add(new Value() { Code = "1491", Label = "Ulricehamn" });
+            myOut.Values.Add(new Value() { Code = "1492", Label = "Åmål" });
+            myOut.Values.Add(new Value() { Code = "1493", Label = "Mariestad" });
+            myOut.Values.Add(new Value() { Code = "1494", Label = "Lidköping" });
+            myOut.Values.Add(new Value() { Code = "1495", Label = "Skara" });
+            myOut.Values.Add(new Value() { Code = "1496", Label = "Skövde" });
+            myOut.Values.Add(new Value() { Code = "1497", Label = "Hjo" });
+            myOut.Values.Add(new Value() { Code = "1498", Label = "Tidaholm" });
+            myOut.Values.Add(new Value() { Code = "1499", Label = "Falköping" });
+            myOut.Values.Add(new Value() { Code = "17", Label = "Värmlands län" });
+            myOut.Values.Add(new Value() { Code = "1715", Label = "Kil" });
+            myOut.Values.Add(new Value() { Code = "1730", Label = "Eda" });
+            myOut.Values.Add(new Value() { Code = "1737", Label = "Torsby" });
+            myOut.Values.Add(new Value() { Code = "1760", Label = "Storfors" });
+            myOut.Values.Add(new Value() { Code = "1761", Label = "Hammarö" });
+            myOut.Values.Add(new Value() { Code = "1762", Label = "Munkfors" });
+            myOut.Values.Add(new Value() { Code = "1763", Label = "Forshaga" });
+            myOut.Values.Add(new Value() { Code = "1764", Label = "Grums" });
+            myOut.Values.Add(new Value() { Code = "1765", Label = "Årjäng" });
+            myOut.Values.Add(new Value() { Code = "1766", Label = "Sunne" });
+            myOut.Values.Add(new Value() { Code = "1780", Label = "Karlstad" });
+            myOut.Values.Add(new Value() { Code = "1781", Label = "Kristinehamn" });
+            myOut.Values.Add(new Value() { Code = "1782", Label = "Filipstad" });
+            myOut.Values.Add(new Value() { Code = "1783", Label = "Hagfors" });
+            myOut.Values.Add(new Value() { Code = "1784", Label = "Arvika" });
+            myOut.Values.Add(new Value() { Code = "1785", Label = "Säffle" });
+            myOut.Values.Add(new Value() { Code = "18", Label = "Örebro län" });
+            myOut.Values.Add(new Value() { Code = "1814", Label = "Lekeberg" });
+            myOut.Values.Add(new Value() { Code = "1860", Label = "Laxå" });
+            myOut.Values.Add(new Value() { Code = "1861", Label = "Hallsberg" });
+            myOut.Values.Add(new Value() { Code = "1862", Label = "Degerfors" });
+            myOut.Values.Add(new Value() { Code = "1863", Label = "Hällefors" });
+            myOut.Values.Add(new Value() { Code = "1864", Label = "Ljusnarsberg" });
+            myOut.Values.Add(new Value() { Code = "1880", Label = "Örebro" });
+            myOut.Values.Add(new Value() { Code = "1881", Label = "Kumla" });
+            myOut.Values.Add(new Value() { Code = "1882", Label = "Askersund" });
+            myOut.Values.Add(new Value() { Code = "1883", Label = "Karlskoga" });
+            myOut.Values.Add(new Value() { Code = "1884", Label = "Nora" });
+            myOut.Values.Add(new Value() { Code = "1885", Label = "Lindesberg" });
+            myOut.Values.Add(new Value() { Code = "19", Label = "Västmanlands län" });
+            myOut.Values.Add(new Value() { Code = "1904", Label = "Skinnskatteberg" });
+            myOut.Values.Add(new Value() { Code = "1907", Label = "Surahammar" });
+            myOut.Values.Add(new Value() { Code = "1960", Label = "Kungsör" });
+            myOut.Values.Add(new Value() { Code = "1961", Label = "Hallstahammar" });
+            myOut.Values.Add(new Value() { Code = "1962", Label = "Norberg" });
+            myOut.Values.Add(new Value() { Code = "1980", Label = "Västerås" });
+            myOut.Values.Add(new Value() { Code = "1981", Label = "Sala" });
+            myOut.Values.Add(new Value() { Code = "1982", Label = "Fagersta" });
+            myOut.Values.Add(new Value() { Code = "1983", Label = "Köping" });
+            myOut.Values.Add(new Value() { Code = "1984", Label = "Arboga" });
+            myOut.Values.Add(new Value() { Code = "20", Label = "Dalarnas län" });
+            myOut.Values.Add(new Value() { Code = "2021", Label = "Vansbro" });
+            myOut.Values.Add(new Value() { Code = "2023", Label = "Malung-Sälen" });
+            myOut.Values.Add(new Value() { Code = "2026", Label = "Gagnef" });
+            myOut.Values.Add(new Value() { Code = "2029", Label = "Leksand" });
+            myOut.Values.Add(new Value() { Code = "2031", Label = "Rättvik" });
+            myOut.Values.Add(new Value() { Code = "2034", Label = "Orsa" });
+            myOut.Values.Add(new Value() { Code = "2039", Label = "Älvdalen" });
+            myOut.Values.Add(new Value() { Code = "2061", Label = "Smedjebacken" });
+            myOut.Values.Add(new Value() { Code = "2062", Label = "Mora" });
+            myOut.Values.Add(new Value() { Code = "2080", Label = "Falun" });
+            myOut.Values.Add(new Value() { Code = "2081", Label = "Borlänge" });
+            myOut.Values.Add(new Value() { Code = "2082", Label = "Säter" });
+            myOut.Values.Add(new Value() { Code = "2083", Label = "Hedemora" });
+            myOut.Values.Add(new Value() { Code = "2084", Label = "Avesta" });
+            myOut.Values.Add(new Value() { Code = "2085", Label = "Ludvika" });
+            myOut.Values.Add(new Value() { Code = "21", Label = "Gävleborgs län" });
+            myOut.Values.Add(new Value() { Code = "2101", Label = "Ockelbo" });
+            myOut.Values.Add(new Value() { Code = "2104", Label = "Hofors" });
+            myOut.Values.Add(new Value() { Code = "2121", Label = "Ovanåker" });
+            myOut.Values.Add(new Value() { Code = "2132", Label = "Nordanstig" });
+            myOut.Values.Add(new Value() { Code = "2161", Label = "Ljusdal" });
+            myOut.Values.Add(new Value() { Code = "2180", Label = "Gävle" });
+            myOut.Values.Add(new Value() { Code = "2181", Label = "Sandviken" });
+            myOut.Values.Add(new Value() { Code = "2182", Label = "Söderhamn" });
+            myOut.Values.Add(new Value() { Code = "2183", Label = "Bollnäs" });
+            myOut.Values.Add(new Value() { Code = "2184", Label = "Hudiksvall" });
+            myOut.Values.Add(new Value() { Code = "22", Label = "Västernorrlands län" });
+            myOut.Values.Add(new Value() { Code = "2260", Label = "Ånge" });
+            myOut.Values.Add(new Value() { Code = "2262", Label = "Timrå" });
+            myOut.Values.Add(new Value() { Code = "2280", Label = "Härnösand" });
+            myOut.Values.Add(new Value() { Code = "2281", Label = "Sundsvall" });
+            myOut.Values.Add(new Value() { Code = "2282", Label = "Kramfors" });
+            myOut.Values.Add(new Value() { Code = "2283", Label = "Sollefteå" });
+            myOut.Values.Add(new Value() { Code = "2284", Label = "Örnsköldsvik" });
+            myOut.Values.Add(new Value() { Code = "23", Label = "Jämtlands län" });
+            myOut.Values.Add(new Value() { Code = "2303", Label = "Ragunda" });
+            myOut.Values.Add(new Value() { Code = "2305", Label = "Bräcke" });
+            myOut.Values.Add(new Value() { Code = "2309", Label = "Krokom" });
+            myOut.Values.Add(new Value() { Code = "2313", Label = "Strömsund" });
+            myOut.Values.Add(new Value() { Code = "2321", Label = "Åre" });
+            myOut.Values.Add(new Value() { Code = "2326", Label = "Berg" });
+            myOut.Values.Add(new Value() { Code = "2361", Label = "Härjedalen" });
+            myOut.Values.Add(new Value() { Code = "2380", Label = "Östersund" });
+            myOut.Values.Add(new Value() { Code = "24", Label = "Västerbottens län" });
+            myOut.Values.Add(new Value() { Code = "2401", Label = "Nordmaling" });
+            myOut.Values.Add(new Value() { Code = "2403", Label = "Bjurholm" });
+            myOut.Values.Add(new Value() { Code = "2404", Label = "Vindeln" });
+            myOut.Values.Add(new Value() { Code = "2409", Label = "Robertsfors" });
+            myOut.Values.Add(new Value() { Code = "2417", Label = "Norsjö" });
+            myOut.Values.Add(new Value() { Code = "2418", Label = "Malå" });
+            myOut.Values.Add(new Value() { Code = "2421", Label = "Storuman" });
+            myOut.Values.Add(new Value() { Code = "2422", Label = "Sorsele" });
+            myOut.Values.Add(new Value() { Code = "2425", Label = "Dorotea" });
+            myOut.Values.Add(new Value() { Code = "2460", Label = "Vännäs" });
+            myOut.Values.Add(new Value() { Code = "2462", Label = "Vilhelmina" });
+            myOut.Values.Add(new Value() { Code = "2463", Label = "Åsele" });
+            myOut.Values.Add(new Value() { Code = "2480", Label = "Umeå" });
+            myOut.Values.Add(new Value() { Code = "2481", Label = "Lycksele" });
+            myOut.Values.Add(new Value() { Code = "2482", Label = "Skellefteå" });
+            myOut.Values.Add(new Value() { Code = "25", Label = "Norrbottens län" });
+            myOut.Values.Add(new Value() { Code = "2505", Label = "Arvidsjaur" });
+            myOut.Values.Add(new Value() { Code = "2506", Label = "Arjeplog" });
+            myOut.Values.Add(new Value() { Code = "2510", Label = "Jokkmokk" });
+            myOut.Values.Add(new Value() { Code = "2513", Label = "Överkalix" });
+            myOut.Values.Add(new Value() { Code = "2514", Label = "Kalix" });
+            myOut.Values.Add(new Value() { Code = "2518", Label = "Övertorneå" });
+            myOut.Values.Add(new Value() { Code = "2521", Label = "Pajala" });
+            myOut.Values.Add(new Value() { Code = "2523", Label = "Gällivare" });
+            myOut.Values.Add(new Value() { Code = "2560", Label = "Älvsbyn" });
+            myOut.Values.Add(new Value() { Code = "2580", Label = "Luleå" });
+            myOut.Values.Add(new Value() { Code = "2581", Label = "Piteå" });
+            myOut.Values.Add(new Value() { Code = "2582", Label = "Boden" });
+            myOut.Values.Add(new Value() { Code = "2583", Label = "Haparanda" });
+            myOut.Values.Add(new Value() { Code = "2584", Label = "Kiruna" });
+
+            #endregion values
+
+            #region codeLists
+            myOut.CodeLists = new List<CodeListInformation>();
+
+            myOut.CodeLists.Add(new CodeListInformation()
+            {
+                Id = "vs_RegionKommun07",
+                Label = "Kommuner",
+                Links = new List<Link>() { new() { Rel = "metadata", Href = "https://my-site.com/api/v2/tables/TAB638/codelists/vs_RegionKommun07" } }
+            });
+
+            myOut.CodeLists.Add(new CodeListInformation()
+            {
+                Id = "vs_RegionLän07",
+                Label = "Län",
+                Links = new List<Link>() { new() { Rel = "metadata", Href = "https://my-site.com/api/v2/tables/TAB638/codelists/vs_RegionLän07" } }
+            });
+
+            myOut.CodeLists.Add(new CodeListInformation()
+            {
+                Id = "vs_RegionRiket99",
+                Label = "Riket",
+                Links = new List<Link>() { new() { Rel = "metadata", Href = "https://my-site.com/api/v2/tables/TAB638/codelists/vs_RegionRiket99" } }
+            });
+
+            myOut.CodeLists.Add(new CodeListInformation()
+            {
+                Id = "agg_RegionA-region_2",
+                Label = "A-regioner",
+                Links = new List<Link>() { new() { Rel = "metadata", Href = "https://my-site.com/api/v2/tables/TAB638/codelists/agg_RegionA-region_2" } }
+            });
+
+            myOut.CodeLists.Add(new CodeListInformation()
+            {
+                Id = "agg_RegionKommungrupp2005-_1",
+                Label = "Kommungrupper (SKL:s) 2005",
+                Links = new List<Link>() { new()
+                                {
+                                    Rel ="metadata",
+                                   Href ="https://my-site.com/api/v2/tables/TAB638/codelists/agg_RegionKommungrupp2005-_1"} }
+            });
+            myOut.CodeLists.Add(new CodeListInformation()
+            {
+                Id = "agg_RegionKommungrupp2011-",
+                Label = "Kommungrupper (SKL:s) 2011",
+                Links = new List<Link>() { new()
+                                {
+                                    Rel ="metadata",
+                                   Href ="https://my-site.com/api/v2/tables/TAB638/codelists/agg_RegionKommungrupp2011-"} }
+            });
+            myOut.CodeLists.Add(new CodeListInformation()
+            {
+                Id = "agg_RegionKommungrupp2017-",
+                Label = "Kommungrupper (SKL:s) 2017",
+                Links = new List<Link>() { new()
+                                {
+                                    Rel ="metadata",
+                                   Href ="https://my-site.com/api/v2/tables/TAB638/codelists/agg_RegionKommungrupp2017-"} }
+            });
+            myOut.CodeLists.Add(new CodeListInformation()
+            {
+                Id = "agg_RegionLA1998",
+                Label = "Lokalaarbetsmarknader 1998",
+                Links = new List<Link>() { new()
+                                {
+                                    Rel ="metadata",
+                                   Href ="https://my-site.com/api/v2/tables/TAB638/codelists/agg_RegionLA1998"} }
+            });
+            myOut.CodeLists.Add(new CodeListInformation()
+            {
+                Id = "agg_RegionLA2003_1",
+                Label = "Lokalaarbetsmarknader 2003",
+                Links = new List<Link>() { new()
+                                {
+                                    Rel ="metadata",
+                                   Href ="https://my-site.com/api/v2/tables/TAB638/codelists/agg_RegionLA2003_1"} }
+            });
+            myOut.CodeLists.Add(new CodeListInformation()
+            {
+                Id = "agg_RegionLA2008",
+                Label = "Lokalaarbetsmarknader 2008",
+                Links = new List<Link>() { new()
+                                {
+                                    Rel ="metadata",
+                                   Href ="https://my-site.com/api/v2/tables/TAB638/codelists/agg_RegionLA2008"} }
+            });
+            myOut.CodeLists.Add(new CodeListInformation()
+            {
+                Id = "agg_RegionLA2013",
+                Label = "Lokalaarbetsmarknader 2013",
+                Links = new List<Link>() { new()
+                                {
+                                    Rel ="metadata",
+                                   Href ="https://my-site.com/api/v2/tables/TAB638/codelists/agg_RegionLA2013"} }
+            });
+            myOut.CodeLists.Add(new CodeListInformation()
+            {
+                Id = "agg_RegionLA2018",
+                Label = "Lokalaarbetsmarknader 2018",
+                Links = new List<Link>() { new()
+                                {
+                                    Rel ="metadata",
+                                   Href ="https://my-site.com/api/v2/tables/TAB638/codelists/agg_Ålder5år"} }
+            });
+            myOut.CodeLists.Add(new CodeListInformation()
+            {
+                Id = "agg_RegionStoromr-04_2",
+                Label = "Sorstadsområder -2004",
+                Links = new List<Link>() { new()
+                                {
+                                    Rel ="metadata",
+                                   Href ="https://my-site.com/api/v2/tables/TAB638/codelists/agg_RegionStoromr-04_2"} }
+            });
+            myOut.CodeLists.Add(new CodeListInformation()
+            {
+                Id = "agg_RegionStoromr05-_1",
+                Label = "Sorstadsområder 2005-",
+                Links = new List<Link>() { new()
+                                {
+                                    Rel ="metadata",
+                                   Href ="https://my-site.com/api/v2/tables/TAB638/codelists/agg_RegionStoromr05-_1"} }
+            });
+            myOut.CodeLists.Add(new CodeListInformation()
+            {
+                Id = "agg_RegionNUTS1_2008",
+                Label = "NUTS1 fr.o.m 2008",
+                Links = new List<Link>() { new()
+                                {
+                                    Rel ="metadata",
+                                   Href ="https://my-site.com/api/v2/tables/TAB638/codelists/agg_RegionNUTS1_2008"} }
+            });
+            myOut.CodeLists.Add(new CodeListInformation()
+            {
+                Id = "agg_RegionNUTS2_2008",
+                Label = "NUTS2 fr.o.m 2008",
+                Links = new List<Link>() { new()
+                                {
+                                    Rel ="metadata",
+                                   Href ="https://my-site.com/api/v2/tables/TAB638/codelists/agg_RegionNUTS2_2008"} }
+            });
+            myOut.CodeLists.Add(new CodeListInformation()
+            {
+                Id = "agg_RegionNUTS3_2008",
+                Label = "NUTS3 fr.o.m 2008",
+                Links = new List<Link>() { new()
+                                {
+                                    Rel ="metadata",
+                                   Href ="https://my-site.com/api/v2/tables/TAB638/codelists/agg_RegionNUTS3_2008"} }
+            });
+            #endregion codeLists
+
+            return myOut;
+
+        }
+
+        
 
 
 

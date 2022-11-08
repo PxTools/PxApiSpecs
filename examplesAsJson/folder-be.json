@@ -1,0 +1,67 @@
+{
+  "id": "BE0101",
+  "objectType": "folder",
+  "label": "Balance statistics",
+  "description": "Balance statistics",
+  "folderContents": [
+    {
+      "id": "01",
+      "objectType": "folder-information",
+      "label": "Annual statistics",
+      "description": "Annual statistics",
+      "links": [
+        {
+          "rel": "folder",
+          "href": "https://my-site.com/api/v2/navigation/01"
+        }
+      ]
+    },
+    {
+      "id": "BEH1",
+      "objectType": "heading",
+      "label": "I am heading",
+      "description": "I am heading"
+    },
+    {
+      "id": "TAB0001",
+      "objectType": "table",
+      "label": "Corporations Financial Assets and Liabilities. Quarterly 1998K2 - 2021K4",
+      "description": "Corporations Financial Assets and Liabilities by item. Quarterly 1998K2 - 2021K4 [2022-03-11]",
+      "tags": [
+        "Money",
+        "Gold"
+      ],
+      "updated": "2017-09-08T06:00:00.714Z",
+      "category": "official",
+      "links": [
+        {
+          "rel": "self",
+          "href": "https://my-site.com/api/v2/tables/TAB0001"
+        },
+        {
+          "rel": "metadata",
+          "href": "https://my-site.com/api/v2/tables/TAB0001/metadata"
+        },
+        {
+          "rel": "data",
+          "href": "https://my-site.com/api/v2/tables/TAB0001/data"
+        }
+      ],
+      "variablesName": [
+        "observations",
+        "region",
+        "marital status",
+        "age"
+      ],
+      "firstPeriod": "1998K2",
+      "lastPeriod": "2021K4",
+      "discontinued": false
+    }
+  ],
+  "links": [
+    {
+      "rel": "self",
+      "href": "https://my-site.com/api/v2/navigation/BE0101"
+    }
+  ]
+}

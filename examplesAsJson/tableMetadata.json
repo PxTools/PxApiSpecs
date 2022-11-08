@@ -1,0 +1,2317 @@
+{
+  "id": "TAB638",
+  "label": "Folkmängden efter region; civilstånd; ålder och kön. År 1968 - 2021",
+  "description": "",
+  "agregationPossible": false,
+  "officalStatistics": true,
+  "source": "SCB",
+  "copyright": "CC0-1.0",
+  "updated": null,
+  "notes": [
+    {
+      "conditions": null,
+      "mandatory": true,
+      "text": "Fr o m 2007-01-01 överförs Heby kommun från Västmanlands län till Uppsala län. Hebys kommunkod ändras från 1917 till 0331. "
+    },
+    {
+      "conditions": null,
+      "mandatory": true,
+      "text": "Registrerat partnerskap reglerade parförhållanden mellan personer av samma kön och fanns från 1995 till 2009. Registrerade partners räknas som Gifta, Separerade partners som Skilda och Efterlevande partners som Änka/änklingar."
+    },
+    {
+      "conditions": [
+        {
+          "variableCode": "ContentsCode",
+          "valueCode": "BE0101N1"
+        },
+        {
+          "variableCode": "Region",
+          "valueCode": "03"
+        }
+      ],
+      "mandatory": true,
+      "text": "Fr o m 2007-01-01 utökas Uppsala län med Heby kommun. Observera att länssiffrorna inte är jämförbara med länssiffrorna bakåt i tiden."
+    },
+    {
+      "conditions": [
+        {
+          "variableCode": "ContentsCode",
+          "valueCode": "BE0101N1"
+        },
+        {
+          "variableCode": "Region",
+          "valueCode": "19"
+        }
+      ],
+      "mandatory": false,
+      "text": "Fr o m 2007-01-01 minskar Västmanlands län med Heby kommun. Observera att länssiffrorna inte är jämförbara med länssiffrorna bakåt i tiden."
+    }
+  ],
+  "contacts": [
+    {
+      "name": "Tomas Johansson",
+      "phone": "+46 010-479 64 26",
+      "mail": "tomas.johansson@scb.se"
+    },
+    {
+      "name": "(SCB) Statistikservice",
+      "phone": "+46 010-479 50 0",
+      "mail": "information@scb.se"
+    }
+  ],
+  "contentsVariable": {
+    "id": "ContentsCode",
+    "label": "tabellinnehåll",
+    "type": 0,
+    "values": [
+      {
+        "baseperiod": null,
+        "adjustment": "None",
+        "measuringType": "Stock",
+        "preferedNumberOfDecimals": 0,
+        "priceType": 0,
+        "unit": "antall",
+        "refrencePeriod": "31 december repektive år",
+        "code": "BE0101N1",
+        "label": "Folkmängd",
+        "notes": [
+          {
+            "mandatory": true,
+            "text": "Uppgifterna avser förhållandena den 31 december för valt/valda år enligt den regionala indelning som gäller den 1 januari året efter."
+          }
+        ]
+      },
+      {
+        "baseperiod": null,
+        "adjustment": "None",
+        "measuringType": "Flow",
+        "preferedNumberOfDecimals": 0,
+        "priceType": 0,
+        "unit": "antall",
+        "code": "BE0101N2",
+        "label": "Folkökning",
+        "notes": [
+          {
+            "mandatory": false,
+            "text": "Folkökningen definieras som skillnaden mellan folkmängden vid årets början och årets slut."
+          }
+        ]
+      }
+    ]
+  },
+  "timeVariable": {
+    "id": "Tid",
+    "label": "år",
+    "type": 0,
+    "values": [
+      {
+        "code": "1968",
+        "label": "1968"
+      },
+      {
+        "code": "1969",
+        "label": "1969"
+      },
+      {
+        "code": "1970",
+        "label": "1970"
+      },
+      {
+        "code": "1971",
+        "label": "1971"
+      },
+      {
+        "code": "1972",
+        "label": "1972"
+      },
+      {
+        "code": "1973",
+        "label": "1973"
+      },
+      {
+        "code": "1974",
+        "label": "1974"
+      },
+      {
+        "code": "1975",
+        "label": "1975"
+      },
+      {
+        "code": "1976",
+        "label": "1976"
+      },
+      {
+        "code": "1977",
+        "label": "1977"
+      },
+      {
+        "code": "1978",
+        "label": "1978"
+      },
+      {
+        "code": "1979",
+        "label": "1979"
+      },
+      {
+        "code": "1980",
+        "label": "1980"
+      },
+      {
+        "code": "1981",
+        "label": "1981"
+      },
+      {
+        "code": "1982",
+        "label": "1982"
+      },
+      {
+        "code": "1983",
+        "label": "1983"
+      },
+      {
+        "code": "1984",
+        "label": "1984"
+      },
+      {
+        "code": "1985",
+        "label": "1985"
+      },
+      {
+        "code": "1986",
+        "label": "1986"
+      },
+      {
+        "code": "1987",
+        "label": "1987"
+      },
+      {
+        "code": "1988",
+        "label": "1988"
+      },
+      {
+        "code": "1989",
+        "label": "1989"
+      },
+      {
+        "code": "1990",
+        "label": "1990"
+      },
+      {
+        "code": "1991",
+        "label": "1991"
+      },
+      {
+        "code": "1992",
+        "label": "1992"
+      },
+      {
+        "code": "1993",
+        "label": "1993"
+      },
+      {
+        "code": "1994",
+        "label": "1994"
+      },
+      {
+        "code": "1995",
+        "label": "1995"
+      },
+      {
+        "code": "1996",
+        "label": "1996"
+      },
+      {
+        "code": "1997",
+        "label": "1997"
+      },
+      {
+        "code": "1998",
+        "label": "1998"
+      },
+      {
+        "code": "1999",
+        "label": "1999"
+      },
+      {
+        "code": "2000",
+        "label": "2000"
+      },
+      {
+        "code": "2001",
+        "label": "2001"
+      },
+      {
+        "code": "2002",
+        "label": "2002"
+      },
+      {
+        "code": "2003",
+        "label": "2003"
+      },
+      {
+        "code": "2004",
+        "label": "2004"
+      },
+      {
+        "code": "2005",
+        "label": "2005"
+      },
+      {
+        "code": "2006",
+        "label": "2006"
+      },
+      {
+        "code": "2007",
+        "label": "2007"
+      },
+      {
+        "code": "2008",
+        "label": "2008"
+      },
+      {
+        "code": "2009",
+        "label": "2009"
+      },
+      {
+        "code": "2010",
+        "label": "2010"
+      },
+      {
+        "code": "2011",
+        "label": "2011"
+      },
+      {
+        "code": "2012",
+        "label": "2012"
+      },
+      {
+        "code": "2013",
+        "label": "2013"
+      },
+      {
+        "code": "2014",
+        "label": "2014"
+      },
+      {
+        "code": "2015",
+        "label": "2015"
+      },
+      {
+        "code": "2016",
+        "label": "2016"
+      },
+      {
+        "code": "2017",
+        "label": "2017"
+      },
+      {
+        "code": "2018",
+        "label": "2018"
+      },
+      {
+        "code": "2019",
+        "label": "2019"
+      },
+      {
+        "code": "2020",
+        "label": "2020"
+      },
+      {
+        "code": "2021",
+        "label": "2021"
+      }
+    ],
+    "frequency": "A",
+    "firstPeriod": "1968",
+    "lastPeriod": "2021"
+  },
+  "geoVariables": [
+    {
+      "id": "Region",
+      "label": "region",
+      "type": 0,
+      "values": [
+        {
+          "code": "00",
+          "label": "Riket"
+        },
+        {
+          "code": "01",
+          "label": "Stockholms län"
+        },
+        {
+          "code": "0114",
+          "label": "Upplands Väsby"
+        },
+        {
+          "code": "0115",
+          "label": "Vallentuna"
+        },
+        {
+          "code": "0117",
+          "label": "Österåker"
+        },
+        {
+          "code": "0120",
+          "label": "Värmdö"
+        },
+        {
+          "code": "0123",
+          "label": "Järfälla"
+        },
+        {
+          "code": "0125",
+          "label": "Ekerö"
+        },
+        {
+          "code": "0126",
+          "label": "Huddinge"
+        },
+        {
+          "code": "0127",
+          "label": "Botkyrka"
+        },
+        {
+          "code": "0128",
+          "label": "Salem"
+        },
+        {
+          "code": "0136",
+          "label": "Haninge"
+        },
+        {
+          "code": "0138",
+          "label": "Tyresö"
+        },
+        {
+          "code": "0139",
+          "label": "Upplands-Bro"
+        },
+        {
+          "code": "0140",
+          "label": "Nykvarn",
+          "notes": [
+            {
+              "mandatory": true,
+              "text": "Ny regional indelning fr.o.m. 1999-01-01. Delar av Södertälje kommun (kod 0181) bildar en ny kommun benämnd Nykvarn (kod 0140)."
+            }
+          ]
+        },
+        {
+          "code": "0160",
+          "label": "Täby"
+        },
+        {
+          "code": "0162",
+          "label": "Danderyd"
+        },
+        {
+          "code": "0163",
+          "label": "Sollentuna"
+        },
+        {
+          "code": "0180",
+          "label": "Stockholm"
+        },
+        {
+          "code": "0181",
+          "label": "Södertälje",
+          "notes": [
+            {
+              "mandatory": true,
+              "text": "Ny regional indelning fr.o.m. 1999-01-01. Delar av Södertälje kommun (kod 0181) bildar en ny kommun benämnd Nykvarn (kod 0140)."
+            }
+          ]
+        },
+        {
+          "code": "0182",
+          "label": "Nacka"
+        },
+        {
+          "code": "0183",
+          "label": "Sundbyberg"
+        },
+        {
+          "code": "0184",
+          "label": "Solna"
+        },
+        {
+          "code": "0186",
+          "label": "Lidingö",
+          "notes": [
+            {
+              "mandatory": true,
+              "text": "Från och med 2011-01-01 tillhör Storholmen Lidingö (0186) som tidigare tillhörde Vaxholm (0187)."
+            }
+          ]
+        },
+        {
+          "code": "0187",
+          "label": "Vaxholm",
+          "notes": [
+            {
+              "mandatory": true,
+              "text": "Från och med 2011-01-01 tillhör Storholmen Lidingö (0186) som tidigare tillhörde Vaxholm (0187)."
+            }
+          ]
+        },
+        {
+          "code": "0188",
+          "label": "Norrtälje"
+        },
+        {
+          "code": "0191",
+          "label": "Sigtuna"
+        },
+        {
+          "code": "0192",
+          "label": "Nynäshamn"
+        },
+        {
+          "code": "03",
+          "label": "Uppsala län"
+        },
+        {
+          "code": "0305",
+          "label": "Håbo"
+        },
+        {
+          "code": "0319",
+          "label": "Älvkarleby"
+        },
+        {
+          "code": "0330",
+          "label": "Knivsta",
+          "notes": [
+            {
+              "mandatory": true,
+              "text": "Ny regional indelning fr.o.m. 2003-01-01. Delar av Uppsala kommun bildar en ny kommun benämnd Knivsta kommun."
+            }
+          ]
+        },
+        {
+          "code": "0331",
+          "label": "Heby"
+        },
+        {
+          "code": "0360",
+          "label": "Tierp"
+        },
+        {
+          "code": "0380",
+          "label": "Uppsala",
+          "notes": [
+            {
+              "mandatory": true,
+              "text": "Ny regional indelning fr.o.m. 2003-01-01. Delar av Uppsala kommun bildar en ny kommun benämnd Knivsta kommun."
+            }
+          ]
+        },
+        {
+          "code": "0381",
+          "label": "Enköping"
+        },
+        {
+          "code": "0382",
+          "label": "Östhammar"
+        },
+        {
+          "code": "04",
+          "label": "Södermanlands län"
+        },
+        {
+          "code": "0428",
+          "label": "Vingåker"
+        },
+        {
+          "code": "0461",
+          "label": "Gnesta"
+        },
+        {
+          "code": "0480",
+          "label": "Nyköping"
+        },
+        {
+          "code": "0481",
+          "label": "Oxelösund"
+        },
+        {
+          "code": "0482",
+          "label": "Flen"
+        },
+        {
+          "code": "0483",
+          "label": "Katrineholm"
+        },
+        {
+          "code": "0484",
+          "label": "Eskilstuna"
+        },
+        {
+          "code": "0486",
+          "label": "Strängnäs"
+        },
+        {
+          "code": "0488",
+          "label": "Trosa"
+        },
+        {
+          "code": "05",
+          "label": "Östergötlands län"
+        },
+        {
+          "code": "0509",
+          "label": "Ödeshög"
+        },
+        {
+          "code": "0512",
+          "label": "Ydre"
+        },
+        {
+          "code": "0513",
+          "label": "Kinda"
+        },
+        {
+          "code": "0560",
+          "label": "Boxholm"
+        },
+        {
+          "code": "0561",
+          "label": "Åtvidaberg"
+        },
+        {
+          "code": "0562",
+          "label": "Finspång"
+        },
+        {
+          "code": "0563",
+          "label": "Valdemarsvik"
+        },
+        {
+          "code": "0580",
+          "label": "Linköping"
+        },
+        {
+          "code": "0581",
+          "label": "Norrköping"
+        },
+        {
+          "code": "0582",
+          "label": "Söderköping"
+        },
+        {
+          "code": "0583",
+          "label": "Motala"
+        },
+        {
+          "code": "0584",
+          "label": "Vadstena"
+        },
+        {
+          "code": "0586",
+          "label": "Mjölby"
+        },
+        {
+          "code": "06",
+          "label": "Jönköpings län"
+        },
+        {
+          "code": "0604",
+          "label": "Aneby"
+        },
+        {
+          "code": "0617",
+          "label": "Gnosjö"
+        },
+        {
+          "code": "0642",
+          "label": "Mullsjö"
+        },
+        {
+          "code": "0643",
+          "label": "Habo"
+        },
+        {
+          "code": "0662",
+          "label": "Gislaved"
+        },
+        {
+          "code": "0665",
+          "label": "Vaggeryd"
+        },
+        {
+          "code": "0680",
+          "label": "Jönköping"
+        },
+        {
+          "code": "0682",
+          "label": "Nässjö"
+        },
+        {
+          "code": "0683",
+          "label": "Värnamo"
+        },
+        {
+          "code": "0684",
+          "label": "Sävsjö"
+        },
+        {
+          "code": "0685",
+          "label": "Vetlanda"
+        },
+        {
+          "code": "0686",
+          "label": "Eksjö"
+        },
+        {
+          "code": "0687",
+          "label": "Tranås"
+        },
+        {
+          "code": "07",
+          "label": "Kronobergs län"
+        },
+        {
+          "code": "0760",
+          "label": "Uppvidinge"
+        },
+        {
+          "code": "0761",
+          "label": "Lessebo"
+        },
+        {
+          "code": "0763",
+          "label": "Tingsryd"
+        },
+        {
+          "code": "0764",
+          "label": "Alvesta"
+        },
+        {
+          "code": "0765",
+          "label": "Älmhult"
+        },
+        {
+          "code": "0767",
+          "label": "Markaryd"
+        },
+        {
+          "code": "0780",
+          "label": "Växjö"
+        },
+        {
+          "code": "0781",
+          "label": "Ljungby"
+        },
+        {
+          "code": "08",
+          "label": "Kalmar län"
+        },
+        {
+          "code": "0821",
+          "label": "Högsby"
+        },
+        {
+          "code": "0834",
+          "label": "Torsås"
+        },
+        {
+          "code": "0840",
+          "label": "Mörbylånga"
+        },
+        {
+          "code": "0860",
+          "label": "Hultsfred"
+        },
+        {
+          "code": "0861",
+          "label": "Mönsterås"
+        },
+        {
+          "code": "0862",
+          "label": "Emmaboda"
+        },
+        {
+          "code": "0880",
+          "label": "Kalmar"
+        },
+        {
+          "code": "0881",
+          "label": "Nybro"
+        },
+        {
+          "code": "0882",
+          "label": "Oskarshamn"
+        },
+        {
+          "code": "0883",
+          "label": "Västervik"
+        },
+        {
+          "code": "0884",
+          "label": "Vimmerby"
+        },
+        {
+          "code": "0885",
+          "label": "Borgholm"
+        },
+        {
+          "code": "09",
+          "label": "Gotlands län"
+        },
+        {
+          "code": "0980",
+          "label": "Gotland"
+        },
+        {
+          "code": "10",
+          "label": "Blekinge län"
+        },
+        {
+          "code": "1060",
+          "label": "Olofström"
+        },
+        {
+          "code": "1080",
+          "label": "Karlskrona"
+        },
+        {
+          "code": "1081",
+          "label": "Ronneby"
+        },
+        {
+          "code": "1082",
+          "label": "Karlshamn"
+        },
+        {
+          "code": "1083",
+          "label": "Sölvesborg"
+        },
+        {
+          "code": "12",
+          "label": "Skåne län"
+        },
+        {
+          "code": "1214",
+          "label": "Svalöv"
+        },
+        {
+          "code": "1230",
+          "label": "Staffanstorp"
+        },
+        {
+          "code": "1231",
+          "label": "Burlöv"
+        },
+        {
+          "code": "1233",
+          "label": "Vellinge"
+        },
+        {
+          "code": "1256",
+          "label": "Östra Göinge"
+        },
+        {
+          "code": "1257",
+          "label": "Örkelljunga"
+        },
+        {
+          "code": "1260",
+          "label": "Bjuv"
+        },
+        {
+          "code": "1261",
+          "label": "Kävlinge"
+        },
+        {
+          "code": "1262",
+          "label": "Lomma"
+        },
+        {
+          "code": "1263",
+          "label": "Svedala"
+        },
+        {
+          "code": "1264",
+          "label": "Skurup"
+        },
+        {
+          "code": "1265",
+          "label": "Sjöbo"
+        },
+        {
+          "code": "1266",
+          "label": "Hörby"
+        },
+        {
+          "code": "1267",
+          "label": "Höör"
+        },
+        {
+          "code": "1270",
+          "label": "Tomelilla"
+        },
+        {
+          "code": "1272",
+          "label": "Bromölla"
+        },
+        {
+          "code": "1273",
+          "label": "Osby"
+        },
+        {
+          "code": "1275",
+          "label": "Perstorp"
+        },
+        {
+          "code": "1276",
+          "label": "Klippan"
+        },
+        {
+          "code": "1277",
+          "label": "Åstorp"
+        },
+        {
+          "code": "1278",
+          "label": "Båstad"
+        },
+        {
+          "code": "1280",
+          "label": "Malmö"
+        },
+        {
+          "code": "1281",
+          "label": "Lund"
+        },
+        {
+          "code": "1282",
+          "label": "Landskrona"
+        },
+        {
+          "code": "1283",
+          "label": "Helsingborg"
+        },
+        {
+          "code": "1284",
+          "label": "Höganäs"
+        },
+        {
+          "code": "1285",
+          "label": "Eslöv"
+        },
+        {
+          "code": "1286",
+          "label": "Ystad"
+        },
+        {
+          "code": "1287",
+          "label": "Trelleborg"
+        },
+        {
+          "code": "1290",
+          "label": "Kristianstad"
+        },
+        {
+          "code": "1291",
+          "label": "Simrishamn"
+        },
+        {
+          "code": "1292",
+          "label": "Ängelholm"
+        },
+        {
+          "code": "1293",
+          "label": "Hässleholm"
+        },
+        {
+          "code": "13",
+          "label": "Hallands län"
+        },
+        {
+          "code": "1315",
+          "label": "Hylte"
+        },
+        {
+          "code": "1380",
+          "label": "Halmstad"
+        },
+        {
+          "code": "1381",
+          "label": "Laholm"
+        },
+        {
+          "code": "1382",
+          "label": "Falkenberg"
+        },
+        {
+          "code": "1383",
+          "label": "Varberg"
+        },
+        {
+          "code": "1384",
+          "label": "Kungsbacka"
+        },
+        {
+          "code": "14",
+          "label": "Västra Götalands län"
+        },
+        {
+          "code": "1401",
+          "label": "Härryda"
+        },
+        {
+          "code": "1402",
+          "label": "Partille"
+        },
+        {
+          "code": "1407",
+          "label": "Öckerö"
+        },
+        {
+          "code": "1415",
+          "label": "Stenungsund"
+        },
+        {
+          "code": "1419",
+          "label": "Tjörn"
+        },
+        {
+          "code": "1421",
+          "label": "Orust"
+        },
+        {
+          "code": "1427",
+          "label": "Sotenäs"
+        },
+        {
+          "code": "1430",
+          "label": "Munkedal"
+        },
+        {
+          "code": "1435",
+          "label": "Tanum"
+        },
+        {
+          "code": "1438",
+          "label": "Dals-Ed"
+        },
+        {
+          "code": "1439",
+          "label": "Färgelanda"
+        },
+        {
+          "code": "1440",
+          "label": "Ale"
+        },
+        {
+          "code": "1441",
+          "label": "Lerum"
+        },
+        {
+          "code": "1442",
+          "label": "Vårgårda"
+        },
+        {
+          "code": "1443",
+          "label": "Bollebygd"
+        },
+        {
+          "code": "1444",
+          "label": "Grästorp"
+        },
+        {
+          "code": "1445",
+          "label": "Essunga"
+        },
+        {
+          "code": "1446",
+          "label": "Karlsborg"
+        },
+        {
+          "code": "1447",
+          "label": "Gullspång"
+        },
+        {
+          "code": "1452",
+          "label": "Tranemo"
+        },
+        {
+          "code": "1460",
+          "label": "Bengtsfors"
+        },
+        {
+          "code": "1461",
+          "label": "Mellerud"
+        },
+        {
+          "code": "1462",
+          "label": "Lilla Edet"
+        },
+        {
+          "code": "1463",
+          "label": "Mark"
+        },
+        {
+          "code": "1465",
+          "label": "Svenljunga"
+        },
+        {
+          "code": "1466",
+          "label": "Herrljunga"
+        },
+        {
+          "code": "1470",
+          "label": "Vara"
+        },
+        {
+          "code": "1471",
+          "label": "Götene"
+        },
+        {
+          "code": "1472",
+          "label": "Tibro"
+        },
+        {
+          "code": "1473",
+          "label": "Töreboda"
+        },
+        {
+          "code": "1480",
+          "label": "Göteborg"
+        },
+        {
+          "code": "1481",
+          "label": "Mölndal"
+        },
+        {
+          "code": "1482",
+          "label": "Kungälv"
+        },
+        {
+          "code": "1484",
+          "label": "Lysekil"
+        },
+        {
+          "code": "1485",
+          "label": "Uddevalla"
+        },
+        {
+          "code": "1486",
+          "label": "Strömstad"
+        },
+        {
+          "code": "1487",
+          "label": "Vänersborg"
+        },
+        {
+          "code": "1488",
+          "label": "Trollhättan"
+        },
+        {
+          "code": "1489",
+          "label": "Alingsås"
+        },
+        {
+          "code": "1490",
+          "label": "Borås"
+        },
+        {
+          "code": "1491",
+          "label": "Ulricehamn"
+        },
+        {
+          "code": "1492",
+          "label": "Åmål"
+        },
+        {
+          "code": "1493",
+          "label": "Mariestad"
+        },
+        {
+          "code": "1494",
+          "label": "Lidköping"
+        },
+        {
+          "code": "1495",
+          "label": "Skara"
+        },
+        {
+          "code": "1496",
+          "label": "Skövde"
+        },
+        {
+          "code": "1497",
+          "label": "Hjo"
+        },
+        {
+          "code": "1498",
+          "label": "Tidaholm"
+        },
+        {
+          "code": "1499",
+          "label": "Falköping"
+        },
+        {
+          "code": "17",
+          "label": "Värmlands län"
+        },
+        {
+          "code": "1715",
+          "label": "Kil"
+        },
+        {
+          "code": "1730",
+          "label": "Eda"
+        },
+        {
+          "code": "1737",
+          "label": "Torsby"
+        },
+        {
+          "code": "1760",
+          "label": "Storfors"
+        },
+        {
+          "code": "1761",
+          "label": "Hammarö"
+        },
+        {
+          "code": "1762",
+          "label": "Munkfors"
+        },
+        {
+          "code": "1763",
+          "label": "Forshaga"
+        },
+        {
+          "code": "1764",
+          "label": "Grums"
+        },
+        {
+          "code": "1765",
+          "label": "Årjäng"
+        },
+        {
+          "code": "1766",
+          "label": "Sunne"
+        },
+        {
+          "code": "1780",
+          "label": "Karlstad"
+        },
+        {
+          "code": "1781",
+          "label": "Kristinehamn"
+        },
+        {
+          "code": "1782",
+          "label": "Filipstad"
+        },
+        {
+          "code": "1783",
+          "label": "Hagfors"
+        },
+        {
+          "code": "1784",
+          "label": "Arvika"
+        },
+        {
+          "code": "1785",
+          "label": "Säffle"
+        },
+        {
+          "code": "18",
+          "label": "Örebro län"
+        },
+        {
+          "code": "1814",
+          "label": "Lekeberg"
+        },
+        {
+          "code": "1860",
+          "label": "Laxå"
+        },
+        {
+          "code": "1861",
+          "label": "Hallsberg"
+        },
+        {
+          "code": "1862",
+          "label": "Degerfors"
+        },
+        {
+          "code": "1863",
+          "label": "Hällefors"
+        },
+        {
+          "code": "1864",
+          "label": "Ljusnarsberg"
+        },
+        {
+          "code": "1880",
+          "label": "Örebro"
+        },
+        {
+          "code": "1881",
+          "label": "Kumla"
+        },
+        {
+          "code": "1882",
+          "label": "Askersund"
+        },
+        {
+          "code": "1883",
+          "label": "Karlskoga"
+        },
+        {
+          "code": "1884",
+          "label": "Nora"
+        },
+        {
+          "code": "1885",
+          "label": "Lindesberg"
+        },
+        {
+          "code": "19",
+          "label": "Västmanlands län"
+        },
+        {
+          "code": "1904",
+          "label": "Skinnskatteberg"
+        },
+        {
+          "code": "1907",
+          "label": "Surahammar"
+        },
+        {
+          "code": "1960",
+          "label": "Kungsör"
+        },
+        {
+          "code": "1961",
+          "label": "Hallstahammar"
+        },
+        {
+          "code": "1962",
+          "label": "Norberg"
+        },
+        {
+          "code": "1980",
+          "label": "Västerås"
+        },
+        {
+          "code": "1981",
+          "label": "Sala"
+        },
+        {
+          "code": "1982",
+          "label": "Fagersta"
+        },
+        {
+          "code": "1983",
+          "label": "Köping"
+        },
+        {
+          "code": "1984",
+          "label": "Arboga"
+        },
+        {
+          "code": "20",
+          "label": "Dalarnas län"
+        },
+        {
+          "code": "2021",
+          "label": "Vansbro"
+        },
+        {
+          "code": "2023",
+          "label": "Malung-Sälen"
+        },
+        {
+          "code": "2026",
+          "label": "Gagnef"
+        },
+        {
+          "code": "2029",
+          "label": "Leksand"
+        },
+        {
+          "code": "2031",
+          "label": "Rättvik"
+        },
+        {
+          "code": "2034",
+          "label": "Orsa"
+        },
+        {
+          "code": "2039",
+          "label": "Älvdalen"
+        },
+        {
+          "code": "2061",
+          "label": "Smedjebacken"
+        },
+        {
+          "code": "2062",
+          "label": "Mora"
+        },
+        {
+          "code": "2080",
+          "label": "Falun"
+        },
+        {
+          "code": "2081",
+          "label": "Borlänge"
+        },
+        {
+          "code": "2082",
+          "label": "Säter"
+        },
+        {
+          "code": "2083",
+          "label": "Hedemora"
+        },
+        {
+          "code": "2084",
+          "label": "Avesta"
+        },
+        {
+          "code": "2085",
+          "label": "Ludvika"
+        },
+        {
+          "code": "21",
+          "label": "Gävleborgs län"
+        },
+        {
+          "code": "2101",
+          "label": "Ockelbo"
+        },
+        {
+          "code": "2104",
+          "label": "Hofors"
+        },
+        {
+          "code": "2121",
+          "label": "Ovanåker"
+        },
+        {
+          "code": "2132",
+          "label": "Nordanstig"
+        },
+        {
+          "code": "2161",
+          "label": "Ljusdal"
+        },
+        {
+          "code": "2180",
+          "label": "Gävle"
+        },
+        {
+          "code": "2181",
+          "label": "Sandviken"
+        },
+        {
+          "code": "2182",
+          "label": "Söderhamn"
+        },
+        {
+          "code": "2183",
+          "label": "Bollnäs"
+        },
+        {
+          "code": "2184",
+          "label": "Hudiksvall"
+        },
+        {
+          "code": "22",
+          "label": "Västernorrlands län"
+        },
+        {
+          "code": "2260",
+          "label": "Ånge"
+        },
+        {
+          "code": "2262",
+          "label": "Timrå"
+        },
+        {
+          "code": "2280",
+          "label": "Härnösand"
+        },
+        {
+          "code": "2281",
+          "label": "Sundsvall"
+        },
+        {
+          "code": "2282",
+          "label": "Kramfors"
+        },
+        {
+          "code": "2283",
+          "label": "Sollefteå"
+        },
+        {
+          "code": "2284",
+          "label": "Örnsköldsvik"
+        },
+        {
+          "code": "23",
+          "label": "Jämtlands län"
+        },
+        {
+          "code": "2303",
+          "label": "Ragunda"
+        },
+        {
+          "code": "2305",
+          "label": "Bräcke"
+        },
+        {
+          "code": "2309",
+          "label": "Krokom"
+        },
+        {
+          "code": "2313",
+          "label": "Strömsund"
+        },
+        {
+          "code": "2321",
+          "label": "Åre"
+        },
+        {
+          "code": "2326",
+          "label": "Berg"
+        },
+        {
+          "code": "2361",
+          "label": "Härjedalen"
+        },
+        {
+          "code": "2380",
+          "label": "Östersund"
+        },
+        {
+          "code": "24",
+          "label": "Västerbottens län"
+        },
+        {
+          "code": "2401",
+          "label": "Nordmaling"
+        },
+        {
+          "code": "2403",
+          "label": "Bjurholm"
+        },
+        {
+          "code": "2404",
+          "label": "Vindeln"
+        },
+        {
+          "code": "2409",
+          "label": "Robertsfors"
+        },
+        {
+          "code": "2417",
+          "label": "Norsjö"
+        },
+        {
+          "code": "2418",
+          "label": "Malå"
+        },
+        {
+          "code": "2421",
+          "label": "Storuman"
+        },
+        {
+          "code": "2422",
+          "label": "Sorsele"
+        },
+        {
+          "code": "2425",
+          "label": "Dorotea"
+        },
+        {
+          "code": "2460",
+          "label": "Vännäs"
+        },
+        {
+          "code": "2462",
+          "label": "Vilhelmina"
+        },
+        {
+          "code": "2463",
+          "label": "Åsele"
+        },
+        {
+          "code": "2480",
+          "label": "Umeå"
+        },
+        {
+          "code": "2481",
+          "label": "Lycksele"
+        },
+        {
+          "code": "2482",
+          "label": "Skellefteå"
+        },
+        {
+          "code": "25",
+          "label": "Norrbottens län"
+        },
+        {
+          "code": "2505",
+          "label": "Arvidsjaur"
+        },
+        {
+          "code": "2506",
+          "label": "Arjeplog"
+        },
+        {
+          "code": "2510",
+          "label": "Jokkmokk"
+        },
+        {
+          "code": "2513",
+          "label": "Överkalix"
+        },
+        {
+          "code": "2514",
+          "label": "Kalix"
+        },
+        {
+          "code": "2518",
+          "label": "Övertorneå"
+        },
+        {
+          "code": "2521",
+          "label": "Pajala"
+        },
+        {
+          "code": "2523",
+          "label": "Gällivare"
+        },
+        {
+          "code": "2560",
+          "label": "Älvsbyn"
+        },
+        {
+          "code": "2580",
+          "label": "Luleå"
+        },
+        {
+          "code": "2581",
+          "label": "Piteå"
+        },
+        {
+          "code": "2582",
+          "label": "Boden"
+        },
+        {
+          "code": "2583",
+          "label": "Haparanda"
+        },
+        {
+          "code": "2584",
+          "label": "Kiruna"
+        }
+      ],
+      "elimination": true,
+      "eliminationValueCode": "00",
+      "codeLists": [
+        {
+          "id": "vs_RegionKommun07",
+          "label": "Kommuner",
+          "links": [
+            {
+              "rel": "metadata",
+              "href": "https://my-site.com/api/v2/tables/TAB638/codelists/vs_RegionKommun07"
+            }
+          ]
+        },
+        {
+          "id": "vs_RegionLän07",
+          "label": "Län",
+          "links": [
+            {
+              "rel": "metadata",
+              "href": "https://my-site.com/api/v2/tables/TAB638/codelists/vs_RegionLän07"
+            }
+          ]
+        },
+        {
+          "id": "vs_RegionRiket99",
+          "label": "Riket",
+          "links": [
+            {
+              "rel": "metadata",
+              "href": "https://my-site.com/api/v2/tables/TAB638/codelists/vs_RegionRiket99"
+            }
+          ]
+        },
+        {
+          "id": "agg_RegionA-region_2",
+          "label": "A-regioner",
+          "links": [
+            {
+              "rel": "metadata",
+              "href": "https://my-site.com/api/v2/tables/TAB638/codelists/agg_RegionA-region_2"
+            }
+          ]
+        },
+        {
+          "id": "agg_RegionKommungrupp2005-_1",
+          "label": "Kommungrupper (SKL:s) 2005",
+          "links": [
+            {
+              "rel": "metadata",
+              "href": "https://my-site.com/api/v2/tables/TAB638/codelists/agg_RegionKommungrupp2005-_1"
+            }
+          ]
+        },
+        {
+          "id": "agg_RegionKommungrupp2011-",
+          "label": "Kommungrupper (SKL:s) 2011",
+          "links": [
+            {
+              "rel": "metadata",
+              "href": "https://my-site.com/api/v2/tables/TAB638/codelists/agg_RegionKommungrupp2011-"
+            }
+          ]
+        },
+        {
+          "id": "agg_RegionKommungrupp2017-",
+          "label": "Kommungrupper (SKL:s) 2017",
+          "links": [
+            {
+              "rel": "metadata",
+              "href": "https://my-site.com/api/v2/tables/TAB638/codelists/agg_RegionKommungrupp2017-"
+            }
+          ]
+        },
+        {
+          "id": "agg_RegionLA1998",
+          "label": "Lokalaarbetsmarknader 1998",
+          "links": [
+            {
+              "rel": "metadata",
+              "href": "https://my-site.com/api/v2/tables/TAB638/codelists/agg_RegionLA1998"
+            }
+          ]
+        },
+        {
+          "id": "agg_RegionLA2003_1",
+          "label": "Lokalaarbetsmarknader 2003",
+          "links": [
+            {
+              "rel": "metadata",
+              "href": "https://my-site.com/api/v2/tables/TAB638/codelists/agg_RegionLA2003_1"
+            }
+          ]
+        },
+        {
+          "id": "agg_RegionLA2008",
+          "label": "Lokalaarbetsmarknader 2008",
+          "links": [
+            {
+              "rel": "metadata",
+              "href": "https://my-site.com/api/v2/tables/TAB638/codelists/agg_RegionLA2008"
+            }
+          ]
+        },
+        {
+          "id": "agg_RegionLA2013",
+          "label": "Lokalaarbetsmarknader 2013",
+          "links": [
+            {
+              "rel": "metadata",
+              "href": "https://my-site.com/api/v2/tables/TAB638/codelists/agg_RegionLA2013"
+            }
+          ]
+        },
+        {
+          "id": "agg_RegionLA2018",
+          "label": "Lokalaarbetsmarknader 2018",
+          "links": [
+            {
+              "rel": "metadata",
+              "href": "https://my-site.com/api/v2/tables/TAB638/codelists/agg_Ålder5år"
+            }
+          ]
+        },
+        {
+          "id": "agg_RegionStoromr-04_2",
+          "label": "Sorstadsområder -2004",
+          "links": [
+            {
+              "rel": "metadata",
+              "href": "https://my-site.com/api/v2/tables/TAB638/codelists/agg_RegionStoromr-04_2"
+            }
+          ]
+        },
+        {
+          "id": "agg_RegionStoromr05-_1",
+          "label": "Sorstadsområder 2005-",
+          "links": [
+            {
+              "rel": "metadata",
+              "href": "https://my-site.com/api/v2/tables/TAB638/codelists/agg_RegionStoromr05-_1"
+            }
+          ]
+        },
+        {
+          "id": "agg_RegionNUTS1_2008",
+          "label": "NUTS1 fr.o.m 2008",
+          "links": [
+            {
+              "rel": "metadata",
+              "href": "https://my-site.com/api/v2/tables/TAB638/codelists/agg_RegionNUTS1_2008"
+            }
+          ]
+        },
+        {
+          "id": "agg_RegionNUTS2_2008",
+          "label": "NUTS2 fr.o.m 2008",
+          "links": [
+            {
+              "rel": "metadata",
+              "href": "https://my-site.com/api/v2/tables/TAB638/codelists/agg_RegionNUTS2_2008"
+            }
+          ]
+        },
+        {
+          "id": "agg_RegionNUTS3_2008",
+          "label": "NUTS3 fr.o.m 2008",
+          "links": [
+            {
+              "rel": "metadata",
+              "href": "https://my-site.com/api/v2/tables/TAB638/codelists/agg_RegionNUTS3_2008"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "regularVariables": [
+    {
+      "id": "Civilstand",
+      "label": "civilstånd",
+      "type": 0,
+      "values": [
+        {
+          "code": "OG",
+          "label": "ogifta"
+        },
+        {
+          "code": "G",
+          "label": "gifta"
+        },
+        {
+          "code": "SK",
+          "label": "skilda"
+        },
+        {
+          "code": "ÄNKL",
+          "label": "änkor/änklingar"
+        }
+      ],
+      "elimination": true
+    },
+    {
+      "id": "Kon",
+      "label": "kön",
+      "type": 0,
+      "values": [
+        {
+          "code": "1",
+          "label": "män"
+        },
+        {
+          "code": "2",
+          "label": "kvinnor"
+        }
+      ],
+      "elimination": true
+    },
+    {
+      "id": "Alder",
+      "label": "ålder",
+      "type": 0,
+      "values": [
+        {
+          "code": "0",
+          "label": "0 år"
+        },
+        {
+          "code": "1",
+          "label": "1 år"
+        },
+        {
+          "code": "2",
+          "label": "2 år"
+        },
+        {
+          "code": "3",
+          "label": "3 år"
+        },
+        {
+          "code": "4",
+          "label": "4 år"
+        },
+        {
+          "code": "5",
+          "label": "5 år"
+        },
+        {
+          "code": "6",
+          "label": "6 år"
+        },
+        {
+          "code": "7",
+          "label": "7 år"
+        },
+        {
+          "code": "8",
+          "label": "8 år"
+        },
+        {
+          "code": "9",
+          "label": "9 år"
+        },
+        {
+          "code": "10",
+          "label": "10 år"
+        },
+        {
+          "code": "11",
+          "label": "11 år"
+        },
+        {
+          "code": "12",
+          "label": "12 år"
+        },
+        {
+          "code": "13",
+          "label": "13 år"
+        },
+        {
+          "code": "14",
+          "label": "14 år"
+        },
+        {
+          "code": "15",
+          "label": "15 år"
+        },
+        {
+          "code": "16",
+          "label": "16 år"
+        },
+        {
+          "code": "17",
+          "label": "17 år"
+        },
+        {
+          "code": "18",
+          "label": "18 år"
+        },
+        {
+          "code": "19",
+          "label": "19 år"
+        },
+        {
+          "code": "20",
+          "label": "20 år"
+        },
+        {
+          "code": "21",
+          "label": "21 år"
+        },
+        {
+          "code": "22",
+          "label": "22 år"
+        },
+        {
+          "code": "23",
+          "label": "23 år"
+        },
+        {
+          "code": "24",
+          "label": "24 år"
+        },
+        {
+          "code": "25",
+          "label": "25 år"
+        },
+        {
+          "code": "26",
+          "label": "26 år"
+        },
+        {
+          "code": "27",
+          "label": "27 år"
+        },
+        {
+          "code": "28",
+          "label": "28 år"
+        },
+        {
+          "code": "29",
+          "label": "29 år"
+        },
+        {
+          "code": "30",
+          "label": "30 år"
+        },
+        {
+          "code": "31",
+          "label": "31 år"
+        },
+        {
+          "code": "32",
+          "label": "32 år"
+        },
+        {
+          "code": "33",
+          "label": "33 år"
+        },
+        {
+          "code": "34",
+          "label": "34 år"
+        },
+        {
+          "code": "35",
+          "label": "35 år"
+        },
+        {
+          "code": "36",
+          "label": "36 år"
+        },
+        {
+          "code": "37",
+          "label": "37 år"
+        },
+        {
+          "code": "38",
+          "label": "38 år"
+        },
+        {
+          "code": "39",
+          "label": "39 år"
+        },
+        {
+          "code": "40",
+          "label": "40 år"
+        },
+        {
+          "code": "41",
+          "label": "41 år"
+        },
+        {
+          "code": "42",
+          "label": "42 år"
+        },
+        {
+          "code": "43",
+          "label": "43 år"
+        },
+        {
+          "code": "44",
+          "label": "44 år"
+        },
+        {
+          "code": "45",
+          "label": "45 år"
+        },
+        {
+          "code": "46",
+          "label": "46 år"
+        },
+        {
+          "code": "47",
+          "label": "47 år"
+        },
+        {
+          "code": "48",
+          "label": "48 år"
+        },
+        {
+          "code": "49",
+          "label": "49 år"
+        },
+        {
+          "code": "50",
+          "label": "50 år"
+        },
+        {
+          "code": "51",
+          "label": "51 år"
+        },
+        {
+          "code": "52",
+          "label": "52 år"
+        },
+        {
+          "code": "53",
+          "label": "53 år"
+        },
+        {
+          "code": "54",
+          "label": "54 år"
+        },
+        {
+          "code": "55",
+          "label": "55 år"
+        },
+        {
+          "code": "56",
+          "label": "56 år"
+        },
+        {
+          "code": "57",
+          "label": "57 år"
+        },
+        {
+          "code": "58",
+          "label": "58 år"
+        },
+        {
+          "code": "59",
+          "label": "59 år"
+        },
+        {
+          "code": "60",
+          "label": "60 år"
+        },
+        {
+          "code": "61",
+          "label": "61 år"
+        },
+        {
+          "code": "62",
+          "label": "62 år"
+        },
+        {
+          "code": "63",
+          "label": "63 år"
+        },
+        {
+          "code": "64",
+          "label": "64 år"
+        },
+        {
+          "code": "65",
+          "label": "65 år"
+        },
+        {
+          "code": "66",
+          "label": "66 år"
+        },
+        {
+          "code": "67",
+          "label": "67 år"
+        },
+        {
+          "code": "68",
+          "label": "68 år"
+        },
+        {
+          "code": "69",
+          "label": "69 år"
+        },
+        {
+          "code": "70",
+          "label": "70 år"
+        },
+        {
+          "code": "71",
+          "label": "71 år"
+        },
+        {
+          "code": "72",
+          "label": "72 år"
+        },
+        {
+          "code": "73",
+          "label": "73 år"
+        },
+        {
+          "code": "74",
+          "label": "74 år"
+        },
+        {
+          "code": "75",
+          "label": "75 år"
+        },
+        {
+          "code": "76",
+          "label": "76 år"
+        },
+        {
+          "code": "77",
+          "label": "77 år"
+        },
+        {
+          "code": "78",
+          "label": "78 år"
+        },
+        {
+          "code": "79",
+          "label": "79 år"
+        },
+        {
+          "code": "80",
+          "label": "80 år"
+        },
+        {
+          "code": "81",
+          "label": "81 år"
+        },
+        {
+          "code": "82",
+          "label": "82 år"
+        },
+        {
+          "code": "83",
+          "label": "83 år"
+        },
+        {
+          "code": "84",
+          "label": "84 år"
+        },
+        {
+          "code": "85",
+          "label": "85 år"
+        },
+        {
+          "code": "86",
+          "label": "86 år"
+        },
+        {
+          "code": "87",
+          "label": "87 år"
+        },
+        {
+          "code": "88",
+          "label": "88 år"
+        },
+        {
+          "code": "89",
+          "label": "89 år"
+        },
+        {
+          "code": "90",
+          "label": "90 år"
+        },
+        {
+          "code": "91",
+          "label": "91 år"
+        },
+        {
+          "code": "92",
+          "label": "92 år"
+        },
+        {
+          "code": "93",
+          "label": "93 år"
+        },
+        {
+          "code": "94",
+          "label": "94 år"
+        },
+        {
+          "code": "95",
+          "label": "95 år"
+        },
+        {
+          "code": "96",
+          "label": "96 år"
+        },
+        {
+          "code": "97",
+          "label": "97 år"
+        },
+        {
+          "code": "98",
+          "label": "98 år"
+        },
+        {
+          "code": "99",
+          "label": "99 år"
+        },
+        {
+          "code": "100+",
+          "label": "100+ år"
+        },
+        {
+          "code": "tot",
+          "label": "totalt ålder"
+        }
+      ],
+      "elimination": true,
+      "eliminationValueCode": "tot",
+      "codeLists": [
+        {
+          "id": "vs_Ålder1årA",
+          "label": "Ålder, 1 års-klasser",
+          "links": [
+            {
+              "rel": "metadata",
+              "href": "https://my-site.com/api/v2/tables/TAB638/codelists/vs_Ålder1årA"
+            }
+          ]
+        },
+        {
+          "id": "vs_ÅlderTotA",
+          "label": "Ålder, totalt, alla redovisade åldrar",
+          "links": [
+            {
+              "rel": "metadata",
+              "href": "https://my-site.com/api/v2/tables/TAB638/codelists/vs_ÅlderTotA"
+            }
+          ]
+        },
+        {
+          "id": "agg_Ålder10år",
+          "label": "10-årsklasser",
+          "links": [
+            {
+              "rel": "metadata",
+              "href": "https://my-site.com/api/v2/tables/TAB638/codelists/agg_Ålder10år"
+            }
+          ]
+        },
+        {
+          "id": "agg_Ålder5år",
+          "label": "5-årsklasser",
+          "links": [
+            {
+              "rel": "metadata",
+              "href": "https://my-site.com/api/v2/tables/TAB638/codelists/agg_Ålder5år"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "variablesDisplayOrder": [
+    "ContentsCode",
+    "Civilstand",
+    "Alder",
+    "Tid",
+    "Kon"
+  ],
+  "links": [
+    {
+      "rel": "self",
+      "href": "https://my-site.com/api/v2/tables/TAB638"
+    },
+    {
+      "rel": "metadata",
+      "href": "https://my-site.com/api/v2/tables/TAB638/metadata"
+    },
+    {
+      "rel": "data",
+      "href": "https://my-site.com/api/v2/tables/TAB638/data"
+    }
+  ]
+}

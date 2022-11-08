@@ -28,7 +28,7 @@ paths:
                   $ref: '#/components/schemas/Folder'
                 examples:
                   NavigateRoot:
-                    $ref: '#/components/examples/navigation-root'
+                    $ref: '#/components/examples/folder-root'
           '429':
             $ref: '#/components/responses/ErrorResponse429'
   /navigation/{id}:
@@ -49,7 +49,7 @@ paths:
                 $ref: '#/components/schemas/Folder'
               examples:
                   Navigation-BE:
-                    $ref: '#/components/examples/navigation-be'
+                    $ref: '#/components/examples/folder-be'
   /tables:
     get:
       tags:
@@ -107,7 +107,10 @@ paths:
                     $ref: '#/components/examples/tableMetadata'
             application/jsonstat:
               schema:
-                $ref: '#/components/schemas/Dataset'    
+                $ref: '#/components/schemas/Dataset'
+              examples:
+                  Dataset-meta:
+                    $ref: '#/components/examples/dataset-meta'
             application/vnd.json-stat2+json:
               schema:
                 externalDocs:
@@ -1067,10 +1070,10 @@ components:
             status: 429
             detail: You have reach the threshold for request limiting. 30 request per minute.
   examples:  
-    navigation-root:
+    folder-root:
       description: Example for 200 response for navigation endpoint
       value:
-        #generated navigation-root start
+        #generated folder-root start
         id: 
         objectType: folder
         label: 
@@ -1093,11 +1096,11 @@ components:
           links:
           - rel: self
             href: https://my-site.com/api/v2/navigation/NV
-        #generated navigation-root end
-    navigation-be:
+        #generated folder-root end
+    folder-be:
       description: Example for 200 response for navigation endpoint
       value:
-        #generated navigation-be start
+        #generated folder-be start
         id: BE0101
         objectType: folder
         label: Balance statistics
@@ -1141,7 +1144,7 @@ components:
           firstPeriod: 1998K2
           lastPeriod: 2021K4
           discontinued: false
-        #generated navigation-be end          
+        #generated folder-be end          
     tablesResponse:
       description: List all tables with pagination
       value:
@@ -1209,8 +1212,17 @@ components:
             href: https://my-site.com/api/v2/tables/?pageNumber=9  
         #generated tablesResponse end
     tableMetadata:
-      description: Example for 200 response for navigation endpoint
+      description: Example for 200 response for tableMetadata in PXJson
       value:
         #generated tableMetadata start
         id: "TAB638"
         #generated tableMetadata end
+    dataset-meta:
+      description: Example for 200 response for dataset as metadata in Jsonstat2
+      value:
+        #generated dataset-meta start
+        id: "TAB638"
+        #generated dataset-meta end
+            
+        
+        

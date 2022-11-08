@@ -1,0 +1,94 @@
+{
+  "page": {
+    "pageNumber": 10,
+    "pageSize": 100,
+    "totalElements": 7000,
+    "totalPages": 70,
+    "links": [
+      {
+        "rel": "self",
+        "href": "https://my-site.com/api/v2/tables/?pageNumber=10"
+      },
+      {
+        "rel": "first",
+        "href": "https://my-site.com/api/v2/tables/?pageNumber=1"
+      },
+      {
+        "rel": "last",
+        "href": "https://my-site.com/api/v2/tables/?pageNumber=70"
+      },
+      {
+        "rel": "next",
+        "href": "https://my-site.com/api/v2/tables/?pageNumber=11"
+      },
+      {
+        "rel": "prev",
+        "href": "https://my-site.com/api/v2/tables/?pageNumber=9"
+      }
+    ]
+  },
+  "tables": [
+    {
+      "id": "TAB0001",
+      "objectType": "table",
+      "label": "Population. Year 1968 - 2021",
+      "description": "Population by region, marital status, age and sex. Year 1968 - 2021",
+      "updated": "2017-12-24T06:00:00.014Z",
+      "category": "official",
+      "links": [
+        {
+          "rel": "self",
+          "href": "https://my-site.com/api/v2/tables/TAB0001"
+        },
+        {
+          "rel": "metadata",
+          "href": "https://my-site.com/api/v2/tables/TAB0001/metadata"
+        },
+        {
+          "rel": "data",
+          "href": "https://my-site.com/api/v2/tables/TAB0001/data"
+        }
+      ],
+      "variablesName": [
+        "observations",
+        "region",
+        "marital status",
+        "age"
+      ],
+      "firstPeriod": "1968",
+      "lastPeriod": "2021",
+      "discontinued": false
+    },
+    {
+      "id": "TAB0001A",
+      "objectType": "table",
+      "label": "Tabell A",
+      "description": "Folkmängd, in- och utvanding, medellivslängd, namn, prognoser mm",
+      "updated": "2018-12-24T06:00:00.014Z",
+      "category": "official",
+      "links": [
+        {
+          "rel": "self",
+          "href": "https://my-site.com/api/v2/tables/TAB0001A"
+        },
+        {
+          "rel": "metadata",
+          "href": "https://my-site.com/api/v2/tables/TAB0001A/metadata"
+        },
+        {
+          "rel": "data",
+          "href": "https://my-site.com/api/v2/tables/TAB0001A/data"
+        }
+      ],
+      "variablesName": [
+        "observations",
+        "region",
+        "marital status",
+        "age"
+      ],
+      "firstPeriod": "2017",
+      "lastPeriod": "2022",
+      "discontinued": false
+    }
+  ]
+}
