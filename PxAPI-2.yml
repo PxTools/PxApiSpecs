@@ -2,6 +2,7 @@ openapi: '3.0.2'
 info:
   title: PxApi
   version: '2.0'
+  description: This api lets you do 2 things; Find a table(Navigation) and use a table (Table).
 servers:
   - url: https://api.server.test/api/v2
 tags:
@@ -52,7 +53,7 @@ paths:
   /tables:
     get:
       tags:
-        - Table
+        - Navigation
       summary: Endpoint for listing tables
       operationId: ListAllTables
       parameters:
@@ -101,6 +102,9 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/TableMetadata'
+            application/jsonstat:
+              schema:
+                $ref: '#/components/schemas/Dataset'    
             application/vnd.json-stat2+json:
               schema:
                 externalDocs:
@@ -576,10 +580,8 @@ components:
           type: boolean
         eliminationValueCode:
           type: string
-        filters:
-          type: array
-          items:
-            $ref: '#/components/schemas/CodeListInformation'
+        codeLists:
+          $ref: '#/components/schemas/CodeLists'
     GeographicalVariable:
       required:
         - "map"
@@ -803,6 +805,252 @@ components:
           description: |
             An absolute URI that identifies the specific occurrence of the problem.
             It may or may not yield further information if dereferenced.
+              
+    strarray:
+      type: array
+      items:
+        type: string
+      uniqueItems: true
+    # jsonstat-version:
+    #   type: string
+    #   enum:
+    #     - '2.0'
+    #   default: '2.0'
+    # updated:
+    #   oneOf:
+    #     - type: string
+    #       format: date-time
+    #     - type: string
+    #       pattern: "^((19|20)\\d\\d)\\-(0?[1-9]|1[012])\\-(0?[1-9]|[12][0-9]|3[01])$"
+    updated:
+        type: string
+        pattern: "^((19|20)\\d\\d)\\-(0?[1-9]|1[012])\\-(0?[1-9]|[12][0-9]|3[01])$"
+    href:
+      type: string
+      format: uri
+    label:
+      type: string
+    source:
+      type: string
+    extension-root:
+      description: extension at root level
+      type: object
+      properties:
+        px:
+          type: object
+          properties:
+            infofile:
+              type: string
+            tableid:
+              type: string
+            decimals:
+              type: integer
+            official-statistics:
+              type: boolean
+            aggregallowed:
+              type: boolean
+            copyright:
+              type: string
+            language:
+              type: string
+            description:
+              type: string
+            matrix:
+              type: string
+            subject-code:
+              type: string
+        tags:
+          type: array
+          items: 
+            type: string
+        discontinued:
+          type: boolean
+        contact:
+          type: array
+          description: A list of contacts associated with the table.
+          items: 
+            $ref: '#/components/schemas/Contact'
+        note:
+          type: array
+          items:
+            $ref: '#/components/schemas/Note'
+    extension:
+      description: extension at some level
+      type: object
+    extension-dimension:
+      description: extension at dimension
+      type: object
+      properties:
+        elimination:
+          type: boolean
+        eliminationValueCode:
+          type: string
+        refperiod:
+          type: object
+          additionalProperties:
+            type: string
+        note:
+          type: array
+          items:
+            $ref: '#/components/schemas/Note'
+        valueNote:
+          type: object
+          additionalProperties:
+            type: array
+            items:
+              $ref: '#/components/schemas/Note'          
+        codeLists:
+         $ref: '#/components/schemas/CodeLists'
+        frequency:
+          type: string
+          description: Hmm, we have this on root as well
+        firstPeriod: 
+          type: string
+        lastPeriod: 
+          type: string
+    strarray-by-str-dict:
+       type: object
+       additionalProperties:
+          type: array
+          items:
+            type: string
+          uniqueItems: true  
+    jsonstat-link:
+      type: object
+      additionalProperties: 
+         type: array
+         items:
+            type: object
+            title: jsonstatLink
+            properties:
+              type:
+                type: string  
+              href:
+                "$ref": "#/components/schemas/href"
+            additionalProperties: false
+    jsonstat-extension-link:
+      type: object
+      properties:
+        describedby:
+          type: array
+          items:
+            type: object
+            title: DimensionExtension
+            properties:
+              extension:
+                 description: A extension object
+                 type: object
+                 additionalProperties:
+                    description: A string
+                    type: string
+                    
+            additionalProperties: false       
+      additionalProperties: false         
+
+    jsonstat-category:
+      type: object
+      properties:
+        index:
+           type: object
+           additionalProperties:
+                type: integer
+        label:
+          type: object
+          minProperties: 1
+          additionalProperties:
+            type: string
+        child:
+           "$ref": "#/components/schemas/strarray-by-str-dict"
+        unit:
+          type: object
+          additionalProperties:
+            type: object
+            properties:
+              base:
+                type: string
+              decimals: 
+                type: integer
+      additionalProperties: false
+    CodeLists:
+          type: array
+          items:
+            $ref: '#/components/schemas/CodeListInformation'
+    Dataset:
+      title: JSON-stat 2.0 Dataset Schema
+      description:
+        This is version 1.04 of the JSON-stat 2.0 Dataset Schema (2018-09-05 10:55)
+      type: object
+      properties:
+        version:
+          type: string
+          enum:
+            - '2.0'
+          default: '2.0'      
+        class:
+          type: string
+          enum:
+            - dataset
+          default: dataset
+          # "$ref": "#/components/schemas/jsonstat-version"
+        href:
+          "$ref": "#/components/schemas/href"
+        label:
+          "$ref": "#/components/schemas/label"
+        source:
+          "$ref": "#/components/schemas/source"
+        updated:
+          "$ref": "#/components/schemas/updated"
+        link:
+          "$ref": "#/components/schemas/jsonstat-link"
+
+        extension:
+          "$ref": "#/components/schemas/extension-root"  
+        role:
+           type: object
+           properties:
+                  time:
+                    "$ref": "#/components/schemas/strarray"
+                  geo:
+                    "$ref": "#/components/schemas/strarray"
+                  metric:
+                    "$ref": "#/components/schemas/strarray"
+           additionalProperties: false  
+        id:
+           "$ref": "#/components/schemas/strarray"
+        size:
+          type: array
+          items:
+             type: integer
+        dimension:
+           type: object
+           additionalProperties:
+              type: object
+              properties:
+                    label:
+                      "$ref": "#/components/schemas/label"
+                    category:
+                      "$ref": "#/components/schemas/jsonstat-category"  
+                    extension:
+                      "$ref": "#/components/schemas/extension-dimension"
+                    link:
+                      "$ref": "#/components/schemas/jsonstat-extension-link"
+              additionalProperties: false            
+        value:
+          type: array
+          nullable: true
+          items:
+            type: number
+        status:
+          type: string
+      additionalProperties: false
+      required:
+        - version
+        - class
+        - value
+        - id
+        - size
+        - dimension
+                   
   responses:
     ErrorResponse429:
       description: Error respsone for 429
