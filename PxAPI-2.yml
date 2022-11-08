@@ -157,6 +157,7 @@ paths:
       parameters:
         - $ref: '#/components/parameters/language'
         - $ref: '#/components/parameters/id'
+        - $ref: '#/components/parameters/codeListId'
       responses:
         '200':
           description: Success
@@ -520,6 +521,10 @@ components:
           - TimeVariable
           - GeographicalVariable
           - RegularVariable
+        values:
+          type: array
+          items:
+            $ref: '#/components/schemas/Value'
         notes: 
           type: array
           items:
@@ -600,14 +605,8 @@ components:
           type: boolean
         eliminationValueCode:
           type: string
-        filters:
-          type: array
-          items:
-            $ref: '#/components/schemas/CodeListInformation'
-        values:
-          type: array
-          items:
-            $ref: '#/components/schemas/Value'
+        codeLists:
+          $ref: '#/components/schemas/CodeLists'
     GeographicalVariable:
       required:
         - "map"
@@ -908,6 +907,10 @@ components:
           description: A list of contacts associated with the table.
           items: 
             $ref: '#/components/schemas/Contact'
+        note:
+          type: array
+          items:
+            $ref: '#/components/schemas/Note'
     extension:
       description: extension at some level
       type: object
@@ -921,6 +924,10 @@ components:
         eliminationValueCode:
           description: Elimination value code
           type: string
+        refperiod:
+          type: object
+          additionalProperties:
+            type: string
         note:
           description: Notes for dimension
           type: array
@@ -933,8 +940,8 @@ components:
             type: array
             items:
               $ref: '#/components/schemas/Note'          
-        filters:
-         $ref: '#/components/schemas/filters'
+        codeLists:
+         $ref: '#/components/schemas/CodeLists'
         frequency:
           description: How often a table is updated
           type: string
@@ -944,8 +951,6 @@ components:
         lastPeriod:
           description: Latest time period in table
           type: string
-    jsonstat-note:
-      "$ref": "#/components/schemas/strarray"
     strarray-by-str-dict:
        type: object
        additionalProperties:
@@ -1015,17 +1020,8 @@ components:
                 description: Number of decimals 
                 type: integer
       additionalProperties: false
-    filters:
-      description: Available filters for this dimension 
-      type: object
-      properties:
-        vs:
-          description: List of available valuesets
-          type: array
-          items:
-            $ref: '#/components/schemas/CodeListInformation'
-        agg:
-          description: List of available aggregations
+    CodeLists:
+          description: Available codelists for this dimension
           type: array
           items:
             $ref: '#/components/schemas/CodeListInformation'
@@ -1083,9 +1079,6 @@ components:
           type: array
           items:
              type: integer
-        note:
-          description: Spesification on json-stat.org -> [here](https://json-stat.org/full/#note)
-          "$ref": "#/components/schemas/jsonstat-note"
         dimension:
           description: Spesification on json-stat.org -> [here](https://json-stat.org/full/#dimension)
           type: object

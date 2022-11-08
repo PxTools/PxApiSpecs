@@ -26,7 +26,6 @@
       "decimals": 0,
       "official-statistics": true,
       "aggregallowed": false,
-      "refperiod": "31 December each year",
       "copyright": "CC-0",
       "language": "sv",
       "description": "",
@@ -47,6 +46,20 @@
         "name": "Statistikservice",
         "phone": "+46 010-479 50 0",
         "mail": "information@scb.se"
+      }
+    ],
+    "note": [
+      {
+        "mandatory": true,
+        "text": "Fr o m 2007-01-01 överförs Heby kommun från Västmanlands län till Uppsala län. Hebys kommunkod ändras från 1917 till 0331. "
+      },
+      {
+        "mandatory": true,
+        "text": "Registrerat partnerskap reglerade parförhållanden mellan personer av samma kön och fanns från 1995 till 2009. Registrerade partners räknas som Gifta, Separerade partners som Skilda och Efterlevande partners som Änka/änklingar."
+      },
+      {
+        "mandatory": true,
+        "text": "Fr o m 2007-01-01 utökas Uppsala län med Heby kommun. Observera att länssiffrorna inte är jämförbara med länssiffrorna bakåt i tiden."
       }
     ]
   },
@@ -76,11 +89,6 @@
     2,
     2,
     1
-  ],
-  "note": [
-    "Fr o m 2007-01-01 överförs Heby kommun från Västmanlands län till Uppsala län. Hebys kommunkod ändras från 1917 till 0331. ",
-    "Registrerat partnerskap reglerade parförhållanden mellan personer av samma kön och fanns från 1995 till 2009. Registrerade partners räknas som Gifta, Separerade partners som Skilda och Efterlevande partners som Änka/änklingar.",
-    "Fr o m 2007-01-01 utökas Uppsala län med Heby kommun. Observera att länssiffrorna inte är jämförbara med länssiffrorna bakåt i tiden."
   ],
   "dimension": {
     "Region": {
@@ -762,182 +770,178 @@
             }
           ]
         },
-        "filters": {
-          "vs": [
-            {
-              "id": "vs_RegionKommun07",
-              "label": "Kommuner",
-              "links": [
-                {
-                  "rel": "metadata",
-                  "href": "https://my-site.com/api/v2/tables/TAB638/filters/vs_RegionKommun07"
-                }
-              ]
-            },
-            {
-              "id": "vs_RegionLän07",
-              "label": "Län",
-              "links": [
-                {
-                  "rel": "metadata",
-                  "href": "https://my-site.com/api/v2/tables/TAB638/filters/vs_RegionLän07"
-                }
-              ]
-            },
-            {
-              "id": "vs_RegionRiket99",
-              "label": "Riket",
-              "links": [
-                {
-                  "rel": "metadata",
-                  "href": "https://my-site.com/api/v2/tables/TAB638/filters/vs_RegionRiket99"
-                }
-              ]
-            }
-          ],
-          "agg": [
-            {
-              "id": "agg_RegionA-region_2",
-              "label": "A-regioner",
-              "links": [
-                {
-                  "rel": "metadata",
-                  "href": "https://my-site.com/api/v2/tables/TAB638/filters/agg_RegionA-region_2"
-                }
-              ]
-            },
-            {
-              "id": "agg_RegionKommungrupp2005-_1",
-              "label": "Kommungrupper (SKL:s) 2005",
-              "links": [
-                {
-                  "rel": "metadata",
-                  "href": "https://my-site.com/api/v2/tables/TAB638/filters/agg_RegionKommungrupp2005-_1"
-                }
-              ]
-            },
-            {
-              "id": "agg_RegionKommungrupp2011-",
-              "label": "Kommungrupper (SKL:s) 2011",
-              "links": [
-                {
-                  "rel": "metadata",
-                  "href": "https://my-site.com/api/v2/tables/TAB638/filters/agg_RegionKommungrupp2011-"
-                }
-              ]
-            },
-            {
-              "id": "agg_RegionKommungrupp2017-",
-              "label": "Kommungrupper (SKL:s) 2017",
-              "links": [
-                {
-                  "rel": "metadata",
-                  "href": "https://my-site.com/api/v2/tables/TAB638/filters/agg_RegionKommungrupp2017-"
-                }
-              ]
-            },
-            {
-              "id": "agg_RegionLA1998",
-              "label": "Lokalaarbetsmarknader 1998",
-              "links": [
-                {
-                  "rel": "metadata",
-                  "href": "https://my-site.com/api/v2/tables/TAB638/filters/agg_RegionLA1998"
-                }
-              ]
-            },
-            {
-              "id": "agg_RegionLA2003_1",
-              "label": "Lokalaarbetsmarknader 2003",
-              "links": [
-                {
-                  "rel": "metadata",
-                  "href": "https://my-site.com/api/v2/tables/TAB638/filters/agg_RegionLA2003_1"
-                }
-              ]
-            },
-            {
-              "id": "agg_RegionLA2008",
-              "label": "Lokalaarbetsmarknader 2008",
-              "links": [
-                {
-                  "rel": "metadata",
-                  "href": "https://my-site.com/api/v2/tables/TAB638/filters/agg_RegionLA2008"
-                }
-              ]
-            },
-            {
-              "id": "agg_RegionLA2013",
-              "label": "Lokalaarbetsmarknader 2013",
-              "links": [
-                {
-                  "rel": "metadata",
-                  "href": "https://my-site.com/api/v2/tables/TAB638/filters/agg_RegionLA2013"
-                }
-              ]
-            },
-            {
-              "id": "agg_RegionLA2018",
-              "label": "Lokalaarbetsmarknader 2018",
-              "links": [
-                {
-                  "rel": "metadata",
-                  "href": "https://my-site.com/api/v2/tables/TAB638/filters/agg_Ålder5år"
-                }
-              ]
-            },
-            {
-              "id": "agg_RegionStoromr-04_2",
-              "label": "Sorstadsområder -2004",
-              "links": [
-                {
-                  "rel": "metadata",
-                  "href": "https://my-site.com/api/v2/tables/TAB638/filters/agg_RegionStoromr-04_2"
-                }
-              ]
-            },
-            {
-              "id": "agg_RegionStoromr05-_1",
-              "label": "Sorstadsområder 2005-",
-              "links": [
-                {
-                  "rel": "metadata",
-                  "href": "https://my-site.com/api/v2/tables/TAB638/filters/agg_RegionStoromr05-_1"
-                }
-              ]
-            },
-            {
-              "id": "agg_RegionNUTS1_2008",
-              "label": "NUTS1 fr.o.m 2008",
-              "links": [
-                {
-                  "rel": "metadata",
-                  "href": "https://my-site.com/api/v2/tables/TAB638/filters/agg_RegionNUTS1_2008"
-                }
-              ]
-            },
-            {
-              "id": "agg_RegionNUTS2_2008",
-              "label": "NUTS2 fr.o.m 2008",
-              "links": [
-                {
-                  "rel": "metadata",
-                  "href": "https://my-site.com/api/v2/tables/TAB638/filters/agg_RegionNUTS2_2008"
-                }
-              ]
-            },
-            {
-              "id": "agg_RegionNUTS3_2008",
-              "label": "NUTS3 fr.o.m 2008",
-              "links": [
-                {
-                  "rel": "metadata",
-                  "href": "https://my-site.com/api/v2/tables/TAB638/filters/agg_RegionNUTS3_2008"
-                }
-              ]
-            }
-          ]
-        }
+        "codeLists": [
+          {
+            "id": "vs_RegionKommun07",
+            "label": "Kommuner",
+            "links": [
+              {
+                "rel": "metadata",
+                "href": "https://my-site.com/api/v2/tables/TAB638/codelists/vs_RegionKommun07"
+              }
+            ]
+          },
+          {
+            "id": "vs_RegionLän07",
+            "label": "Län",
+            "links": [
+              {
+                "rel": "metadata",
+                "href": "https://my-site.com/api/v2/tables/TAB638/codelists/vs_RegionLän07"
+              }
+            ]
+          },
+          {
+            "id": "vs_RegionRiket99",
+            "label": "Riket",
+            "links": [
+              {
+                "rel": "metadata",
+                "href": "https://my-site.com/api/v2/tables/TAB638/codelists/vs_RegionRiket99"
+              }
+            ]
+          },
+          {
+            "id": "agg_RegionA-region_2",
+            "label": "A-regioner",
+            "links": [
+              {
+                "rel": "metadata",
+                "href": "https://my-site.com/api/v2/tables/TAB638/codelists/agg_RegionA-region_2"
+              }
+            ]
+          },
+          {
+            "id": "agg_RegionKommungrupp2005-_1",
+            "label": "Kommungrupper (SKL:s) 2005",
+            "links": [
+              {
+                "rel": "metadata",
+                "href": "https://my-site.com/api/v2/tables/TAB638/codelists/agg_RegionKommungrupp2005-_1"
+              }
+            ]
+          },
+          {
+            "id": "agg_RegionKommungrupp2011-",
+            "label": "Kommungrupper (SKL:s) 2011",
+            "links": [
+              {
+                "rel": "metadata",
+                "href": "https://my-site.com/api/v2/tables/TAB638/codelists/agg_RegionKommungrupp2011-"
+              }
+            ]
+          },
+          {
+            "id": "agg_RegionKommungrupp2017-",
+            "label": "Kommungrupper (SKL:s) 2017",
+            "links": [
+              {
+                "rel": "metadata",
+                "href": "https://my-site.com/api/v2/tables/TAB638/codelists/agg_RegionKommungrupp2017-"
+              }
+            ]
+          },
+          {
+            "id": "agg_RegionLA1998",
+            "label": "Lokalaarbetsmarknader 1998",
+            "links": [
+              {
+                "rel": "metadata",
+                "href": "https://my-site.com/api/v2/tables/TAB638/codelists/agg_RegionLA1998"
+              }
+            ]
+          },
+          {
+            "id": "agg_RegionLA2003_1",
+            "label": "Lokalaarbetsmarknader 2003",
+            "links": [
+              {
+                "rel": "metadata",
+                "href": "https://my-site.com/api/v2/tables/TAB638/codelists/agg_RegionLA2003_1"
+              }
+            ]
+          },
+          {
+            "id": "agg_RegionLA2008",
+            "label": "Lokalaarbetsmarknader 2008",
+            "links": [
+              {
+                "rel": "metadata",
+                "href": "https://my-site.com/api/v2/tables/TAB638/codelists/agg_RegionLA2008"
+              }
+            ]
+          },
+          {
+            "id": "agg_RegionLA2013",
+            "label": "Lokalaarbetsmarknader 2013",
+            "links": [
+              {
+                "rel": "metadata",
+                "href": "https://my-site.com/api/v2/tables/TAB638/codelists/agg_RegionLA2013"
+              }
+            ]
+          },
+          {
+            "id": "agg_RegionLA2018",
+            "label": "Lokalaarbetsmarknader 2018",
+            "links": [
+              {
+                "rel": "metadata",
+                "href": "https://my-site.com/api/v2/tables/TAB638/codelists/agg_Ålder5år"
+              }
+            ]
+          },
+          {
+            "id": "agg_RegionStoromr-04_2",
+            "label": "Sorstadsområder -2004",
+            "links": [
+              {
+                "rel": "metadata",
+                "href": "https://my-site.com/api/v2/tables/TAB638/codelists/agg_RegionStoromr-04_2"
+              }
+            ]
+          },
+          {
+            "id": "agg_RegionStoromr05-_1",
+            "label": "Sorstadsområder 2005-",
+            "links": [
+              {
+                "rel": "metadata",
+                "href": "https://my-site.com/api/v2/tables/TAB638/codelists/agg_RegionStoromr05-_1"
+              }
+            ]
+          },
+          {
+            "id": "agg_RegionNUTS1_2008",
+            "label": "NUTS1 fr.o.m 2008",
+            "links": [
+              {
+                "rel": "metadata",
+                "href": "https://my-site.com/api/v2/tables/TAB638/codelists/agg_RegionNUTS1_2008"
+              }
+            ]
+          },
+          {
+            "id": "agg_RegionNUTS2_2008",
+            "label": "NUTS2 fr.o.m 2008",
+            "links": [
+              {
+                "rel": "metadata",
+                "href": "https://my-site.com/api/v2/tables/TAB638/codelists/agg_RegionNUTS2_2008"
+              }
+            ]
+          },
+          {
+            "id": "agg_RegionNUTS3_2008",
+            "label": "NUTS3 fr.o.m 2008",
+            "links": [
+              {
+                "rel": "metadata",
+                "href": "https://my-site.com/api/v2/tables/TAB638/codelists/agg_RegionNUTS3_2008"
+              }
+            ]
+          }
+        ]
       }
     },
     "Civilstand": {
@@ -1175,52 +1179,48 @@
       "extension": {
         "elimination": true,
         "eliminationValueCode": "tot",
-        "filters": {
-          "vs": [
-            {
-              "id": "vs_Ålder1årA",
-              "label": "Ålder, 1 års-klasser",
-              "links": [
-                {
-                  "rel": "metadata",
-                  "href": "https://my-site.com/api/v2/tables/TAB638/filters/vs_Ålder1årA"
-                }
-              ]
-            },
-            {
-              "id": "vs_ÅlderTotA",
-              "label": "Ålder, totalt, alla redovisade åldrar",
-              "links": [
-                {
-                  "rel": "metadata",
-                  "href": "https://my-site.com/api/v2/tables/TAB638/filters/vs_ÅlderTotA"
-                }
-              ]
-            }
-          ],
-          "agg": [
-            {
-              "id": "agg_Ålder10år",
-              "label": "10-årsklasser",
-              "links": [
-                {
-                  "rel": "metadata",
-                  "href": "https://my-site.com/api/v2/tables/TAB638/filters/agg_Ålder10år"
-                }
-              ]
-            },
-            {
-              "id": "agg_Ålder5år",
-              "label": "5-årsklasser",
-              "links": [
-                {
-                  "rel": "metadata",
-                  "href": "https://my-site.com/api/v2/tables/TAB638/filters/agg_Ålder5år"
-                }
-              ]
-            }
-          ]
-        }
+        "codeLists": [
+          {
+            "id": "vs_Ålder1årA",
+            "label": "Ålder, 1 års-klasser",
+            "links": [
+              {
+                "rel": "metadata",
+                "href": "https://my-site.com/api/v2/tables/TAB638/codelists/vs_Ålder1årA"
+              }
+            ]
+          },
+          {
+            "id": "vs_ÅlderTotA",
+            "label": "Ålder, totalt, alla redovisade åldrar",
+            "links": [
+              {
+                "rel": "metadata",
+                "href": "https://my-site.com/api/v2/tables/TAB638/codelists/vs_ÅlderTotA"
+              }
+            ]
+          },
+          {
+            "id": "agg_Ålder10år",
+            "label": "10-årsklasser",
+            "links": [
+              {
+                "rel": "metadata",
+                "href": "https://my-site.com/api/v2/tables/TAB638/codelists/agg_Ålder10år"
+              }
+            ]
+          },
+          {
+            "id": "agg_Ålder5år",
+            "label": "5-årsklasser",
+            "links": [
+              {
+                "rel": "metadata",
+                "href": "https://my-site.com/api/v2/tables/TAB638/codelists/agg_Ålder5år"
+              }
+            ]
+          }
+        ]
       },
       "link": {
         "describedby": [
@@ -1281,6 +1281,10 @@
       },
       "extension": {
         "elimination": false,
+        "refperiod": {
+          "BE0101N1": "31 December each year",
+          "BE0101N2": "31 December each year"
+        },
         "valueNote": {
           "BE0101N1": [
             {
