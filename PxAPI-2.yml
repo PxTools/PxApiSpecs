@@ -875,10 +875,7 @@ components:
               type: boolean
             aggregallowed:
               description: If the contents of the table cannot be aggregated
-              type: boolean
-            refperiod:
-              description: Text with information on the exact period for the statistics
-              type: string              
+              type: boolean            
             copyright:
               description: Copyright is given as YES or NO
               type: string
@@ -925,6 +922,7 @@ components:
           description: Elimination value code
           type: string
         refperiod:
+          description: Text with information on the exact period for the statistics
           type: object
           additionalProperties:
             type: string
