@@ -841,14 +841,14 @@ components:
       type: string
       pattern: "^((19|20)\\d\\d)\\-(0?[1-9]|1[012])\\-(0?[1-9]|[12][0-9]|3[01])$"
     href:
-      description: Spesification on json-stat.org -> [here](https://json-stat.org/full/#href)
+      description: Specification on json-stat.org -> [here](https://json-stat.org/full/#href)
       type: string
       format: uri
     label:
-      description: Spesification on json-stat.org -> [here](https://json-stat.org/full/#label)
+      description: Specification on json-stat.org -> [here](https://json-stat.org/full/#label)
       type: string
     source:
-      description: Spesification on json-stat.org -> [here](https://json-stat.org/full/#source)
+      description: Specification on json-stat.org -> [here](https://json-stat.org/full/#source)
       type: string
     extension-root:
       description: extension at root level
@@ -994,21 +994,21 @@ components:
       type: object
       properties:
         index:
-          description: Spesification on json-stat.org -> [here](https://json-stat.org/full/#index)
+          description: Specification on json-stat.org -> [here](https://json-stat.org/full/#index)
           type: object
           additionalProperties:
             type: integer
         label:
-          description: Spesification on json-stat.org -> [here](https://json-stat.org/full/#label)
+          description: Specification on json-stat.org -> [here](https://json-stat.org/full/#label)
           type: object
           minProperties: 1
           additionalProperties:
             type: string
         child:
-          description: Spesification on json-stat.org -> [here](https://json-stat.org/full/#child)
+          description: Specification on json-stat.org -> [here](https://json-stat.org/full/#child)
           "$ref": "#/components/schemas/strarray-by-str-dict"
         unit:
-          description: Spesification on json-stat.org -> [here](https://json-stat.org/full/#unit)
+          description: Specification on json-stat.org -> [here](https://json-stat.org/full/#unit)
           type: object
           additionalProperties:
             type: object
@@ -1028,7 +1028,7 @@ components:
     Dataset:
       title: JSON-stat 2.0 Dataset Schema
       description: |
-         Representation of TableMetaData/TableData according to JSON-stat 2.0 Dataset Schema (2018-09-05 10:55), see full spesification of JSON-stat format [here](https://json-stat.org/full/)
+         Representation of TableMetaData/TableData according to JSON-stat 2.0 Dataset Schema (2018-09-05 10:55), see full specification of JSON-stat format [here](https://json-stat.org/full/)
          
          Properties in **extension** are mostly from PX-file format, see [PX file format](https://www.scb.se/en/services/statistical-programs-for-px-files/px-file-format/)
       type: object
@@ -1058,38 +1058,38 @@ components:
         extension:
           "$ref": "#/components/schemas/extension-root"  
         role:
-          description: Spesification on json-stat.org -> [here](https://json-stat.org/full/#role)
+          description: Specification on json-stat.org -> [here](https://json-stat.org/full/#role)
           type: object
           properties:
             time:
-              description: Spesification on json-stat.org -> [here](https://json-stat.org/full/#time)
+              description: Specification on json-stat.org -> [here](https://json-stat.org/full/#time)
               "$ref": "#/components/schemas/strarray"
             geo:
-              description: Spesification on json-stat.org -> [here](https://json-stat.org/full/#geo)
+              description: Specification on json-stat.org -> [here](https://json-stat.org/full/#geo)
               "$ref": "#/components/schemas/strarray"
             metric:
-              description: Spesification on json-stat.org -> [here](https://json-stat.org/full/#metric)
+              description: Specification on json-stat.org -> [here](https://json-stat.org/full/#metric)
               "$ref": "#/components/schemas/strarray"
           additionalProperties: false  
         id:
-          description: Spesification on json-stat.org -> [here](https://json-stat.org/full/#id)
+          description: Specification on json-stat.org -> [here](https://json-stat.org/full/#id)
           "$ref": "#/components/schemas/strarray"
         size:
-          description: Spesification on json-stat.org -> [here](https://json-stat.org/full/#size)
+          description: Specification on json-stat.org -> [here](https://json-stat.org/full/#size)
           type: array
           items:
              type: integer
         dimension:
-          description: Spesification on json-stat.org -> [here](https://json-stat.org/full/#dimension)
+          description: Specification on json-stat.org -> [here](https://json-stat.org/full/#dimension)
           type: object
           additionalProperties:
              type: object
              properties:
               label:
-                description: Spesification on json-stat.org -> [here](https://json-stat.org/full/#label) 
+                description: Specification on json-stat.org -> [here](https://json-stat.org/full/#label) 
                 "$ref": "#/components/schemas/label"
               category:
-                description: Spesification on json-stat.org -> [here](https://json-stat.org/full/#category)
+                description: Specification on json-stat.org -> [here](https://json-stat.org/full/#category)
                 "$ref": "#/components/schemas/jsonstat-category"  
               extension:
                 "$ref": "#/components/schemas/extension-dimension"
@@ -1097,13 +1097,13 @@ components:
                 "$ref": "#/components/schemas/jsonstat-extension-link"
              additionalProperties: false            
         value:
-          description: Spesification on json-stat.org -> [here](https://json-stat.org/full/#value)
+          description: Specification on json-stat.org -> [here](https://json-stat.org/full/#value)
           type: array
           nullable: true
           items:
             type: number
         status:
-          description: Spesification on json-stat.org -> [here](https://json-stat.org/full/#status)
+          description: Specification on json-stat.org -> [here](https://json-stat.org/full/#status)
           type: object
           additionalProperties:
             type: string
