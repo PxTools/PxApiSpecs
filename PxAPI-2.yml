@@ -143,6 +143,62 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/CodeList'
+
+  /tables/{id}/data:
+    get:
+      tags:
+        - Table
+      summary: List all codelists that are associated with the table 
+      operationId: GetTableData
+      parameters:
+        - $ref: '#/components/parameters/language'
+        - $ref: '#/components/parameters/id'
+        - in: query
+          name: valuecodes
+          schema:
+            type: object
+            example: |
+              [
+                {"variable_1": "1,2,3"},
+                {"variable_2": "TOP(5)"}
+              ]
+          style: deepObject
+          explode: true
+        - in: query
+          name: codelist
+          schema:
+            type: object
+            example: |
+              [
+                {"variable_1": "NUTS_2008"}
+              ]
+          style: deepObject
+          explode: true
+        - in: query
+          name: outputvalues
+          schema:
+            type: object
+            example: |
+              [
+                {"variable_1": "single"}
+              ]
+          style: deepObject
+          explode: true          
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CodeListsResponse'
+            
+            #application/vnd.json-stat.2.px+json:
+            #application/json:
+            application/vnd.px+text:
+              schema:
+                format: binary #Should it realy be banary?
+                externalDocs:
+                  url: "https://www.scb.se/globalassets/vara-tjanster/px-programmen/px-file_format_specification_2013.pdf"
     
 components:
   parameters:
