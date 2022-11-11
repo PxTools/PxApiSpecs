@@ -157,6 +157,10 @@ paths:
           name: valuecodes
           schema:
             type: object
+            additionalProperties:
+              type: array
+              items:
+                type: string
             example: |
               [
                 {"variable_1": "1,2,3"},
