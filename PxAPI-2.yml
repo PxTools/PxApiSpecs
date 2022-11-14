@@ -521,10 +521,6 @@ components:
           - TimeVariable
           - GeographicalVariable
           - RegularVariable
-        values:
-          type: array
-          items:
-            $ref: '#/components/schemas/Value'
         notes: 
           type: array
           items:
@@ -585,6 +581,10 @@ components:
         lastPeriod:
           description: Latest time period in table
           type: string
+        values:
+          type: array
+          items:
+            $ref: '#/components/schemas/Value'
     ContentsVariable:
       description: Content variable
       allOf:
@@ -605,6 +605,10 @@ components:
           type: boolean
         eliminationValueCode:
           type: string
+        values:
+          type: array
+          items:
+            $ref: '#/components/schemas/Value'
         codeLists:
           $ref: '#/components/schemas/CodeLists'
     GeographicalVariable:
