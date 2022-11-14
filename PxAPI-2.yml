@@ -172,6 +172,8 @@ paths:
           name: codelist
           schema:
             type: object
+            additionalProperties:
+              type: string
             example: |
               [
                 {"variable_1": "NUTS_2008"}
@@ -182,6 +184,8 @@ paths:
           name: outputvalues
           schema:
             type: object
+            additionalProperties:
+              $ref: '#/components/schemas/CodeListOutputValuesStyle'
             example: |
               [
                 {"variable_1": "single"}
@@ -284,6 +288,11 @@ components:
         type: integer
         #Default value depends on site?
   schemas:
+    CodeListOutputValuesStyle:
+      type: string
+      enum:
+        - aggregated
+        - single
     FolderContentItem:
       discriminator:
         propertyName: objectType
