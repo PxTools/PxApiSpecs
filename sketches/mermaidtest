@@ -1,4 +1,3 @@
-
 ```mermaid
 mindmap
   root((mindmap))
@@ -17,4 +16,9 @@ mindmap
     Tools
       Pen and paper
       Mermaid
+```
+
+```mermaid
+    graph LR
+        user1[fa:fa-user User 1] -- edit --> folder
 ```
