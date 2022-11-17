@@ -931,6 +931,9 @@ components:
           type: object
           additionalProperties:
             type: string
+        show:
+          description: Information about how variables are presented
+          type: string
         note:
           description: Notes for dimension
           type: array
