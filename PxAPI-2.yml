@@ -906,6 +906,7 @@ components:
         discontinued:
           description: Table will no longer be updated
           type: boolean
+          nullable: true
         contact:
           type: array
           description: A list of contacts associated with the table.
@@ -933,6 +934,9 @@ components:
           type: object
           additionalProperties:
             type: string
+        show:
+          description: Information about how variables are presented
+          type: string
         note:
           description: Notes for dimension
           type: array
@@ -1060,8 +1064,6 @@ components:
           "$ref": "#/components/schemas/updated"
         link:
           "$ref": "#/components/schemas/jsonstat-link"
-        extension:
-          "$ref": "#/components/schemas/extension-root"  
         role:
           description: Specification on json-stat.org -> [here](https://json-stat.org/full/#role)
           type: object
@@ -1101,12 +1103,16 @@ components:
               link:
                 "$ref": "#/components/schemas/jsonstat-extension-link"
              additionalProperties: false            
+        extension:
+          "$ref": "#/components/schemas/extension-root"  
         value:
           description: Specification on json-stat.org -> [here](https://json-stat.org/full/#value)
           type: array
           nullable: true
           items:
             type: number
+            format: double
+            nullable: true
         status:
           description: Specification on json-stat.org -> [here](https://json-stat.org/full/#status)
           type: object
