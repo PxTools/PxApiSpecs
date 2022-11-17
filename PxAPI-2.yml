@@ -303,6 +303,8 @@ components:
         - $ref: '#/components/schemas/FolderContentItem'
       type: object
       description: Folder information item
+      required:
+        - "links"
       properties:
             tags:
               type: array
@@ -326,6 +328,12 @@ components:
         - $ref: '#/components/schemas/FolderContentItem'
       type: object
       description: Table item
+      required:
+        - "updated"
+        - "firstPeriod"
+        - "lastPeriod"
+        - "variableNames"
+        - "links"
       properties:
             tags:
               type: array
@@ -335,61 +343,73 @@ components:
               nullable: true
             updated:
               type: string
-              description: For treeNodeType "table"
+              description: Date and time when the figures in the table was last updated, in UTC time.
+              pattern: "^((19|20)\\d\\d)\\-(0?[1-9]|1[012])\\-(0?[1-9]|[12][0-9]|3[01])$"
               format: date-time
+              nullable: true
+            firstPeriod:
+              type: string
+              description: First period
+              example: 2017
+              nullable: true
+            lastPeriod:
+              type: string
+              description: Last period
+              example: 2022
               nullable: true
             category:
               type: string
-              description: Mostly for internal use. Which category table belongs to. internal, official, private or section. I, O, P, S
-              default: official
+              description: Mostly for internal use. Which category table belongs to. internal, public, private or section. 
+              default: public
               enum:
               - internal
-              - official
+              - public
               - private
               - section
+            variableNames:
+              type: array
+              description: List of varibles name
+              items:
+                type: string
+            discontinued:
+              type: boolean
+              nullable: true
             links:
               type: array
               items:
                 $ref: '#/components/schemas/Link'
               description: Links to ...
               nullable: true
-            variablesName:
-              type: array
-              description: List of varibles name
-              items:
-                type: string
-            firstPeriod:
-              type: string
-              description: First period
-              example: 2017
-            lastPeriod:
-              type: string
-              description: Last period
-              example: 2022
-            discontinued:
-              type: boolean
-              nullable: true
 
     PageInfo:
       type: object
+      required:
+        - "pageNumber"
+        - "pageSize"
+        - "totalElements"
+        - "totalPages"
       properties:
         pageNumber:
           type: integer
+          description: The current page number.
           format: int32
           minimum: 1
         pageSize:
           type: integer
           format: int32
-          example: 20
+          description: The maximal number of elements in a page
+          example: 100
           minimum: 1
         totalElements:
           type: integer
           format: int32
+          description: the Total number of elements
           minimum: 0
         totalPages:
           type: integer
           format: int32
-          minimum: 0
+          description: The total number of pages
+          minimum: 1
         links:
           type: array
           items:
@@ -397,22 +417,33 @@ components:
 
     TablesResponse:
       type: object
+      required:
+        - "tables"
+        - "page"
       properties:
-        page:
-          $ref: '#/components/schemas/PageInfo'
         tables:
           type: array
           items:
               $ref: '#/components/schemas/Table'    
+        page:
+          $ref: '#/components/schemas/PageInfo'
+        links:
+          type: array
+          items:
+             $ref: '#/components/schemas/Link'
+
     TableMetadata:
       type: object
       required: 
-        - id
-        - label
+        - "id"
+        - "label"
+        - "variables"
+        - "variablesDisplayOrder"
+        - "links"
       properties:
         id:
           type: string
-          description: Identifyer for the table.
+          description: Identifier for the table.
           example: "TAB0001"
         label:
           type: string
@@ -422,23 +453,27 @@ components:
           type: string
           description: A description of the table.
           example: Corporations Financial Assets and Liabilities by item. Quarterly 1998K2 - 2021K4 [2022-03-11]
-        agregationPossible:
+        aggregationAllowed:
           type: boolean
-          description: If the content of the table can be aggregated.
+          description: If all content of the table can be aggregated.
         officalStatistics:
           type: boolean
           description: A marker if the table is a part of the national official statistics.
-        category:
+        subjectCode:
           type: string
           description: The code for the subject area that the table belongs to.
           example: BE
+        subjectLabel:
+          type: string
+          description: The label for the subject area that the table belongs to.
+          example: Population
         source:
           type: string
           description: The name of the organization responsible for the table.
-          example: SCB
-        copyright:
+          example: Statistics Sweden
+        licence:
           type: string
-          description: A copyright statement for the data it could also be SPDX (https://spdx.org/licenses/) identifyer
+          description: A copyright statement for the data it could also be SPDX (https://spdx.org/licenses/) identifier
           example: CC0-1.0
         tags:
           type: array
@@ -447,7 +482,8 @@ components:
             type: string
         updated:
             type: string
-            description: A date and time when the table was last updated
+            description: Date and time when the figures in the table was last updated, in UTC time.
+            pattern: "^((19|20)\\d\\d)\\-(0?[1-9]|1[012])\\-(0?[1-9]|[12][0-9]|3[01])$"
             format: date-time
             nullable: true
         notes: 
@@ -460,18 +496,8 @@ components:
           description: A list of contacts associated with the table.
           items: 
             $ref: '#/components/schemas/Contact'
-        contentsVariable:
-          $ref: '#/components/schemas/ContentsVariable'
-        timeVariable:
-          $ref: '#/components/schemas/TimeVariable'
-        geoVariables: 
-          type: array
-          items:
-            $ref: '#/components/schemas/GeographicalVariable'
-        regularVariables: 
-          type: array
-          items:
-            $ref: '#/components/schemas/RegularVariable'
+        variables:
+          $ref: '#/components/schemas/AbstractVariable'
         variablesDisplayOrder:
           type: array
           items:
