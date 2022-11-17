@@ -1,1 +1,1 @@
-discontinued
+discontinued  boolean on table
