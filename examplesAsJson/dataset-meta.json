@@ -19,50 +19,6 @@
       }
     ]
   },
-  "extension": {
-    "px": {
-      "infofile": "BE0101",
-      "tableid": "TAB638",
-      "decimals": 0,
-      "official-statistics": true,
-      "aggregallowed": false,
-      "copyright": "CC-0",
-      "language": "sv",
-      "description": "",
-      "matrix": "TAB638",
-      "subject-code": "BE"
-    },
-    "tags": [
-      ""
-    ],
-    "discontinued": false,
-    "contact": [
-      {
-        "name": "Tomas Johansson",
-        "phone": "+46 010-479 64 26",
-        "mail": "tomas.johansson@scb.se"
-      },
-      {
-        "name": "Statistikservice",
-        "phone": "+46 010-479 50 0",
-        "mail": "information@scb.se"
-      }
-    ],
-    "note": [
-      {
-        "mandatory": true,
-        "text": "Fr o m 2007-01-01 överförs Heby kommun från Västmanlands län till Uppsala län. Hebys kommunkod ändras från 1917 till 0331. "
-      },
-      {
-        "mandatory": true,
-        "text": "Registrerat partnerskap reglerade parförhållanden mellan personer av samma kön och fanns från 1995 till 2009. Registrerade partners räknas som Gifta, Separerade partners som Skilda och Efterlevande partners som Änka/änklingar."
-      },
-      {
-        "mandatory": true,
-        "text": "Fr o m 2007-01-01 utökas Uppsala län med Heby kommun. Observera att länssiffrorna inte är jämförbara med länssiffrorna bakåt i tiden."
-      }
-    ]
-  },
   "role": {
     "time": [
       "Tid"
@@ -1318,6 +1274,50 @@
         "lastPeriod": "2021"
       }
     }
+  },
+  "extension": {
+    "px": {
+      "infofile": "BE0101",
+      "tableid": "TAB638",
+      "decimals": 0,
+      "official-statistics": true,
+      "aggregallowed": false,
+      "copyright": "CC-0",
+      "language": "sv",
+      "description": "",
+      "matrix": "TAB638",
+      "subject-code": "BE"
+    },
+    "tags": [
+      ""
+    ],
+    "discontinued": false,
+    "contact": [
+      {
+        "name": "Tomas Johansson",
+        "phone": "+46 010-479 64 26",
+        "mail": "tomas.johansson@scb.se"
+      },
+      {
+        "name": "Statistikservice",
+        "phone": "+46 010-479 50 0",
+        "mail": "information@scb.se"
+      }
+    ],
+    "note": [
+      {
+        "mandatory": true,
+        "text": "Fr o m 2007-01-01 överförs Heby kommun från Västmanlands län till Uppsala län. Hebys kommunkod ändras från 1917 till 0331. "
+      },
+      {
+        "mandatory": true,
+        "text": "Registrerat partnerskap reglerade parförhållanden mellan personer av samma kön och fanns från 1995 till 2009. Registrerade partners räknas som Gifta, Separerade partners som Skilda och Efterlevande partners som Änka/änklingar."
+      },
+      {
+        "mandatory": true,
+        "text": "Fr o m 2007-01-01 utökas Uppsala län med Heby kommun. Observera att länssiffrorna inte är jämförbara med länssiffrorna bakåt i tiden."
+      }
+    ]
   },
   "value": []
 }

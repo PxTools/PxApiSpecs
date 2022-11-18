@@ -103,6 +103,9 @@
     "id": "Tid",
     "label": "år",
     "type": 0,
+    "frequency": "A",
+    "firstPeriod": "1968",
+    "lastPeriod": "2021",
     "values": [
       {
         "code": "1968",
@@ -320,16 +323,15 @@
         "code": "2021",
         "label": "2021"
       }
-    ],
-    "frequency": "A",
-    "firstPeriod": "1968",
-    "lastPeriod": "2021"
+    ]
   },
   "geoVariables": [
     {
       "id": "Region",
       "label": "region",
       "type": 0,
+      "elimination": true,
+      "eliminationValueCode": "00",
       "values": [
         {
           "code": "00",
@@ -1616,8 +1618,6 @@
           "label": "Kiruna"
         }
       ],
-      "elimination": true,
-      "eliminationValueCode": "00",
       "codeLists": [
         {
           "id": "vs_RegionKommun07",
@@ -1797,6 +1797,7 @@
       "id": "Civilstand",
       "label": "civilstånd",
       "type": 0,
+      "elimination": true,
       "values": [
         {
           "code": "OG",
@@ -1814,13 +1815,13 @@
           "code": "ÄNKL",
           "label": "änkor/änklingar"
         }
-      ],
-      "elimination": true
+      ]
     },
     {
       "id": "Kon",
       "label": "kön",
       "type": 0,
+      "elimination": true,
       "values": [
         {
           "code": "1",
@@ -1830,13 +1831,14 @@
           "code": "2",
           "label": "kvinnor"
         }
-      ],
-      "elimination": true
+      ]
     },
     {
       "id": "Alder",
       "label": "ålder",
       "type": 0,
+      "elimination": true,
+      "eliminationValueCode": "tot",
       "values": [
         {
           "code": "0",
@@ -2247,8 +2249,6 @@
           "label": "totalt ålder"
         }
       ],
-      "elimination": true,
-      "eliminationValueCode": "tot",
       "codeLists": [
         {
           "id": "vs_Ålder1årA",

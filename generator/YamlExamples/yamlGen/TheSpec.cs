@@ -11,15 +11,15 @@ namespace yamlGen
         public const string GEN_START_LINE_FORMAT = "#generated {0} start";
         public const string GEN_END_LINE_FORMAT = "#generated {0} end";
 
-        private string specAsString = "";
-        private string specFile = @"C:\github.com\statisticssweden\api2Spec\yamlGen\PxApiSpecs\PxAPI-2.yml";
+        private string specAsString;
+        private string specFile;
 
-        private bool dryRun = true;
+        private bool dryRun;
 
-        public TheSpec(string inFile, bool inDryRun )
+        public TheSpec(string specFile, bool dryRun)
         {
-            dryRun = inDryRun;
-
+            this.dryRun = dryRun;
+            this.specFile = specFile;
             specAsString = File.ReadAllText(specFile);
         }
 
@@ -29,20 +29,11 @@ namespace yamlGen
             string startString = string.Format(GEN_START_LINE_FORMAT,exampleName);
             string endString = string.Format(GEN_END_LINE_FORMAT, exampleName);
 
-
-
             int pos= specAsString.IndexOf(startString);
-
             string temp = specAsString.Substring(pos);
-
-
-
             string oldExample = temp.Substring(0,temp.IndexOf(endString)+endString.Length);
 
             specAsString = specAsString.Replace(oldExample, exampleYaml);
-
-
-
         }
 
         public void Save()

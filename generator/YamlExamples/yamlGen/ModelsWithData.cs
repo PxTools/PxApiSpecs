@@ -318,7 +318,7 @@ namespace yamlGen
                 Text = "Fr o m 2007-01-01 utökas Uppsala län med Heby kommun. Observera att länssiffrorna inte är jämförbara med länssiffrorna bakåt i tiden."
             });
 
-            ds.Value = new List<decimal>();
+            ds.Value = new List<double?>();
             return ds;
         }
 

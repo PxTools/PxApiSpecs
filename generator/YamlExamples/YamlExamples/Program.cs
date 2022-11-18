@@ -2,5 +2,9 @@
 using yamlGen;
 
 Console.WriteLine("Hello, World!");
+
 bool dryRun = true;
-DoIt doingIt = new DoIt(@"C:\github.com\statisticssweden\api2Spec\yamlGen\PxApiSpecs\",dryRun);
+
+//basepath should be the repo-root folder (where the spec-file is).
+DoIt doingIt = new DoIt(basePath: @"..\..\..\..\..\..\", dryRun);
+

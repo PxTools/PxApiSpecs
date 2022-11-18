@@ -8,3 +8,4 @@ additionalProperties:
   packageDescription: Server library for PxWeb API 2.0
   licenseName: Apache-2.0
   packageAuthors: SCB & SSB
+  useSeperateModelProject: true
