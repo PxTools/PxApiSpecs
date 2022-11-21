@@ -1,7 +1,8 @@
 ## Who/How will we use the generated code.
 Is the model usefull outside the api?  (A copy of the model was used to upgraded the "old" jsonstat2 serializer, but this is not "live". It is (soon 🙂 ) used to generate examples, but this happens as part of the spec-editing. So they don't count)
+The GUI will be a client, but its language is yet to be decided. Will the same model be created for the client?  The proxy-api(aka portal.api) is both client and server. 
 
-Will the same model be created for the client?  The proxy-api(aka portal.api) is both client and server.
+Will we create clients for Python or R?  
 
 ## Partial files for the model
 Why do we need partial files: Classes with ObjectType like the subclasses of FolderContentItem (heading, table ,, )
