@@ -8,7 +8,8 @@ Will we create clients for Python or R?
 Why do we need partial files: Classes with ObjectType like the subclasses of FolderContentItem (heading, table ,, )
 should have a constructor setting Objecttype correctly so that instances of the Heading class always has objectType heading.
 We also "need" util methods for adding a contact , making sure updated is UTC and so on. 
-If these things are included in the nugets, many traps are avoided.   
+If these things are included in the nugets, many traps are avoided.
+We will try to use extensions methods and Factory-classes instead of partial classes. That way we can go ahead and generate the code as a class library.
 
 ### Issues
 How to store and maintain:
