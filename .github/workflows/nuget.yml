@@ -34,7 +34,7 @@ jobs:
           dotnet tool install minver-cli
 
       - name: Calculate version
-        run: echo "version=$(dotnet minver -t v -v e -d preview)" >> $GITHUB_ENV
+        run: echo "version=$(dotnet minver -t v -v e)" >> $GITHUB_ENV
 
       - name: Restore Nuget
         working-directory: ./out
