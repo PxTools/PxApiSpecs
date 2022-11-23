@@ -50,7 +50,7 @@ jobs:
       
       - name: Depoly to Nuget
         working-directory: ./out
-        run: dotnet nuget push PxWeb.Api2.Server.${{ env.version }}.nupkg -k $env:nuget_api_key -src https://nuget.org
+        run: dotnet nuget push PxWeb.Api2.Server.${{ env.version }}.nupkg -k $env:nuget_api_key -s https://nuget.org
         env:
           nuget_api_key: ${{ secrets.NUGET_API_KEY }}
             
