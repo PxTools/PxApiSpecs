@@ -583,7 +583,7 @@ components:
       allOf:
         - $ref: '#/components/schemas/Note'
       type: object
-      description: Note for a table
+      description: Note for a table or a part of it
       properties:
         conditions:
           type: array
@@ -595,13 +595,13 @@ components:
       description: Condition determining to what the CellNote applies
       type: object
       required:
-        - "variableCode"
-        - "valueCode"
+        - "variable"
+        - "value"
       properties:
-        variableCode:
+        variable:
           type: string
           description: The code of the variable
-        valueCode:
+        value:
           type: string
           description: The code of the value
     TimeVariable:
@@ -610,9 +610,17 @@ components:
         - $ref: '#/components/schemas/AbstractVariable'
       type: object
       properties:
-        frequency:
-          description: How often a table is updated
+        timeUnit:
+          description: Indicates the time scale for the variable.
           type: string
+          default: Other
+          enum:
+            - Annual
+            - HalfYear
+            - Quarterly
+            - Monthly
+            - Weekly
+            - Other
         firstPeriod:
           description: Earliest time period in table
           type: string
@@ -628,6 +636,8 @@ components:
       allOf:
         - $ref: '#/components/schemas/AbstractVariable'
       type: object
+      required:
+        - "values"
       properties:
             values:
               type: array
@@ -638,6 +648,8 @@ components:
       allOf:
       - $ref: '#/components/schemas/AbstractVariable'
       type: object
+      required:
+        - "values"
       properties:
         elimination:
           type: boolean
@@ -650,8 +662,6 @@ components:
         codeLists:
           $ref: '#/components/schemas/CodeLists'
     GeographicalVariable:
-      required:
-        - "map"
       allOf:
       - $ref: '#/components/schemas/AbstractCodeListVariable'
       type: object
@@ -659,12 +669,16 @@ components:
         map:
           type: string
     RegularVariable:
-      description: Non-geographical Variable
+      description: All other type of variaiable except for time, contents or geographical
       allOf:
       - $ref: '#/components/schemas/AbstractCodeListVariable'
       type: object
     CodeListInformation:
       type: object
+      required:
+        - "id"
+        - "label"
+        - "links"
       properties:
         id:
           type: string
