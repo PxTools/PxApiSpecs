@@ -14,4 +14,6 @@ docker run --rm -v ${PWD}:/local openapitools/openapi-generator-cli generate -i 
 
 Replace `${PWD}` with `$(pwd)` when running from bash.
 
+Add -c /local/aspnetcore-generator-config.yml if you want the same additional-properties as the nuget action uses
+
 docker pull openapitools/openapi-generator-cli:v6.0.0

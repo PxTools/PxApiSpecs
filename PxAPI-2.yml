@@ -2,6 +2,18 @@ openapi: '3.0.2'
 info:
   title: PxApi
   version: '2.0'
+  description: |
+    This api lets you do 2 things; Find a table(Navigation) and use a table (Table).
+
+    _Table below is added to show how tables can be described in yml._
+
+    **Table contains status code this API may return**
+    | Status code    | Description      | Reason                      |
+    | -------        | -----------      | ---------------------       |
+    | 200            | Success          | The endpoint has delivered response for the request                      |
+    | 400            | Bad request      | If the request is not valid |
+    | 404            | Not found        | If the URL in request does not exist |
+    | 429            | Too many request | Number of requests has surpassed the threshold                            |
 servers:
   - url: https://api.server.test/api/v2
 tags:
@@ -52,7 +64,7 @@ paths:
   /tables:
     get:
       tags:
-        - Table
+        - Navigation
       summary: Endpoint for listing tables
       operationId: ListAllTables
       parameters:
@@ -91,6 +103,17 @@ paths:
       tags:
         - Table
       summary: Endpoint to get metadata about table by {id}
+      description: |
+        **Used for listing detailed information about a specific table**
+        * List all variables and values and all other metadata needed to be able to fetch data
+
+        * Also links to where to:
+          + Fetch
+          - Where to get information about codelists
+
+        * 2 output formats
+          + Custom json 
+          - JSON-stat2 
       operationId: GetMetadataById
       parameters:
         - $ref: '#/components/parameters/id'
@@ -101,6 +124,9 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/TableMetadata'
+            application/jsonstat:
+              schema:
+                $ref: '#/components/schemas/Dataset'    
             application/vnd.json-stat2+json:
               schema:
                 externalDocs:
@@ -533,10 +559,6 @@ components:
           - TimeVariable
           - GeographicalVariable
           - RegularVariable
-        values:
-          type: array
-          items:
-            $ref: '#/components/schemas/Value'
         notes: 
           type: array
           items:
@@ -589,11 +611,18 @@ components:
       type: object
       properties:
         frequency:
+          description: How often a table is updated
           type: string
         firstPeriod:
+          description: Earliest time period in table
           type: string
         lastPeriod:
+          description: Latest time period in table
           type: string
+        values:
+          type: array
+          items:
+            $ref: '#/components/schemas/Value'
     ContentsVariable:
       description: Content variable
       allOf:
@@ -614,10 +643,12 @@ components:
           type: boolean
         eliminationValueCode:
           type: string
-        filters:
+        values:
           type: array
           items:
-            $ref: '#/components/schemas/CodeListInformation'
+            $ref: '#/components/schemas/Value'
+        codeLists:
+          $ref: '#/components/schemas/CodeLists'
     GeographicalVariable:
       required:
         - "map"
@@ -841,6 +872,296 @@ components:
           description: |
             An absolute URI that identifies the specific occurrence of the problem.
             It may or may not yield further information if dereferenced.
+              
+    strarray:
+      type: array
+      items:
+        type: string
+      uniqueItems: true
+    updated:
+      description: See https://json-stat.org/full/#updated
+      type: string
+      pattern: "^((19|20)\\d\\d)\\-(0?[1-9]|1[012])\\-(0?[1-9]|[12][0-9]|3[01])$"
+    href:
+      description: Specification on json-stat.org -> [here](https://json-stat.org/full/#href)
+      type: string
+      format: uri
+    label:
+      description: Specification on json-stat.org -> [here](https://json-stat.org/full/#label)
+      type: string
+    source:
+      description: Specification on json-stat.org -> [here](https://json-stat.org/full/#source)
+      type: string
+    extension-root:
+      description: extension at root level
+      type: object
+      properties:
+        px:
+          description: |
+            Properties corresponds to keywords in the px-file.
+            
+            See [PX file format](https://www.scb.se/en/services/statistical-programs-for-px-files/px-file-format/)
+          type: object
+          properties:
+            infofile:
+              description: Name of a file containing more information for the statistics**
+              type: string
+            tableid:
+              description: A text that is the identity of the table
+              type: string
+            decimals:
+              description: The number of decimals in the table cells
+              type: integer
+            official-statistics:
+              description: Indicates if the data table is included in the official statistics of the organization
+              type: boolean
+            aggregallowed:
+              description: If the contents of the table cannot be aggregated
+              type: boolean            
+            copyright:
+              description: Copyright is given as YES or NO
+              type: string
+            language:
+              description: code (two characters) for language
+              type: string
+            description:
+              description: See _description_ in [PX file format](https://www.scb.se/en/services/statistical-programs-for-px-files/px-file-format/)
+              type: string
+            matrix:
+              description: The name of the matrix
+              type: string
+            subject-code:
+              description: Subject area code
+              type: string
+        tags:
+          description: Tag for table
+          type: array
+          items: 
+            type: string
+        discontinued:
+          description: Table will no longer be updated
+          type: boolean
+          nullable: true
+        contact:
+          type: array
+          description: A list of contacts associated with the table.
+          items: 
+            $ref: '#/components/schemas/Contact'
+        note:
+          type: array
+          items:
+            $ref: '#/components/schemas/Note'
+    extension:
+      description: extension at some level
+      type: object
+    extension-dimension:
+      description: extension at dimension
+      type: object
+      properties:
+        elimination:
+          description: Can dimension be elminated
+          type: boolean
+        eliminationValueCode:
+          description: Elimination value code
+          type: string
+        refperiod:
+          description: Text with information on the exact period for the statistics
+          type: object
+          additionalProperties:
+            type: string
+        show:
+          description: Information about how variables are presented
+          type: string
+        note:
+          description: Notes for dimension
+          type: array
+          items:
+            $ref: '#/components/schemas/Note'
+        valueNote:
+          description: Notes for values in dimension.
+          type: object
+          additionalProperties:
+            type: array
+            items:
+              $ref: '#/components/schemas/Note'          
+        codeLists:
+         $ref: '#/components/schemas/CodeLists'
+        frequency:
+          description: How often a table is updated
+          type: string
+        firstPeriod:
+          description: Earliest time period in table 
+          type: string
+        lastPeriod:
+          description: Latest time period in table
+          type: string
+    strarray-by-str-dict:
+       type: object
+       additionalProperties:
+          type: array
+          items:
+            type: string
+          uniqueItems: true  
+    jsonstat-link:
+      type: object
+      additionalProperties: 
+        type: array
+        items:
+          type: object
+          title: jsonstatLink
+          properties:
+            type:
+              type: string  
+            href:
+              "$ref": "#/components/schemas/href"
+          additionalProperties: false
+    jsonstat-extension-link:
+      type: object
+      properties:
+        describedby:
+          type: array
+          items:
+            type: object
+            title: DimensionExtension
+            properties:
+              extension:
+                 description: A extension object
+                 type: object
+                 additionalProperties:
+                    description: A string
+                    type: string
+                    
+            additionalProperties: false       
+      additionalProperties: false         
+
+    jsonstat-category:
+      type: object
+      properties:
+        index:
+          description: Specification on json-stat.org -> [here](https://json-stat.org/full/#index)
+          type: object
+          additionalProperties:
+            type: integer
+        label:
+          description: Specification on json-stat.org -> [here](https://json-stat.org/full/#label)
+          type: object
+          minProperties: 1
+          additionalProperties:
+            type: string
+        child:
+          description: Specification on json-stat.org -> [here](https://json-stat.org/full/#child)
+          "$ref": "#/components/schemas/strarray-by-str-dict"
+        unit:
+          description: Specification on json-stat.org -> [here](https://json-stat.org/full/#unit)
+          type: object
+          additionalProperties:
+            type: object
+            properties:
+              base:
+                description: It is the base unit (person, gram, euro, etc.).
+                type: string
+              decimals:
+                description: Number of decimals 
+                type: integer
+      additionalProperties: false
+    CodeLists:
+          description: Available codelists for this dimension
+          type: array
+          items:
+            $ref: '#/components/schemas/CodeListInformation'
+    Dataset:
+      title: JSON-stat 2.0 Dataset Schema
+      description: |
+         Representation of TableMetaData/TableData according to JSON-stat 2.0 Dataset Schema (2018-09-05 10:55), see full specification of JSON-stat format [here](https://json-stat.org/full/)
+         
+         Properties in **extension** are mostly from PX-file format, see [PX file format](https://www.scb.se/en/services/statistical-programs-for-px-files/px-file-format/)
+      type: object
+      properties:
+        version:
+          description: JSON-stat version 2.0
+          type: string
+          enum:
+            - '2.0'
+          default: '2.0'      
+        class:
+          description: "Is always dataset"
+          type: string
+          enum:
+            - dataset
+          default: dataset
+        href:
+          "$ref": "#/components/schemas/href"
+        label:
+          "$ref": "#/components/schemas/label"
+        source:
+          "$ref": "#/components/schemas/source"
+        updated:
+          "$ref": "#/components/schemas/updated"
+        link:
+          "$ref": "#/components/schemas/jsonstat-link"
+        role:
+          description: Specification on json-stat.org -> [here](https://json-stat.org/full/#role)
+          type: object
+          properties:
+            time:
+              description: Specification on json-stat.org -> [here](https://json-stat.org/full/#time)
+              "$ref": "#/components/schemas/strarray"
+            geo:
+              description: Specification on json-stat.org -> [here](https://json-stat.org/full/#geo)
+              "$ref": "#/components/schemas/strarray"
+            metric:
+              description: Specification on json-stat.org -> [here](https://json-stat.org/full/#metric)
+              "$ref": "#/components/schemas/strarray"
+          additionalProperties: false  
+        id:
+          description: Specification on json-stat.org -> [here](https://json-stat.org/full/#id)
+          "$ref": "#/components/schemas/strarray"
+        size:
+          description: Specification on json-stat.org -> [here](https://json-stat.org/full/#size)
+          type: array
+          items:
+             type: integer
+        dimension:
+          description: Specification on json-stat.org -> [here](https://json-stat.org/full/#dimension)
+          type: object
+          additionalProperties:
+             type: object
+             properties:
+              label:
+                description: Specification on json-stat.org -> [here](https://json-stat.org/full/#label) 
+                "$ref": "#/components/schemas/label"
+              category:
+                description: Specification on json-stat.org -> [here](https://json-stat.org/full/#category)
+                "$ref": "#/components/schemas/jsonstat-category"  
+              extension:
+                "$ref": "#/components/schemas/extension-dimension"
+              link:
+                "$ref": "#/components/schemas/jsonstat-extension-link"
+             additionalProperties: false            
+        extension:
+          "$ref": "#/components/schemas/extension-root"  
+        value:
+          description: Specification on json-stat.org -> [here](https://json-stat.org/full/#value)
+          type: array
+          nullable: true
+          items:
+            type: number
+            format: double
+            nullable: true
+        status:
+          description: Specification on json-stat.org -> [here](https://json-stat.org/full/#status)
+          type: object
+          additionalProperties:
+            type: string
+      additionalProperties: false
+      required:
+        - version
+        - class
+        - value
+        - id
+        - size
+        - dimension
+                   
   responses:
     ErrorResponse429:
       description: Error respsone for 429
