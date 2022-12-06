@@ -784,6 +784,11 @@ components:
             $ref: '#/components/schemas/Link'
     CodeListMetadata:
       type: object
+      required:
+        - "id"
+        - "label"
+        - "type"
+        - "links"
       properties:
         id: 
           type: string
@@ -793,13 +798,29 @@ components:
           type: string
           description: The textual name  for the codelist. 
           example: NUTS2 fr.o.m 2008
+        type:
+          $ref: '#/components/schemas/CodeListType'
         links: 
           type: array
           items:
             $ref: '#/components/schemas/Link'
 
+    CodeListType:
+      type: string
+      description: Type of codelist
+      enum:
+        - Aggregation
+        - Valueset
+
     CodeList: 
       type: object
+      required:
+        - "id"
+        - "label"
+        - "language"
+        - "type"
+        - "values"
+        - "links"
       properties:
         id: 
           type: string
@@ -813,6 +834,8 @@ components:
           type: string
           description: The language code for the language used in this response
           example: sv
+        type:
+          $ref: '#/components/schemas/CodeListType'
         values:
           type: array
           items:
@@ -821,8 +844,13 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/Link'
+
     ValueMap:
       type: object
+      required:
+        - "code"
+        - "label"
+        - "valueMap"
       properties:
         code:
           type: string
@@ -838,19 +866,31 @@ components:
           example: '["10", "12"]'
           items:
             type: string
+        notes: 
+          type: array
+          description: Optional notes that are associated with the value
+          items:
+            $ref: '#/components/schemas/Note'
+
     Link:
       type: object
+      required:
+        - "rel"
+        - "hreflang"
+        - "href"
       properties:
         rel:
           type: string
           nullable: false
+          description: the link relation, see https://www.iana.org/assignments/link-relations/link-relations.xhtml
+        hreflang:
+          type: string
+          description: The language that is used for the link, see https://moz.com/learn/seo/hreflang-tag
         href:
           type: string
           nullable: false
-      additionalProperties: false
-      required:
-        - rel
-        - href
+          description: the link to the resource
+
     Problem:
       type: object
       properties:
@@ -952,6 +992,9 @@ components:
             subject-code:
               description: Subject area code
               type: string
+            subject-area:
+              description: Subject area
+              type: string              
         tags:
           description: Tag for table
           type: array
