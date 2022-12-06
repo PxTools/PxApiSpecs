@@ -752,6 +752,8 @@ components:
               type: string
     Contact:
       type: object
+      required:
+        - "raw"
       properties:
         name: 
           type: string
@@ -762,6 +764,9 @@ components:
         mail:
           type: string
           example: testmail@testmail.com
+        raw:
+          type: string
+          description: Raw contact information for compatability with PX files
     CodeListsResponse:
       type: object
       properties:
