@@ -280,8 +280,27 @@ paths:
         '404':
           $ref: '#/components/responses/ErrorResponse404'            
         '429':
-          $ref: '#/components/responses/ErrorResponse429'                
+          $ref: '#/components/responses/ErrorResponse429'
 
+  /config:
+    get:
+      tags:
+        - Administration
+      summary: List all codelists that are associated with the table 
+      operationId: GetApiConfig
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConfigResponse'
+        '400':
+          $ref: '#/components/responses/ErrorResponse400'
+        '404':
+          $ref: '#/components/responses/ErrorResponse404'            
+        '429':
+          $ref: '#/components/responses/ErrorResponse429'     
     
 components:
   parameters:
@@ -363,6 +382,110 @@ components:
         type: integer
         #Default value depends on site?
   schemas:
+    ConfigResponse:
+      type: object
+      description: API configuration
+      required:
+        - "apiVersion"
+        - "languages"
+        - "defaultLanguage"
+        - "maxDataCells"
+        - "maxCalls"
+        - "timeWindow"
+        - "license"
+      properties:
+        apiVersion:
+          type: string
+          description: The version of then API
+        languages:
+          type: array
+          description: A list of language that exists for the data.
+          items: 
+            $ref: '#/components/schemas/Language'
+        defaultLanguage:
+          type: string
+          description: The id of the language that is the default language.
+        maxDataCells:
+          type: integer
+          description: A threshold of how many datacells that can be fetched in a single API call
+          minimum: 0
+        maxCalls:
+          type: integer
+          description: The maximum number of call to the API for a time window indicated by timeWindow.
+          minimum: 1
+        timeWindow:
+          type: integer
+          description: The time window restricting how many call that can be done.
+          minimum: 1
+        license:
+          type: string
+          description: The license that the data is provided.
+        sourceReferences:
+          type: array
+          description: A list of how the data should be cite for diffrent languages.
+          items:
+            $ref: '#/components/schemas/SourceReference'
+        features:
+          type: array
+          description: A list of features for the API
+          items:
+            $ref: '#/components/schemas/ApiFeature'
+    
+    Language:
+      type: object
+      description: Language information
+      required:
+        - "id"
+        - "label"
+      properties:
+        id:
+          type: string
+          description: The language ISO code
+        label:
+          type: string
+          description: The name of the language
+
+    SourceReference:
+      type: object
+      description: How data should be cite for a specific language
+      required:
+        - "language"
+        - "text"
+      properties:
+        language:
+          type: string
+          description: The language id 
+        text:
+          type: string
+          description: The text that should be displayed
+    
+    ApiFeature:
+      type: object
+      required:
+        - "id"
+      properties:
+        id: 
+          type: string
+          description: The identifyer for the feature
+        params:
+          type: array
+          items: 
+            $ref: '#/components/schemas/KeyValuePair'
+
+    KeyValuePair:
+      type: object
+      required:
+        - "key"
+        - "value"
+      properties:
+        key:
+          type: string
+          description: The key
+        value:
+          type: string
+          description: The value associated with the key
+
+
     CodeListOutputValuesStyle:
       type: string
       enum:
