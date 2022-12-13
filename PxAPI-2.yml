@@ -227,7 +227,7 @@ paths:
             example: |
               [
                 {"variable_1": "1,2,3"},
-                {"variable_2": "TOP(5)"}
+                {"variable_2": "top(5)"}
               ]
           style: deepObject
           explode: true
