@@ -1,6 +1,7 @@
 {
     "id": "vs_RegionLän07",
     "label": "Län",
+    "type": "Valueset",
     "values":  [
         { "code": "01", "label": "Stockholms län", "valueMap": ["01"]},
         { "code": "03", "label": "Uppsala län", "valueMap": ["03"]},

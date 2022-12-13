@@ -12,8 +12,11 @@ info:
     | -------        | -----------      | ---------------------       |
     | 200            | Success          | The endpoint has delivered response for the request                      |
     | 400            | Bad request      | If the request is not valid |
+    | 403            | Forbiddn         | number of cells exceed the API limit |
     | 404            | Not found        | If the URL in request does not exist |
-    | 429            | Too many request | Number of requests has surpassed the threshold                            |
+    | 429            | Too many request | Requests exceed the API time limit. Large queries should be run in sequence |
+    | 50X            | Internal Server Error | The service might be down |
+
 servers:
   - url: https://api.server.test/api/v2
 tags:
@@ -40,8 +43,13 @@ paths:
                 examples:
                   NavigateRoot:
                     $ref: '#/components/examples/navigation-root'
+          '400':
+            $ref: '#/components/responses/ErrorResponse400'
+          '404':
+            $ref: '#/components/responses/ErrorResponse404'            
           '429':
             $ref: '#/components/responses/ErrorResponse429'
+
   /navigation/{id}:
     get:
       tags:
@@ -61,6 +69,13 @@ paths:
               examples:
                   Navigation-BE:
                     $ref: '#/components/examples/navigation-be'
+        '400':
+          $ref: '#/components/responses/ErrorResponse400'
+        '404':
+          $ref: '#/components/responses/ErrorResponse404'            
+        '429':
+          $ref: '#/components/responses/ErrorResponse429'
+
   /tables:
     get:
       tags:
@@ -98,6 +113,13 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Table'
+        '400':
+          $ref: '#/components/responses/ErrorResponse400'
+        '404':
+          $ref: '#/components/responses/ErrorResponse404'            
+        '429':
+          $ref: '#/components/responses/ErrorResponse429'                
+
   /tables/{id}/metadata:
     get:
       tags:
@@ -131,6 +153,13 @@ paths:
               schema:
                 externalDocs:
                   url: "https://json-stat.org/schema/"
+        '400':
+          $ref: '#/components/responses/ErrorResponse400'
+        '404':
+          $ref: '#/components/responses/ErrorResponse404'            
+        '429':
+          $ref: '#/components/responses/ErrorResponse429'
+                            
   /tables/{id}/codelists:
     get:
       tags:
@@ -147,6 +176,12 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/CodeListsResponse'
+        '400':
+          $ref: '#/components/responses/ErrorResponse400'
+        '404':
+          $ref: '#/components/responses/ErrorResponse404'            
+        '429':
+          $ref: '#/components/responses/ErrorResponse429'                
 
   /tables/{id}/codelists/{codeListId}:
     get:
@@ -165,6 +200,12 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/CodeList'
+        '400':
+          $ref: '#/components/responses/ErrorResponse400'
+        '404':
+          $ref: '#/components/responses/ErrorResponse404'            
+        '429':
+          $ref: '#/components/responses/ErrorResponse429'                
 
   /tables/{id}/data:
     get:
@@ -232,6 +273,14 @@ paths:
               schema:
                 type: string
                 format: binary
+        '400':
+          $ref: '#/components/responses/ErrorResponse400'
+        '403':
+          $ref: '#/components/responses/ErrorResponse403'  
+        '404':
+          $ref: '#/components/responses/ErrorResponse404'            
+        '429':
+          $ref: '#/components/responses/ErrorResponse429'                
 
     
 components:
@@ -328,15 +377,18 @@ components:
           table: "#/components/schemas/Table"
       type: object
       description: Navigation item.
+      required:
+        - "objectType"
+        - "id"
+        - "label"
       properties:
-        id:
-          type: string
-          nullable: true
-          #nullable = true beacause root is empty
         objectType:
           type: string
           nullable: false
           description: One of heading, table, folder or folder-information
+        id:
+          type: string
+          nullable: false
         label:
           type: string
           nullable: true
@@ -344,22 +396,31 @@ components:
         description:
           type: string
           nullable: true
-          description: Longer text describing node. If no longer text exist, same as label
+          description: Longer text describing node.
         sortCode:
           type: string
           description: String for sorting the contents in folder
     Folder:
       type: object
       description: Folder item
+      required:
+        - "language"
+        - "id"
+        - "label"
+        - "folderContents"
+        - "links"
       properties:
+        objectType:
+          type: string
+          nullable: false
+          description: allways set to folder
+        language:
+          type: string
+          description: The language code (ISO 639) for this response
         id:
           type: string
           nullable: true
           #nullable = true beacause root is empty
-        objectType:
-          type: string
-          nullable: false
-          description: One of heading, table, folder or folder-information
         label:
           type: string
           nullable: true
@@ -390,6 +451,8 @@ components:
         - $ref: '#/components/schemas/FolderContentItem'
       type: object
       description: Folder information item
+      required:
+        - "links"
       properties:
             tags:
               type: array
@@ -413,6 +476,12 @@ components:
         - $ref: '#/components/schemas/FolderContentItem'
       type: object
       description: Table item
+      required:
+        - "updated"
+        - "firstPeriod"
+        - "lastPeriod"
+        - "variableNames"
+        - "links"
       properties:
             tags:
               type: array
@@ -422,61 +491,73 @@ components:
               nullable: true
             updated:
               type: string
-              description: For treeNodeType "table"
+              description: Date and time when the figures in the table was last updated, in UTC time.
+              pattern: "^((19|20)\\d\\d)\\-(0?[1-9]|1[012])\\-(0?[1-9]|[12][0-9]|3[01])$"
               format: date-time
+              nullable: true
+            firstPeriod:
+              type: string
+              description: First period
+              example: 2017
+              nullable: true
+            lastPeriod:
+              type: string
+              description: Last period
+              example: 2022
               nullable: true
             category:
               type: string
-              description: Mostly for internal use. Which category table belongs to. internal, official, private or section. I, O, P, S
-              default: official
+              description: Mostly for internal use. Which category table belongs to. internal, public, private or section. 
+              default: public
               enum:
               - internal
-              - official
+              - public
               - private
               - section
+            variableNames:
+              type: array
+              description: List of varibles name
+              items:
+                type: string
+            discontinued:
+              type: boolean
+              nullable: true
             links:
               type: array
               items:
                 $ref: '#/components/schemas/Link'
               description: Links to ...
               nullable: true
-            variablesName:
-              type: array
-              description: List of varibles name
-              items:
-                type: string
-            firstPeriod:
-              type: string
-              description: First period
-              example: 2017
-            lastPeriod:
-              type: string
-              description: Last period
-              example: 2022
-            discontinued:
-              type: boolean
-              nullable: true
 
     PageInfo:
       type: object
+      required:
+        - "pageNumber"
+        - "pageSize"
+        - "totalElements"
+        - "totalPages"
       properties:
         pageNumber:
           type: integer
+          description: The current page number.
           format: int32
           minimum: 1
         pageSize:
           type: integer
           format: int32
-          example: 20
+          description: The maximal number of elements in a page
+          example: 100
           minimum: 1
         totalElements:
           type: integer
           format: int32
+          description: the Total number of elements
           minimum: 0
         totalPages:
           type: integer
           format: int32
-          minimum: 0
+          description: The total number of pages
+          minimum: 1
         links:
           type: array
           items:
@@ -484,22 +565,33 @@ components:
 
     TablesResponse:
       type: object
+      required:
+        - "tables"
+        - "page"
       properties:
-        page:
-          $ref: '#/components/schemas/PageInfo'
         tables:
           type: array
           items:
               $ref: '#/components/schemas/Table'    
+        page:
+          $ref: '#/components/schemas/PageInfo'
+        links:
+          type: array
+          items:
+             $ref: '#/components/schemas/Link'
+
     TableMetadata:
       type: object
       required: 
-        - id
-        - label
+        - "id"
+        - "label"
+        - "variables"
+        - "variablesDisplayOrder"
+        - "links"
       properties:
         id:
           type: string
-          description: Identifyer for the table.
+          description: Identifier for the table.
           example: "TAB0001"
         label:
           type: string
@@ -509,23 +601,27 @@ components:
           type: string
           description: A description of the table.
           example: Corporations Financial Assets and Liabilities by item. Quarterly 1998K2 - 2021K4 [2022-03-11]
-        agregationPossible:
+        aggregationAllowed:
           type: boolean
-          description: If the content of the table can be aggregated.
+          description: If all content of the table can be aggregated.
         officalStatistics:
           type: boolean
           description: A marker if the table is a part of the national official statistics.
-        category:
+        subjectCode:
           type: string
           description: The code for the subject area that the table belongs to.
           example: BE
+        subjectLabel:
+          type: string
+          description: The label for the subject area that the table belongs to.
+          example: Population
         source:
           type: string
           description: The name of the organization responsible for the table.
-          example: SCB
-        copyright:
+          example: Statistics Sweden
+        licence:
           type: string
-          description: A copyright statement for the data it could also be SPDX (https://spdx.org/licenses/) identifyer
+          description: A copyright statement for the data it could also be SPDX (https://spdx.org/licenses/) identifier
           example: CC0-1.0
         tags:
           type: array
@@ -534,7 +630,8 @@ components:
             type: string
         updated:
             type: string
-            description: A date and time when the table was last updated
+            description: Date and time when the figures in the table was last updated, in UTC time.
+            pattern: "^((19|20)\\d\\d)\\-(0?[1-9]|1[012])\\-(0?[1-9]|[12][0-9]|3[01])$"
             format: date-time
             nullable: true
         notes: 
@@ -547,18 +644,8 @@ components:
           description: A list of contacts associated with the table.
           items: 
             $ref: '#/components/schemas/Contact'
-        contentsVariable:
-          $ref: '#/components/schemas/ContentsVariable'
-        timeVariable:
-          $ref: '#/components/schemas/TimeVariable'
-        geoVariables: 
-          type: array
-          items:
-            $ref: '#/components/schemas/GeographicalVariable'
-        regularVariables: 
-          type: array
-          items:
-            $ref: '#/components/schemas/RegularVariable'
+        variables:
+          $ref: '#/components/schemas/AbstractVariable'
         variablesDisplayOrder:
           type: array
           items:
@@ -618,7 +705,7 @@ components:
       allOf:
         - $ref: '#/components/schemas/Note'
       type: object
-      description: Note for a table
+      description: Note for a table or a part of it
       properties:
         conditions:
           type: array
@@ -630,13 +717,13 @@ components:
       description: Condition determining to what the CellNote applies
       type: object
       required:
-        - "variableCode"
-        - "valueCode"
+        - "variable"
+        - "value"
       properties:
-        variableCode:
+        variable:
           type: string
           description: The code of the variable
-        valueCode:
+        value:
           type: string
           description: The code of the value
     TimeVariable:
@@ -645,9 +732,17 @@ components:
         - $ref: '#/components/schemas/AbstractVariable'
       type: object
       properties:
-        frequency:
-          description: How often a table is updated
+        timeUnit:
+          description: Indicates the time scale for the variable.
           type: string
+          default: Other
+          enum:
+            - Annual
+            - HalfYear
+            - Quarterly
+            - Monthly
+            - Weekly
+            - Other
         firstPeriod:
           description: Earliest time period in table
           type: string
@@ -663,6 +758,8 @@ components:
       allOf:
         - $ref: '#/components/schemas/AbstractVariable'
       type: object
+      required:
+        - "values"
       properties:
             values:
               type: array
@@ -673,6 +770,8 @@ components:
       allOf:
       - $ref: '#/components/schemas/AbstractVariable'
       type: object
+      required:
+        - "values"
       properties:
         elimination:
           type: boolean
@@ -685,8 +784,6 @@ components:
         codeLists:
           $ref: '#/components/schemas/CodeLists'
     GeographicalVariable:
-      required:
-        - "map"
       allOf:
       - $ref: '#/components/schemas/AbstractCodeListVariable'
       type: object
@@ -694,12 +791,16 @@ components:
         map:
           type: string
     RegularVariable:
-      description: Non-geographical Variable
+      description: All other type of variaiable except for time, contents or geographical
       allOf:
       - $ref: '#/components/schemas/AbstractCodeListVariable'
       type: object
     CodeListInformation:
       type: object
+      required:
+        - "id"
+        - "label"
+        - "links"
       properties:
         id:
           type: string
@@ -773,6 +874,8 @@ components:
               type: string
     Contact:
       type: object
+      required:
+        - "raw"
       properties:
         name: 
           type: string
@@ -783,6 +886,9 @@ components:
         mail:
           type: string
           example: testmail@testmail.com
+        raw:
+          type: string
+          description: Raw contact information for compatability with PX files
     CodeListsResponse:
       type: object
       properties:
@@ -800,6 +906,11 @@ components:
             $ref: '#/components/schemas/Link'
     CodeListMetadata:
       type: object
+      required:
+        - "id"
+        - "label"
+        - "type"
+        - "links"
       properties:
         id: 
           type: string
@@ -809,13 +920,29 @@ components:
           type: string
           description: The textual name  for the codelist. 
           example: NUTS2 fr.o.m 2008
+        type:
+          $ref: '#/components/schemas/CodeListType'
         links: 
           type: array
           items:
             $ref: '#/components/schemas/Link'
 
+    CodeListType:
+      type: string
+      description: Type of codelist
+      enum:
+        - Aggregation
+        - Valueset
+
     CodeList: 
       type: object
+      required:
+        - "id"
+        - "label"
+        - "language"
+        - "type"
+        - "values"
+        - "links"
       properties:
         id: 
           type: string
@@ -829,6 +956,8 @@ components:
           type: string
           description: The language code for the language used in this response
           example: sv
+        type:
+          $ref: '#/components/schemas/CodeListType'
         values:
           type: array
           items:
@@ -837,8 +966,13 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/Link'
+
     ValueMap:
       type: object
+      required:
+        - "code"
+        - "label"
+        - "valueMap"
       properties:
         code:
           type: string
@@ -854,19 +988,31 @@ components:
           example: '["10", "12"]'
           items:
             type: string
+        notes: 
+          type: array
+          description: Optional notes that are associated with the value
+          items:
+            $ref: '#/components/schemas/Note'
+
     Link:
       type: object
+      required:
+        - "rel"
+        - "hreflang"
+        - "href"
       properties:
         rel:
           type: string
           nullable: false
+          description: the link relation, see https://www.iana.org/assignments/link-relations/link-relations.xhtml
+        hreflang:
+          type: string
+          description: The language that is used for the link, see https://moz.com/learn/seo/hreflang-tag
         href:
           type: string
           nullable: false
-      additionalProperties: false
-      required:
-        - rel
-        - href
+          description: the link to the resource
+
     Problem:
       type: object
       properties:
@@ -968,6 +1114,9 @@ components:
             subject-code:
               description: Subject area code
               type: string
+            subject-area:
+              description: Subject area
+              type: string              
         tags:
           description: Tag for table
           type: array
@@ -1212,6 +1361,42 @@ components:
             title: Too many requests
             status: 429
             detail: You have reach the threshold for request limiting. 30 request per minute.
+
+    ErrorResponse400:
+      description: Error respsone for 400
+      content:
+        application/problem+json:
+          schema:
+            $ref: '#/components/schemas/Problem'
+          example:
+            title: Bad Request
+            status: 400
+            detail: Value, xxx is not a valid value code for variable yyy
+
+
+    ErrorResponse403:
+      description: Error respsone for 403
+      content:
+        application/problem+json:
+          schema:
+            $ref: '#/components/schemas/Problem'
+          example:
+            title: Forbiden
+            status: 403
+            detail: The query resulted in cell that exceeds the number of allowed.
+
+    ErrorResponse404:
+      description: Error respsone for 404
+      content:
+        application/problem+json:
+          schema:
+            $ref: '#/components/schemas/Problem'
+          example:
+            title: Not Found
+            status: 404
+            detail: Node with id, xxx can not be found
+            
+
   examples:  
     navigation-root:
       description: Example for 200 response for navigation endpoint

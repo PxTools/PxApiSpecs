@@ -11,6 +11,8 @@ jobs:
       # Checkout your code
       - name: Checkout
         uses: actions/checkout@v2
+        with:
+          fetch-depth: 0 
 
       # Generate your OpenAPI document (if you don't write it manually)
 
@@ -34,7 +36,7 @@ jobs:
           dotnet tool install minver-cli
 
       - name: Calculate version
-        run: echo "version=$(dotnet minver -v e)" >> $GITHUB_ENV
+        run: echo "version=$(dotnet minver -t v -v e)" >> $GITHUB_ENV
 
       - name: Restore Nuget
         working-directory: ./out
@@ -47,4 +49,8 @@ jobs:
       - name: Pack library
         working-directory: ./out
         run: dotnet pack --configuration Release /p:Version=${{ env.version }} --output .
+      
+      - name: Depoly to Nuget
+        working-directory: ./out
+        run: dotnet nuget push PxWeb.Api2.Server.${{ env.version }}.nupkg -k ${{ secrets.NUGET_API_KEY }} -s https://nuget.org
             

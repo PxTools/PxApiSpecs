@@ -1,6 +1,7 @@
 {
     "id": "agg_RegionNUTS2_2008",
     "label": "NUTS2 fr.o.m 2008",
+    "type": "Aggregation",
     "values": [
         {"code": "SE11", "value": "Stockholm", "valueMap": ["01"]},
         {"code": "SE12", "value": "Östra Mellansverige", "valueMap": ["03", "04", "05", "18", "19"]},
