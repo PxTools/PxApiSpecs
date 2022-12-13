@@ -198,15 +198,19 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/CodeListsResponse'
-            
-            #application/vnd.json-stat.2.px+json:
-            #application/json:
-            application/vnd.px+text:
+                type: string
+            plain/text:
               schema:
-                format: binary #Should it realy be banary?
-                externalDocs:
-                  url: "https://www.scb.se/globalassets/vara-tjanster/px-programmen/px-file_format_specification_2013.pdf"
+                type: string
+            application/xml:
+              schema:
+                type: string
+                format: binary
+            application/octet-stream:
+              schema:
+                type: string
+                format: binary
+
     
 components:
   parameters:
