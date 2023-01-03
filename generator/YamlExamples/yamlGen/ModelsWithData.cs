@@ -44,8 +44,8 @@ namespace yamlGen
   
             myOut.OfficalStatistics = true;
             //myOut.Category = "BE";
-            myOut.Copyright = "CC0-1.0";
-            myOut.AgregationPossible = false;
+            myOut.Licence = "CC0-1.0";
+            myOut.AggregationAllowed = false;
             //myOut.discontinued = false;
 
             myOut.Contacts = new List<Contact>();
@@ -58,31 +58,33 @@ namespace yamlGen
 
             CellNote temp = new CellNote();
             temp.Conditions = new List<Condition>();
-            temp.Conditions.Add(new Condition() { VariableCode =  "ContentsCode", ValueCode = "BE0101N1" });
-            temp.Conditions.Add(new Condition() { VariableCode = "Region", ValueCode = "03" });
+            temp.Conditions.Add(new Condition() { Variable =  "ContentsCode", Value = "BE0101N1" });
+            temp.Conditions.Add(new Condition() { Variable = "Region", Value = "03" });
             temp.Mandatory = true;
             temp.Text = "Fr o m 2007-01-01 utökas Uppsala län med Heby kommun. Observera att länssiffrorna inte är jämförbara med länssiffrorna bakåt i tiden.";
             myOut.Notes.Add(temp);
             temp = new CellNote();
             temp.Conditions = new List<Condition>();
-            temp.Conditions.Add(new Condition() { VariableCode = "ContentsCode", ValueCode = "BE0101N1" });
-            temp.Conditions.Add(new Condition() { VariableCode = "Region", ValueCode = "19" });
+            temp.Conditions.Add(new Condition() { Variable = "ContentsCode", Value = "BE0101N1" });
+            temp.Conditions.Add(new Condition() { Variable = "Region", Value = "19" });
             temp.Text = "Fr o m 2007-01-01 minskar Västmanlands län med Heby kommun. Observera att länssiffrorna inte är jämförbara med länssiffrorna bakåt i tiden.";
             myOut.Notes.Add(temp);
 
             myOut.Links = new List<Link>() { FixLink("self", "tables/" + myOut.Id), FixLink("metadata", "tables/" + myOut.Id + "/metadata"), FixLink("data", "tables/" + myOut.Id + "/data") };
 
 
-            myOut.TimeVariable = new TimeVariable() { Id="Tid", Label="år", Frequency="A",FirstPeriod="1968",LastPeriod="2021"};
-            myOut.TimeVariable.Values = new List<Value>();
+            myOut.Variables = new List<AbstractVariable>();
+            TimeVariable tempTime = new TimeVariable() { Id="Tid", Label="år", TimeUnit=TimeVariable.TimeUnitEnum.AnnualEnum, FirstPeriod="1968",LastPeriod="2021"};
+            tempTime.Values = new List<Value>();
             for(int n= 1968; n <= 2021; n++)
             {
-                myOut.TimeVariable.Values.Add(new Value { Code = n.ToString(), Label = n.ToString() });
+                tempTime.Values.Add(new Value { Code = n.ToString(), Label = n.ToString() });
             }
+            myOut.Variables.Add(tempTime);
 
-            myOut.ContentsVariable = new ContentsVariable() { Id= "ContentsCode", Label= "tabellinnehåll" };
-            myOut.ContentsVariable.Values = new List<ContentValue>();
-            myOut.ContentsVariable.Values.Add(new ContentValue()
+            ContentsVariable tempContents =  new ContentsVariable() { Id= "ContentsCode", Label= "tabellinnehåll" };
+            tempContents.Values = new List<ContentValue>();
+            tempContents.Values.Add(new ContentValue()
             {
                 Code = "BE0101N1",
                 Label = "Folkmängd",
@@ -93,7 +95,7 @@ namespace yamlGen
                 RefrencePeriod = "31 december repektive år",
                 Notes = new List<Note>() { new() { Mandatory = true, Text = "Uppgifterna avser förhållandena den 31 december för valt/valda år enligt den regionala indelning som gäller den 1 januari året efter." } }
             });
-            myOut.ContentsVariable.Values.Add(new ContentValue()
+            tempContents.Values.Add(new ContentValue()
             {
                 Code = "BE0101N2",
                 Label = "Folkökning",
@@ -103,13 +105,13 @@ namespace yamlGen
                 PreferedNumberOfDecimals = 0,
                 Notes = new List<Note>() { new() { Mandatory = false, Text = "Folkökningen definieras som skillnaden mellan folkmängden vid årets början och årets slut." } }
             });
+            myOut.Variables.Add(tempContents);
 
-            myOut.RegularVariables = new List<RegularVariable>();
-            myOut.RegularVariables.Add(GetCivilstandRegularVariable());
-            myOut.RegularVariables.Add(GetKonRegularVariable());
-            myOut.RegularVariables.Add(GetAlderRegularVariable());
-            myOut.GeoVariables = new List<GeographicalVariable>();
-            myOut.GeoVariables.Add(GetRegion());
+ 
+            myOut.Variables.Add(GetCivilstandRegularVariable());
+            myOut.Variables.Add(GetKonRegularVariable());
+            myOut.Variables.Add(GetAlderRegularVariable());
+            myOut.Variables.Add(GetRegion());
 
             myOut.VariablesDisplayOrder = new List<string>() { "ContentsCode", "Civilstand", "Alder", "Tid", "Kon" };
 
@@ -145,7 +147,7 @@ namespace yamlGen
 
 
            tempT.Tags = new List<string>() { "Money", "Gold" };
-           tempT.VariablesName = new List<string>() { "observations", "region", "marital status", "age" };
+           tempT.VariableNames = new List<string>() { "observations", "region", "marital status", "age" };
            tempT.FirstPeriod = "1998K2";
            tempT.LastPeriod = "2021K4";
            tempT.Discontinued = false;
@@ -158,7 +160,7 @@ namespace yamlGen
        {
            Table table = new Table() { ObjectType = "table", Id = inId, Label = inLabel };
            table.Links = new List<Link>() { FixLink("self", "tables/"+inId), FixLink("metadata", "tables/"+inId+"/metadata"), FixLink("data", "tables/" + inId + "/data")  };
-           table.Category = Table.CategoryEnum.OfficialEnum;
+            table.Category = Table.CategoryEnum.PublicEnum;
            return table;
        } 
 
@@ -207,7 +209,7 @@ namespace yamlGen
            Table tempTab = FixTable("TAB0001", "Population. Year 1968 - 2021");
            tempTab.Description = "Population by region, marital status, age and sex. Year 1968 - 2021";
            tempTab.Updated = new DateTime(2017, 12, 24, 6, 0, 0, 014, DateTimeKind.Utc);
-           tempTab.VariablesName = new List<string>() { "observations", "region", "marital status", "age" };
+           tempTab.VariableNames = new List<string>() { "observations", "region", "marital status", "age" };
            tempTab.FirstPeriod = "1968";
            tempTab.LastPeriod = "2021";
            tempTab.Discontinued = false;
@@ -217,7 +219,7 @@ namespace yamlGen
            tempTab = FixTable("TAB0001A", "Tabell A");
            tempTab.Description = "Folkmängd, in- och utvanding, medellivslängd, namn, prognoser mm";
            tempTab.Updated = new DateTime(2018, 12, 24, 6, 0, 0, 014, DateTimeKind.Utc);
-           tempTab.VariablesName = new List<string>() { "observations", "region", "marital status", "age" };
+           tempTab.VariableNames = new List<string>() { "observations", "region", "marital status", "age" };
            tempTab.FirstPeriod = "2017";
            tempTab.LastPeriod = "2022";
            tempTab.Discontinued = false;

@@ -21,6 +21,7 @@ namespace yamlGen
         private JsonSerializerSettings mySettings;
         private string specFile ;
         private string jsonOutDir;
+        private string ymlOutDir;
 
         private TheSpec theSpec;
 
@@ -28,6 +29,7 @@ namespace yamlGen
         {
             specFile = basePath +"PxAPI-2.yml";
             jsonOutDir = basePath + "examplesAsJson/";
+            ymlOutDir = basePath + "examplesAsYml/";
 
             models = new ModelsWithData();
 
@@ -37,26 +39,27 @@ namespace yamlGen
             };
             
 
-            theSpec = new TheSpec(specFile,dryRun);
+           // theSpec = new TheSpec(specFile,dryRun);
 
-            FixOne(models.rootfolder, "folder-root");
-            FixOne(models.befolder, "folder-be");
-            FixOne(models.tablesResponse, "tablesResponse");
-            FixOne(models.tableMetadata, "tableMetadata");
-            FixOne(models.dataset, "dataset-meta");
-            theSpec.Save();
+            FixOne(models.rootfolder, "folder-root", "Example for 200 response for navigation endpoint root");
+            FixOne(models.befolder, "folder-be", "Example for 200 response for navigation endpoint");
+            FixOne(models.tablesResponse, "tablesResponse", "List all tables with pagination");
+            FixOne(models.tableMetadata, "tableMetadata", "Example for 200 response for tableMetadata in PXJson");
+            FixOne(models.dataset, "dataset-meta", "Example for 200 response for dataset as metadata in Jsonstat2");
+            //theSpec.Save();
         }
 
 
-        private void FixOne(Object modelObject,string exampleName)
+        private void FixOne(Object modelObject,string exampleName, string description)
         {
             string jsonNew = JsonConvert.SerializeObject(modelObject, Formatting.Indented, mySettings);
             File.WriteAllText(jsonOutDir+ exampleName + ".json", jsonNew);
 
             string yamlTemp = json2yaml(jsonNew);
-            string betterYaml = PrepYaml(yamlTemp, exampleName, 8);
-
-            theSpec.replaceExample(exampleName, betterYaml);
+            string betterYaml = PrepYaml(yamlTemp, exampleName, 4);
+            string intro = "# this file is generated\n" + exampleName + ":\n  description: " + description + "\n  value:\n";
+            File.WriteAllText(ymlOutDir + exampleName + ".yml", intro+betterYaml);
+            //theSpec.replaceExample(exampleName, betterYaml);
         }
 
 
@@ -68,9 +71,7 @@ namespace yamlGen
             //var serializer2 = new YamlDotNet.Serialization.Serializer();
             var serializer =  new SerializerBuilder().WithQuotingNecessaryStrings().Build();
 
-
             string yamlOut = serializer.Serialize(deserializedObject);
-
             return yamlOut;
         }
 
@@ -84,12 +85,12 @@ namespace yamlGen
 
 
             List<string> outLines = new List<string>();
-            outLines.Add(String.Format(TheSpec.GEN_START_LINE_FORMAT, exampleId));
+            //outLines.Add(String.Format(TheSpec.GEN_START_LINE_FORMAT, exampleId));
             foreach (string line in lines)
             {
                 outLines.Add(indent + line);
             }
-            outLines.Add(indent + String.Format(TheSpec.GEN_END_LINE_FORMAT, exampleId));
+            //outLines.Add(indent + String.Format(TheSpec.GEN_END_LINE_FORMAT, exampleId));
             return String.Join("\r\n", outLines);
 
         }
