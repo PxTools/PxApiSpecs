@@ -4,7 +4,7 @@ Steps in changing openapi yaml
  graph TD;
       A0[Make feature branch]-->A
       A[Change spec-file]-->B[run openapi-generator via myGen.bat];
-      B-->C5[Open YamlExamples/YamlExamples.sln solution.<br>If path causes problems it is set in Program.cs.<br>Add data if needed. If you add a new example, a change is needed in the spec-file];
+      B-->C15[Open YamlExamples/YamlExamples.sln solution.<br>If path causes problems it is set in Program.cs.<br>Add data if needed. If you add a new example, a change is needed in the spec-file];
     
       
       C15-->D[Run:<br>Updates external example files in folders <br> examplesAsJson and examplesAsYml];
