@@ -1,0 +1,64 @@
+# this file is generated
+tablesResponse:
+  description: List all tables with pagination
+  value:
+    tables:
+    - objectType: table
+      id: TAB0001
+      label: Population. Year 1968 - 2021
+      description: Population by region, marital status, age and sex. Year 1968 - 2021
+      updated: 2017-12-24T06:00:00.0140000Z
+      firstPeriod: "1968"
+      lastPeriod: "2021"
+      category: public
+      variableNames:
+      - observations
+      - region
+      - marital status
+      - age
+      discontinued: false
+      links:
+      - rel: self
+        href: https://my-site.com/api/v2/tables/TAB0001
+      - rel: metadata
+        href: https://my-site.com/api/v2/tables/TAB0001/metadata
+      - rel: data
+        href: https://my-site.com/api/v2/tables/TAB0001/data
+    - objectType: table
+      id: TAB0001A
+      label: Tabell A
+      description: Folkmängd, in- och utvanding, medellivslängd, namn, prognoser mm
+      updated: 2018-12-24T06:00:00.0140000Z
+      firstPeriod: "2017"
+      lastPeriod: "2022"
+      category: public
+      variableNames:
+      - observations
+      - region
+      - marital status
+      - age
+      discontinued: false
+      links:
+      - rel: self
+        href: https://my-site.com/api/v2/tables/TAB0001A
+      - rel: metadata
+        href: https://my-site.com/api/v2/tables/TAB0001A/metadata
+      - rel: data
+        href: https://my-site.com/api/v2/tables/TAB0001A/data
+    page:
+      pageNumber: 10
+      pageSize: 100
+      totalElements: 7000
+      totalPages: 70
+      links:
+      - rel: self
+        href: https://my-site.com/api/v2/tables/?pageNumber=10
+      - rel: first
+        href: https://my-site.com/api/v2/tables/?pageNumber=1
+      - rel: last
+        href: https://my-site.com/api/v2/tables/?pageNumber=70
+      - rel: next
+        href: https://my-site.com/api/v2/tables/?pageNumber=11
+      - rel: prev
+        href: https://my-site.com/api/v2/tables/?pageNumber=9
+    
