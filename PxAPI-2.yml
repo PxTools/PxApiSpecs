@@ -12,7 +12,7 @@ info:
     | -------        | -----------      | ---------------------       |
     | 200            | Success          | The endpoint has delivered response for the request                      |
     | 400            | Bad request      | If the request is not valid |
-    | 403            | Forbiddn         | number of cells exceed the API limit |
+    | 403            | Forbidden        | number of cells exceed the API limit |
     | 404            | Not found        | If the URL in request does not exist |
     | 429            | Too many request | Requests exceed the API time limit. Large queries should be run in sequence |
     | 50X            | Internal Server Error | The service might be down |
@@ -29,7 +29,7 @@ paths:
       get:
         tags:
           - Navigation
-        summary: Browse the database structure
+        summary: Get root Folder.
         operationId: GetNavigationRoot
         parameters:
           - $ref: '#/components/parameters/language'
@@ -54,7 +54,7 @@ paths:
     get:
       tags:
         - Navigation
-      summary: Gets navigation item with the given id.
+      summary: Gets Folder by {id}.
       operationId: GetNavigationById
       parameters:
         - $ref: '#/components/parameters/id'
@@ -80,7 +80,7 @@ paths:
     get:
       tags:
         - Navigation
-      summary: Endpoint for listing tables
+      summary: Get all Tables.
       operationId: ListAllTables
       parameters:
         - $ref: '#/components/parameters/query'
@@ -102,9 +102,10 @@ paths:
     get:
       tags:
         - Table
-      summary: Endpoint to get table by {id}
+      summary: Get Table by {id}.
       operationId: GetTableById
       parameters:
+        - $ref: '#/components/parameters/language'
         - $ref: '#/components/parameters/id'
       responses:
         '200':
@@ -124,7 +125,7 @@ paths:
     get:
       tags:
         - Table
-      summary: Endpoint to get metadata about table by {id}
+      summary: Get Metadata about Table by {id}.
       description: |
         **Used for listing detailed information about a specific table**
         * List all variables and values and all other metadata needed to be able to fetch data
@@ -138,6 +139,7 @@ paths:
           - JSON-stat2 
       operationId: GetMetadataById
       parameters:
+        - $ref: '#/components/parameters/language'
         - $ref: '#/components/parameters/id'
       responses:
         '200':
@@ -170,7 +172,7 @@ paths:
     get:
       tags:
         - Table
-      summary: List all codelists that are associated with the table 
+      summary: Is this needed? Get information about all Codelists that are associated with the Table for the given {id}.
       operationId: GetTableCodeLists
       parameters:
         - $ref: '#/components/parameters/language'
@@ -189,16 +191,15 @@ paths:
         '429':
           $ref: '#/components/responses/ErrorResponse429'                
 
-  /tables/{id}/codelists/{codeListId}:
+  /codelists/{id}:
     get:
       tags:
         - Table
-      summary: List information about the codelist that is associated with the table.
+      summary: Get Codelist by {id}.
       operationId: GetTableCodeListById
       parameters:
         - $ref: '#/components/parameters/language'
         - $ref: '#/components/parameters/id'
-        - $ref: '#/components/parameters/codeListId'
       responses:
         '200':
           description: Success
@@ -217,7 +218,7 @@ paths:
     get:
       tags:
         - Table
-      summary: List all codelists that are associated with the table 
+      summary: Get data from table by {id}.
       operationId: GetTableData
       parameters:
         - $ref: '#/components/parameters/language'
