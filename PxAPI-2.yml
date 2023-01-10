@@ -292,7 +292,7 @@ paths:
     get:
       tags:
         - Administration
-      summary: List all codelists that are associated with the table 
+      summary: Get API configuration settings.
       operationId: GetApiConfig
       responses:
         '200':
@@ -415,7 +415,7 @@ components:
           type: integer
           description: A threshold of how many datacells that can be fetched in a single API call
           minimum: 0
-        maxCalls:
+        maxCallsPerTimeWindow:
           type: integer
           description: The maximum number of call to the API for a time window indicated by timeWindow.
           minimum: 1
