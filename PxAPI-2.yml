@@ -42,11 +42,11 @@ paths:
                   $ref: '#/components/schemas/Folder'
                 examples:
                   NavigateRoot:
-                    $ref: '#/components/examples/navigation-root'
+                    $ref: './examplesAsYml/folder-root.yml#/folder-root'
           '400':
             $ref: '#/components/responses/ErrorResponse400'
           '404':
-            $ref: '#/components/responses/ErrorResponse404'            
+            $ref: '#/components/responses/ErrorResponse404'
           '429':
             $ref: '#/components/responses/ErrorResponse429'
 
@@ -68,7 +68,7 @@ paths:
                 $ref: '#/components/schemas/Folder'
               examples:
                   Navigation-BE:
-                    $ref: '#/components/examples/navigation-be'
+                    $ref: './examplesAsYml/folder-be.yml#/folder-be'
         '400':
           $ref: '#/components/responses/ErrorResponse400'
         '404':
@@ -97,7 +97,7 @@ paths:
                 $ref: '#/components/schemas/TablesResponse'
               examples:
                   tables:
-                    $ref: '#/components/examples/tablesResponse'
+                    $ref: './examplesAsYml/tablesResponse.yml#/tablesResponse'
   /tables/{id}:
     get:
       tags:
@@ -146,9 +146,15 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/TableMetadata'
+              examples:
+                  TableMetadata:
+                    $ref: './examplesAsYml/tableMetadata.yml#/tableMetadata'
             application/jsonstat:
               schema:
-                $ref: '#/components/schemas/Dataset'    
+                $ref: '#/components/schemas/Dataset'
+              examples:
+                  Dataset-meta:
+                    $ref: './examplesAsYml/dataset-meta.yml#/dataset-meta'
             application/vnd.json-stat2+json:
               schema:
                 externalDocs:
@@ -434,7 +440,6 @@ components:
           items:
             type: string
             description: tag for folder
-          nullable: true
         folderContents:
           type: array
           items:
@@ -459,7 +464,6 @@ components:
               items:
                 type: string
                 description: tag for folder
-              nullable: true
             links:
               type: array
               items:
@@ -488,7 +492,6 @@ components:
               items:
                 type: string
                 description: tag for table
-              nullable: true
             updated:
               type: string
               description: Date and time when the figures in the table was last updated, in UTC time.
@@ -645,7 +648,9 @@ components:
           items: 
             $ref: '#/components/schemas/Contact'
         variables:
-          $ref: '#/components/schemas/AbstractVariable'
+          type: array
+          items:
+            $ref: '#/components/schemas/AbstractVariable'
         variablesDisplayOrder:
           type: array
           items:
@@ -1397,140 +1402,4 @@ components:
             detail: Node with id, xxx can not be found
             
 
-  examples:  
-    navigation-root:
-      description: Example for 200 response for navigation endpoint
-      value:
-        id: 
-        objectType: folder
-        label: 
-        description: 
-        links:
-        - rel: self
-          href: https://my-site.com/api/v2/navigation
-        folderContents:
-        - id: JO
-          objectType: folder
-          label: Agriculture, forestry and fishery
-          description: Animals, economy, employment, production, and more.
-          links:
-          - rel: self
-            href: https://my-site.com/api/v2/navigation/JO
-        - id: NV
-          objectType: folder
-          label: Financial markets
-          description: Assets, banks, insurance companies, liabilities, shares, and more.
-          links:
-          - rel: self
-            href: https://my-site.com/api/v2/navigation/NV
-
-    navigation-be:
-      description: Example for 200 response for navigation endpoint
-      value:
-        id: BE0101
-        objectType: folder
-        label: Balance statistics
-        description: Balance statistics
-        links:
-        - rel: self
-          href: https://my-site.com/api/v2/navigation/BE0101
-        folderContents:
-        - id: "01"
-          objectType: folder-information
-          label: Annual statistics
-          description: Annual statistics
-          links:
-          - rel: folder
-            href: https://my-site.com/api/v2/navigation/01
-        - id: BEH1
-          objectType: heading
-          label: I am heading
-          description: I am heading
-        - id: TAB0001
-          objectType: table
-          label: Corporations Financial Assets and Liabilities. Quarterly 1998K2 - 2021K4
-          description: Corporations Financial Assets and Liabilities by item. Quarterly 1998K2 - 2021K4 [2022-03-11]
-          updated: 2017-09-08T19:01:55.714942+03:00
-          categoy: 'O'
-          tags: 
-          - Money
-          - Gold
-          links:
-          - rel: self
-            href: https://my-site.com/api/v2/tables/TAB0001
-          - rel: metadata
-            href: https://my-site.com/api/v2/tables/TAB0001/metadata
-          - rel: data
-            href: https://my-site.com/api/v2/tables/TAB0001/data
-          variablesName:
-            - observations
-            - region
-            - marital status
-            - age
-          firstPeriod: 1998K2
-          lastPeriod: 2021K4
-          discontinued: false
-    tablesResponse:
-      description: List all tables with pagination
-      value:
-        tables: 
-          - id: TAB0001
-            objectType: table
-            label: Population. Year 1968 - 2021
-            description: Population by region, marital status, age and sex. Year 1968 - 2021
-            updated: 2017-09-08T19:01:55.714942+03:00
-            categoy: 'O'
-            tags: []
-            links:
-            - rel: self
-              href: https://my-site.com/api/v2/tables/TAB0001
-            - rel: metadata
-              href: https://my-site.com/api/v2/tables/TAB0001/metadata
-            - rel: data
-              href: https://my-site.com/api/v2/tables/TAB0001/data
-            variablesName:
-              - observations
-              - region
-              - marital status
-              - age
-            firstPeriod: 1968
-            lastPeriod: 2021
-            discontinued: false
-          - id: TAB0001
-            objectType: table
-            label: Tabell A
-            description: Folkmängd, in- och utvanding, medellivslängd, namn, prognoser mm
-            updated: 2017-09-08T19:01:55.714942+03:00
-            categoy: 'O'
-            tags: []
-            links:
-            - rel: self
-              href: https://my-site.com/api/v2/tables/TAB0001
-            - rel: metadata
-              href: https://my-site.com/api/v2/tables/TAB0001/metadata
-            - rel: data
-              href: https://my-site.com/api/v2/tables/TAB0001/data
-            variablesName:
-              - observations
-              - region
-              - marital status
-              - age
-            firstPeriod: 2017
-            lastPeriod: 2022
-            discontinued: false
-        page:
-          pageNumber: 10
-          pageSize: 100
-          totalElements: 7000
-          totalPages: 70
-        links:
-          - rel: self
-            href: https://my-site.com/api/v2/tables/?pageNumber=10
-          - rel: first
-            href: https://my-site.com/api/v2/tables/?pageNumber=1
-          - rel: last
-            href: https://my-site.com/api/v2/tables/?pageNumber=70
-          - rel: next
-            href: https://my-site.com/api/v2/tables/?pageNumber=11
-          - rel: prev
-            href: https://my-site.com/api/v2/tables/?pageNumber=9  
+  
