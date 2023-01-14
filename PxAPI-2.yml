@@ -397,7 +397,7 @@ components:
         - "languages"
         - "defaultLanguage"
         - "maxDataCells"
-        - "maxCalls"
+        - "maxCallsPerTimeWindow"
         - "timeWindow"
         - "license"
       properties:
