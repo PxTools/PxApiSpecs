@@ -1,15 +1,8 @@
 # PxApi 2.0
-
 # Readers guide
 ## What this instruction covers
-This document specifies the  queries and response formats and also the endpoints for the 2.0 version of the PX web API.
-
-## Terminology
-- *Paxiom* the object model representing a statistical cube
-- *table* a multidimensional table containing statistical measures and metadata about these measures stored in a PX-File or a database using the CNMM.
-- *CNMM* the Common Nordic Meta Model which is the database structure that is used and maintained by Statistics Sweden, Norway and Denmark.
-
-**References**
+This document specifies the  queries and response formats and also the endpoints for the PxApi 2.0.
+## References
 
 [https://www.dst.dk/en/Statistik/statistikbanken/api](https://www.dst.dk/en/Statistik/statistikbanken/api)
 
@@ -17,108 +10,151 @@ This document specifies the  queries and response formats and also the endpoints
 
 [https://www.vinaysahni.com/best-practices-for-a-pragmatic-restful-api](https://www.vinaysahni.com/best-practices-for-a-pragmatic-restful-api)
 
-# Information model for a Table
-TODO
-
-## Model mappings
-### Mapping to Paxiom
-Table = PXModel
-
-Value = Value
-
-FilterableVariable = Variable
-
-Filter = ValueSet or Grouping (bad name, what shall we have instead???)
-
-### PX-file database
-Filter = Aggregation
-Stream = N/A
-
-### CNMM
-Filter = ValueSet or Grouping
-Stream = Subtable
-
-# Restrictions
-Some restrictions in the 2.0 version of the API
--	**Only one database** – Drop the support of many databases that can be served by the same instance of the API. This will lower the complexity of the internals of the API since it does not have to take into account different configuration for different databases. Most organizations only have one database so the effect is limited only to a few. The solution for organizations with multiple databases is to have multiple instances of the API with different configuration.
--	**New table identity** – The id for a table is changed from in the case of a PX-file name to MATRIX  and TableId instead of MainTable . The new id should be stable and not be reused. If a table change in such a way that it is no longer compatible it should be duplicated and assign an new id. This way the API will be able to identify the table even if it has been moved in the database.
--	**Names of aggregation files must be unique** – names of the aggregation files within a database must be unique since they will serve as the id of the aggregation filter.
--	VARIABLETYPE must be formalized.
--	Initially only support for PX, JSON-STAT, CSV,TSV, Excel and JSON-STAT2 (this should be possible to configure) 
--	~~Client should accept new properties in the responses without breaking.~~
-
+# Concepts
+The PxAPI uses some abstractions to represent the different parts of the statistical database. This section aims to give the reader a better understanding of those abstractions laying a foundation for understanding the structure of the API and the data that it provides.
+## Table
+A table is the representation of a statistical table. Others may sometimes refer to the same concept a dataset, cube, or multi-dimensional cube. But we have chose to call it a table due to historical reasons. A table consists of two parts the data that contains the numbers and the metadata that gives the data a context/meaning. E.g. data 10 452 326 and the metadata the population of Sweden December 31 2021.
+## Database
+A database is a collection of tables that are organized and structured together according to some schema. 
+A common mistake is to mix the database concept with a relational database management system like Oracle Database or Microsoft SQL Server. 
+Also sometimes when referring to the database one might refer to the instance of the database.
+## Folder
+Folders are used to organize tables in a database. A folder can contain other folders or tables. 
+Usually, the first level of folders in a database are referred to the subject areas of the database. Others might also call them the themes of the database.
+## Variable
+Tables are multidimensional and variables are the concept used to describe the data (others may refer to variables as dimensions).  Take the example data 10 452 326 and the metadata the population of Sweden December 31 2021. 10 452 326 is described by tree variables 
+1. What we are measuring, in our case this is the population. This variable is special and is referred to as the content variable. There and only be one content variable. Sometimes when there is just one content the content variable may be omitted instead the context is given by other metadata for the table. 
+2. The point in time that the number is associated to in our case 31 December 2021. This variable type is also special and is referred to as the time variable. There should always be one and only one time variable.
+3. The region. In our case it is Sweden. This is also a special kind of variable called a geographical variable. A table might have zero or many geographical variables but usually only have one if they have any.
+There is a fourth kind of variable that is just called a variable that is used to describe the data. Imagen, that we had divided 10 452 326 by gender so we have two data cells instead 5 260 707 and 5 191 619 one for male and one for female. Then that fourth variable would be gender.
+## Value
+Variables have distinct values that make up the space for it. E.g. our gender variable above have two values one for male and one for female.
+## Code list
+A variable might have code list associated to that defined a new space for the variable by providing different sets of values. E.g. imagine, you have a regional variable with values for each municipality in Sweden. Then you might have a code list that transforms the municipalities into counties.
+## Data cell
+A data cell is the individual measure in a table.
+The total number of cells for a table is given by the product of the number of values for each variable.
+## Data source type
+The information might be stored in different formats and technologies. We currently support two different data source types PX-file based and Oracle databases and Microsoft SQL Server that uses the Common Nordic Meta Model.
+## Other terminology
+- *Paxiom* the object model representing a table.
+- *CNMM* the Common Nordic Meta Model is a relational database model for representing a `database` and `tables`. It is used and maintained by Statistics Sweden, Norway and Denmark.
+- *PX-file* a physical representation of a table by using the PX file format.
+- *PX-file database* a collection of PX-files that represents a `database`.
 # API endpoints
-~~All the endpoints are able to handle GET and POST HTTP request. GET is the preferred method in most cases. They result in the same response which is not very RESTful instead it is a pragmatically solution. All the examples bellow uses the GET method if you wish to do a POST request you will do it to the same url but instead of specifying query string parameters you could specify the same parameters as a JSON object having the same name as the parameter and sending that JSON object as the content of the POST request.~~
 
-**Example**
-```json
-{
-  "lang": "en",
-}
-```
 POST is primarily intended to be used when fetching data since the query to select the data can in some cases become very large. So large that it can extends come web browser limits on url’s .
 
 Proposal: Look at Json-Stat collections 
 
+TODO Throttle protection
+
 ## Configuration endpoint
-Get the configuration of the API
-
-**url:** `http://my-site.com/api/v2/config`
-
-**HTTP method:** GET
-
-**Response**
+Get API configuration settings.
+```
+HTTP GET https://my-site.com/api/v2/config
+```
+### Example response
 ```json
 {
-    "apiVersion": "2.0",
-    "languages": [
+    "ApiVersion": "2.0",
+    "Languages": [
         {
-            "id": "sv",
-            "lable": "Svenska"
+            "Id": "sv",
+            "Lable": "Svenska"
         },
         {
-            "id": "en",
-            "lable": "English"
+            "Id": "en",
+            "Lable": "English"
         }
     ],
-    "defaultLanguage": "sv",
-    "maxDataCells": 10000,
-    "maxCalls": 30,
-    "timeWindow": 10,
-    "sourceReferences": [
+    "DefaultLanguage": "sv",
+    "MaxDataCells": 10000,
+    "MaxCalls": 30,
+    "TimeWindow": 10,
+    "SourceReferences": [
         {
-            "language": "sv",
-            "text": "Källa: SCB"
+            "Language": "sv",
+            "Text": "Källa: SCB"
         },
         {
-            "language": "en",
-            "text": "Source: Statistics Sweden"
+            "Language": "en",
+            "Text": "Source: Statistics Sweden"
         }
     ],
-    "license": "https://creativecommons.org/share-your-work/public-domain/cc0/",
-    "features": [
+    "License": "https://creativecommons.org/share-your-work/public-domain/cc0/",
+    "Features": [
         {
-            "id": "CORS",
-            "params": [
+            "Id": "CORS",
+            "Params": [
                 {
-                    "key": "enabled",
-                    "value": "True"
+                    "Key": "enabled",
+                    "Value": "True"
                 }
             ]
         }
-    ],
-   "dataFormats": ["px", "json-stat", "csv", "tsv"],
-   "defaultDataFormat": "px",	
-   "streamingFormats": ["csv", "tsv"],
-   "defaultStreamingFormat": "csv",
+    ]
+}
+```
+- *apiVersion* states the version of the API
+- *languages* list the languages that can be used to when querying the API. Almost every endpoint support a lang query string parameter that can be set to the `id` of the language e.g. `lang=en` for english
+- *defaultLanguage* specifys which langue is used in the resonses if no language have been specified.
+- *maxDataCells* specifys the maximum number of data cells that can be fetch by one request.
+- *maxCallsPerTimeWindow* specifys how many requests that can be done during a time window specified by *timeWindow*
+- *timeWindow* the time duration in seconds that makes up the time window used the the thotteling protection. 
+- *sourceReferences* specifies how one could cite the data fetch from through API.
+- *license* specifys the license of the data.
+
+## Navigation endpoints 
+
+Browse the database structure.
+```
+HTTP GET https://my-site.com/api/v2/navigation
+```
+**Http method:** GET
+
+### Example response
+```json
+{
+  "objectType": "folder",
+  "id": null,
+  "label": null,
+  "description": null,
+  "folderContents": [
+    {
+      "objectType": "folder-information",
+      "id": "JO",
+      "label": "Agriculture, forestry and fishery",
+      "description": "Animals, economy, employment, production, and more.",
+      "links": [
+        {
+          "rel": "self",
+          "href": "https://my-site.com/api/v2/navigation/JO"
+        }
+      ]
+    },
+    {
+      "objectType": "folder-information",
+      "id": "NV",
+      "label": "Financial markets",
+      "description": "Assets, banks, insurance companies, liabilities, shares, and more.",
+      "links": [
+        {
+          "rel": "self",
+          "href": "https://my-site.com/api/v2/navigation/NV"
+        }
+      ]
+    }
+  ],
+  "links": [
+    {
+      "rel": "self",
+      "href": "https://my-site.com/api/v2/navigation"
+    }
+  ]
 }
 ```
 
-## Navigation endpoint 
-
-Browse the database structure.
-
-**url:** `http://my-site.com/api/v2/navigation`
 
 Returns the database root folder.
 
@@ -128,61 +164,44 @@ Returns the database folder identified by *id*.
 
 **HTTP method:** GET
 
-**Response example**
-
+### Example response
 The following example shows the response of the API request `http://my-site.com/api/v2/navigation/BE0101`. Metadata about the folder BE0101 is returned together with the folder contents of the BE0101 folder, which is a subfolder BE0101A and the statistical table BefolkningNy.
 ```json
 {
-  "id": "BE0101",
-  "objectType": "Folder",
-  "label": "Population statistics",
-  "description": "",
-  "tags": null,
-  "links": [
-    {
-      "rel": "self",
-      "href": "http://my-site.com/api/v2/navigation/BE0101"
-    }
-  ],
+  "objectType": "folder",
+  "id": null,
+  "label": null,
+  "description": null,
   "folderContents": [
     {
-      "id": "BE0101A",
-      "objectType": "FolderInformation",
-      "label": "Number of inhabitants",
-      "description": "",
-      "tags": null,
+      "objectType": "folder-information",
+      "id": "JO",
+      "label": "Agriculture, forestry and fishery",
+      "description": "Animals, economy, employment, production, and more.",
       "links": [
         {
-          "rel": "folder",
-          "href": "http://my-site.com/api/v2/navigation/BE0101A"
+          "rel": "self",
+          "href": "https://my-site.com/api/v2/navigation/JO"
         }
       ]
     },
     {
-      "id": "BefolkningNy",
-      "objectType": "Table",
-      "label": "Population by region, marital status, age and sex.  Year",
-      "description": "",
-      "updated": "2019-02-21T09:30:00",
-      "category": "official",
-      "firstPeriod": "1968",
-      "lastPeriod": "2018",
-      "discontinued": false,
-      "tags": null,
+      "objectType": "folder-information",
+      "id": "NV",
+      "label": "Financial markets",
+      "description": "Assets, banks, insurance companies, liabilities, shares, and more.",
       "links": [
         {
           "rel": "self",
-          "href": "http://my-site.com/api/v2/tables/BefolkningNy"
-        },
-        {
-          "rel": "metadata",
-          "href": "http://my-site.com/api/v2/tables/BefolkningNy/metadata"
-        },
-        {
-          "rel": "data",
-          "href": "http://my-site.com/api/v2/tables/BefolkningNy/data"
+          "href": "https://my-site.com/api/v2/navigation/NV"
         }
       ]
+    }
+  ],
+  "links": [
+    {
+      "rel": "self",
+      "href": "https://my-site.com/api/v2/navigation"
     }
   ]
 }
@@ -248,34 +267,6 @@ There are three possible values for *objectType*:
 - self - How to navigate to the table
 - metadata - How to navigate to the table metadata
 - data - How to navigate to the table data
-
-**More ...**
-
-Proposal: 
-The querystring parameter recursive=true will return all sub nodes for the specified node.
-Possible to define number of recursive levels. 
-
-Question:
-Will http://my-site.com/api/v2/tables/TAB0001/data return default values or is it necessary to also specify variables and values to this URL to get data? 
--	Yes, if the number of resulting cells is lower than the max cell limit.
-Same selection rules as in the current API.
-Do not make it the whole url ony specify the nodeid like
-http://my-site.com/api/v2/database/BE and http://my-site.com/api/v2/database/BE0401
-and not http://my-site.com/api/v2/database/BE/BE0401.. OK (ge exempel på PX fil fallet)
-
-Should not LINK and HEADLINE menu types be included? Suggestion is to skip the LINK type.
-
-Suggested properties for all types
-* Id
-* Label
-* Description
-
-Suggested properties for table type
-* LastUpdated
-* Published
-* TableCategory (PresCategory)
-
-
 
 
 ## Table  endpoint
@@ -2702,124 +2693,6 @@ Retrieves data for a the specified table in the format specified. The available 
 #### Parameters
 The variables of the table can be used to subquery a part of the data see 6 Data selection parameters for how to specify these parameters.
 
-### List all streams for a table
-**url:** `/api/v2/tables/<table-id>/streams`
-
-**HTTP method:** GET|POST
-
-List all streams that are associated with the table.
-
-**Response**
-```json
-[
-  {
-    "id": "K1", 
-    "text": "Befolkning efter kommun, kön och år",
-    "links": [
-           {"rel": "metadata" ,
-            "href": "http://my-site.com/api/v2/tables/TAB0001/streams/K1"},
-           {"rel": "data", 
-            "href": "http://my-site.com/api/v2/tables/TAB0001/streams/K1/stream"}
-            ]},
-  {
-    "id": "L1", 
-    "text": "Befolkning efter län, kön och år",
-    "links": [
-           {"rel": "metadata",
-            "href": "http://my-site.com/api/v2/tables/TAB0001/streams/L1"},
-           {"rel": "data",
-            "href": "http://my-site.com/api/v2/tables/TAB0001/streams/L1/data"}
-            ]}]
-  }
-]
-```
-### List metadata for a stream
-**url:** `/api/v2/tables/<table-id>/streams/<stream-id>/`
-
-**HTTP method:** GET|POST
-
-List metadata for the specified stream
-
-**Response**
-```json
-{
-  "id": "K1",
-  "text": "Befolkning",
-  "description": "Befolkning efter kommun, kön och år",
-  "updated": "2019-02-21T09:30:00",
-  "footnotes": [""],
-  "contacts": [{
-               "name": "Inga Svensson",
-               "phone": "+46111111111",
-               "mail": "inga.svensson@my-site.com"}],
-  "variables": [{
-                "id": "CONTENTS",
-                "text": "Befolkning",
-                "elimination": false,
-                "type": "CONTENTS",
-                "values": [ {"id": "A", "text": "Befolkning", "unit": "antal"}]},
-
-              {
-                "id": "region",
-                "text": "kommun",
-                "elimination": true,
-                "type": "GEO",
-                ~~"domain": "kommun2017",~~
-                "values": [ {"id": "0114", "text": "Upplands Väsby"},
-                          {"id": "0115", "text": "Vallentuna"},
-                          .
-                          .
-                          .
-                          {"id": "2584", "text": "Kiruna"}
-                        ]},
-              {
-                "id": "kon",
-                "text": "kön",
-                "elimination": true,
-                "type": "GENERIC",
-                "domain": "kon",
-                "values": [
-                          {"id": "1", "text": "män"},
-                          {"id": "2", "text": "kvinnor"}
-                        ]},
-              {
-                "id": "Tid",
-                "text": "år",
-                "elimination": false,
-                "type": "TIME",
-                "domain": "år",
-                "values": [
-                          {"id": "2000", "text": "2000"},
-                          {"id": "2001", "text": "2001"},
-                          .
-                          .
-                          .
-                          {"id": "2017", "text": "2017"}
-
-                        ]}],
-   "links": [{
-             "rel": "data",
-             "href": "http://my-site.com/api/v2/tables/TAB0001/streams/K1/data"}]
-
-   }
-
-}
-```
-
-### Get data via a stream
-**url:** `/api/v2/tables/<table-id>/streams/<stream-id>/data/<format>`
-
-**HTTP method:** GET|POST
-
-List metadata for the specified table
-Retrieves data for a the specified table in the format specified. The available formats are listed in the configuration end point see 4.1 Configuration endpoint.
-#### Parameters
-The variables of the table can be used to subquery a part of the data see 6 Data selection parameters for how to specify these parameters.
-
-Question: Is it possible to get data without specifying any selection? Would this give me the whole table?
--	Yes! If you don´t make any selection you will get all. Same rules as in the Danish API:
-Default kanske man ska begränsa default till de senast tider och värden. 
-
 ### List all filters for a table
 **url:** `/api/v2/tables/<table-id>/filters`
 
@@ -2947,3 +2820,41 @@ If elimination is set to true the variable can be eliminated and nothing have to
 429
 404
 500
+
+# Restrictions
+Some restrictions in the 2.0 version of the API in comparison to the first version of the API.
+-	**Only one database** – Drop the support of many databases that can be served by the same instance of the API. This will lower the complexity of the internals of the API since it does not have to take into account different configuration for different databases. Most organizations only have one database so the effect is limited only to a few inststances of the API. 
+The recommended solution for organizations with multiple databases is to have multiple instances of the API with different configuration.
+-	**New table identity** – The identifyer for a table is changed. In the case of a PX-file the MATRIX is used instead if the filename and in the case of CNMM the TableId instead of MainTable. The new id should be stable and not be reused. If a table change in such a way that it is no longer compatible it should be duplicated and assign an new id. This way the API will be able to identify the table even if it has been moved in the database.
+-	**Names of aggregation files must be unique** – names of the aggregation files within a database must be unique since they will serve as the id of the aggregation filter.
+-	VARIABLETYPE must be formalized.
+-	Initially only support for PX, JSON-STAT, CSV,TSV, Excel and JSON-STAT2 (this should be possible to configure) 
+
+## TODO  Remove section: Question:
+Will http://my-site.com/api/v2/tables/TAB0001/data return default values or is it necessary to also specify variables and values to this URL to get data? 
+-	Yes, if the number of resulting cells is lower than the max cell limit.
+Same selection rules as in the current API.
+Do not make it the whole url ony specify the nodeid like
+http://my-site.com/api/v2/database/BE and http://my-site.com/api/v2/database/BE0401
+and not http://my-site.com/api/v2/database/BE/BE0401.. OK (ge exempel på PX fil fallet)
+
+Should not LINK and HEADLINE menu types be included? Suggestion is to skip the LINK type.
+
+Suggested properties for all types
+* Id
+* Label
+* Description
+
+Suggested properties for table type
+* LastUpdated
+* Published
+* TableCategory (PresCategory)
+
+### Impelemntation guides
+### PX-file database
+Filter = Aggregation
+Stream = N/A
+
+### CNMM
+Filter = ValueSet or Grouping
+Stream = Subtable
