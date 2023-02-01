@@ -116,6 +116,7 @@ HTTP GET https://my-site.com/api/v2/navigation
 ### Example response
 ```json
 {
+  "language": "sv",
   "objectType": "folder",
   "id": null,
   "label": null,
@@ -129,7 +130,13 @@ HTTP GET https://my-site.com/api/v2/navigation
       "links": [
         {
           "rel": "self",
+          "hreflang": "sv",
           "href": "https://my-site.com/api/v2/navigation/JO"
+        },
+        {
+          "rel": "self",
+          "hreflang": "en",
+          "href": "https://my-site.com/api/v2/navigation/JO?lang=en"
         }
       ]
     },
@@ -141,7 +148,13 @@ HTTP GET https://my-site.com/api/v2/navigation
       "links": [
         {
           "rel": "self",
+          "hreflang": "sv",
           "href": "https://my-site.com/api/v2/navigation/NV"
+        },
+        {
+          "rel": "self",
+          "hreflang": "en",
+          "href": "https://my-site.com/api/v2/navigation/NV?lang=en"
         }
       ]
     }
@@ -149,7 +162,13 @@ HTTP GET https://my-site.com/api/v2/navigation
   "links": [
     {
       "rel": "self",
+      "hreflang": "sv",
       "href": "https://my-site.com/api/v2/navigation"
+    },
+    {
+      "rel": "self",
+      "hreflang": "en",
+      "href": "https://my-site.com/api/v2/navigation?lang=en"
     }
   ]
 }
@@ -168,6 +187,7 @@ Returns the database folder identified by *id*.
 The following example shows the response of the API request `http://my-site.com/api/v2/navigation/BE0101`. Metadata about the folder BE0101 is returned together with the folder contents of the BE0101 folder, which is a subfolder BE0101A and the statistical table BefolkningNy.
 ```json
 {
+  "language": "sv",
   "objectType": "folder",
   "id": null,
   "label": null,
@@ -181,7 +201,13 @@ The following example shows the response of the API request `http://my-site.com/
       "links": [
         {
           "rel": "self",
+          "hreflang": "sv",
           "href": "https://my-site.com/api/v2/navigation/JO"
+        },
+        {
+          "rel": "self",
+          "hreflang": "en",
+          "href": "https://my-site.com/api/v2/navigation/JO?lang=en"
         }
       ]
     },
@@ -193,7 +219,13 @@ The following example shows the response of the API request `http://my-site.com/
       "links": [
         {
           "rel": "self",
+          "hreflang": "sv",
           "href": "https://my-site.com/api/v2/navigation/NV"
+        },
+        {
+          "rel": "self",
+          "hreflang": "en",
+          "href": "https://my-site.com/api/v2/navigation/NV?lang=en"
         }
       ]
     }
@@ -201,7 +233,13 @@ The following example shows the response of the API request `http://my-site.com/
   "links": [
     {
       "rel": "self",
+      "hreflang": "sv",
       "href": "https://my-site.com/api/v2/navigation"
+    },
+    {
+      "rel": "self",
+      "hreflang": "en",
+      "href": "https://my-site.com/api/v2/navigation?lang=en"
     }
   ]
 }

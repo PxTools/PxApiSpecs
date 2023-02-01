@@ -56,7 +56,7 @@ HTTP GET https://my-site.com/api/v2/config
 ```
 ### Example response
 ```json
-::: examplesAsJson/configResponse.json
+::: examples/config-response.json
 ```
 - *apiVersion* states the version of the API
 - *languages* list the languages that can be used to when querying the API. Almost every endpoint support a lang query string parameter that can be set to the `id` of the language e.g. `lang=en` for english
@@ -77,9 +77,8 @@ HTTP GET https://my-site.com/api/v2/navigation
 
 ### Example response
 ```json
-::: examplesAsJson/folder-root.json
+::: examples/navigation-root-response.json
 ```
-
 
 Returns the database root folder.
 
@@ -90,7 +89,8 @@ Returns the database folder identified by *id*.
 **HTTP method:** GET
 
 ### Example response
-The following example shows the response of the API request `http://my-site.com/api/v2/navigation/BE0101`. Metadata about the folder BE0101 is returned together with the folder contents of the BE0101 folder, which is a subfolder BE0101A and the statistical table BefolkningNy.
+The following example shows the response of the API request `http://my-site.com/api/v2/navigation/BE0101A`. Metadata about the folder BE0101A is returned together with the folder contents of the BE0101A folder
+
 ```json
 ::: examplesAsJson/folder-root.json
 ```
