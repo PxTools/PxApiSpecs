@@ -83,6 +83,7 @@ paths:
       summary: Get all Tables.
       operationId: ListAllTables
       parameters:
+        - $ref: '#/components/parameters/language'
         - $ref: '#/components/parameters/query'
         - $ref: '#/components/parameters/pastDays'
         - $ref: '#/components/parameters/include_discontinued'
@@ -113,7 +114,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Table'
+                $ref: '#/components/schemas/TableResponse'
         '400':
           $ref: '#/components/responses/ErrorResponse400'
         '404':
@@ -599,6 +600,17 @@ components:
         - $ref: '#/components/schemas/FolderContentItem'
       type: object
       description: Heading item
+
+    TableResponse:
+      allOf:
+        - $ref: '#/components/schemas/Table'
+      required:
+        - "language"
+      properties:
+        language:
+          type: string
+          description: The language code (ISO 639) for this response    
+
     Table:
       allOf:
         - $ref: '#/components/schemas/FolderContentItem'
@@ -693,9 +705,13 @@ components:
     TablesResponse:
       type: object
       required:
+        - "language"
         - "tables"
         - "page"
       properties:
+        language:
+          type: string
+          description: The language code (ISO 639) for this response      
         tables:
           type: array
           items:
@@ -709,13 +725,17 @@ components:
 
     TableMetadata:
       type: object
-      required: 
+      required:
+        - "language"
         - "id"
         - "label"
         - "variables"
         - "variablesDisplayOrder"
         - "links"
       properties:
+        language:
+          type: string
+          description: The language code (ISO 639) for this response      
         id:
           type: string
           description: Identifier for the table.
@@ -1020,6 +1040,8 @@ components:
           description: Raw contact information for compatability with PX files
     CodeListsResponse:
       type: object
+      required:
+        - "language"
       properties:
         language:
           type: string
