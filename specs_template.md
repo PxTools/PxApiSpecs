@@ -92,7 +92,7 @@ Returns the database folder identified by *id*.
 The following example shows the response of the API request `http://my-site.com/api/v2/navigation/BE0101A`. Metadata about the folder BE0101A is returned together with the folder contents of the BE0101A folder
 
 ```json
-::: examplesAsJson/folder-root.json
+::: examples/navigation-BE0101A-response.json
 ```
 **Response described**
 

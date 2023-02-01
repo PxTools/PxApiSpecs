@@ -116,7 +116,7 @@ HTTP GET https://my-site.com/api/v2/navigation
 ### Example response
 ```json
 {
-  "language": "sv",
+  "language": "en",
   "objectType": "folder",
   "id": null,
   "label": null,
@@ -124,37 +124,37 @@ HTTP GET https://my-site.com/api/v2/navigation
   "folderContents": [
     {
       "objectType": "folder-information",
-      "id": "JO",
-      "label": "Agriculture, forestry and fishery",
-      "description": "Animals, economy, employment, production, and more.",
+      "id": "AM",
+      "label": "Labour market",
+      "description": "",
       "links": [
         {
           "rel": "self",
           "hreflang": "sv",
-          "href": "https://my-site.com/api/v2/navigation/JO"
+          "href": "https://my-site.com/api/v2/navigation/AM"
         },
         {
           "rel": "self",
           "hreflang": "en",
-          "href": "https://my-site.com/api/v2/navigation/JO?lang=en"
+          "href": "https://my-site.com/api/v2/navigation/AM?lang=en"
         }
       ]
     },
     {
       "objectType": "folder-information",
-      "id": "NV",
-      "label": "Financial markets",
-      "description": "Assets, banks, insurance companies, liabilities, shares, and more.",
+      "id": "BE",
+      "label": "Population",
+      "description": "",
       "links": [
         {
           "rel": "self",
           "hreflang": "sv",
-          "href": "https://my-site.com/api/v2/navigation/NV"
+          "href": "https://my-site.com/api/v2/navigation/BE"
         },
         {
           "rel": "self",
           "hreflang": "en",
-          "href": "https://my-site.com/api/v2/navigation/NV?lang=en"
+          "href": "https://my-site.com/api/v2/navigation/BE?lang=en"
         }
       ]
     }
@@ -174,7 +174,6 @@ HTTP GET https://my-site.com/api/v2/navigation
 }
 ```
 
-
 Returns the database root folder.
 
 **url:** `http://my-site.com/api/v2/navigation/{id}`
@@ -184,48 +183,229 @@ Returns the database folder identified by *id*.
 **HTTP method:** GET
 
 ### Example response
-The following example shows the response of the API request `http://my-site.com/api/v2/navigation/BE0101`. Metadata about the folder BE0101 is returned together with the folder contents of the BE0101 folder, which is a subfolder BE0101A and the statistical table BefolkningNy.
+The following example shows the response of the API request `http://my-site.com/api/v2/navigation/BE0101A`. Metadata about the folder BE0101A is returned together with the folder contents of the BE0101A folder
+
 ```json
 {
-  "language": "sv",
+  "language": "en",
   "objectType": "folder",
-  "id": null,
-  "label": null,
-  "description": null,
+  "id": "BE0101A",
+  "label": "Number of inhabitants",
+  "description": "",
   "folderContents": [
     {
-      "objectType": "folder-information",
-      "id": "JO",
-      "label": "Agriculture, forestry and fishery",
-      "description": "Animals, economy, employment, production, and more.",
+      "objectType": "table",
+      "id": "TAB5444",
+      "label": "Population per month by region, age and sex. Year 2000M01 - 2022M11",
+      "description": "",
+      "tags": [
+        "population",
+        "inhabitants"
+      ],
+      "updated": "2022-01-08T07:00:00.000Z",
+      "firstPeriod": "2000M1",
+      "lastPeriod": "2022M11",
+      "category": "public",
+      "variableNames": [
+        "region",
+        "age",
+        "sex",
+        "age",
+        "month"
+      ],
+      "discontinued": false,
       "links": [
         {
           "rel": "self",
           "hreflang": "sv",
-          "href": "https://my-site.com/api/v2/navigation/JO"
+          "href": "https://my-site.com/api/v2/tables/TAB5444"
         },
         {
           "rel": "self",
           "hreflang": "en",
-          "href": "https://my-site.com/api/v2/navigation/JO?lang=en"
+          "href": "https://my-site.com/api/v2/tables/TAB5444?lang=en"
+        },
+        {
+          "rel": "metadata",
+          "hreflang": "en",
+          "href": "https://my-site.com/api/v2/tables/TAB5444/metadata?lang=en"
+        },
+        {
+          "rel": "data",
+          "hreflang": "en",
+          "href": "https://my-site.com/api/v2/tables/TAB5444/data?lang=en"
         }
       ]
     },
     {
-      "objectType": "folder-information",
-      "id": "NV",
-      "label": "Financial markets",
-      "description": "Assets, banks, insurance companies, liabilities, shares, and more.",
+      "objectType": "table",
+      "id": "TAB638",
+      "label": "Population by region, marital status, age, sex, observations and year 1968 - 2021",
+      "description": "",
+      "tags": [
+        "population"
+      ],
+      "updated": "2022-01-08T07:00:00.000Z",
+      "firstPeriod": "1968",
+      "lastPeriod": "2021",
+      "category": "public",
+      "variableNames": [
+        "region",
+        "marital status",
+        "age",
+        "sex",
+        "age",
+        "observations",
+        "year"
+      ],
+      "discontinued": false,
       "links": [
         {
           "rel": "self",
           "hreflang": "sv",
-          "href": "https://my-site.com/api/v2/navigation/NV"
+          "href": "https://my-site.com/api/v2/tables/TAB638"
         },
         {
           "rel": "self",
           "hreflang": "en",
-          "href": "https://my-site.com/api/v2/navigation/NV?lang=en"
+          "href": "https://my-site.com/api/v2/tables/TAB638?lang=en"
+        },
+        {
+          "rel": "metadata",
+          "hreflang": "en",
+          "href": "https://my-site.com/api/v2/tables/TAB638/metadata?lang=en"
+        },
+        {
+          "rel": "data",
+          "hreflang": "en",
+          "href": "https://my-site.com/api/v2/tables/TAB638/data?lang=en"
+        }
+      ]
+    },
+    {
+      "objectType": "table",
+      "id": "TAB5890",
+      "label": "Population by age and sex. Year 1860 - 2021",
+      "description": "",
+      "tags": [
+        "population"
+      ],
+      "updated": "2022-01-08T07:00:00.000Z",
+      "firstPeriod": "1860",
+      "lastPeriod": "2021",
+      "category": "public",
+      "variableNames": [
+        "age",
+        "sex",
+        "observations",
+        "year"
+      ],
+      "discontinued": false,
+      "links": [
+        {
+          "rel": "self",
+          "hreflang": "sv",
+          "href": "https://my-site.com/api/v2/tables/TAB5890"
+        },
+        {
+          "rel": "self",
+          "hreflang": "en",
+          "href": "https://my-site.com/api/v2/tables/TAB5890?lang=en"
+        },
+        {
+          "rel": "metadata",
+          "hreflang": "en",
+          "href": "https://my-site.com/api/v2/tables/TAB5890/metadata?lang=en"
+        },
+        {
+          "rel": "data",
+          "hreflang": "en",
+          "href": "https://my-site.com/api/v2/tables/TAB5890/data?lang=en"
+        }
+      ]
+    },
+    {
+      "objectType": "table",
+      "id": "TAB4537",
+      "label": "Population by district, Landscape or Part of the country by sex. Year 2015 - 2021",
+      "description": "",
+      "tags": [
+        "population"
+      ],
+      "updated": "2022-01-08T07:00:00.000Z",
+      "firstPeriod": "2015",
+      "lastPeriod": "2021",
+      "category": "public",
+      "variableNames": [
+        "region",
+        "sex",
+        "observations",
+        "year"
+      ],
+      "discontinued": false,
+      "links": [
+        {
+          "rel": "self",
+          "hreflang": "sv",
+          "href": "https://my-site.com/api/v2/tables/TAB4537"
+        },
+        {
+          "rel": "self",
+          "hreflang": "en",
+          "href": "https://my-site.com/api/v2/tables/TAB4537?lang=en"
+        },
+        {
+          "rel": "metadata",
+          "hreflang": "en",
+          "href": "https://my-site.com/api/v2/tables/TAB4537/metadata?lang=en"
+        },
+        {
+          "rel": "data",
+          "hreflang": "en",
+          "href": "https://my-site.com/api/v2/tables/TAB4537/data?lang=en"
+        }
+      ]
+    },
+    {
+      "objectType": "table",
+      "id": "TAB1267",
+      "label": "Population 1 November by region, age, sex, observations and year 2002 - 2022",
+      "description": "",
+      "tags": [
+        "population"
+      ],
+      "updated": "2022-01-08T07:00:00.000Z",
+      "firstPeriod": "2015",
+      "lastPeriod": "2021",
+      "category": "public",
+      "variableNames": [
+        "region",
+        "age",
+        "sex",
+        "observations",
+        "year"
+      ],
+      "discontinued": false,
+      "links": [
+        {
+          "rel": "self",
+          "hreflang": "sv",
+          "href": "https://my-site.com/api/v2/tables/TAB1267"
+        },
+        {
+          "rel": "self",
+          "hreflang": "en",
+          "href": "https://my-site.com/api/v2/tables/TAB1267?lang=en"
+        },
+        {
+          "rel": "metadata",
+          "hreflang": "en",
+          "href": "https://my-site.com/api/v2/tables/TAB1267/metadata?lang=en"
+        },
+        {
+          "rel": "data",
+          "hreflang": "en",
+          "href": "https://my-site.com/api/v2/tables/TAB1267/data?lang=en"
         }
       ]
     }
@@ -234,12 +414,12 @@ The following example shows the response of the API request `http://my-site.com/
     {
       "rel": "self",
       "hreflang": "sv",
-      "href": "https://my-site.com/api/v2/navigation"
+      "href": "https://my-site.com/api/v2/navigation/BE0101A"
     },
     {
       "rel": "self",
       "hreflang": "en",
-      "href": "https://my-site.com/api/v2/navigation?lang=en"
+      "href": "https://my-site.com/api/v2/navigation/BE0101A?lang=en"
     }
   ]
 }
