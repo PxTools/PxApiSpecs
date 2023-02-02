@@ -1,0 +1,162 @@
+{
+    "language": "en",
+    "tables": [
+        {
+            "objectType": "table",
+            "id": "TAB5444",
+            "label": "Population per month by region, age and sex. Year 2000M01 - 2022M11",
+            "description": "",
+            "tags": [
+              "population",
+              "inhabitants"
+            ],
+            "updated": "2022-01-08T07:00:00.000Z",
+            "firstPeriod": "2000M1",
+            "lastPeriod": "2022M11",
+            "category": "public",
+            "variableNames": [
+              "region",
+              "age",
+              "sex",
+              "age",
+              "month"
+            ],
+            "discontinued": false,
+            "links": [
+              {
+                "rel": "self",
+                "hreflang": "sv",
+                "href": "https://my-site.com/api/v2/tables/TAB5444"
+              },
+              {
+                "rel": "self",
+                "hreflang": "en",
+                "href": "https://my-site.com/api/v2/tables/TAB5444?lang=en"
+              },
+              {
+                "rel": "metadata",
+                "hreflang": "en",
+                "href": "https://my-site.com/api/v2/tables/TAB5444/metadata?lang=en"
+              },
+              {
+                "rel": "data",
+                "hreflang": "en",
+                "href": "https://my-site.com/api/v2/tables/TAB5444/data?lang=en"
+              }
+            ]
+          },
+          {
+            "objectType": "table",
+            "id": "TAB638",
+            "label": "Population by region, marital status, age, sex, observations and year 1968 - 2021",
+            "description": "",
+            "tags": [
+              "population"
+            ],
+            "updated": "2022-01-08T07:00:00.000Z",
+            "firstPeriod": "1968",
+            "lastPeriod": "2021",
+            "category": "public",
+            "variableNames": [
+              "region",
+              "marital status",
+              "age",
+              "sex",
+              "age",
+              "observations",
+              "year"
+            ],
+            "discontinued": false,
+            "links": [
+              {
+                "rel": "self",
+                "hreflang": "sv",
+                "href": "https://my-site.com/api/v2/tables/TAB638"
+              },
+              {
+                "rel": "self",
+                "hreflang": "en",
+                "href": "https://my-site.com/api/v2/tables/TAB638?lang=en"
+              },
+              {
+                "rel": "metadata",
+                "hreflang": "en",
+                "href": "https://my-site.com/api/v2/tables/TAB638/metadata?lang=en"
+              },
+              {
+                "rel": "data",
+                "hreflang": "en",
+                "href": "https://my-site.com/api/v2/tables/TAB638/data?lang=en"
+              }
+            ]
+          },
+          {
+            "objectType": "table",
+            "id": "TAB5890",
+            "label": "Population by age and sex. Year 1860 - 2021",
+            "description": "",
+            "tags": [
+              "population"
+            ],
+            "updated": "2022-01-08T07:00:00.000Z",
+            "firstPeriod": "1860",
+            "lastPeriod": "2021",
+            "category": "public",
+            "variableNames": [
+              "age",
+              "sex",
+              "observations",
+              "year"
+            ],
+            "discontinued": false,
+            "links": [
+              {
+                "rel": "self",
+                "hreflang": "sv",
+                "href": "https://my-site.com/api/v2/tables/TAB5890"
+              },
+              {
+                "rel": "self",
+                "hreflang": "en",
+                "href": "https://my-site.com/api/v2/tables/TAB5890?lang=en"
+              },
+              {
+                "rel": "metadata",
+                "hreflang": "en",
+                "href": "https://my-site.com/api/v2/tables/TAB5890/metadata?lang=en"
+              },
+              {
+                "rel": "data",
+                "hreflang": "en",
+                "href": "https://my-site.com/api/v2/tables/TAB5890/data?lang=en"
+              }
+            ]
+          }
+    ],
+    "page": {
+        "pageNumber": 1,
+        "pageSize": 3,
+        "totalElements": 56,
+        "totalPages": 19,
+        "links": [
+            {
+                "rel": "next",
+                "hreflang": "en",
+                "href": "https://my-site.com/api/v2/tables/?lang=en&query=population&pagesize=3,pageNumber=2"
+            },
+            {
+                "rel": "last",
+                "hreflang": "en",
+                "href": "https://my-site.com/api/v2/tables/?lang=en&query=population&pagesize=3,pageNumber=19"
+            }
+
+        ]
+    },
+    "links": [
+        {
+            "rel": "self",
+            "hreflang": "en",
+            "href": "https://my-site.com/api/v2/tables/?lang=en&query=population&pagesize=3"
+        }
+    ]
+}

@@ -761,6 +761,10 @@ components:
             pattern: "^((19|20)\\d\\d)\\-(0?[1-9]|1[012])\\-(0?[1-9]|[12][0-9]|3[01])$"
             format: date-time
             nullable: true
+        discontinued:
+          type: boolean
+          description: If the table is discontinued or not. That is if it no longer updated with new figures.
+          nullable: true
         notes: 
           type: array
           description: A list of notes associated with the table as a whole or a specific area of the table

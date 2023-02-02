@@ -108,12 +108,15 @@ HTTP GET https://my-site.com/api/v2/config
 ## Navigation endpoints 
 
 Browse the database structure.
+
+### Returns the database root folder.
 ```
 HTTP GET https://my-site.com/api/v2/navigation
 ```
-**Http method:** GET
-
-### Example response
+#### Parameters
+##### lang
+An optional language parameter.
+#### Example response
 ```json
 {
   "language": "en",
@@ -173,16 +176,18 @@ HTTP GET https://my-site.com/api/v2/navigation
   ]
 }
 ```
-
-Returns the database root folder.
-
-**url:** `http://my-site.com/api/v2/navigation/{id}`
+### Return the content of a specific folder in the database
+```
+HTTP GET http://my-site.com/api/v2/navigation/{id}
+```
 
 Returns the database folder identified by *id*.
 
-**HTTP method:** GET
+#### Parameters
+##### lang
+An optional language parameter.
 
-### Example response
+#### Example response
 The following example shows the response of the API request `http://my-site.com/api/v2/navigation/BE0101A`. Metadata about the folder BE0101A is returned together with the folder contents of the BE0101A folder
 
 ```json
@@ -445,6 +450,7 @@ There are three possible values for *objectType*:
 *objectType* - Can have one of two possible values:
 - *Folder* (the folder asked for in the API request)
 - *FolderInformation* (subfolder)
+- *Heading* A heading for separationg the content
 
 *label* - Folder text
 
@@ -487,90 +493,207 @@ There are three possible values for *objectType*:
 - data - How to navigate to the table data
 
 
-## Table  endpoint
+## Table endpoints
 ### List all tables
-**url:** `/api/v2/tables/`
-
-**HTTP method:** GET|POST
-
-List all tables in the database
-
-**Response**
-```json
-[
-   {
-     "id": "TAB0001",
-     "text": "Tabell A",
-     "updated": "2018-01-01T09:30:00",
-     "links": [{
-               "rel": "metadata",
-               "href": "http://my-site.com/api/v2/tables/TAB0001"},
-             {
-               "rel":"data",
-               "href": "http://my-site.com/api/v2/tables/TAB0001/data"}]
-   },
-   {
-     "id": "TAB0002",
-     "text": "Tabell B",
-     "updated": "2018-01-22T09:30:00",
-     "links": [{
-               "rel": "metadata",
-               "href": "http://my-site.com/api/v2/tables/TAB0002"},
-             {
-               "rel": "data",
-               "href": "http://my-site.com/api/v2/tables/TAB0002/data"}]
-
-   }
-]
+List all tables in the database. The list can be filter by the parameters.
+```
+HTTP GET http://my-site.com/api/v2/api/v2/tables/
 ```
 #### Parameters
 You can restrict the tables return by the following parameters
-
-##### pastDays
-Selects only tables that was updated from the time of execution going back number of days stated by the parameter pastDays. Valid values for past days are integers between 1 and ? (Will return error?)
-```
-http://my-site.com/api/v2/tables?pastDays=5
-```
-Question: Which date in the database/PX-file shall we check against?
--	PX-file: LAST-UPDATED
--	CNMM: Published
-
-~~##### updatedSince
-Selects only tables that was updated after and including the date specified by the parameter updatedSince.
-```
-http://my-site.com/api/v2/tables?updatedSince=2018-01-15
-```
-Question: Which date in the database/PX-file shall we check against?
--	PX-file: LAST-UPDATEDCNMM: Published~~
-
 ##### query
 Selects only tables that that matches a criteria which is specified by the search parameter.
 ```
 http://my-site.com/api/v2/tables?query=befolkning
 ```
-Question: Which metadata shall we check against?
-Exempel på hur man kan begränsa till en viss egenskap i sökindex.
-Search index match against:
--	Table id
--	Table title
--	Value text
--	Value code
--	Matrix
--	Variable name
--	Period
--	Grouping name
--	Grouping codes
--	Valueset name
--	Valueset codes
-- 	(keyword) ???
+##### pastDays
+Selects only tables that was updated from the time of execution going back number of days stated by the parameter pastDays. Valid values for past days are integers between 1 and ? (Will return error?)
+```
+http://my-site.com/api/v2/tables?pastDays=5
+```
+##### includeDiscontinued
+A true or false if discontinued tables should be included. Tables that do not have an explicit set the discontinued property will be treated as they are not discontinued.
 
-Proposal: 
-endedTables=false will omit ended tables in the table list. There is a new code for ended tables. What is the code? How will this work with PX-files?
-From documentation:
-D = The table is no longer updated but is accessible to all
--	PXModel needs to be extended
--	No support for this in PX-files (new keyword needed?)
--	Notering om att det kan skilja sig mellan och PX fil baserade databaser.
+##### pageSize
+How many tables that should be in the response.
+##### pageNumber
+A number that specifies which page of the response to display. Default value is 1.
+
+#### Example response
+An exampel filtering on population with a page size of 3
+```json
+{
+    "language": "en",
+    "tables": [
+        {
+            "objectType": "table",
+            "id": "TAB5444",
+            "label": "Population per month by region, age and sex. Year 2000M01 - 2022M11",
+            "description": "",
+            "tags": [
+              "population",
+              "inhabitants"
+            ],
+            "updated": "2022-01-08T07:00:00.000Z",
+            "firstPeriod": "2000M1",
+            "lastPeriod": "2022M11",
+            "category": "public",
+            "variableNames": [
+              "region",
+              "age",
+              "sex",
+              "age",
+              "month"
+            ],
+            "discontinued": false,
+            "links": [
+              {
+                "rel": "self",
+                "hreflang": "sv",
+                "href": "https://my-site.com/api/v2/tables/TAB5444"
+              },
+              {
+                "rel": "self",
+                "hreflang": "en",
+                "href": "https://my-site.com/api/v2/tables/TAB5444?lang=en"
+              },
+              {
+                "rel": "metadata",
+                "hreflang": "en",
+                "href": "https://my-site.com/api/v2/tables/TAB5444/metadata?lang=en"
+              },
+              {
+                "rel": "data",
+                "hreflang": "en",
+                "href": "https://my-site.com/api/v2/tables/TAB5444/data?lang=en"
+              }
+            ]
+          },
+          {
+            "objectType": "table",
+            "id": "TAB638",
+            "label": "Population by region, marital status, age, sex, observations and year 1968 - 2021",
+            "description": "",
+            "tags": [
+              "population"
+            ],
+            "updated": "2022-01-08T07:00:00.000Z",
+            "firstPeriod": "1968",
+            "lastPeriod": "2021",
+            "category": "public",
+            "variableNames": [
+              "region",
+              "marital status",
+              "age",
+              "sex",
+              "age",
+              "observations",
+              "year"
+            ],
+            "discontinued": false,
+            "links": [
+              {
+                "rel": "self",
+                "hreflang": "sv",
+                "href": "https://my-site.com/api/v2/tables/TAB638"
+              },
+              {
+                "rel": "self",
+                "hreflang": "en",
+                "href": "https://my-site.com/api/v2/tables/TAB638?lang=en"
+              },
+              {
+                "rel": "metadata",
+                "hreflang": "en",
+                "href": "https://my-site.com/api/v2/tables/TAB638/metadata?lang=en"
+              },
+              {
+                "rel": "data",
+                "hreflang": "en",
+                "href": "https://my-site.com/api/v2/tables/TAB638/data?lang=en"
+              }
+            ]
+          },
+          {
+            "objectType": "table",
+            "id": "TAB5890",
+            "label": "Population by age and sex. Year 1860 - 2021",
+            "description": "",
+            "tags": [
+              "population"
+            ],
+            "updated": "2022-01-08T07:00:00.000Z",
+            "firstPeriod": "1860",
+            "lastPeriod": "2021",
+            "category": "public",
+            "variableNames": [
+              "age",
+              "sex",
+              "observations",
+              "year"
+            ],
+            "discontinued": false,
+            "links": [
+              {
+                "rel": "self",
+                "hreflang": "sv",
+                "href": "https://my-site.com/api/v2/tables/TAB5890"
+              },
+              {
+                "rel": "self",
+                "hreflang": "en",
+                "href": "https://my-site.com/api/v2/tables/TAB5890?lang=en"
+              },
+              {
+                "rel": "metadata",
+                "hreflang": "en",
+                "href": "https://my-site.com/api/v2/tables/TAB5890/metadata?lang=en"
+              },
+              {
+                "rel": "data",
+                "hreflang": "en",
+                "href": "https://my-site.com/api/v2/tables/TAB5890/data?lang=en"
+              }
+            ]
+          }
+    ],
+    "page": {
+        "pageNumber": 1,
+        "pageSize": 3,
+        "totalElements": 56,
+        "totalPages": 19,
+        "links": [
+            {
+                "rel": "next",
+                "hreflang": "en",
+                "href": "https://my-site.com/api/v2/tables/?lang=en&query=population&pagesize=3,pageNumber=2"
+            },
+            {
+                "rel": "last",
+                "hreflang": "en",
+                "href": "https://my-site.com/api/v2/tables/?lang=en&query=population&pagesize=3,pageNumber=19"
+            }
+
+        ]
+    },
+    "links": [
+        {
+            "rel": "self",
+            "hreflang": "en",
+            "href": "https://my-site.com/api/v2/tables/?lang=en&query=population&pagesize=3"
+        }
+    ]
+}
+```
+**Response described**
+
+*Tables* a list of table objects containing basic metadata for a table.
+*Page* paging information about the results 
+* *pageNumber* the page number that was returned.
+* *pageSize* the pageSize of the response.
+* *totalElements* the total number of tables
+* *totalPages* the total number of pages.
+* *links* links with relation next, previous and last when relevant. That describes the links to next, previous and last page in the result set.
 
 ### List metadata for a table
 **url:** `/api/v2/tables/<table-id>`

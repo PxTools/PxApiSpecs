@@ -1,0 +1,23 @@
+{
+    "id": "agg_RegionNUTS2_2008",
+    "label": "NUTS2 fr.o.m 2008",
+    "language": "sv",
+    "type": "Aggregation",
+    "values": [
+        {"code": "SE11", "value": "Stockholm", "valueMap": ["01"]},
+        {"code": "SE12", "value": "Östra Mellansverige", "valueMap": ["03", "04", "05", "18", "19"]},
+        {"code": "SE21", "value": "Småland med öarna", "valueMap": ["06", "07", "08", "09"]},
+        {"code": "SE22", "value": "Sydsverige", "valueMap": ["10", "12"]},
+        {"code": "SE23", "value": "Västsverige", "valueMap": ["13", "14"]},
+        {"code": "SE31", "value": "Norra Mellansverige", "valueMap": ["17", "20", "21"]},
+        {"code": "SE32", "value": "Mellersta Norrland", "valueMap": ["22", "23"]},
+        {"code": "SE33", "value": "Övre Norrland", "valueMap": ["24", "25"]}
+    ],
+    "links": [
+        {
+            "rel": "self",
+            "hreflang": "sv",
+            "href": "https://my-site.com/api/v2/codelist/agg_RegionNUTS2_2008"
+        }        
+    ]
+}

@@ -70,25 +70,30 @@ HTTP GET https://my-site.com/api/v2/config
 ## Navigation endpoints 
 
 Browse the database structure.
+
+### Returns the database root folder.
 ```
 HTTP GET https://my-site.com/api/v2/navigation
 ```
-**Http method:** GET
-
-### Example response
+#### Parameters
+##### lang
+An optional language parameter.
+#### Example response
 ```json
 ::: examples/navigation-root-response.json
 ```
-
-Returns the database root folder.
-
-**url:** `http://my-site.com/api/v2/navigation/{id}`
+### Return the content of a specific folder in the database
+```
+HTTP GET http://my-site.com/api/v2/navigation/{id}
+```
 
 Returns the database folder identified by *id*.
 
-**HTTP method:** GET
+#### Parameters
+##### lang
+An optional language parameter.
 
-### Example response
+#### Example response
 The following example shows the response of the API request `http://my-site.com/api/v2/navigation/BE0101A`. Metadata about the folder BE0101A is returned together with the folder contents of the BE0101A folder
 
 ```json
@@ -115,6 +120,7 @@ There are three possible values for *objectType*:
 *objectType* - Can have one of two possible values:
 - *Folder* (the folder asked for in the API request)
 - *FolderInformation* (subfolder)
+- *Heading* A heading for separationg the content
 
 *label* - Folder text
 
@@ -157,167 +163,94 @@ There are three possible values for *objectType*:
 - data - How to navigate to the table data
 
 
-## Table  endpoint
+## Table endpoints
 ### List all tables
-**url:** `/api/v2/tables/`
-
-**HTTP method:** GET|POST
-
-List all tables in the database
-
-**Response**
-```json
-[
-   {
-     "id": "TAB0001",
-     "text": "Tabell A",
-     "updated": "2018-01-01T09:30:00",
-     "links": [{
-               "rel": "metadata",
-               "href": "http://my-site.com/api/v2/tables/TAB0001"},
-             {
-               "rel":"data",
-               "href": "http://my-site.com/api/v2/tables/TAB0001/data"}]
-   },
-   {
-     "id": "TAB0002",
-     "text": "Tabell B",
-     "updated": "2018-01-22T09:30:00",
-     "links": [{
-               "rel": "metadata",
-               "href": "http://my-site.com/api/v2/tables/TAB0002"},
-             {
-               "rel": "data",
-               "href": "http://my-site.com/api/v2/tables/TAB0002/data"}]
-
-   }
-]
+List all tables in the database. The list can be filter by the parameters.
+```
+HTTP GET http://my-site.com/api/v2/api/v2/tables/
 ```
 #### Parameters
 You can restrict the tables return by the following parameters
-
-##### pastDays
-Selects only tables that was updated from the time of execution going back number of days stated by the parameter pastDays. Valid values for past days are integers between 1 and ? (Will return error?)
-```
-http://my-site.com/api/v2/tables?pastDays=5
-```
-Question: Which date in the database/PX-file shall we check against?
--	PX-file: LAST-UPDATED
--	CNMM: Published
-
-~~##### updatedSince
-Selects only tables that was updated after and including the date specified by the parameter updatedSince.
-```
-http://my-site.com/api/v2/tables?updatedSince=2018-01-15
-```
-Question: Which date in the database/PX-file shall we check against?
--	PX-file: LAST-UPDATEDCNMM: Published~~
-
+##### lang
+An optional language parameter.
 ##### query
 Selects only tables that that matches a criteria which is specified by the search parameter.
 ```
 http://my-site.com/api/v2/tables?query=befolkning
 ```
-Question: Which metadata shall we check against?
-Exempel på hur man kan begränsa till en viss egenskap i sökindex.
-Search index match against:
--	Table id
--	Table title
--	Value text
--	Value code
--	Matrix
--	Variable name
--	Period
--	Grouping name
--	Grouping codes
--	Valueset name
--	Valueset codes
-- 	(keyword) ???
-
-Proposal: 
-endedTables=false will omit ended tables in the table list. There is a new code for ended tables. What is the code? How will this work with PX-files?
-From documentation:
-D = The table is no longer updated but is accessible to all
--	PXModel needs to be extended
--	No support for this in PX-files (new keyword needed?)
--	Notering om att det kan skilja sig mellan och PX fil baserade databaser.
-
-### List metadata for a table
-**url:** `/api/v2/tables/<table-id>`
-
-**HTTP method:** GET|POST
-
-List metadata for the specified table
-Proposal: Add a property lanuage to the response
-**Response**
-```json
-::: examplesAsJson/tableMetadata.json
+##### pastDays
+Selects only tables that was updated from the time of execution going back number of days stated by the parameter pastDays. Valid values for past days are integers between 1 and ? (Will return error?)
 ```
+http://my-site.com/api/v2/tables?pastDays=5
+```
+##### includeDiscontinued
+A true or false if discontinued tables should be included. Tables that do not have an explicit set the discontinued property will be treated as they are not discontinued.
 
-Question: domain exists in PX-files but not in CNMM. Is domain really needed? Could we use only filter instead?
-We need to rethink. All valuesets and aggregations shall be listed.
-The idea behind domain was to have a way to select which map to use when displaying the data on a map. In the CNMM case the domain should be the name of the valueset but when we show all the values for all subtables we can not specify the domain. Maybe it should be a different attribute but the problem still remains.
+##### pageSize
+How many tables that should be in the response.
+##### pageNumber
+A number that specifies which page of the response to display. Default value is 1.
 
+#### Example response
+An exampel filtering on population with a page size of 3
+```json
+::: examples/tables-tables-response.json
+```
+**Response described**
+
+*Tables* a list of table objects containing basic metadata for a table.
+*Page* paging information about the results 
+* *pageNumber* the page number that was returned.
+* *pageSize* the pageSize of the response.
+* *totalElements* the total number of tables
+* *totalPages* the total number of pages.
+* *links* links with relation next, previous and last when relevant. That describes the links to next, previous and last page in the result set.
+
+**Note**
+The information is cache for performance and there can be a lag in the response directly after release of new data. 
+
+### List basic information for a table
+```
+HTTP GET http://my-site.com/api/v2/tables/<table-id>
+```
+#### Parameters
+##### lang
+An optional language parameter.
+#### Example response
+An example that returns the basic information for table TAB638
+```json
+::: examples/tables-table-response.json
+```
+**Note**
+The information is cache for performance and there can be a lag in the response directly after release of new data. 
+### List metadata for a table
+List metadata for the specified table
+```
+HTTP GET http://my-site.com/api/v2/tables/<table-id>/metadata
+```
+#### Parameters
+##### lang
+An optional language parameter.
+##### ouputFormat
+One of json or json-stat2. The default is given by the configuration endpoint.
+#### Example response
+```json
+::: examples/tables-table-metadata-response.json
+```
 ### Get data for a specific table
-**url:** `/api/v2/tables/<table-id>/data/<format>`
-
-**HTTP method:** GET|POST
-
-Retrieves data for a the specified table in the format specified. The available formats are listed in the configuration end point see 4.1 Configuration endpoint.
+```
+HTTP GET or POST http://my-site.com/api/v2/tables/<table-id>/data/
+```
 #### Parameters
 The variables of the table can be used to subquery a part of the data see 6 Data selection parameters for how to specify these parameters.
+##### lang
+An optional language parameter.
+##### valueCodes
 
-### List all filters for a table
-**url:** `/api/v2/tables/<table-id>/filters`
+##### codelist
 
-**HTTP method:** GET|POST
+##### outputValues
 
-List all filters for specified table
-
-**Response**
-```json
-TODO: Make an example of the response.
-```
-
-### Get filter specification
-**url:** `/api/v2/tables/<table-id>/filters/<filter-id>/`
-
-**HTTP method:** GET|POST
-List the filter specification.
-
-**Response**
-```json
-{
-  "id": "vs_lan",
-  "values": [
-    {"id": "01", "text": "Stockholm", "map": ["0114","0115", … "0192"]}
-    {"id": "02", "text": "Uppsala", "map": ["0305","0319", … "0382"]}
-    .
-    .
-    .
-    {"id": "25", "text": "Norrbotten", "map": ["2505","2506", … "2584"]}
-
-  ]
-}
-```
-Question: The above example must be a grouping. How would a valueset look like?
-~~TODO: Make examples for valueset and for aggregation.~~
-
-# General parameters
-## Language
-The parameters controls the language used in the response.
-The name of the parameter is lang and the valid values are  language id that is return from the configuration endpoint.
-**Example**
-```
-http://my-site.com/api/v2/data/TAB0001?lang=en
-```
-## Pretty print
-The parameters controls the formatting in the response.
-The name of the parameter is prettyPrint and the valid values are true or false and false is the default value. Any other value specified other than the valid values will be treated as false.
-**Example**
-```
-http://my-site.com/api/v2/data/TAB0001?prettyPrint=true
-```
 # Data selection parameters
 Data queries to the API can limit the amount of data that is fetch by specifying a table query. The parameters to the table query are the Id:s for the variables. E.g. imaging the table A with the structure in the example above. We could specify  a table query as
 ```
@@ -369,6 +302,7 @@ Time=>1980.. From
 Sortera alfabestiskt på kod och välj därefter.
 Man måste ange koderna precist (inga ? och *)
 ```
+
 ## Filters
 There is two type of filters: selection and transformation. The selection filters are used to make the selection easier. Imagine you have a variable, *Country*, with values for all countries and that you also have a filter, *agg_continents*, that group all countries to continents. You would like to select all European countries but you do not want to select each individual country (and they can vary over time). What you will do is that you specify that the table query for Country should use the selection filter and that the values that are specified are the filter values. It could look something like this 
 ```
@@ -389,6 +323,26 @@ Streams cannot have filters and therefor filters cannot be used in table query�
 
 ## Elimination
 If elimination is set to true the variable can be eliminated and nothing have to be selected for this variable and the result will not contain that variable. If the variable have a value that states that it is the elimination value then that value will be selected to eliminate the variable. If no elimination value is specified the variable will be eliminated from the result by summing up all data points for the all values of that variable. If a variable has elimination set to false then at least one value bust be selected for that variable.
+
+
+
+### Codelist endpoints
+### List codelist for a table
+Give information about a specific codelist
+```
+HTTP GET/api/v2/codelists/<codlist-id>
+```
+#### Parameters
+##### lang
+An optional language parameter.
+#### Example response
+An example response for codelist agg_RegionNUTS2_2008
+```json
+::: examples/codelists-agg_RegionNUTS2_2008-response.json
+```
+
+
+
 
 # Response codes
 429
