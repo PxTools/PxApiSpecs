@@ -169,29 +169,7 @@ paths:
         '429':
           $ref: '#/components/responses/ErrorResponse429'
                             
-  /tables/{id}/codelists:
-    get:
-      tags:
-        - Table
-      summary: Is this needed? Get information about all Codelists that are associated with the Table for the given {id}.
-      operationId: GetTableCodeLists
-      parameters:
-        - $ref: '#/components/parameters/language'
-        - $ref: '#/components/parameters/id'
-      responses:
-        '200':
-          description: Success
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/CodeListsResponse'
-        '400':
-          $ref: '#/components/responses/ErrorResponse400'
-        '404':
-          $ref: '#/components/responses/ErrorResponse404'            
-        '429':
-          $ref: '#/components/responses/ErrorResponse429'                
-
+ 
   /codelists/{id}:
     get:
       tags:
