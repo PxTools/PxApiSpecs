@@ -79,7 +79,7 @@ paths:
   /tables:
     get:
       tags:
-        - Navigation
+        - Table
       summary: Get all Tables.
       operationId: ListAllTables
       parameters:
