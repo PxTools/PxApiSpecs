@@ -232,7 +232,7 @@ HTTP GET http://my-site.com/api/v2/tables/<table-id>/metadata
 ##### lang
 An optional language parameter.
 ##### ouputFormat
-One of json or json-stat2. The default is given by the configuration endpoint.
+One of json-px or json-stat2. The default is given by the configuration endpoint.
 #### Example response
 ```json
 ::: examples/tables-table-metadata-response.json
