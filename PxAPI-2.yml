@@ -389,7 +389,19 @@ components:
       schema:
         type: integer
         #Default value depends on site?
+    metadataOutputFormat:
+      name: outputFormat
+      in: query
+      description: The format of the resulting metadata
+      required: false
+      schema:
+        $ref: '#/components/schemas/MetadataOutputFormatType'
   schemas:
+    MetadataOutputFormatType:
+      type: string
+      enum:
+        - json-px
+        - json-stat2
     ConfigResponse:
       type: object
       description: API configuration
@@ -433,6 +445,9 @@ components:
           description: A list of how the data should be cite for diffrent languages.
           items:
             $ref: '#/components/schemas/SourceReference'
+        defaultMetadataFormat:
+          $ref: '#/components/schemas/MetadataOutputFormatType'
+          description: The default metadata format to used when no format is specified in the request.
         features:
           type: array
           description: A list of features for the API
