@@ -271,9 +271,9 @@ paths:
   /config:
     get:
       tags:
-        - Administration
+        - Configuration
       summary: Get API configuration settings.
-      operationId: GetApiConfig
+      operationId: GetApiConfiguration
       responses:
         '200':
           description: Success
