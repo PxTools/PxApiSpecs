@@ -1,37 +1,37 @@
 {
-    "ApiVersion": "2.0",
-    "Languages": [
+    "apiVersion": "2.0",
+    "languages": [
         {
-            "Id": "sv",
-            "Lable": "Svenska"
+            "id": "sv",
+            "lable": "Svenska"
         },
         {
-            "Id": "en",
-            "Lable": "English"
+            "id": "en",
+            "lable": "English"
         }
     ],
-    "DefaultLanguage": "sv",
-    "MaxDataCells": 10000,
-    "MaxCalls": 30,
-    "TimeWindow": 10,
-    "SourceReferences": [
+    "defaultLanguage": "sv",
+    "maxDataCells": 10000,
+    "maxCallsPerTimeWindow": 30,
+    "timeWindow": 10,
+    "sourceReferences": [
         {
-            "Language": "sv",
-            "Text": "Källa: SCB"
+            "language": "sv",
+            "text": "Källa: SCB"
         },
         {
-            "Language": "en",
-            "Text": "Source: Statistics Sweden"
+            "language": "en",
+            "text": "Source: Statistics Sweden"
         }
     ],
-    "License": "https://creativecommons.org/share-your-work/public-domain/cc0/",
-    "Features": [
+    "license": "https://creativecommons.org/share-your-work/public-domain/cc0/",
+    "features": [
         {
-            "Id": "CORS",
-            "Params": [
+            "id": "CORS",
+            "params": [
                 {
-                    "Key": "enabled",
-                    "Value": "True"
+                    "key": "enabled",
+                    "value": "True"
                 }
             ]
         }
