@@ -240,7 +240,11 @@ paths:
                 {"variable_1": "single"}
               ]
           style: deepObject
-          explode: true          
+          explode: true    
+        - in: query
+          name: outputFormat
+          schema:
+            type: string
       responses:
         '200':
           description: Success
