@@ -391,6 +391,9 @@ components:
         - "maxCalls"
         - "timeWindow"
         - "license"
+        - "defaultMetadataFormat"
+        - "defaultDataFormat"
+        - "dataFormats"
       properties:
         apiVersion:
           type: string
@@ -426,6 +429,14 @@ components:
         defaultMetadataFormat:
           $ref: '#/components/schemas/MetadataOutputFormatType'
           description: The default metadata format to used when no format is specified in the request.
+        defaultDataFormat:
+          type: string
+          description: The default data format to used when no format is specified in the request.
+        dataFormats:
+          type: array
+          description: List of available data formts for fetching data in.
+          items:
+            type: string
         features:
           type: array
           description: A list of features for the API
