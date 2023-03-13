@@ -1,3 +1,6 @@
+[comment]: <> (Run this command in a bash promt to updated the specs.md file)
+[comment]: <> (./include_refs.sh specs_template.md > specs.md)
+
 # PxApi 2.0
 # Readers guide
 ## What this instruction covers
