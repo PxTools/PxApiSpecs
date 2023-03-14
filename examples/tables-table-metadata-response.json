@@ -654,7 +654,7 @@
         {
             "id": "Tid",
             "label": "år",
-            "type": "TIME",
+            "type": "TimeVariable",
             "frequency": "A",
             "firstPeriod": "1968",
             "lastPeriod": "2021",
