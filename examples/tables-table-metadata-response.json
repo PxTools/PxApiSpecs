@@ -3,7 +3,7 @@
     "language": "sv",
     "label": "Folkmängden efter region, civilstånd, ålder och kön. År 1968 - 2021",
     "description": "",
-    "aggregationAllowed": false,
+    "aggregationAllowed": true,
     "officialStatistics": true,
     "subjectCode": "BE",
     "subjectLabel": "Befolkning",
