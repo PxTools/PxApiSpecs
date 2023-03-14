@@ -16,7 +16,7 @@
         {
             "id": "Region",
             "label": "region",
-            "type": "GEOGRAPICAL",
+            "type": "GeographicalVariable",
             "eliminination": true,
             "eliminationValueCode": "00",
             "values": [
@@ -477,7 +477,7 @@
         {
             "id": "Civilstand",
             "label": "civilstånd",
-            "type": "GENERIC",
+            "type": "RegularVariable",
             "eliminination": true,
             "values": [
                 {"code": "OG", "label": "ogifta" },
@@ -489,7 +489,7 @@
         {
             "id": "Alder",
             "label": "ålder",
-            "type": "GENERIC",
+            "type": "RegularVariable",
             "eliminination": true,
             "eliminationValueCode": "tot",
             "values": [
@@ -634,7 +634,7 @@
         {
             "id": "Kon",
             "label": "kön",
-            "type": "GENERIC",
+            "type": "RegularVariable",
             "eliminination": true,
             "values":[
                 {"code": "1", "label": "män" },
@@ -645,7 +645,7 @@
         {
             "id": "ContentsCode",
             "label": "tabellinnehåll",
-            "type": "CONTENTS",
+            "type": "ContentsVariable",
             "values": [
                 {"code": "BE0101N1", "label": "Folkmängd", "measuringAttribute": "Stock", "dayAdjusted": false, "seasonallyAdjusted": false, "unit": "antal", "refrencePeriod": "31 december repektive år", "PreferedNumberOfDecimals": 0, "notes": [{"mandantory": true, "text": "Uppgifterna avser förhållandena den 31 december för valt/valda år enligt den regionala indelning som gäller den 1 januari året efter."}] },
                 {"code": "BE0101N2", "label": "Folkökning", "measuringAttribute": "Flow", "dayAdjusted": false, "seasonallyAdjusted": false, "unit": "antal", "PreferedNumberOfDecimals": 0, "note": [{"mandantory": false, "text": "Folkökningen definieras som skillnaden mellan folkmängden vid årets början och årets slut."}] }
