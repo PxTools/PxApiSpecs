@@ -272,6 +272,49 @@ paths:
         '429':
           $ref: '#/components/responses/ErrorResponse429'
 
+    post:
+      tags:
+        - Table
+      summary: Get data from table by {id}.
+      operationId: GetTableDataByPost
+      parameters:
+        - $ref: '#/components/parameters/language'
+        - $ref: '#/components/parameters/id'
+      requestBody:
+        description: A selection
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/VariablesSelection'  
+
+         
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: string
+            plain/text:
+              schema:
+                type: string
+            application/xml:
+              schema:
+                type: string
+                format: binary
+            application/octet-stream:
+              schema:
+                type: string
+                format: binary
+        '400':
+          $ref: '#/components/responses/ErrorResponse400'
+        '403':
+          $ref: '#/components/responses/ErrorResponse403'  
+        '404':
+          $ref: '#/components/responses/ErrorResponse404'            
+        '429':
+          $ref: '#/components/responses/ErrorResponse429'
+
   /config:
     get:
       tags:
@@ -379,6 +422,47 @@ components:
       schema:
         $ref: '#/components/schemas/MetadataOutputFormatType'
   schemas:
+    VariablesSelection:
+      type: object
+      required:
+        - "selection"
+      properties:
+        selection:
+          type: array
+          items:
+            $ref: '#/components/schemas/VariableSelection'  
+          
+
+
+    VariableSelection:
+      type: object
+      required:
+        - "variableCode"
+        - "values"
+      properties:
+        variableCode:
+          type: string
+          description: The variable code.
+        codeList:
+          type: string
+          description: The identifier of the codelist that should be applied
+          nullable: true
+        outputValues:
+          $ref: '#/components/schemas/SelectionOutputValuesType'
+          description: If an codelist has been applied then how the resulting values should be constructed.
+          default: Aggregated
+          nullable: true
+        valueCodes:
+          type: array
+          description: An array of string that specifies wich values sould be selected. Either as value codes or value expressions
+          items:
+            type: string
+    SelectionOutputValuesType:
+      type: string
+      enum:
+        - Aggregated
+        - Single
+
     MetadataOutputFormatType:
       type: string
       enum:
@@ -957,6 +1041,7 @@ components:
       required:
         - "id"
         - "label"
+        - "type"
         - "links"
       properties:
         id:
@@ -965,6 +1050,8 @@ components:
         label:
           type: string
           description: A textual name for the CodeList
+        type:
+          $ref: '#/components/schemas/CodeListType'
         links: 
           type: array
           description: Links to associated information about the code list
@@ -1023,6 +1110,7 @@ components:
             priceType:
               type: string
               enum:
+              - Undefined
               - Current
               - Fixed
             unit:
