@@ -822,7 +822,6 @@ components:
         - "id"
         - "label"
         - "variables"
-        - "variablesDisplayOrder"
         - "links"
       properties:
         language:
@@ -887,10 +886,6 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/AbstractVariable'
-        variablesDisplayOrder:
-          type: array
-          items:
-            type: string
         links: 
           type: array
           items:
