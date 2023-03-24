@@ -591,6 +591,13 @@ components:
       enum:
         - aggregated
         - single
+
+    FolderContentItemTypeEnum:
+      type: string
+      enum:
+        - Heading
+        - FolderInformation
+        - Table
     FolderContentItem:
       discriminator:
         propertyName: objectType
@@ -606,11 +613,7 @@ components:
         - "label"
       properties:
         type: 
-          type: string
-          enum:
-          - Heading
-          - FolderInformation
-          - Table
+          $ref: '#/components/schemas/FolderContentItemTypeEnum'
           description: One of Heading, Table or FolderInformation
           nullable: false
         id:
@@ -815,6 +818,14 @@ components:
           items:
              $ref: '#/components/schemas/Link'
 
+    VariableTypeEnum:
+      type: string
+      enum:
+        - ContentsVariable
+        - TimeVariable
+        - GeographicalVariable
+        - RegularVariable
+
     TableMetadataResponse:
       type: object
       required:
@@ -911,12 +922,7 @@ components:
           type: string
           example: Import and export
         type: 
-          type: string
-          enum:
-          - ContentsVariable
-          - TimeVariable
-          - GeographicalVariable
-          - RegularVariable
+          $ref: '#/components/schemas/VariableTypeEnum'
         notes: 
           type: array
           items:
