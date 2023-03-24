@@ -39,7 +39,7 @@ paths:
             content:
               application/json:
                 schema:
-                  $ref: '#/components/schemas/Folder'
+                  $ref: '#/components/schemas/FolderResponse'
                 examples:
                   NavigateRoot:
                     $ref: './examplesAsYml/folder-root.yml#/folder-root'
@@ -65,7 +65,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Folder'
+                $ref: '#/components/schemas/FolderResponse'
               examples:
                   Navigation-BE:
                     $ref: './examplesAsYml/folder-be.yml#/folder-be'
@@ -595,20 +595,24 @@ components:
       discriminator:
         propertyName: objectType
         mapping:
-          heading: "#/components/schemas/Heading"
-          folderinformation: "#/components/schemas/FolderInformation"
-          table: "#/components/schemas/Table"
+          Heading: "#/components/schemas/Heading"
+          FolderInformation: "#/components/schemas/FolderInformation"
+          Table: "#/components/schemas/Table"
       type: object
       description: Navigation item.
       required:
-        - "objectType"
+        - "type"
         - "id"
         - "label"
       properties:
-        objectType:
+        type: 
           type: string
+          enum:
+          - Heading
+          - FolderInformation
+          - Table
+          description: One of Heading, Table or FolderInformation
           nullable: false
-          description: One of heading, table, folder or folder-information
         id:
           type: string
           nullable: false
@@ -623,7 +627,7 @@ components:
         sortCode:
           type: string
           description: String for sorting the contents in folder
-    Folder:
+    FolderResponse:
       type: object
       description: Folder item
       required:
@@ -633,10 +637,6 @@ components:
         - "folderContents"
         - "links"
       properties:
-        objectType:
-          type: string
-          nullable: false
-          description: allways set to folder
         language:
           type: string
           description: The language code (ISO 639) for this response
