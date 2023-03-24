@@ -148,7 +148,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/TableMetadata'
+                $ref: '#/components/schemas/TableMetadataResponse'
               examples:
                   TableMetadata:
                     $ref: './examplesAsYml/tableMetadata.yml#/tableMetadata'
@@ -185,7 +185,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/CodeList'
+                $ref: '#/components/schemas/CodeListResponse'
         '400':
           $ref: '#/components/responses/ErrorResponse400'
         '404':
@@ -815,7 +815,7 @@ components:
           items:
              $ref: '#/components/schemas/Link'
 
-    TableMetadata:
+    TableMetadataResponse:
       type: object
       required:
         - "language"
@@ -1176,7 +1176,7 @@ components:
         - Aggregation
         - Valueset
 
-    CodeList: 
+    CodeListResponse: 
       type: object
       required:
         - "id"
