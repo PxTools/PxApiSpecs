@@ -280,6 +280,10 @@ paths:
       parameters:
         - $ref: '#/components/parameters/language'
         - $ref: '#/components/parameters/id'
+        - in: query
+          name: outputFormat
+          schema:
+            type: string
       requestBody:
         description: A selection
         content:
