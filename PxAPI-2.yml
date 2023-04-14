@@ -234,7 +234,7 @@ paths:
           schema:
             type: object
             additionalProperties:
-              $ref: '#/components/schemas/CodeListOutputValuesStyle'
+              $ref: '#/components/schemas/CodeListOutputValuesType'
             example: |
               [
                 {"variable_1": "single"}
@@ -452,7 +452,7 @@ components:
           description: The identifier of the codelist that should be applied
           nullable: true
         outputValues:
-          $ref: '#/components/schemas/SelectionOutputValuesType'
+          $ref: '#/components/schemas/CodeListOutputValuesType'
           description: If an codelist has been applied then how the resulting values should be constructed.
           default: Aggregated
           nullable: true
@@ -461,12 +461,6 @@ components:
           description: An array of string that specifies wich values sould be selected. Either as value codes or value expressions
           items:
             type: string
-    SelectionOutputValuesType:
-      type: string
-      enum:
-        - Aggregated
-        - Single
-
     MetadataOutputFormatType:
       type: string
       enum:
@@ -590,7 +584,7 @@ components:
           description: The value associated with the key
 
 
-    CodeListOutputValuesStyle:
+    CodeListOutputValuesType:
       type: string
       enum:
         - aggregated
