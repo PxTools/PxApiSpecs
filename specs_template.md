@@ -46,14 +46,14 @@ The information might be stored in different formats and technologies. We curren
 - *PX-file database* a collection of PX-files that represents a `database`.
 # API endpoints
 
-POST is primarily intended to be used when fetching data since the query to select the data can in some cases become very large. So large that it can extends come web browser limits on url’s .
+POST is primarily intended to be used when fetching data since the query to select the data can in some cases become very large. I some cases the url can exceed the maximum number of characteras allowed for a url. In these cases a POST request could be the solution.
 
 Proposal: Look at Json-Stat collections 
 
 TODO Throttle protection
 
 ## Configuration endpoint
-Get API configuration settings.
+Get API configuration settings. Instances of the API could be configured diffrently from each other. Clients can then use this endpoint to get information that could be useful for strering the behaivour for the client.
 ```
 HTTP GET https://my-site.com/api/v2/config
 ```
@@ -166,9 +166,9 @@ There are three possible values for *objectType*:
 - data - How to navigate to the table data
 
 
-## Table endpoints
+## Tables endpoints
 ### List all tables
-List all tables in the database. The list can be filter by the parameters.
+List all tables in the database. The list can be filter by diffrent parameters.
 ```
 HTTP GET http://my-site.com/api/v2/api/v2/tables/
 ```
@@ -225,7 +225,7 @@ An example that returns the basic information for table TAB638
 ::: examples/tables-table-response.json
 ```
 **Note**
-The information is cache for performance and there can be a lag in the response directly after release of new data. 
+The information may be cached for performance and there can be a short delay in the response directly after release of new data. 
 ### List metadata for a table
 List metadata for the specified table
 ```
@@ -242,17 +242,87 @@ One of json-px or json-stat2. The default is given by the configuration endpoint
 ```
 ### Get data for a specific table
 ```
-HTTP GET or POST http://my-site.com/api/v2/tables/<table-id>/data/
+HTTP GET http://my-site.com/api/v2/tables/<table-id>/data/
 ```
 #### Parameters
-The variables of the table can be used to subquery a part of the data see 6 Data selection parameters for how to specify these parameters.
+The variables of the table can be used to query a specific part of the table by using the parameters bellow. If the parameters is not given a default region of the table will be selected.
 ##### lang
 An optional language parameter.
 ##### valueCodes
-
+A selection specifying a region of the table that will be returned. All variables that cann´t be eliminated must have a selection specified. The selection for a varibale is given in the form:
+```
+valueCodes[VARIABLE-CODE]=ITEM-SELECTION-1,ITEM-SELECTION-2,ITEM-SELECTION-3, etc
+```
+Whare `VARIABLE-CODE` is the code of the variable and `ITEM-SELECTION-X` is either a value code of a selection expression.
+If the value code of a selection expression contains a comma is should be in brackets e.g. `[TOP(1,12)]` and if the value code is allready in brackets is should be in extra brackets e.g. `[ME01]` should be `[[ME01]]`.
 ##### codelist
-
+You might what to use a diffrent codelist i.e. have a diffrent aggregate for a variable. I that case use can specify a codelist of one that is available for that variable. The items refered in `valueCodes` will then refeere to the values in the refered codelist. To codelist is specified in the form
+```
+codelist[VARIABLE-CODE]=CODELIST-ID
+```
+Whare `VARIABLE-CODE` is the code of the variable and `CODELIST-ID` is the ID of the codelist to use.
 ##### outputValues
+Codelists can either be used to transform the returned variable or as a mean for selecting values. E.g. If a variable as values at municipality level and a codelist a county level. You might either use the codelist to aggregated the municiplaites to countys in the result or select all municipalities by specifying counties and have the municipalities that belongs the selected counties in the result.
+The `outputValues` paramater can be used to specify how the codelist is used and is only applicable when a codelist have been secified for a variable.
+It is given in the form
+```
+outputValues[VARIABLE-CODE]=aggregated|single
+```
+Whare `VARIABLE-CODE` is the code of the variable and the value could be either `aggregated` that is the values should be transformed to the codelist values or `single` the original values should be in the result. If no paramater is given `aggregated` will be used when specifying a codelist for a variable.
+##### ouputFormat
+Specifies the fomrat that the result should be in. The default is given by the configuration endpoint. See also the configuration endpind for available formats.
+
+### Get data for a specific table
+```
+HTTP POST http://my-site.com/api/v2/tables/<table-id>/data/
+```
+This endpoint is similar to the GET but the selection expression is given in the body of the request as a JSON object.
+#### Selection expression
+The JSON object specifying the request is given in the form
+```json
+{
+    "selection": [
+        {
+            "variableCode": "VARIABLE-CODE-1",
+            "valueCodes": ["ITEM-SELECTION-1-1","ITEM-SELECTION-1-2"]
+        },
+        {
+            "variableCode": "VARIABLE-CODE-1",
+            "valueCodes": ["ITEM-SELECTION-2-1"],
+            "codelList": "CODE-LIST-A",
+            "outputValues": "single"
+        }
+    ]
+}
+```
+#### Parameters
+##### lang
+An optional language parameter.
+##### ouputFormat
+Specifies the fomrat that the result should be in. The default is given by the configuration endpoint. See also the configuration endpind for available formats.
+
+### Selection expression
+Instead of specifying all valuecodes one could use a selection expression instead. Bellow follows the available expressions.
+#### Wildcard expression 
+A wildcard can be used to match all codes e.g. `*01` matches all codes that ends with `01`, `*2*` matches all codes that contains a `2`, `A*` matches all codes that starts with `A` and `*` matches all codes. Maximum of 2 waildcards can be given.
+
+#### Exact match
+A questionmark can be used to match exactly one character. E.g. `?` matches all codes that has exactly one character, `?1` matches codes that are 2 character long and ends with `1`.
+
+#### TOP
+The `TOP(N, Offset)` expression selects the `N` first values with an offset of `Offset`. E.g. `TOP(5)` will select the first 5 values or `TOP(5,3)` will select 3rd to 8th value. The `Offset` is by default `0` and must not be specified.
+
+#### BOTTOM
+`BOTTOM` is just as `TOP` but selects values from the bottom if the values list.
+
+#### RANGE
+`RANGE(X,Y)` selectes all values between value code `X` and value code `Y` including `X` and `Y`.
+
+#### FROM
+`FROM(X)` selectes all value codes from the value code that has `X` and bellow including `X`.
+
+#### TO
+TO(X) väljer alla värden från början till värdet med koden X inklusive värdet med koden X.
 
 # Data selection parameters
 Data queries to the API can limit the amount of data that is fetch by specifying a table query. The parameters to the table query are the Id:s for the variables. E.g. imaging the table A with the structure in the example above. We could specify  a table query as
