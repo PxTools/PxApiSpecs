@@ -714,19 +714,19 @@
           ]
         }
       },
-        "extension": {
-          "elimination": true,
-          "eliminationValueCode": "00",
-          "note-status": ["mandatory"],
-          "category-note-status": [
-            "mandatory",
-            "mandatory",
-            "mandatory",
-            "mandatory",
-            null,
-            null
-          ],
-        
+      "extension": {
+        "elimination": true,
+        "eliminationValueCode": "00",
+        "note-status": ["mandatory"],
+        "category-note-status": [
+          "mandatory",
+          "mandatory",
+          "mandatory",
+          "mandatory",
+          null,
+          null
+        ],
+
         "codeLists": [
           {
             "id": "vs_RegionKommun07",
