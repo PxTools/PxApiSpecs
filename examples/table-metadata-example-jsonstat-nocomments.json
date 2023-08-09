@@ -25,7 +25,7 @@
     "Fr o m 2007-01-01 utökas Uppsala län med Heby kommun. Observera att länssiffrorna inte är jämförbara med länssiffrorna bakåt i tiden."
   ],
   "extension": {
-    "note-status": [null, "mandatory", null],
+    "noteIsMandatory": { "1": true },
     "px": {
       "infofile": "BE0101",
       "tableid": "TAB638",
@@ -710,22 +710,23 @@
             "Ny regional indelning fr.o.m. 1999-01-01. Delar av Södertälje kommun (kod 0181) bildar en ny kommun benämnd Nykvarn (kod 0140)."
           ],
           "0181": [
-            "Ny regional indelning fr.o.m. 1999-01-01. Delar av Södertälje kommun (kod 0181) bildar en ny kommun benämnd Nykvarn (kod 0140)."
+            "Eksempel på valgri fotnote",
+            "Eksempel på obligatorisk fotnote"
           ]
         }
       },
       "extension": {
         "elimination": true,
         "eliminationValueCode": "00",
-        "note-status": ["mandatory"],
-        "category-note-status": [
-          "mandatory",
-          "mandatory",
-          "mandatory",
-          "mandatory",
-          null,
-          null
-        ],
+        "noteIsMandatory": { "0": true },
+        "categoryNoteIsMandatory": {
+          "0580": { "0": true },
+          "0187": { "0": true },
+          "0330": { "0": true },
+          "0380": { "0": true },
+          "0181": { "1": true }
+        },
+        
 
         "codeLists": [
           {
@@ -1250,7 +1251,9 @@
           "BE0101N1": "31 December each year",
           "BE0101N2": "31 December each year"
         },
-        "category-note-status": ["mandatory", null]
+        "categoryNoteIsMandatory": {
+          "BE0101N1": { "0": true }
+        }
       }
     },
     "Tid": {
