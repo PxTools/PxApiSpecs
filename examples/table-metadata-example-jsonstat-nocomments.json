@@ -25,7 +25,7 @@
     "Fr o m 2007-01-01 utökas Uppsala län med Heby kommun. Observera att länssiffrorna inte är jämförbara med länssiffrorna bakåt i tiden."
   ],
   "extension": {
-    "noteIsMandatory": { "1": true },
+    "noteMandatory": { "1": true },
     "px": {
       "infofile": "BE0101",
       "tableid": "TAB638",
@@ -718,8 +718,8 @@
       "extension": {
         "elimination": true,
         "eliminationValueCode": "00",
-        "noteIsMandatory": { "0": true },
-        "categoryNoteIsMandatory": {
+        "noteMandatory": { "0": true },
+        "categoryNoteMandatory": {
           "0580": { "0": true },
           "0187": { "0": true },
           "0330": { "0": true },
@@ -1251,7 +1251,7 @@
           "BE0101N1": "31 December each year",
           "BE0101N2": "31 December each year"
         },
-        "categoryNoteIsMandatory": {
+        "categoryNoteMandatory": {
           "BE0101N1": { "0": true }
         }
       }
