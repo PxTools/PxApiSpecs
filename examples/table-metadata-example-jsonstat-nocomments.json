@@ -19,7 +19,13 @@
       }
     ]
   },
+  "note": [
+    "Fr o m 2007-01-01 överförs Heby kommun från Västmanlands län till Uppsala län. Hebys kommunkod ändras från 1917 till 0331. ",
+    "Registrerat partnerskap reglerade parförhållanden mellan personer av samma kön och fanns från 1995 till 2009. Registrerade partners räknas som Gifta, Separerade partners som Skilda och Efterlevande partners som Änka/änklingar.",
+    "Fr o m 2007-01-01 utökas Uppsala län med Heby kommun. Observera att länssiffrorna inte är jämförbara med länssiffrorna bakåt i tiden."
+  ],
   "extension": {
+    "noteMandatory": { "1": true },
     "px": {
       "infofile": "BE0101",
       "tableid": "TAB638",
@@ -32,9 +38,7 @@
       "matrix": "TAB638",
       "subject-code": "BE"
     },
-    "tags": [
-      ""
-    ],
+    "tags": [""],
     "discontinued": false,
     "contact": [
       {
@@ -47,52 +51,19 @@
         "phone": "+46 010-479 50 0",
         "mail": "information@scb.se"
       }
-    ],
-    "note": [
-      {
-        "mandatory": true,
-        "text": "Fr o m 2007-01-01 överförs Heby kommun från Västmanlands län till Uppsala län. Hebys kommunkod ändras från 1917 till 0331. "
-      },
-      {
-        "mandatory": true,
-        "text": "Registrerat partnerskap reglerade parförhållanden mellan personer av samma kön och fanns från 1995 till 2009. Registrerade partners räknas som Gifta, Separerade partners som Skilda och Efterlevande partners som Änka/änklingar."
-      },
-      {
-        "mandatory": true,
-        "text": "Fr o m 2007-01-01 utökas Uppsala län med Heby kommun. Observera att länssiffrorna inte är jämförbara med länssiffrorna bakåt i tiden."
-      }
     ]
   },
   "role": {
-    "time": [
-      "Tid"
-    ],
-    "geo": [
-      "Region"
-    ],
-    "metric": [
-      "ContentsCode"
-    ]
+    "time": ["Tid"],
+    "geo": ["Region"],
+    "metric": ["ContentsCode"]
   },
-  "id": [
-    "Region",
-    "Civilstand",
-    "Alder",
-    "Kon",
-    "ContentsCode",
-    "Tid"
-  ],
-  "size": [
-    312,
-    4,
-    1,
-    2,
-    2,
-    1
-  ],
+  "id": ["Region", "Civilstand", "Alder", "Kon", "ContentsCode", "Tid"],
+  "size": [312, 4, 1, 2, 2, 1],
   "dimension": {
     "Region": {
       "label": "region",
+      "note": ["År 1968-1998 redovisas enligt regional indelning 1998-01-01."],
       "category": {
         "index": {
           "00": 0,
@@ -721,55 +692,42 @@
           "2582": "Boden",
           "2583": "Haparanda",
           "2584": "Kiruna"
+        },
+        "note": {
+          "0580": [
+            "Från och med 2011-01-01 tillhör Storholmen Lidingö (0186) som tidigare tillhörde Vaxholm (0187)."
+          ],
+          "0187": [
+            "Från och med 2011-01-01 tillhör Storholmen Lidingö (0186) som tidigare tillhörde Vaxholm (0187)."
+          ],
+          "0330": [
+            "Ny regional indelning fr.o.m. 2003-01-01. Delar av Uppsala kommun bildar en ny kommun benämnd Knivsta kommun."
+          ],
+          "0380": [
+            "Ny regional indelning fr.o.m. 2003-01-01. Delar av Uppsala kommun bildar en ny kommun benämnd Knivsta kommun."
+          ],
+          "0140": [
+            "Ny regional indelning fr.o.m. 1999-01-01. Delar av Södertälje kommun (kod 0181) bildar en ny kommun benämnd Nykvarn (kod 0140)."
+          ],
+          "0181": [
+            "Eksempel på valgri fotnote",
+            "Eksempel på obligatorisk fotnote"
+          ]
         }
       },
       "extension": {
         "elimination": true,
         "eliminationValueCode": "00",
-        "note": [
-          {
-            "mandatory": true,
-            "text": "År 1968-1998 redovisas enligt regional indelning 1998-01-01."
-          }
-        ],
-        "valueNote": {
-          "0580": [
-            {
-              "mandatory": true,
-              "text": "Från och med 2011-01-01 tillhör Storholmen Lidingö (0186) som tidigare tillhörde Vaxholm (0187)."
-            }
-          ],
-          "0187": [
-            {
-              "mandatory": true,
-              "text": "Från och med 2011-01-01 tillhör Storholmen Lidingö (0186) som tidigare tillhörde Vaxholm (0187)."
-            }
-          ],
-          "0330": [
-            {
-              "mandatory": true,
-              "text": "Ny regional indelning fr.o.m. 2003-01-01. Delar av Uppsala kommun bildar en ny kommun benämnd Knivsta kommun."
-            }
-          ],
-          "0380": [
-            {
-              "mandatory": true,
-              "text": "Ny regional indelning fr.o.m. 2003-01-01. Delar av Uppsala kommun bildar en ny kommun benämnd Knivsta kommun."
-            }
-          ],
-          "0140": [
-            {
-              "mandatory": true,
-              "text": "Ny regional indelning fr.o.m. 1999-01-01. Delar av Södertälje kommun (kod 0181) bildar en ny kommun benämnd Nykvarn (kod 0140)."
-            }
-          ],
-          "0181": [
-            {
-              "mandatory": true,
-              "text": "Ny regional indelning fr.o.m. 1999-01-01. Delar av Södertälje kommun (kod 0181) bildar en ny kommun benämnd Nykvarn (kod 0140)."
-            }
-          ]
+        "noteMandatory": { "0": true },
+        "categoryNoteMandatory": {
+          "0580": { "0": true },
+          "0187": { "0": true },
+          "0330": { "0": true },
+          "0380": { "0": true },
+          "0181": { "1": true }
         },
+        
+
         "codeLists": [
           {
             "id": "vs_RegionKommun07",
@@ -1277,6 +1235,14 @@
             "base": "antal",
             "decimals": 0
           }
+        },
+        "note": {
+          "BE0101N1": [
+            "Uppgifterna avser förhållandena den 31 december för valt/valda år enligt den regionala indelning som gäller den 1 januari året efter."
+          ],
+          "BE0101N2": [
+            "Folkökningen definieras som skillnaden mellan folkmängden vid årets början och årets slut."
+          ]
         }
       },
       "extension": {
@@ -1285,19 +1251,8 @@
           "BE0101N1": "31 December each year",
           "BE0101N2": "31 December each year"
         },
-        "valueNote": {
-          "BE0101N1": [
-            {
-              "mandatory": true,
-              "text": "Uppgifterna avser förhållandena den 31 december för valt/valda år enligt den regionala indelning som gäller den 1 januari året efter."
-            }
-          ],
-          "BE0101N2": [
-            {
-              "mandatory": true,
-              "text": "Folkökningen definieras som skillnaden mellan folkmängden vid årets början och årets slut."
-            }
-          ]
+        "categoryNoteMandatory": {
+          "BE0101N1": { "0": true }
         }
       }
     },
