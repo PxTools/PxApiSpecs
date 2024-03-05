@@ -195,7 +195,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/VariableSelection'
+                $ref: '#/components/schemas/SelectionResponse'
         '400':
           $ref: '#/components/responses/ErrorResponse400'
         '404':
@@ -469,7 +469,25 @@ components:
           items:
             $ref: '#/components/schemas/VariableSelection'  
           
-
+    SelectionResponse: 
+      type: object
+      required:
+        - "language"
+        - "selection"
+        - "links"
+      properties:
+        language:
+          type: string
+          description: The language code for the language used in this response
+          example: sv
+        selection:
+          type: array
+          items:
+            $ref: '#/components/schemas/VariableSelection'
+        links: 
+          type: array
+          items:
+            $ref: '#/components/schemas/Link'
 
     VariableSelection:
       type: object
