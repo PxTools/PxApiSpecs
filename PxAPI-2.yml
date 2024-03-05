@@ -173,18 +173,8 @@ paths:
     get:
       tags:
         - Table
-      summary: Get the .
-      description: |
-        **Used for listing detailed information about a specific table**
-        * List all variables and values and all other metadata needed to be able to fetch data
-
-        * Also links to where to:
-          + Fetch
-          - Where to get information about codelists
-
-        * 2 output formats
-          + Custom json 
-          - JSON-stat2 
+      summary: Get the default selection for Table by {id}.
+      description: Get information about what is selected for the table by default when no selection is made i the /data endpoint.
       operationId: GetDefaultSelection
       parameters:
         - $ref: '#/components/parameters/language'
@@ -481,9 +471,7 @@ components:
           description: The language code for the language used in this response
           example: sv
         selection:
-          type: array
-          items:
-            $ref: '#/components/schemas/VariableSelection'
+          $ref: '#/components/schemas/VariablesSelection'
         links: 
           type: array
           items:
