@@ -890,7 +890,7 @@ components:
         aggregationAllowed:
           type: boolean
           description: If all content of the table can be aggregated.
-        officalStatistics:
+        officialStatistics:
           type: boolean
           description: A marker if the table is a part of the national official statistics.
         subjectCode:
