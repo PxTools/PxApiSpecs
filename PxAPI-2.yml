@@ -866,7 +866,7 @@ components:
           type: string
           description: The name of the organization responsible for the table.
           example: Statistics Sweden
-        licence:
+        license:
           type: string
           description: A copyright statement for the data it could also be SPDX (https://spdx.org/licenses/) identifier
           example: CC0-1.0
