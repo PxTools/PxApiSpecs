@@ -23,6 +23,7 @@ jobs:
           generator: aspnetcore
           openapi-file: PxAPI-2.yml
           config-file: aspnetcore-generator-config.yml
+          generator-tag: v6.5.0
           command-args: -o out
 
       - name: Setup .NET Core
