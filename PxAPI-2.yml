@@ -1565,11 +1565,12 @@ components:
             - '2.0'
           default: '2.0'      
         class:
-          description: "Is always dataset"
-          type: string
-          enum:
-            - dataset
-          default: dataset
+          "$ref": "#/components/schemas/ClassType"
+          # description: "Is always dataset"
+          # type: string
+          # enum:
+          #   - dataset
+          # default: dataset
         href:
           "$ref": "#/components/schemas/href"
         label:
@@ -1648,7 +1649,14 @@ components:
         - id
         - size
         - dimension
-                   
+
+    ClassType:
+      description: "Is always dataset"
+      type: string
+      enum:
+        - dataset
+      default: dataset                   
+
   responses:
     ErrorResponse429:
       description: Error respsone for 429
