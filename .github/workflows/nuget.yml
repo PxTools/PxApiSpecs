@@ -1,6 +1,6 @@
 name: Build server library and deploy to nuget
 on:
-  workflow_dispatch:
+    workflow_dispatch:
 
 jobs:
   generate-aspnetcore-server:
@@ -10,7 +10,7 @@ jobs:
     steps:
       # Checkout your code
       - name: Checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
         with:
           fetch-depth: 0 
 
@@ -27,7 +27,7 @@ jobs:
           command-args: -o out
 
       - name: Setup .NET Core
-        uses: actions/setup-dotnet@v1
+        uses: actions/setup-dotnet@v4
         with:
           dotnet-version: '6.0.x'
 
