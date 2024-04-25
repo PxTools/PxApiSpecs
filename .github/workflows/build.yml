@@ -1,0 +1,51 @@
+name: Build server library
+on:
+  push:
+    branches: ["main"]
+  pull_request:
+    branches: ["main"]
+
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+jobs:
+  build:
+    strategy:
+      matrix:
+        configuration: [Debug]
+        os: [ubuntu-latest]
+
+    runs-on: ${{ matrix.os }}
+
+    steps:
+      # Checkout your code
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0 
+      # Use the action to generate a server library
+      - name: Generate ASPNET Core server
+        uses: openapi-generators/openapitools-generator-action@v1
+        with:
+          generator: aspnetcore
+          openapi-file: PxAPI-2.yml
+          config-file: aspnetcore-generator-config.yml
+          generator-tag: v6.5.0
+
+      - name: Check for staged changes
+        run: git diff --exit-code || (echo "Uncommitted changes found" && exit 1)
+        # or maybe use: git status --porcelain
+
+      - name: Setup .NET Core
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: 6.0.x
+
+      - name: Restore Nuget
+        run: dotnet restore
+
+      - name: Build library
+        run: dotnet build --no-restore --configuration ${{ matrix.configuration }}
+
+      - name: Execute unit tests
+        run: dotnet test --verbosity normal
