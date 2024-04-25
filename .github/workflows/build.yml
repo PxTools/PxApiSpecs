@@ -33,8 +33,9 @@ jobs:
           generator-tag: v6.5.0
 
       - name: Check for staged changes
-        run: git diff --exit-code || (echo "Uncommitted changes found" && exit 1)
-        # or maybe use: git status --porcelain
+        run: git status --porcelain || (echo "Uncommitted changes found" && exit 1)
+        # git status --porcelain
+        # git diff --exit-code
 
       - name: Setup .NET Core
         uses: actions/setup-dotnet@v4
