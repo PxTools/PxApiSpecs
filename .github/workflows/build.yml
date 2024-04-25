@@ -36,8 +36,6 @@ jobs:
       - name: Check for staged changes
         run: |
           git diff --exit-code
-          # git status --porcelain
-          # git diff --exit-code
 
       - name: Setup .NET Core
         uses: actions/setup-dotnet@v4
