@@ -31,6 +31,7 @@ jobs:
           openapi-file: PxAPI-2.yml
           config-file: aspnetcore-generator-config.yml
           generator-tag: v6.5.0
+          command-args: -o .
 
       - name: Check for staged changes
         run: git status --porcelain || (echo "Uncommitted changes found" && exit 1)
