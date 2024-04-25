@@ -22,3 +22,5 @@
 # Then explicitly reverse the ignore rule for a single file:
 #!docs/README.md
 README.md
+PxWeb.Api2.Server.sln
+src/PxWeb.Api2.Server/PxWeb.Api2.Server.csproj
