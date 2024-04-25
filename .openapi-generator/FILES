@@ -1,6 +1,3 @@
-.openapi-generator-ignore
-PxWeb.Api2.Server.sln
-README.md
 build.bat
 build.sh
 src/PxWeb.Api2.Server/.gitignore
@@ -66,5 +63,4 @@ src/PxWeb.Api2.Server/Models/VariableSelection.cs
 src/PxWeb.Api2.Server/Models/VariableTypeEnum.cs
 src/PxWeb.Api2.Server/Models/VariablesSelection.cs
 src/PxWeb.Api2.Server/OpenApi/TypeExtensions.cs
-src/PxWeb.Api2.Server/PxWeb.Api2.Server.csproj
 src/PxWeb.Api2.Server/PxWeb.Api2.Server.nuspec
