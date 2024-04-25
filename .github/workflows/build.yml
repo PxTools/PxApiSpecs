@@ -34,9 +34,10 @@ jobs:
           command-args: -o .
 
       - name: Check for staged changes
-        run: git status --porcelain || (echo "Uncommitted changes found" && exit 1)
-        # git status --porcelain
-        # git diff --exit-code
+        run: |
+          git status --porcelain && echo "Uncommitted changes found."
+          # git status --porcelain
+          # git diff --exit-code
 
       - name: Setup .NET Core
         uses: actions/setup-dotnet@v4
