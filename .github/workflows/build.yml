@@ -35,7 +35,7 @@ jobs:
 
       - name: Check for staged changes
         run: |
-          git status --porcelain && echo "Uncommitted changes found."
+          git diff --exit-code
           # git status --porcelain
           # git diff --exit-code
 
