@@ -1396,9 +1396,25 @@ components:
             language:
               description: code (two characters) for language
               type: string
+            contents:
+              description: Information about the contents, which makes up the first part of a title created when retrieving tables from PC-Axis.
+              type: string
             description:
               description: See _description_ in [PX file format](https://www.scb.se/en/services/statistical-programs-for-px-files/px-file-format/)
               type: string
+            descriptiondefault:
+              description: See _description_ in [PX file format](https://www.scb.se/en/services/statistical-programs-for-px-files/px-file-format/)
+              type: boolean
+            heading:
+              description: List of variables for table head
+              type: array
+              items:
+                type: string
+            stub:
+              description: List of variables for table stub
+              type: array
+              items:
+                type: string
             matrix:
               description: The name of the matrix
               type: string
