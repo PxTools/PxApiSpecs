@@ -51,30 +51,12 @@ namespace PxWeb.Api2.Server.Models
         [DataMember(Name="version", EmitDefaultValue=true)]
         public VersionEnum _Version { get; set; } = VersionEnum._20Enum;
 
-
         /// <summary>
-        /// Is always dataset
+        /// Gets or Sets Class
         /// </summary>
-        /// <value>Is always dataset</value>
-        [TypeConverter(typeof(CustomEnumConverter<ClassEnum>))]
-        [JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
-        public enum ClassEnum
-        {
-            
-            /// <summary>
-            /// Enum DatasetEnum for dataset
-            /// </summary>
-            [EnumMember(Value = "dataset")]
-            DatasetEnum = 1
-        }
-
-        /// <summary>
-        /// Is always dataset
-        /// </summary>
-        /// <value>Is always dataset</value>
         [Required]
         [DataMember(Name="class", EmitDefaultValue=true)]
-        public ClassEnum Class { get; set; } = ClassEnum.DatasetEnum;
+        public ClassType Class { get; set; }
 
         /// <summary>
         /// Specification on json-stat.org -&gt; [here](https://json-stat.org/full/#href)
