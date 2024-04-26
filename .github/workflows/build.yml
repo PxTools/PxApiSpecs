@@ -5,24 +5,19 @@ on:
   pull_request:
     branches: ["master"]
 
-  # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
 
 jobs:
   build:
-    strategy:
-      matrix:
-        configuration: [Debug]
-        os: [ubuntu-latest, windows-latest]
-
-    runs-on: ${{ matrix.os }}
+    runs-on: ubuntu-latest
 
     steps:
       # Checkout your code
       - name: Checkout
         uses: actions/checkout@v4
         with:
-          fetch-depth: 0 
+          fetch-depth: 0
+
       # Use the action to generate a server library
       - name: Generate ASPNET Core server
         uses: openapi-generators/openapitools-generator-action@v1
@@ -46,7 +41,7 @@ jobs:
         run: dotnet restore
 
       - name: Build library
-        run: dotnet build --no-restore --configuration ${{ matrix.configuration }}
+        run: dotnet build --no-restore --configuration Debug
 
       - name: Execute unit tests
         run: dotnet test --verbosity normal
