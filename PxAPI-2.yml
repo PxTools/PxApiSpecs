@@ -32,7 +32,7 @@ paths:
         summary: Get root Folder.
         operationId: GetNavigationRoot
         parameters:
-          - $ref: '#/components/parameters/language'
+          - $ref: '#/components/parameters/lang'
         responses:
           '200':
             description: Success
@@ -58,7 +58,7 @@ paths:
       operationId: GetNavigationById
       parameters:
         - $ref: '#/components/parameters/id'
-        - $ref: '#/components/parameters/language'
+        - $ref: '#/components/parameters/lang'
       responses:
         '200':
           description: Success
@@ -83,7 +83,7 @@ paths:
       summary: Get all Tables.
       operationId: ListAllTables
       parameters:
-        - $ref: '#/components/parameters/language'
+        - $ref: '#/components/parameters/lang'
         - $ref: '#/components/parameters/query'
         - $ref: '#/components/parameters/pastDays'
         - $ref: '#/components/parameters/include_discontinued'
@@ -106,7 +106,7 @@ paths:
       summary: Get Table by {id}.
       operationId: GetTableById
       parameters:
-        - $ref: '#/components/parameters/language'
+        - $ref: '#/components/parameters/lang'
         - $ref: '#/components/parameters/id'
       responses:
         '200':
@@ -140,7 +140,7 @@ paths:
           - JSON-stat2 
       operationId: GetMetadataById
       parameters:
-        - $ref: '#/components/parameters/language'
+        - $ref: '#/components/parameters/lang'
         - $ref: '#/components/parameters/id'
       responses:
         '200':
@@ -177,7 +177,7 @@ paths:
       description: Get information about what is selected for the table by default when no selection is made i the /data endpoint.
       operationId: GetDefaultSelection
       parameters:
-        - $ref: '#/components/parameters/language'
+        - $ref: '#/components/parameters/lang'
         - $ref: '#/components/parameters/id'
       responses:
         '200':
@@ -200,7 +200,7 @@ paths:
       summary: Get Codelist by {id}.
       operationId: GetTableCodeListById
       parameters:
-        - $ref: '#/components/parameters/language'
+        - $ref: '#/components/parameters/lang'
         - $ref: '#/components/parameters/id'
       responses:
         '200':
@@ -223,7 +223,7 @@ paths:
       summary: Get data from table by {id}.
       operationId: GetTableData
       parameters:
-        - $ref: '#/components/parameters/language'
+        - $ref: '#/components/parameters/lang'
         - $ref: '#/components/parameters/id'
         - in: query
           name: valuecodes
@@ -301,7 +301,7 @@ paths:
       summary: Get data from table by {id}.
       operationId: GetTableDataByPost
       parameters:
-        - $ref: '#/components/parameters/language'
+        - $ref: '#/components/parameters/lang'
         - $ref: '#/components/parameters/id'
         - in: query
           name: outputFormat
@@ -364,7 +364,7 @@ paths:
     
 components:
   parameters:
-    language:
+    lang:
       name: lang
       in: query
       description: The language if the default is not what you want.
