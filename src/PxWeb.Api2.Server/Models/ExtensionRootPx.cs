@@ -90,23 +90,23 @@ namespace PxWeb.Api2.Server.Models
         public string Description { get; set; }
 
         /// <summary>
-        /// See _description_ in [PX file format](https://www.scb.se/en/services/statistical-programs-for-px-files/px-file-format/)
+        /// For some languages it is difficult to build a table title dynamically. The keyword descriptiondefault &#x3D; True; means that the text after keyword Description will be used as title for the table
         /// </summary>
-        /// <value>See _description_ in [PX file format](https://www.scb.se/en/services/statistical-programs-for-px-files/px-file-format/)</value>
+        /// <value>For some languages it is difficult to build a table title dynamically. The keyword descriptiondefault &#x3D; True; means that the text after keyword Description will be used as title for the table</value>
         [DataMember(Name="descriptiondefault", EmitDefaultValue=true)]
         public bool Descriptiondefault { get; set; }
 
         /// <summary>
-        /// List of variables for table head
+        /// List of variables for suggested table head
         /// </summary>
-        /// <value>List of variables for table head</value>
+        /// <value>List of variables for suggested table head</value>
         [DataMember(Name="heading", EmitDefaultValue=false)]
         public List<string> Heading { get; set; }
 
         /// <summary>
-        /// List of variables for table stub
+        /// List of variables for suggested table stub
         /// </summary>
-        /// <value>List of variables for table stub</value>
+        /// <value>List of variables for suggested table stub</value>
         [DataMember(Name="stub", EmitDefaultValue=false)]
         public List<string> Stub { get; set; }
 
