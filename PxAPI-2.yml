@@ -1403,15 +1403,15 @@ components:
               description: See _description_ in [PX file format](https://www.scb.se/en/services/statistical-programs-for-px-files/px-file-format/)
               type: string
             descriptiondefault:
-              description: See _description_ in [PX file format](https://www.scb.se/en/services/statistical-programs-for-px-files/px-file-format/)
+              description: For some languages it is difficult to build a table title dynamically. The keyword descriptiondefault = True; means that the text after keyword Description will be used as title for the table
               type: boolean
             heading:
-              description: List of variables for table head
+              description: List of variables for suggested table head
               type: array
               items:
                 type: string
             stub:
-              description: List of variables for table stub
+              description: List of variables for suggested table stub
               type: array
               items:
                 type: string
