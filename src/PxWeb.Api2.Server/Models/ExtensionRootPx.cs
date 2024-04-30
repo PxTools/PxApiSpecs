@@ -76,11 +76,39 @@ namespace PxWeb.Api2.Server.Models
         public string Language { get; set; }
 
         /// <summary>
+        /// Information about the contents, which makes up the first part of a title created when retrieving tables from PC-Axis.
+        /// </summary>
+        /// <value>Information about the contents, which makes up the first part of a title created when retrieving tables from PC-Axis.</value>
+        [DataMember(Name="contents", EmitDefaultValue=false)]
+        public string Contents { get; set; }
+
+        /// <summary>
         /// See _description_ in [PX file format](https://www.scb.se/en/services/statistical-programs-for-px-files/px-file-format/)
         /// </summary>
         /// <value>See _description_ in [PX file format](https://www.scb.se/en/services/statistical-programs-for-px-files/px-file-format/)</value>
         [DataMember(Name="description", EmitDefaultValue=false)]
         public string Description { get; set; }
+
+        /// <summary>
+        /// For some languages it is difficult to build a table title dynamically. The keyword descriptiondefault &#x3D; True; means that the text after keyword Description will be used as title for the table
+        /// </summary>
+        /// <value>For some languages it is difficult to build a table title dynamically. The keyword descriptiondefault &#x3D; True; means that the text after keyword Description will be used as title for the table</value>
+        [DataMember(Name="descriptiondefault", EmitDefaultValue=true)]
+        public bool Descriptiondefault { get; set; }
+
+        /// <summary>
+        /// List of suggested variables for table head
+        /// </summary>
+        /// <value>List of suggested variables for table head</value>
+        [DataMember(Name="heading", EmitDefaultValue=false)]
+        public List<string> Heading { get; set; }
+
+        /// <summary>
+        /// List of suggested variables for table stub
+        /// </summary>
+        /// <value>List of suggested variables for table stub</value>
+        [DataMember(Name="stub", EmitDefaultValue=false)]
+        public List<string> Stub { get; set; }
 
         /// <summary>
         /// The name of the matrix
@@ -118,7 +146,11 @@ namespace PxWeb.Api2.Server.Models
             sb.Append("  Aggregallowed: ").Append(Aggregallowed).Append("\n");
             sb.Append("  Copyright: ").Append(Copyright).Append("\n");
             sb.Append("  Language: ").Append(Language).Append("\n");
+            sb.Append("  Contents: ").Append(Contents).Append("\n");
             sb.Append("  Description: ").Append(Description).Append("\n");
+            sb.Append("  Descriptiondefault: ").Append(Descriptiondefault).Append("\n");
+            sb.Append("  Heading: ").Append(Heading).Append("\n");
+            sb.Append("  Stub: ").Append(Stub).Append("\n");
             sb.Append("  Matrix: ").Append(Matrix).Append("\n");
             sb.Append("  SubjectCode: ").Append(SubjectCode).Append("\n");
             sb.Append("  SubjectArea: ").Append(SubjectArea).Append("\n");
@@ -194,9 +226,31 @@ namespace PxWeb.Api2.Server.Models
                     Language.Equals(other.Language)
                 ) && 
                 (
+                    Contents == other.Contents ||
+                    Contents != null &&
+                    Contents.Equals(other.Contents)
+                ) && 
+                (
                     Description == other.Description ||
                     Description != null &&
                     Description.Equals(other.Description)
+                ) && 
+                (
+                    Descriptiondefault == other.Descriptiondefault ||
+                    
+                    Descriptiondefault.Equals(other.Descriptiondefault)
+                ) && 
+                (
+                    Heading == other.Heading ||
+                    Heading != null &&
+                    other.Heading != null &&
+                    Heading.SequenceEqual(other.Heading)
+                ) && 
+                (
+                    Stub == other.Stub ||
+                    Stub != null &&
+                    other.Stub != null &&
+                    Stub.SequenceEqual(other.Stub)
                 ) && 
                 (
                     Matrix == other.Matrix ||
@@ -239,8 +293,16 @@ namespace PxWeb.Api2.Server.Models
                     hashCode = hashCode * 59 + Copyright.GetHashCode();
                     if (Language != null)
                     hashCode = hashCode * 59 + Language.GetHashCode();
+                    if (Contents != null)
+                    hashCode = hashCode * 59 + Contents.GetHashCode();
                     if (Description != null)
                     hashCode = hashCode * 59 + Description.GetHashCode();
+                    
+                    hashCode = hashCode * 59 + Descriptiondefault.GetHashCode();
+                    if (Heading != null)
+                    hashCode = hashCode * 59 + Heading.GetHashCode();
+                    if (Stub != null)
+                    hashCode = hashCode * 59 + Stub.GetHashCode();
                     if (Matrix != null)
                     hashCode = hashCode * 59 + Matrix.GetHashCode();
                     if (SubjectCode != null)
