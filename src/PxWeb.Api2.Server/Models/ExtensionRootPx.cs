@@ -97,16 +97,16 @@ namespace PxWeb.Api2.Server.Models
         public bool Descriptiondefault { get; set; }
 
         /// <summary>
-        /// List of variables for suggested table head
+        /// List of suggested variables for table head
         /// </summary>
-        /// <value>List of variables for suggested table head</value>
+        /// <value>List of suggested variables for table head</value>
         [DataMember(Name="heading", EmitDefaultValue=false)]
         public List<string> Heading { get; set; }
 
         /// <summary>
-        /// List of variables for suggested table stub
+        /// List of suggested variables for table stub
         /// </summary>
-        /// <value>List of variables for suggested table stub</value>
+        /// <value>List of suggested variables for table stub</value>
         [DataMember(Name="stub", EmitDefaultValue=false)]
         public List<string> Stub { get; set; }
 
