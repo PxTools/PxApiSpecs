@@ -1111,6 +1111,10 @@ components:
         label:
           type: string
           description: A Textual name for the value
+        parentCode:
+          type: string
+          description: The code of the parent value
+          nullable: true
         notes: 
           type: array
           description: Optional notes that are associated with the value
