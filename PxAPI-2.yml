@@ -17,8 +17,6 @@ info:
     | 429            | Too many request | Requests exceed the API time limit. Large queries should be run in sequence |
     | 50X            | Internal Server Error | The service might be down |
 
-servers:
-  - url: https://api.server.test/api/v2
 tags:
  - name: Navigation
    description:  Find a table

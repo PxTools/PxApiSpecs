@@ -38,7 +38,7 @@ namespace PxWeb.Api2.Server.Controllers
         /// <response code="404">Error respsone for 404</response>
         /// <response code="429">Error respsone for 429</response>
         [HttpGet]
-        [Route("/api/v2/tables/{id}/defaultselection")]
+        [Route("/tables/{id}/defaultselection")]
         [ValidateModelState]
         [SwaggerOperation("GetDefaultSelection")]
         [SwaggerResponse(statusCode: 200, type: typeof(SelectionResponse), description: "Success")]
@@ -59,7 +59,7 @@ namespace PxWeb.Api2.Server.Controllers
         /// <response code="404">Error respsone for 404</response>
         /// <response code="429">Error respsone for 429</response>
         [HttpGet]
-        [Route("/api/v2/tables/{id}/metadata")]
+        [Route("/tables/{id}/metadata")]
         [ValidateModelState]
         [SwaggerOperation("GetMetadataById")]
         [SwaggerResponse(statusCode: 200, type: typeof(TableMetadataResponse), description: "Success")]
@@ -78,7 +78,7 @@ namespace PxWeb.Api2.Server.Controllers
         /// <response code="404">Error respsone for 404</response>
         /// <response code="429">Error respsone for 429</response>
         [HttpGet]
-        [Route("/api/v2/tables/{id}")]
+        [Route("/tables/{id}")]
         [ValidateModelState]
         [SwaggerOperation("GetTableById")]
         [SwaggerResponse(statusCode: 200, type: typeof(TableResponse), description: "Success")]
@@ -97,7 +97,7 @@ namespace PxWeb.Api2.Server.Controllers
         /// <response code="404">Error respsone for 404</response>
         /// <response code="429">Error respsone for 429</response>
         [HttpGet]
-        [Route("/api/v2/codelists/{id}")]
+        [Route("/codelists/{id}")]
         [ValidateModelState]
         [SwaggerOperation("GetTableCodeListById")]
         [SwaggerResponse(statusCode: 200, type: typeof(CodeListResponse), description: "Success")]
@@ -121,7 +121,7 @@ namespace PxWeb.Api2.Server.Controllers
         /// <response code="404">Error respsone for 404</response>
         /// <response code="429">Error respsone for 429</response>
         [HttpGet]
-        [Route("/api/v2/tables/{id}/data")]
+        [Route("/tables/{id}/data")]
         [ValidateModelState]
         [SwaggerOperation("GetTableData")]
         [SwaggerResponse(statusCode: 200, type: typeof(string), description: "Success")]
@@ -144,7 +144,7 @@ namespace PxWeb.Api2.Server.Controllers
         /// <response code="404">Error respsone for 404</response>
         /// <response code="429">Error respsone for 429</response>
         [HttpPost]
-        [Route("/api/v2/tables/{id}/data")]
+        [Route("/tables/{id}/data")]
         [Consumes("application/json")]
         [ValidateModelState]
         [SwaggerOperation("GetTableDataByPost")]
@@ -166,7 +166,7 @@ namespace PxWeb.Api2.Server.Controllers
         /// <param name="pageSize">Pagination: Decides how many tables per page</param>
         /// <response code="200">Success</response>
         [HttpGet]
-        [Route("/api/v2/tables")]
+        [Route("/tables")]
         [ValidateModelState]
         [SwaggerOperation("ListAllTables")]
         [SwaggerResponse(statusCode: 200, type: typeof(TablesResponse), description: "Success")]
