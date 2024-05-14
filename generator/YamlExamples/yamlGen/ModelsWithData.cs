@@ -2230,4 +2230,4 @@ namespace yamlGen
             return folder;
         }
     }
-    }
+}
