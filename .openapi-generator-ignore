@@ -24,3 +24,4 @@
 README.md
 PxWeb.Api2.Server.sln
 src/PxWeb.Api2.Server/PxWeb.Api2.Server.csproj
+src/PxWeb.Api2.Server.Models/PxWeb.Api2.Server.Models.csproj
