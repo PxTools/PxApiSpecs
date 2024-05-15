@@ -182,6 +182,13 @@ namespace PxWeb.Api2.Server.Models
         public string Label { get; set; }
 
         /// <summary>
+        /// The code of the parent value
+        /// </summary>
+        /// <value>The code of the parent value</value>
+        [DataMember(Name="parentCode", EmitDefaultValue=true)]
+        public string? ParentCode { get; set; }
+
+        /// <summary>
         /// Optional notes that are associated with the value
         /// </summary>
         /// <value>Optional notes that are associated with the value</value>
@@ -211,6 +218,7 @@ namespace PxWeb.Api2.Server.Models
             sb.Append("  RefrencePeriod: ").Append(RefrencePeriod).Append("\n");
             sb.Append("  Code: ").Append(Code).Append("\n");
             sb.Append("  Label: ").Append(Label).Append("\n");
+            sb.Append("  ParentCode: ").Append(ParentCode).Append("\n");
             sb.Append("  Notes: ").Append(Notes).Append("\n");
             sb.Append("  Links: ").Append(Links).Append("\n");
             sb.Append("}\n");
@@ -295,6 +303,11 @@ namespace PxWeb.Api2.Server.Models
                     Label.Equals(other.Label)
                 ) && 
                 (
+                    ParentCode == other.ParentCode ||
+                    ParentCode != null &&
+                    ParentCode.Equals(other.ParentCode)
+                ) && 
+                (
                     Notes == other.Notes ||
                     Notes != null &&
                     other.Notes != null &&
@@ -336,6 +349,8 @@ namespace PxWeb.Api2.Server.Models
                     hashCode = hashCode * 59 + Code.GetHashCode();
                     if (Label != null)
                     hashCode = hashCode * 59 + Label.GetHashCode();
+                    if (ParentCode != null)
+                    hashCode = hashCode * 59 + ParentCode.GetHashCode();
                     if (Notes != null)
                     hashCode = hashCode * 59 + Notes.GetHashCode();
                     if (Links != null)
