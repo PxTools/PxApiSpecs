@@ -9,22 +9,16 @@
     <Version>1.0.0</Version>
     <Nullable>annotations</Nullable>
     <OutputType>Library</OutputType>
-    <AssemblyName>PxWeb.Api2.Server</AssemblyName>
-    <PackageId>PxWeb.Api2.Server</PackageId>
-    <UserSecretsId>0ef88ba1-d6e0-4ea4-a15f-96a03efec7bf</UserSecretsId>
-    <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
-    <DockerfileContext>..\..</DockerfileContext>
+    <AssemblyName>PxWeb.Api2.Server.Models</AssemblyName>
+    <PackageId>PxWeb.Api2.Server.Models</PackageId>
   </PropertyGroup>
   <ItemGroup>
-    <ProjectReference Include="../PxWeb.Api2.Server.Models/PxWeb.Api2.Server.Models.csproj"/>
-    <FrameworkReference Include="Microsoft.AspNetCore.App" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="6.0.0"/>
     <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.10.8" />
     <PackageReference Include="Swashbuckle.AspNetCore.Newtonsoft" Version="6.4.0"/>
-    <PackageReference Include="Swashbuckle.AspNetCore.SwaggerUI" Version="6.4.0"/>
     <PackageReference Include="Swashbuckle.AspNetCore.Annotations" Version="6.4.0" />
     <PackageReference Include="JsonSubTypes" Version="1.8.0" />
   </ItemGroup>
   <ItemGroup>
-    <!--<DotNetCliToolReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="6.0.0" />-->
   </ItemGroup>
 </Project>
