@@ -35,7 +35,7 @@ namespace PxWeb.Api2.Server.Controllers
         /// <response code="404">Error respsone for 404</response>
         /// <response code="429">Error respsone for 429</response>
         [HttpGet]
-        [Route("/api/v2/config")]
+        [Route("/config")]
         [ValidateModelState]
         [SwaggerOperation("GetApiConfiguration")]
         [SwaggerResponse(statusCode: 200, type: typeof(ConfigResponse), description: "Success")]

@@ -37,7 +37,7 @@ namespace PxWeb.Api2.Server.Controllers
         /// <response code="404">Error respsone for 404</response>
         /// <response code="429">Error respsone for 429</response>
         [HttpGet]
-        [Route("/api/v2/navigation/{id}")]
+        [Route("/navigation/{id}")]
         [ValidateModelState]
         [SwaggerOperation("GetNavigationById")]
         [SwaggerResponse(statusCode: 200, type: typeof(FolderResponse), description: "Success")]
@@ -55,7 +55,7 @@ namespace PxWeb.Api2.Server.Controllers
         /// <response code="404">Error respsone for 404</response>
         /// <response code="429">Error respsone for 429</response>
         [HttpGet]
-        [Route("/api/v2/navigation")]
+        [Route("/navigation")]
         [ValidateModelState]
         [SwaggerOperation("GetNavigationRoot")]
         [SwaggerResponse(statusCode: 200, type: typeof(FolderResponse), description: "Success")]
