@@ -34,7 +34,7 @@ jobs:
         run: dotnet build --no-restore --configuration Release /p:Version=${{ env.version }} 
 
       - name: Pack library
-        run: dotnet pack --configuration Release /p:Version=${{ env.version }} --output .
+        run: dotnet pack --configuration Release /p:Version=${{ env.version }} -IncludeReferencedProjects --output .
       
       - name: Depoly to Nuget
         run: dotnet nuget push PxWeb.Api2.Server.${{ env.version }}.nupkg -k ${{ secrets.NUGET_API_KEY }} -s https://nuget.org
