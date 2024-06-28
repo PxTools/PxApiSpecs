@@ -14,6 +14,7 @@
     <UserSecretsId>0ef88ba1-d6e0-4ea4-a15f-96a03efec7bf</UserSecretsId>
     <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
     <DockerfileContext>..\..</DockerfileContext>
+    <IncludeSourceRevisionInInformationalVersion>false</IncludeSourceRevisionInInformationalVersion>
   </PropertyGroup>
   <ItemGroup>
     <ProjectReference Include="../PxWeb.Api2.Server.Models/PxWeb.Api2.Server.Models.csproj"/>
