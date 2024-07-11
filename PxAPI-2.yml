@@ -509,6 +509,7 @@ components:
       description: API configuration
       required:
         - "apiVersion"
+        - "appVersion"
         - "languages"
         - "defaultLanguage"
         - "maxDataCells"
@@ -521,7 +522,10 @@ components:
       properties:
         apiVersion:
           type: string
-          description: The version of then API
+          description: The version of then API spesification
+        appVersion:
+          type: string
+          description: The version of then API implementation
         languages:
           type: array
           description: A list of language that exists for the data.
