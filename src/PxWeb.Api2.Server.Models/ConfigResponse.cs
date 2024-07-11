@@ -27,17 +27,17 @@ namespace PxWeb.Api2.Server.Models
     public class ConfigResponse : IEquatable<ConfigResponse>
     {
         /// <summary>
-        /// The version of then API spesification
+        /// The version of the API spesification
         /// </summary>
-        /// <value>The version of then API spesification</value>
+        /// <value>The version of the API spesification</value>
         [Required]
         [DataMember(Name="apiVersion", EmitDefaultValue=false)]
         public string ApiVersion { get; set; }
 
         /// <summary>
-        /// The version of then API implementation
+        /// The version of the API implementation
         /// </summary>
-        /// <value>The version of then API implementation</value>
+        /// <value>The version of the API implementation</value>
         [Required]
         [DataMember(Name="appVersion", EmitDefaultValue=false)]
         public string AppVersion { get; set; }
