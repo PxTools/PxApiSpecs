@@ -522,10 +522,10 @@ components:
       properties:
         apiVersion:
           type: string
-          description: The version of then API spesification
+          description: The version of the API spesification
         appVersion:
           type: string
-          description: The version of then API implementation
+          description: The version of the API implementation
         languages:
           type: array
           description: A list of language that exists for the data.
