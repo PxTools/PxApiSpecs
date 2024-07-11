@@ -27,12 +27,20 @@ namespace PxWeb.Api2.Server.Models
     public class ConfigResponse : IEquatable<ConfigResponse>
     {
         /// <summary>
-        /// The version of then API
+        /// The version of the API spesification
         /// </summary>
-        /// <value>The version of then API</value>
+        /// <value>The version of the API spesification</value>
         [Required]
         [DataMember(Name="apiVersion", EmitDefaultValue=false)]
         public string ApiVersion { get; set; }
+
+        /// <summary>
+        /// The version of the API implementation
+        /// </summary>
+        /// <value>The version of the API implementation</value>
+        [Required]
+        [DataMember(Name="appVersion", EmitDefaultValue=false)]
+        public string AppVersion { get; set; }
 
         /// <summary>
         /// A list of language that exists for the data.
@@ -128,6 +136,7 @@ namespace PxWeb.Api2.Server.Models
             var sb = new StringBuilder();
             sb.Append("class ConfigResponse {\n");
             sb.Append("  ApiVersion: ").Append(ApiVersion).Append("\n");
+            sb.Append("  AppVersion: ").Append(AppVersion).Append("\n");
             sb.Append("  Languages: ").Append(Languages).Append("\n");
             sb.Append("  DefaultLanguage: ").Append(DefaultLanguage).Append("\n");
             sb.Append("  MaxDataCells: ").Append(MaxDataCells).Append("\n");
@@ -179,6 +188,11 @@ namespace PxWeb.Api2.Server.Models
                     ApiVersion == other.ApiVersion ||
                     ApiVersion != null &&
                     ApiVersion.Equals(other.ApiVersion)
+                ) && 
+                (
+                    AppVersion == other.AppVersion ||
+                    AppVersion != null &&
+                    AppVersion.Equals(other.AppVersion)
                 ) && 
                 (
                     Languages == other.Languages ||
@@ -253,6 +267,8 @@ namespace PxWeb.Api2.Server.Models
                 // Suitable nullity checks etc, of course :)
                     if (ApiVersion != null)
                     hashCode = hashCode * 59 + ApiVersion.GetHashCode();
+                    if (AppVersion != null)
+                    hashCode = hashCode * 59 + AppVersion.GetHashCode();
                     if (Languages != null)
                     hashCode = hashCode * 59 + Languages.GetHashCode();
                     if (DefaultLanguage != null)
