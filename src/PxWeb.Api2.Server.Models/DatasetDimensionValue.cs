@@ -31,7 +31,7 @@ namespace PxWeb.Api2.Server.Models
         /// </summary>
         /// <value>Specification on json-stat.org -&gt; [here](https://json-stat.org/full/#label)</value>
         [DataMember(Name="label", EmitDefaultValue=false)]
-        public string Label { get; set; }
+        public string? Label { get; set; }
 
         /// <summary>
         /// Spesification on json-stat.org -&gt; [here](https://json-stat.org/full/#note)
@@ -44,19 +44,19 @@ namespace PxWeb.Api2.Server.Models
         /// Gets or Sets Category
         /// </summary>
         [DataMember(Name="category", EmitDefaultValue=false)]
-        public JsonstatCategory Category { get; set; }
+        public JsonstatCategory? Category { get; set; }
 
         /// <summary>
         /// Gets or Sets Extension
         /// </summary>
         [DataMember(Name="extension", EmitDefaultValue=false)]
-        public ExtensionDimension Extension { get; set; }
+        public ExtensionDimension? Extension { get; set; }
 
         /// <summary>
         /// Gets or Sets Link
         /// </summary>
         [DataMember(Name="link", EmitDefaultValue=false)]
-        public JsonstatExtensionLink Link { get; set; }
+        public JsonstatExtensionLink? Link { get; set; }
 
         /// <summary>
         /// Returns the string presentation of the object
@@ -81,7 +81,7 @@ namespace PxWeb.Api2.Server.Models
         /// <returns>JSON string presentation of the object</returns>
         public string ToJson()
         {
-            return Newtonsoft.Json.JsonConvert.SerializeObject(this, Newtonsoft.Json.Formatting.Indented);
+            return JsonConvert.SerializeObject(this, Formatting.Indented);
         }
 
         /// <summary>

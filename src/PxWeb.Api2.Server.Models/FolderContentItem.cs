@@ -70,7 +70,7 @@ namespace PxWeb.Api2.Server.Models
         /// </summary>
         /// <value>String for sorting the contents in folder</value>
         [DataMember(Name="sortCode", EmitDefaultValue=false)]
-        public string SortCode { get; set; }
+        public string? SortCode { get; set; }
 
         /// <summary>
         /// Returns the string presentation of the object
@@ -95,7 +95,7 @@ namespace PxWeb.Api2.Server.Models
         /// <returns>JSON string presentation of the object</returns>
         public string ToJson()
         {
-            return Newtonsoft.Json.JsonConvert.SerializeObject(this, Newtonsoft.Json.Formatting.Indented);
+            return JsonConvert.SerializeObject(this, Formatting.Indented);
         }
 
         /// <summary>

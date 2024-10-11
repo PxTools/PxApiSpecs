@@ -41,7 +41,7 @@ namespace PxWeb.Api2.Server.Models
         /// <summary>
         /// Gets or Sets Id
         /// </summary>
-        /// <example>&quot;impex01&quot;</example>
+        /* <example>impex01</example> */
         [Required]
         [DataMember(Name="id", EmitDefaultValue=false)]
         public string Id { get; set; }
@@ -49,7 +49,7 @@ namespace PxWeb.Api2.Server.Models
         /// <summary>
         /// Gets or Sets Label
         /// </summary>
-        /// <example>&quot;Import and export&quot;</example>
+        /* <example>Import and export</example> */
         [Required]
         [DataMember(Name="label", EmitDefaultValue=false)]
         public string Label { get; set; }
@@ -96,7 +96,7 @@ namespace PxWeb.Api2.Server.Models
         /// <returns>JSON string presentation of the object</returns>
         public string ToJson()
         {
-            return Newtonsoft.Json.JsonConvert.SerializeObject(this, Newtonsoft.Json.Formatting.Indented);
+            return JsonConvert.SerializeObject(this, Formatting.Indented);
         }
 
         /// <summary>

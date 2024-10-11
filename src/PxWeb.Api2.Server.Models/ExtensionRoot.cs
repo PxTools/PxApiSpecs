@@ -37,7 +37,7 @@ namespace PxWeb.Api2.Server.Models
         /// Gets or Sets Px
         /// </summary>
         [DataMember(Name="px", EmitDefaultValue=false)]
-        public ExtensionRootPx Px { get; set; }
+        public ExtensionRootPx? Px { get; set; }
 
         /// <summary>
         /// Tag for table
@@ -83,7 +83,7 @@ namespace PxWeb.Api2.Server.Models
         /// <returns>JSON string presentation of the object</returns>
         public string ToJson()
         {
-            return Newtonsoft.Json.JsonConvert.SerializeObject(this, Newtonsoft.Json.Formatting.Indented);
+            return JsonConvert.SerializeObject(this, Formatting.Indented);
         }
 
         /// <summary>

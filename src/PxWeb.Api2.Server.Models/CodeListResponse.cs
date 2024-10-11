@@ -30,7 +30,7 @@ namespace PxWeb.Api2.Server.Models
         /// The identiyer for the codelist
         /// </summary>
         /// <value>The identiyer for the codelist</value>
-        /// <example>&quot;agg_RegionNUTS2_2008&quot;</example>
+        /* <example>agg_RegionNUTS2_2008</example> */
         [Required]
         [DataMember(Name="id", EmitDefaultValue=false)]
         public string Id { get; set; }
@@ -39,7 +39,7 @@ namespace PxWeb.Api2.Server.Models
         /// The textual name  for the codelist.
         /// </summary>
         /// <value>The textual name  for the codelist.</value>
-        /// <example>&quot;NUTS2 fr.o.m 2008&quot;</example>
+        /* <example>NUTS2 fr.o.m 2008</example> */
         [Required]
         [DataMember(Name="label", EmitDefaultValue=false)]
         public string Label { get; set; }
@@ -48,7 +48,7 @@ namespace PxWeb.Api2.Server.Models
         /// The language code for the language used in this response
         /// </summary>
         /// <value>The language code for the language used in this response</value>
-        /// <example>&quot;sv&quot;</example>
+        /* <example>sv</example> */
         [Required]
         [DataMember(Name="language", EmitDefaultValue=false)]
         public string Language { get; set; }
@@ -98,7 +98,7 @@ namespace PxWeb.Api2.Server.Models
         /// <returns>JSON string presentation of the object</returns>
         public string ToJson()
         {
-            return Newtonsoft.Json.JsonConvert.SerializeObject(this, Newtonsoft.Json.Formatting.Indented);
+            return JsonConvert.SerializeObject(this, Formatting.Indented);
         }
 
         /// <summary>

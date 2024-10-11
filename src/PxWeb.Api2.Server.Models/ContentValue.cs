@@ -116,7 +116,7 @@ namespace PxWeb.Api2.Server.Models
         /// Gets or Sets PreferedNumberOfDecimals
         /// </summary>
         [DataMember(Name="preferedNumberOfDecimals", EmitDefaultValue=true)]
-        public int PreferedNumberOfDecimals { get; set; }
+        public int? PreferedNumberOfDecimals { get; set; }
 
 
         /// <summary>
@@ -163,7 +163,7 @@ namespace PxWeb.Api2.Server.Models
         /// Gets or Sets RefrencePeriod
         /// </summary>
         [DataMember(Name="refrencePeriod", EmitDefaultValue=false)]
-        public string RefrencePeriod { get; set; }
+        public string? RefrencePeriod { get; set; }
 
         /// <summary>
         /// A code representing the value.
@@ -223,7 +223,7 @@ namespace PxWeb.Api2.Server.Models
         /// <returns>JSON string presentation of the object</returns>
         public string ToJson()
         {
-            return Newtonsoft.Json.JsonConvert.SerializeObject(this, Newtonsoft.Json.Formatting.Indented);
+            return JsonConvert.SerializeObject(this, Formatting.Indented);
         }
 
         /// <summary>

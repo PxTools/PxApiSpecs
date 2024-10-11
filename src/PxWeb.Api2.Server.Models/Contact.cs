@@ -29,23 +29,23 @@ namespace PxWeb.Api2.Server.Models
         /// <summary>
         /// Gets or Sets Name
         /// </summary>
-        /// <example>&quot;Inga Svensson&quot;</example>
+        /* <example>Inga Svensson</example> */
         [DataMember(Name="name", EmitDefaultValue=false)]
-        public string Name { get; set; }
+        public string? Name { get; set; }
 
         /// <summary>
         /// Gets or Sets Phone
         /// </summary>
-        /// <example>&quot;+46101111111&quot;</example>
+        /* <example>+46101111111</example> */
         [DataMember(Name="phone", EmitDefaultValue=false)]
-        public string Phone { get; set; }
+        public string? Phone { get; set; }
 
         /// <summary>
         /// Gets or Sets Mail
         /// </summary>
-        /// <example>&quot;testmail@testmail.com&quot;</example>
+        /* <example>testmail@testmail.com</example> */
         [DataMember(Name="mail", EmitDefaultValue=false)]
-        public string Mail { get; set; }
+        public string? Mail { get; set; }
 
         /// <summary>
         /// Raw contact information for compatability with PX files
@@ -77,7 +77,7 @@ namespace PxWeb.Api2.Server.Models
         /// <returns>JSON string presentation of the object</returns>
         public string ToJson()
         {
-            return Newtonsoft.Json.JsonConvert.SerializeObject(this, Newtonsoft.Json.Formatting.Indented);
+            return JsonConvert.SerializeObject(this, Formatting.Indented);
         }
 
         /// <summary>

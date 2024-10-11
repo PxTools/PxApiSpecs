@@ -30,13 +30,13 @@ namespace PxWeb.Api2.Server.Models
         /// Gets or Sets Elimination
         /// </summary>
         [DataMember(Name="elimination", EmitDefaultValue=true)]
-        public bool Elimination { get; set; }
+        public bool? Elimination { get; set; }
 
         /// <summary>
         /// Gets or Sets EliminationValueCode
         /// </summary>
         [DataMember(Name="eliminationValueCode", EmitDefaultValue=false)]
-        public string EliminationValueCode { get; set; }
+        public string? EliminationValueCode { get; set; }
 
         /// <summary>
         /// Gets or Sets Values
@@ -72,9 +72,9 @@ namespace PxWeb.Api2.Server.Models
         /// Returns the JSON string presentation of the object
         /// </summary>
         /// <returns>JSON string presentation of the object</returns>
-        public string ToJson()
+        public new string ToJson()
         {
-            return Newtonsoft.Json.JsonConvert.SerializeObject(this, Newtonsoft.Json.Formatting.Indented);
+            return JsonConvert.SerializeObject(this, Formatting.Indented);
         }
 
         /// <summary>

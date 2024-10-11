@@ -31,14 +31,14 @@ namespace PxWeb.Api2.Server.Models
         /// </summary>
         /// <value>It is the base unit (person, gram, euro, etc.).</value>
         [DataMember(Name="base", EmitDefaultValue=false)]
-        public string Base { get; set; }
+        public string? Base { get; set; }
 
         /// <summary>
         /// Number of decimals
         /// </summary>
         /// <value>Number of decimals</value>
         [DataMember(Name="decimals", EmitDefaultValue=true)]
-        public int Decimals { get; set; }
+        public int? Decimals { get; set; }
 
         /// <summary>
         /// Returns the string presentation of the object
@@ -60,7 +60,7 @@ namespace PxWeb.Api2.Server.Models
         /// <returns>JSON string presentation of the object</returns>
         public string ToJson()
         {
-            return Newtonsoft.Json.JsonConvert.SerializeObject(this, Newtonsoft.Json.Formatting.Indented);
+            return JsonConvert.SerializeObject(this, Formatting.Indented);
         }
 
         /// <summary>

@@ -31,70 +31,70 @@ namespace PxWeb.Api2.Server.Models
         /// </summary>
         /// <value>Name of a file containing more information for the statistics**</value>
         [DataMember(Name="infofile", EmitDefaultValue=false)]
-        public string Infofile { get; set; }
+        public string? Infofile { get; set; }
 
         /// <summary>
         /// A text that is the identity of the table
         /// </summary>
         /// <value>A text that is the identity of the table</value>
         [DataMember(Name="tableid", EmitDefaultValue=false)]
-        public string Tableid { get; set; }
+        public string? Tableid { get; set; }
 
         /// <summary>
         /// The number of decimals in the table cells
         /// </summary>
         /// <value>The number of decimals in the table cells</value>
         [DataMember(Name="decimals", EmitDefaultValue=true)]
-        public int Decimals { get; set; }
+        public int? Decimals { get; set; }
 
         /// <summary>
         /// Indicates if the data table is included in the official statistics of the organization
         /// </summary>
         /// <value>Indicates if the data table is included in the official statistics of the organization</value>
         [DataMember(Name="official-statistics", EmitDefaultValue=true)]
-        public bool OfficialStatistics { get; set; }
+        public bool? OfficialStatistics { get; set; }
 
         /// <summary>
         /// If the contents of the table cannot be aggregated
         /// </summary>
         /// <value>If the contents of the table cannot be aggregated</value>
         [DataMember(Name="aggregallowed", EmitDefaultValue=true)]
-        public bool Aggregallowed { get; set; }
+        public bool? Aggregallowed { get; set; }
 
         /// <summary>
         /// Copyright is given as YES or NO
         /// </summary>
         /// <value>Copyright is given as YES or NO</value>
         [DataMember(Name="copyright", EmitDefaultValue=false)]
-        public string Copyright { get; set; }
+        public string? Copyright { get; set; }
 
         /// <summary>
         /// code (two characters) for language
         /// </summary>
         /// <value>code (two characters) for language</value>
         [DataMember(Name="language", EmitDefaultValue=false)]
-        public string Language { get; set; }
+        public string? Language { get; set; }
 
         /// <summary>
         /// Information about the contents, which makes up the first part of a title created when retrieving tables from PC-Axis.
         /// </summary>
         /// <value>Information about the contents, which makes up the first part of a title created when retrieving tables from PC-Axis.</value>
         [DataMember(Name="contents", EmitDefaultValue=false)]
-        public string Contents { get; set; }
+        public string? Contents { get; set; }
 
         /// <summary>
         /// See _description_ in [PX file format](https://www.scb.se/en/services/statistical-programs-for-px-files/px-file-format/)
         /// </summary>
         /// <value>See _description_ in [PX file format](https://www.scb.se/en/services/statistical-programs-for-px-files/px-file-format/)</value>
         [DataMember(Name="description", EmitDefaultValue=false)]
-        public string Description { get; set; }
+        public string? Description { get; set; }
 
         /// <summary>
         /// For some languages it is difficult to build a table title dynamically. The keyword descriptiondefault &#x3D; True; means that the text after keyword Description will be used as title for the table
         /// </summary>
         /// <value>For some languages it is difficult to build a table title dynamically. The keyword descriptiondefault &#x3D; True; means that the text after keyword Description will be used as title for the table</value>
         [DataMember(Name="descriptiondefault", EmitDefaultValue=true)]
-        public bool Descriptiondefault { get; set; }
+        public bool? Descriptiondefault { get; set; }
 
         /// <summary>
         /// List of suggested variables for table head
@@ -115,21 +115,21 @@ namespace PxWeb.Api2.Server.Models
         /// </summary>
         /// <value>The name of the matrix</value>
         [DataMember(Name="matrix", EmitDefaultValue=false)]
-        public string Matrix { get; set; }
+        public string? Matrix { get; set; }
 
         /// <summary>
         /// Subject area code
         /// </summary>
         /// <value>Subject area code</value>
         [DataMember(Name="subject-code", EmitDefaultValue=false)]
-        public string SubjectCode { get; set; }
+        public string? SubjectCode { get; set; }
 
         /// <summary>
         /// Subject area
         /// </summary>
         /// <value>Subject area</value>
         [DataMember(Name="subject-area", EmitDefaultValue=false)]
-        public string SubjectArea { get; set; }
+        public string? SubjectArea { get; set; }
 
         /// <summary>
         /// Returns the string presentation of the object
@@ -164,7 +164,7 @@ namespace PxWeb.Api2.Server.Models
         /// <returns>JSON string presentation of the object</returns>
         public string ToJson()
         {
-            return Newtonsoft.Json.JsonConvert.SerializeObject(this, Newtonsoft.Json.Formatting.Indented);
+            return JsonConvert.SerializeObject(this, Formatting.Indented);
         }
 
         /// <summary>

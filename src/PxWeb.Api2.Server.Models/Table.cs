@@ -45,7 +45,7 @@ namespace PxWeb.Api2.Server.Models
         /// First period
         /// </summary>
         /// <value>First period</value>
-        /// <example>&quot;2017&quot;</example>
+        /* <example>2017</example> */
         [Required]
         [DataMember(Name="firstPeriod", EmitDefaultValue=true)]
         public string? FirstPeriod { get; set; }
@@ -54,7 +54,7 @@ namespace PxWeb.Api2.Server.Models
         /// Last period
         /// </summary>
         /// <value>Last period</value>
-        /// <example>&quot;2022&quot;</example>
+        /* <example>2022</example> */
         [Required]
         [DataMember(Name="lastPeriod", EmitDefaultValue=true)]
         public string? LastPeriod { get; set; }
@@ -147,9 +147,9 @@ namespace PxWeb.Api2.Server.Models
         /// Returns the JSON string presentation of the object
         /// </summary>
         /// <returns>JSON string presentation of the object</returns>
-        public string ToJson()
+        public new string ToJson()
         {
-            return Newtonsoft.Json.JsonConvert.SerializeObject(this, Newtonsoft.Json.Formatting.Indented);
+            return JsonConvert.SerializeObject(this, Formatting.Indented);
         }
 
         /// <summary>

@@ -38,7 +38,7 @@ namespace PxWeb.Api2.Server.Models
         /// Identifier for the table.
         /// </summary>
         /// <value>Identifier for the table.</value>
-        /// <example>&quot;TAB0001&quot;</example>
+        /* <example>TAB0001</example> */
         [Required]
         [DataMember(Name="id", EmitDefaultValue=false)]
         public string Id { get; set; }
@@ -47,7 +47,7 @@ namespace PxWeb.Api2.Server.Models
         /// A title for the table that describes the content of it.
         /// </summary>
         /// <value>A title for the table that describes the content of it.</value>
-        /// <example>&quot;Corporations Financial Assets and Liabilities. Quarterly 1998K2 - 2021K4&quot;</example>
+        /* <example>Corporations Financial Assets and Liabilities. Quarterly 1998K2 - 2021K4</example> */
         [Required]
         [DataMember(Name="label", EmitDefaultValue=false)]
         public string Label { get; set; }
@@ -56,55 +56,55 @@ namespace PxWeb.Api2.Server.Models
         /// A description of the table.
         /// </summary>
         /// <value>A description of the table.</value>
-        /// <example>&quot;Corporations Financial Assets and Liabilities by item. Quarterly 1998K2 - 2021K4 [2022-03-11]&quot;</example>
+        /* <example>Corporations Financial Assets and Liabilities by item. Quarterly 1998K2 - 2021K4 [2022-03-11]</example> */
         [DataMember(Name="description", EmitDefaultValue=false)]
-        public string Description { get; set; }
+        public string? Description { get; set; }
 
         /// <summary>
         /// If all content of the table can be aggregated.
         /// </summary>
         /// <value>If all content of the table can be aggregated.</value>
         [DataMember(Name="aggregationAllowed", EmitDefaultValue=true)]
-        public bool AggregationAllowed { get; set; }
+        public bool? AggregationAllowed { get; set; }
 
         /// <summary>
         /// A marker if the table is a part of the national official statistics.
         /// </summary>
         /// <value>A marker if the table is a part of the national official statistics.</value>
         [DataMember(Name="officialStatistics", EmitDefaultValue=true)]
-        public bool OfficialStatistics { get; set; }
+        public bool? OfficialStatistics { get; set; }
 
         /// <summary>
         /// The code for the subject area that the table belongs to.
         /// </summary>
         /// <value>The code for the subject area that the table belongs to.</value>
-        /// <example>&quot;BE&quot;</example>
+        /* <example>BE</example> */
         [DataMember(Name="subjectCode", EmitDefaultValue=false)]
-        public string SubjectCode { get; set; }
+        public string? SubjectCode { get; set; }
 
         /// <summary>
         /// The label for the subject area that the table belongs to.
         /// </summary>
         /// <value>The label for the subject area that the table belongs to.</value>
-        /// <example>&quot;Population&quot;</example>
+        /* <example>Population</example> */
         [DataMember(Name="subjectLabel", EmitDefaultValue=false)]
-        public string SubjectLabel { get; set; }
+        public string? SubjectLabel { get; set; }
 
         /// <summary>
         /// The name of the organization responsible for the table.
         /// </summary>
         /// <value>The name of the organization responsible for the table.</value>
-        /// <example>&quot;Statistics Sweden&quot;</example>
+        /* <example>Statistics Sweden</example> */
         [DataMember(Name="source", EmitDefaultValue=false)]
-        public string Source { get; set; }
+        public string? Source { get; set; }
 
         /// <summary>
         /// A copyright statement for the data it could also be SPDX (https://spdx.org/licenses/) identifier
         /// </summary>
         /// <value>A copyright statement for the data it could also be SPDX (https://spdx.org/licenses/) identifier</value>
-        /// <example>&quot;CC0-1.0&quot;</example>
+        /* <example>CC0-1.0</example> */
         [DataMember(Name="license", EmitDefaultValue=false)]
-        public string License { get; set; }
+        public string? License { get; set; }
 
         /// <summary>
         /// A list of strings/tags associated with the table
@@ -191,7 +191,7 @@ namespace PxWeb.Api2.Server.Models
         /// <returns>JSON string presentation of the object</returns>
         public string ToJson()
         {
-            return Newtonsoft.Json.JsonConvert.SerializeObject(this, Newtonsoft.Json.Formatting.Indented);
+            return JsonConvert.SerializeObject(this, Formatting.Indented);
         }
 
         /// <summary>

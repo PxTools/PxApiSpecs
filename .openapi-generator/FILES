@@ -1,5 +1,6 @@
 build.bat
 build.sh
+src/PxWeb.Api2.Server.Models/.gitignore
 src/PxWeb.Api2.Server.Models/AbstractCodeListVariable.cs
 src/PxWeb.Api2.Server.Models/AbstractVariable.cs
 src/PxWeb.Api2.Server.Models/ApiFeature.cs
