@@ -30,14 +30,14 @@ namespace PxWeb.Api2.Server.Models
         /// Gets or Sets Type
         /// </summary>
         [DataMember(Name="type", EmitDefaultValue=false)]
-        public string Type { get; set; }
+        public string? Type { get; set; }
 
         /// <summary>
         /// Specification on json-stat.org -&gt; [here](https://json-stat.org/full/#href)
         /// </summary>
         /// <value>Specification on json-stat.org -&gt; [here](https://json-stat.org/full/#href)</value>
         [DataMember(Name="href", EmitDefaultValue=false)]
-        public string Href { get; set; }
+        public string? Href { get; set; }
 
         /// <summary>
         /// Returns the string presentation of the object
@@ -59,7 +59,7 @@ namespace PxWeb.Api2.Server.Models
         /// <returns>JSON string presentation of the object</returns>
         public string ToJson()
         {
-            return Newtonsoft.Json.JsonConvert.SerializeObject(this, Newtonsoft.Json.Formatting.Indented);
+            return JsonConvert.SerializeObject(this, Formatting.Indented);
         }
 
         /// <summary>

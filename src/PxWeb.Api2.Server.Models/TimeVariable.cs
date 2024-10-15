@@ -85,14 +85,14 @@ namespace PxWeb.Api2.Server.Models
         /// </summary>
         /// <value>Earliest time period in table</value>
         [DataMember(Name="firstPeriod", EmitDefaultValue=false)]
-        public string FirstPeriod { get; set; }
+        public string? FirstPeriod { get; set; }
 
         /// <summary>
         /// Latest time period in table
         /// </summary>
         /// <value>Latest time period in table</value>
         [DataMember(Name="lastPeriod", EmitDefaultValue=false)]
-        public string LastPeriod { get; set; }
+        public string? LastPeriod { get; set; }
 
         /// <summary>
         /// Gets or Sets Values
@@ -120,9 +120,9 @@ namespace PxWeb.Api2.Server.Models
         /// Returns the JSON string presentation of the object
         /// </summary>
         /// <returns>JSON string presentation of the object</returns>
-        public string ToJson()
+        public new string ToJson()
         {
-            return Newtonsoft.Json.JsonConvert.SerializeObject(this, Newtonsoft.Json.Formatting.Indented);
+            return JsonConvert.SerializeObject(this, Formatting.Indented);
         }
 
         /// <summary>

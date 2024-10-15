@@ -31,9 +31,9 @@ namespace PxWeb.Api2.Server.Models
         /// JSON-stat version 2.0
         /// </summary>
         /// <value>JSON-stat version 2.0</value>
-        [TypeConverter(typeof(CustomEnumConverter<VersionEnum>))]
+        [TypeConverter(typeof(CustomEnumConverter<VarVersionEnum>))]
         [JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
-        public enum VersionEnum
+        public enum VarVersionEnum
         {
             
             /// <summary>
@@ -49,7 +49,7 @@ namespace PxWeb.Api2.Server.Models
         /// <value>JSON-stat version 2.0</value>
         [Required]
         [DataMember(Name="version", EmitDefaultValue=true)]
-        public VersionEnum _Version { get; set; } = VersionEnum._20Enum;
+        public VarVersionEnum VarVersion { get; set; } = VarVersionEnum._20Enum;
 
         /// <summary>
         /// Gets or Sets Class
@@ -63,21 +63,21 @@ namespace PxWeb.Api2.Server.Models
         /// </summary>
         /// <value>Specification on json-stat.org -&gt; [here](https://json-stat.org/full/#href)</value>
         [DataMember(Name="href", EmitDefaultValue=false)]
-        public string Href { get; set; }
+        public string? Href { get; set; }
 
         /// <summary>
         /// Specification on json-stat.org -&gt; [here](https://json-stat.org/full/#label)
         /// </summary>
         /// <value>Specification on json-stat.org -&gt; [here](https://json-stat.org/full/#label)</value>
         [DataMember(Name="label", EmitDefaultValue=false)]
-        public string Label { get; set; }
+        public string? Label { get; set; }
 
         /// <summary>
         /// Specification on json-stat.org -&gt; [here](https://json-stat.org/full/#source)
         /// </summary>
         /// <value>Specification on json-stat.org -&gt; [here](https://json-stat.org/full/#source)</value>
         [DataMember(Name="source", EmitDefaultValue=false)]
-        public string Source { get; set; }
+        public string? Source { get; set; }
 
         /// <summary>
         /// See https://json-stat.org/full/#updated
@@ -85,7 +85,7 @@ namespace PxWeb.Api2.Server.Models
         /// <value>See https://json-stat.org/full/#updated</value>
         [RegularExpression("^((19|20)\\d\\d)\\-(0?[1-9]|1[012])\\-(0?[1-9]|[12][0-9]|3[01])$")]
         [DataMember(Name="updated", EmitDefaultValue=false)]
-        public string Updated { get; set; }
+        public string? Updated { get; set; }
 
         /// <summary>
         /// Gets or Sets Link
@@ -104,7 +104,7 @@ namespace PxWeb.Api2.Server.Models
         /// Gets or Sets Role
         /// </summary>
         [DataMember(Name="role", EmitDefaultValue=false)]
-        public DatasetRole Role { get; set; }
+        public DatasetRole? Role { get; set; }
 
         /// <summary>
         /// Gets or Sets Id
@@ -133,7 +133,7 @@ namespace PxWeb.Api2.Server.Models
         /// Gets or Sets Extension
         /// </summary>
         [DataMember(Name="extension", EmitDefaultValue=false)]
-        public ExtensionRoot Extension { get; set; }
+        public ExtensionRoot? Extension { get; set; }
 
         /// <summary>
         /// Specification on json-stat.org -&gt; [here](https://json-stat.org/full/#value)
@@ -158,7 +158,7 @@ namespace PxWeb.Api2.Server.Models
         {
             var sb = new StringBuilder();
             sb.Append("class Dataset {\n");
-            sb.Append("  _Version: ").Append(_Version).Append("\n");
+            sb.Append("  VarVersion: ").Append(VarVersion).Append("\n");
             sb.Append("  Class: ").Append(Class).Append("\n");
             sb.Append("  Href: ").Append(Href).Append("\n");
             sb.Append("  Label: ").Append(Label).Append("\n");
@@ -183,7 +183,7 @@ namespace PxWeb.Api2.Server.Models
         /// <returns>JSON string presentation of the object</returns>
         public string ToJson()
         {
-            return Newtonsoft.Json.JsonConvert.SerializeObject(this, Newtonsoft.Json.Formatting.Indented);
+            return JsonConvert.SerializeObject(this, Formatting.Indented);
         }
 
         /// <summary>
@@ -210,9 +210,9 @@ namespace PxWeb.Api2.Server.Models
 
             return 
                 (
-                    _Version == other._Version ||
+                    VarVersion == other.VarVersion ||
                     
-                    _Version.Equals(other._Version)
+                    VarVersion.Equals(other.VarVersion)
                 ) && 
                 (
                     Class == other.Class ||
@@ -304,7 +304,7 @@ namespace PxWeb.Api2.Server.Models
                 var hashCode = 41;
                 // Suitable nullity checks etc, of course :)
                     
-                    hashCode = hashCode * 59 + _Version.GetHashCode();
+                    hashCode = hashCode * 59 + VarVersion.GetHashCode();
                     
                     hashCode = hashCode * 59 + Class.GetHashCode();
                     if (Href != null)

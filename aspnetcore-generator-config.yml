@@ -1,5 +1,5 @@
 additionalProperties:
-  aspnetCoreVersion: 6.0
+  aspnetCoreVersion: 8.0
   buildTarget: library
   licenseName: Apache-2.0
   nullableReferenceTypes: true

@@ -38,7 +38,7 @@ namespace PxWeb.Api2.Server.Models
         /// The maximal number of elements in a page
         /// </summary>
         /// <value>The maximal number of elements in a page</value>
-        /// <example>100</example>
+        /* <example>100</example> */
         [Required]
         [DataMember(Name="pageSize", EmitDefaultValue=true)]
         public int PageSize { get; set; }
@@ -88,7 +88,7 @@ namespace PxWeb.Api2.Server.Models
         /// <returns>JSON string presentation of the object</returns>
         public string ToJson()
         {
-            return Newtonsoft.Json.JsonConvert.SerializeObject(this, Newtonsoft.Json.Formatting.Indented);
+            return JsonConvert.SerializeObject(this, Formatting.Indented);
         }
 
         /// <summary>

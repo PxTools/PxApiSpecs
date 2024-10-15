@@ -38,7 +38,7 @@ namespace PxWeb.Api2.Server.Models
         /// </summary>
         /// <value>Must be shown to end user if true</value>
         [DataMember(Name="mandatory", EmitDefaultValue=true)]
-        public bool Mandatory { get; set; } = false;
+        public bool? Mandatory { get; set; } = false;
 
         /// <summary>
         /// Gets or Sets Text
@@ -68,7 +68,7 @@ namespace PxWeb.Api2.Server.Models
         /// <returns>JSON string presentation of the object</returns>
         public string ToJson()
         {
-            return Newtonsoft.Json.JsonConvert.SerializeObject(this, Newtonsoft.Json.Formatting.Indented);
+            return JsonConvert.SerializeObject(this, Formatting.Indented);
         }
 
         /// <summary>

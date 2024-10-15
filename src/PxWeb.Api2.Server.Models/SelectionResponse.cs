@@ -30,7 +30,7 @@ namespace PxWeb.Api2.Server.Models
         /// The language code for the language used in this response
         /// </summary>
         /// <value>The language code for the language used in this response</value>
-        /// <example>&quot;sv&quot;</example>
+        /* <example>sv</example> */
         [Required]
         [DataMember(Name="language", EmitDefaultValue=false)]
         public string Language { get; set; }
@@ -70,7 +70,7 @@ namespace PxWeb.Api2.Server.Models
         /// <returns>JSON string presentation of the object</returns>
         public string ToJson()
         {
-            return Newtonsoft.Json.JsonConvert.SerializeObject(this, Newtonsoft.Json.Formatting.Indented);
+            return JsonConvert.SerializeObject(this, Formatting.Indented);
         }
 
         /// <summary>

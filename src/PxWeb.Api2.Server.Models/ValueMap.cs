@@ -30,7 +30,7 @@ namespace PxWeb.Api2.Server.Models
         /// The code for the value.
         /// </summary>
         /// <value>The code for the value.</value>
-        /// <example>&quot;SE22&quot;</example>
+        /* <example>SE22</example> */
         [Required]
         [DataMember(Name="code", EmitDefaultValue=false)]
         public string Code { get; set; }
@@ -39,7 +39,7 @@ namespace PxWeb.Api2.Server.Models
         /// The textual representation for the value
         /// </summary>
         /// <value>The textual representation for the value</value>
-        /// <example>&quot;Sydsverige&quot;</example>
+        /* <example>Sydsverige</example> */
         [Required]
         [DataMember(Name="label", EmitDefaultValue=false)]
         public string Label { get; set; }
@@ -48,9 +48,10 @@ namespace PxWeb.Api2.Server.Models
         /// An array of codes from the origial codelist for the variable that cand be mapped to this value
         /// </summary>
         /// <value>An array of codes from the origial codelist for the variable that cand be mapped to this value</value>
+        /* <example>[&quot;10&quot;, &quot;12&quot;]</example> */
         [Required]
         [DataMember(Name="valueMap", EmitDefaultValue=false)]
-        public List<string> _ValueMap { get; set; }
+        public List<string> VarValueMap { get; set; }
 
         /// <summary>
         /// Optional notes that are associated with the value
@@ -69,7 +70,7 @@ namespace PxWeb.Api2.Server.Models
             sb.Append("class ValueMap {\n");
             sb.Append("  Code: ").Append(Code).Append("\n");
             sb.Append("  Label: ").Append(Label).Append("\n");
-            sb.Append("  _ValueMap: ").Append(_ValueMap).Append("\n");
+            sb.Append("  VarValueMap: ").Append(VarValueMap).Append("\n");
             sb.Append("  Notes: ").Append(Notes).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
@@ -81,7 +82,7 @@ namespace PxWeb.Api2.Server.Models
         /// <returns>JSON string presentation of the object</returns>
         public string ToJson()
         {
-            return Newtonsoft.Json.JsonConvert.SerializeObject(this, Newtonsoft.Json.Formatting.Indented);
+            return JsonConvert.SerializeObject(this, Formatting.Indented);
         }
 
         /// <summary>
@@ -118,10 +119,10 @@ namespace PxWeb.Api2.Server.Models
                     Label.Equals(other.Label)
                 ) && 
                 (
-                    _ValueMap == other._ValueMap ||
-                    _ValueMap != null &&
-                    other._ValueMap != null &&
-                    _ValueMap.SequenceEqual(other._ValueMap)
+                    VarValueMap == other.VarValueMap ||
+                    VarValueMap != null &&
+                    other.VarValueMap != null &&
+                    VarValueMap.SequenceEqual(other.VarValueMap)
                 ) && 
                 (
                     Notes == other.Notes ||
@@ -145,8 +146,8 @@ namespace PxWeb.Api2.Server.Models
                     hashCode = hashCode * 59 + Code.GetHashCode();
                     if (Label != null)
                     hashCode = hashCode * 59 + Label.GetHashCode();
-                    if (_ValueMap != null)
-                    hashCode = hashCode * 59 + _ValueMap.GetHashCode();
+                    if (VarValueMap != null)
+                    hashCode = hashCode * 59 + VarValueMap.GetHashCode();
                     if (Notes != null)
                     hashCode = hashCode * 59 + Notes.GetHashCode();
                 return hashCode;

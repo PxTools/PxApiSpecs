@@ -25,7 +25,7 @@ jobs:
           generator: aspnetcore
           openapi-file: PxAPI-2.yml
           config-file: aspnetcore-generator-config.yml
-          generator-tag: v6.5.0
+          generator-tag: v7.9.0
           command-args: -o .
 
       - name: Check for staged changes
@@ -35,7 +35,7 @@ jobs:
       - name: Setup .NET Core
         uses: actions/setup-dotnet@v4
         with:
-          dotnet-version: 6.0.x
+          dotnet-version: 8.0.x
 
       - name: Restore Nuget
         run: dotnet restore

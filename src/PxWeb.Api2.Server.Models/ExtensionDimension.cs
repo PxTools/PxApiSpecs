@@ -31,14 +31,14 @@ namespace PxWeb.Api2.Server.Models
         /// </summary>
         /// <value>Can dimension be elminated</value>
         [DataMember(Name="elimination", EmitDefaultValue=true)]
-        public bool Elimination { get; set; }
+        public bool? Elimination { get; set; }
 
         /// <summary>
         /// Elimination value code
         /// </summary>
         /// <value>Elimination value code</value>
         [DataMember(Name="eliminationValueCode", EmitDefaultValue=false)]
-        public string EliminationValueCode { get; set; }
+        public string? EliminationValueCode { get; set; }
 
         /// <summary>
         /// Describes if a note of a certain index is mandatory.
@@ -66,7 +66,7 @@ namespace PxWeb.Api2.Server.Models
         /// </summary>
         /// <value>Information about how variables are presented</value>
         [DataMember(Name="show", EmitDefaultValue=false)]
-        public string Show { get; set; }
+        public string? Show { get; set; }
 
         /// <summary>
         /// Available codelists for this dimension
@@ -80,21 +80,21 @@ namespace PxWeb.Api2.Server.Models
         /// </summary>
         /// <value>How often a table is updated</value>
         [DataMember(Name="frequency", EmitDefaultValue=false)]
-        public string Frequency { get; set; }
+        public string? Frequency { get; set; }
 
         /// <summary>
         /// Earliest time period in table
         /// </summary>
         /// <value>Earliest time period in table</value>
         [DataMember(Name="firstPeriod", EmitDefaultValue=false)]
-        public string FirstPeriod { get; set; }
+        public string? FirstPeriod { get; set; }
 
         /// <summary>
         /// Latest time period in table
         /// </summary>
         /// <value>Latest time period in table</value>
         [DataMember(Name="lastPeriod", EmitDefaultValue=false)]
-        public string LastPeriod { get; set; }
+        public string? LastPeriod { get; set; }
 
         /// <summary>
         /// Returns the string presentation of the object
@@ -124,7 +124,7 @@ namespace PxWeb.Api2.Server.Models
         /// <returns>JSON string presentation of the object</returns>
         public string ToJson()
         {
-            return Newtonsoft.Json.JsonConvert.SerializeObject(this, Newtonsoft.Json.Formatting.Indented);
+            return JsonConvert.SerializeObject(this, Formatting.Indented);
         }
 
         /// <summary>
