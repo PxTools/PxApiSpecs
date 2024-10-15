@@ -267,6 +267,26 @@ paths:
           name: outputFormat
           schema:
             type: string
+        - in: query
+          name: heading
+          style: form
+          explode: false 
+          required: false
+          description: Commaseparated list of variable codes that should be placed in the heading in the resulting data
+          schema:
+            type: array
+            items:
+              type: string
+        - in: query
+          name: stub
+          style: form
+          explode: false 
+          required: false
+          description: Commaseparated list of variable codes that should be placed in the stub in the resulting data
+          schema:
+            type: array
+            items:
+              type: string          
       responses:
         '200':
           description: Success
@@ -456,8 +476,23 @@ components:
         selection:
           type: array
           items:
-            $ref: '#/components/schemas/VariableSelection'  
-          
+            $ref: '#/components/schemas/VariableSelection'
+        palcement:
+          $ref: '#/components/schemas/VariablePlacementType'
+
+    VariablePlacementType:  
+      type: object
+      properties:
+        heading:
+          description: List of variables that should be placed in the heading in the resulting data
+          type: array
+          items:
+            type: string
+        stub:
+          description: List of variables that should be placed in the stub in the resulting data
+          type: array
+          items:
+            type: string  
     SelectionResponse: 
       type: object
       required:

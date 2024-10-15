@@ -24,20 +24,21 @@ namespace PxWeb.Api2.Server.Models
     /// 
     /// </summary>
     [DataContract]
-    public class VariablesSelection : IEquatable<VariablesSelection>
+    public class VariablePlacementType : IEquatable<VariablePlacementType>
     {
         /// <summary>
-        /// Gets or Sets Selection
+        /// List of variables that should be placed in the heading in the resulting data
         /// </summary>
-        [Required]
-        [DataMember(Name="selection", EmitDefaultValue=false)]
-        public List<VariableSelection> Selection { get; set; }
+        /// <value>List of variables that should be placed in the heading in the resulting data</value>
+        [DataMember(Name="heading", EmitDefaultValue=false)]
+        public List<string> Heading { get; set; }
 
         /// <summary>
-        /// Gets or Sets Palcement
+        /// List of variables that should be placed in the stub in the resulting data
         /// </summary>
-        [DataMember(Name="palcement", EmitDefaultValue=false)]
-        public VariablePlacementType Palcement { get; set; }
+        /// <value>List of variables that should be placed in the stub in the resulting data</value>
+        [DataMember(Name="stub", EmitDefaultValue=false)]
+        public List<string> Stub { get; set; }
 
         /// <summary>
         /// Returns the string presentation of the object
@@ -46,9 +47,9 @@ namespace PxWeb.Api2.Server.Models
         public override string ToString()
         {
             var sb = new StringBuilder();
-            sb.Append("class VariablesSelection {\n");
-            sb.Append("  Selection: ").Append(Selection).Append("\n");
-            sb.Append("  Palcement: ").Append(Palcement).Append("\n");
+            sb.Append("class VariablePlacementType {\n");
+            sb.Append("  Heading: ").Append(Heading).Append("\n");
+            sb.Append("  Stub: ").Append(Stub).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -71,30 +72,31 @@ namespace PxWeb.Api2.Server.Models
         {
             if (obj is null) return false;
             if (ReferenceEquals(this, obj)) return true;
-            return obj.GetType() == GetType() && Equals((VariablesSelection)obj);
+            return obj.GetType() == GetType() && Equals((VariablePlacementType)obj);
         }
 
         /// <summary>
-        /// Returns true if VariablesSelection instances are equal
+        /// Returns true if VariablePlacementType instances are equal
         /// </summary>
-        /// <param name="other">Instance of VariablesSelection to be compared</param>
+        /// <param name="other">Instance of VariablePlacementType to be compared</param>
         /// <returns>Boolean</returns>
-        public bool Equals(VariablesSelection other)
+        public bool Equals(VariablePlacementType other)
         {
             if (other is null) return false;
             if (ReferenceEquals(this, other)) return true;
 
             return 
                 (
-                    Selection == other.Selection ||
-                    Selection != null &&
-                    other.Selection != null &&
-                    Selection.SequenceEqual(other.Selection)
+                    Heading == other.Heading ||
+                    Heading != null &&
+                    other.Heading != null &&
+                    Heading.SequenceEqual(other.Heading)
                 ) && 
                 (
-                    Palcement == other.Palcement ||
-                    Palcement != null &&
-                    Palcement.Equals(other.Palcement)
+                    Stub == other.Stub ||
+                    Stub != null &&
+                    other.Stub != null &&
+                    Stub.SequenceEqual(other.Stub)
                 );
         }
 
@@ -108,10 +110,10 @@ namespace PxWeb.Api2.Server.Models
             {
                 var hashCode = 41;
                 // Suitable nullity checks etc, of course :)
-                    if (Selection != null)
-                    hashCode = hashCode * 59 + Selection.GetHashCode();
-                    if (Palcement != null)
-                    hashCode = hashCode * 59 + Palcement.GetHashCode();
+                    if (Heading != null)
+                    hashCode = hashCode * 59 + Heading.GetHashCode();
+                    if (Stub != null)
+                    hashCode = hashCode * 59 + Stub.GetHashCode();
                 return hashCode;
             }
         }
@@ -119,12 +121,12 @@ namespace PxWeb.Api2.Server.Models
         #region Operators
         #pragma warning disable 1591
 
-        public static bool operator ==(VariablesSelection left, VariablesSelection right)
+        public static bool operator ==(VariablePlacementType left, VariablePlacementType right)
         {
             return Equals(left, right);
         }
 
-        public static bool operator !=(VariablesSelection left, VariablesSelection right)
+        public static bool operator !=(VariablePlacementType left, VariablePlacementType right)
         {
             return !Equals(left, right);
         }
