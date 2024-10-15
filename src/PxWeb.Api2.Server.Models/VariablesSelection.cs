@@ -37,7 +37,7 @@ namespace PxWeb.Api2.Server.Models
         /// Gets or Sets Palcement
         /// </summary>
         [DataMember(Name="palcement", EmitDefaultValue=false)]
-        public VariablePlacementType Palcement { get; set; }
+        public VariablePlacementType? Palcement { get; set; }
 
         /// <summary>
         /// Returns the string presentation of the object
