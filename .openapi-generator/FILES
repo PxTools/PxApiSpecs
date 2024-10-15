@@ -52,6 +52,7 @@ src/PxWeb.Api2.Server.Models/TablesResponse.cs
 src/PxWeb.Api2.Server.Models/TimeVariable.cs
 src/PxWeb.Api2.Server.Models/Value.cs
 src/PxWeb.Api2.Server.Models/ValueMap.cs
+src/PxWeb.Api2.Server.Models/VariablePlacementType.cs
 src/PxWeb.Api2.Server.Models/VariableSelection.cs
 src/PxWeb.Api2.Server.Models/VariableTypeEnum.cs
 src/PxWeb.Api2.Server.Models/VariablesSelection.cs

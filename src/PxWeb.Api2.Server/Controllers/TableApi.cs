@@ -115,6 +115,8 @@ namespace PxWeb.Api2.Server.Controllers
         /// <param name="codelist"></param>
         /// <param name="outputvalues"></param>
         /// <param name="outputFormat"></param>
+        /// <param name="heading">Commaseparated list of variable codes that should be placed in the heading in the resulting data</param>
+        /// <param name="stub">Commaseparated list of variable codes that should be placed in the stub in the resulting data</param>
         /// <response code="200">Success</response>
         /// <response code="400">Error respsone for 400</response>
         /// <response code="403">Error respsone for 403</response>
@@ -129,7 +131,7 @@ namespace PxWeb.Api2.Server.Controllers
         [SwaggerResponse(statusCode: 403, type: typeof(Problem), description: "Error respsone for 403")]
         [SwaggerResponse(statusCode: 404, type: typeof(Problem), description: "Error respsone for 404")]
         [SwaggerResponse(statusCode: 429, type: typeof(Problem), description: "Error respsone for 429")]
-        public abstract IActionResult GetTableData([FromRoute (Name = "id")][Required]string id, [FromQuery (Name = "lang")]string? lang, [FromQuery (Name = "valuecodes")]Dictionary<string, List<string>>? valuecodes, [FromQuery (Name = "codelist")]Dictionary<string, string>? codelist, [FromQuery (Name = "outputvalues")]Dictionary<string, CodeListOutputValuesType>? outputvalues, [FromQuery (Name = "outputFormat")]string? outputFormat);
+        public abstract IActionResult GetTableData([FromRoute (Name = "id")][Required]string id, [FromQuery (Name = "lang")]string? lang, [FromQuery (Name = "valuecodes")]Dictionary<string, List<string>>? valuecodes, [FromQuery (Name = "codelist")]Dictionary<string, string>? codelist, [FromQuery (Name = "outputvalues")]Dictionary<string, CodeListOutputValuesType>? outputvalues, [FromQuery (Name = "outputFormat")]string? outputFormat, [FromQuery (Name = "heading")]List<string>? heading, [FromQuery (Name = "stub")]List<string>? stub);
 
         /// <summary>
         /// Get data from table by {id}.
