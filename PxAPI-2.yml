@@ -493,19 +493,23 @@ components:
           type: array
           items:
             type: string  
-    SelectionResponse: 
+    SelectionResponse:
+      allOf:
+        - $ref: '#/components/schemas/VariablesSelection' 
       type: object
       required:
         - "language"
-        - "selection"
         - "links"
       properties:
         language:
           type: string
           description: The language code for the language used in this response
           example: sv
-        selection:
-          $ref: '#/components/schemas/VariablesSelection'
+        codeLists:
+          type: array
+          nullable: true
+          items:
+            $ref: '#/components/schemas/CodeList'
         links: 
           type: array
           items:
@@ -1262,11 +1266,23 @@ components:
         - Valueset
 
     CodeListResponse: 
+      allOf:
+        - $ref: "#/components/schemas/CodeList"
+        - type: object
+          required:
+            - "language"
+
+          properties:
+            language:
+              type: string
+              description: The language code for the language used in this response
+              example: sv
+        
+    CodeList: 
       type: object
       required:
         - "id"
         - "label"
-        - "language"
         - "type"
         - "values"
         - "links"
@@ -1279,10 +1295,6 @@ components:
           type: string
           description: The textual name  for the codelist. 
           example: NUTS2 fr.o.m 2008 
-        language:
-          type: string
-          description: The language code for the language used in this response
-          example: sv
         type:
           $ref: '#/components/schemas/CodeListType'
         values:
