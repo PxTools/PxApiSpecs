@@ -24,7 +24,7 @@ namespace PxWeb.Api2.Server.Models
     /// 
     /// </summary>
     [DataContract]
-    public class CodeListResponse : IEquatable<CodeListResponse>
+    public class CodeList : IEquatable<CodeList>
     {
         /// <summary>
         /// The identiyer for the codelist
@@ -66,28 +66,18 @@ namespace PxWeb.Api2.Server.Models
         public List<Link> Links { get; set; }
 
         /// <summary>
-        /// The language code for the language used in this response
-        /// </summary>
-        /// <value>The language code for the language used in this response</value>
-        /* <example>sv</example> */
-        [Required]
-        [DataMember(Name="language", EmitDefaultValue=false)]
-        public string Language { get; set; }
-
-        /// <summary>
         /// Returns the string presentation of the object
         /// </summary>
         /// <returns>String presentation of the object</returns>
         public override string ToString()
         {
             var sb = new StringBuilder();
-            sb.Append("class CodeListResponse {\n");
+            sb.Append("class CodeList {\n");
             sb.Append("  Id: ").Append(Id).Append("\n");
             sb.Append("  Label: ").Append(Label).Append("\n");
             sb.Append("  Type: ").Append(Type).Append("\n");
             sb.Append("  Values: ").Append(Values).Append("\n");
             sb.Append("  Links: ").Append(Links).Append("\n");
-            sb.Append("  Language: ").Append(Language).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -110,15 +100,15 @@ namespace PxWeb.Api2.Server.Models
         {
             if (obj is null) return false;
             if (ReferenceEquals(this, obj)) return true;
-            return obj.GetType() == GetType() && Equals((CodeListResponse)obj);
+            return obj.GetType() == GetType() && Equals((CodeList)obj);
         }
 
         /// <summary>
-        /// Returns true if CodeListResponse instances are equal
+        /// Returns true if CodeList instances are equal
         /// </summary>
-        /// <param name="other">Instance of CodeListResponse to be compared</param>
+        /// <param name="other">Instance of CodeList to be compared</param>
         /// <returns>Boolean</returns>
-        public bool Equals(CodeListResponse other)
+        public bool Equals(CodeList other)
         {
             if (other is null) return false;
             if (ReferenceEquals(this, other)) return true;
@@ -150,11 +140,6 @@ namespace PxWeb.Api2.Server.Models
                     Links != null &&
                     other.Links != null &&
                     Links.SequenceEqual(other.Links)
-                ) && 
-                (
-                    Language == other.Language ||
-                    Language != null &&
-                    Language.Equals(other.Language)
                 );
         }
 
@@ -178,8 +163,6 @@ namespace PxWeb.Api2.Server.Models
                     hashCode = hashCode * 59 + Values.GetHashCode();
                     if (Links != null)
                     hashCode = hashCode * 59 + Links.GetHashCode();
-                    if (Language != null)
-                    hashCode = hashCode * 59 + Language.GetHashCode();
                 return hashCode;
             }
         }
@@ -187,12 +170,12 @@ namespace PxWeb.Api2.Server.Models
         #region Operators
         #pragma warning disable 1591
 
-        public static bool operator ==(CodeListResponse left, CodeListResponse right)
+        public static bool operator ==(CodeList left, CodeList right)
         {
             return Equals(left, right);
         }
 
-        public static bool operator !=(CodeListResponse left, CodeListResponse right)
+        public static bool operator !=(CodeList left, CodeList right)
         {
             return !Equals(left, right);
         }
