@@ -56,10 +56,10 @@ namespace PxWeb.Api2.Server.Models
         public List<VariableSelection> Selection { get; set; }
 
         /// <summary>
-        /// Gets or Sets Palcement
+        /// Gets or Sets Placement
         /// </summary>
-        [DataMember(Name="palcement", EmitDefaultValue=false)]
-        public VariablePlacementType? Palcement { get; set; }
+        [DataMember(Name="placement", EmitDefaultValue=false)]
+        public VariablePlacementType? Placement { get; set; }
 
         /// <summary>
         /// Returns the string presentation of the object
@@ -73,7 +73,7 @@ namespace PxWeb.Api2.Server.Models
             sb.Append("  CodeLists: ").Append(CodeLists).Append("\n");
             sb.Append("  Links: ").Append(Links).Append("\n");
             sb.Append("  Selection: ").Append(Selection).Append("\n");
-            sb.Append("  Palcement: ").Append(Palcement).Append("\n");
+            sb.Append("  Placement: ").Append(Placement).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -134,9 +134,9 @@ namespace PxWeb.Api2.Server.Models
                     Selection.SequenceEqual(other.Selection)
                 ) && 
                 (
-                    Palcement == other.Palcement ||
-                    Palcement != null &&
-                    Palcement.Equals(other.Palcement)
+                    Placement == other.Placement ||
+                    Placement != null &&
+                    Placement.Equals(other.Placement)
                 );
         }
 
@@ -158,8 +158,8 @@ namespace PxWeb.Api2.Server.Models
                     hashCode = hashCode * 59 + Links.GetHashCode();
                     if (Selection != null)
                     hashCode = hashCode * 59 + Selection.GetHashCode();
-                    if (Palcement != null)
-                    hashCode = hashCode * 59 + Palcement.GetHashCode();
+                    if (Placement != null)
+                    hashCode = hashCode * 59 + Placement.GetHashCode();
                 return hashCode;
             }
         }

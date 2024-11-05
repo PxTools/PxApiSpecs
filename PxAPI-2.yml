@@ -477,7 +477,7 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/VariableSelection'
-        palcement:
+        placement:
           $ref: '#/components/schemas/VariablePlacementType'
 
     VariablePlacementType:  
