@@ -36,11 +36,10 @@ namespace PxWeb.Api2.Server.Models
         public string Language { get; set; }
 
         /// <summary>
-        /// Gets or Sets Selection
+        /// Gets or Sets CodeLists
         /// </summary>
-        [Required]
-        [DataMember(Name="selection", EmitDefaultValue=false)]
-        public VariablesSelection Selection { get; set; }
+        [DataMember(Name="codeLists", EmitDefaultValue=true)]
+        public List<CodeList> CodeLists { get; set; }
 
         /// <summary>
         /// Gets or Sets Links
@@ -48,6 +47,19 @@ namespace PxWeb.Api2.Server.Models
         [Required]
         [DataMember(Name="links", EmitDefaultValue=false)]
         public List<Link> Links { get; set; }
+
+        /// <summary>
+        /// Gets or Sets Selection
+        /// </summary>
+        [Required]
+        [DataMember(Name="selection", EmitDefaultValue=false)]
+        public List<VariableSelection> Selection { get; set; }
+
+        /// <summary>
+        /// Gets or Sets Placement
+        /// </summary>
+        [DataMember(Name="placement", EmitDefaultValue=false)]
+        public VariablePlacementType? Placement { get; set; }
 
         /// <summary>
         /// Returns the string presentation of the object
@@ -58,8 +70,10 @@ namespace PxWeb.Api2.Server.Models
             var sb = new StringBuilder();
             sb.Append("class SelectionResponse {\n");
             sb.Append("  Language: ").Append(Language).Append("\n");
-            sb.Append("  Selection: ").Append(Selection).Append("\n");
+            sb.Append("  CodeLists: ").Append(CodeLists).Append("\n");
             sb.Append("  Links: ").Append(Links).Append("\n");
+            sb.Append("  Selection: ").Append(Selection).Append("\n");
+            sb.Append("  Placement: ").Append(Placement).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -102,15 +116,27 @@ namespace PxWeb.Api2.Server.Models
                     Language.Equals(other.Language)
                 ) && 
                 (
-                    Selection == other.Selection ||
-                    Selection != null &&
-                    Selection.Equals(other.Selection)
+                    CodeLists == other.CodeLists ||
+                    CodeLists != null &&
+                    other.CodeLists != null &&
+                    CodeLists.SequenceEqual(other.CodeLists)
                 ) && 
                 (
                     Links == other.Links ||
                     Links != null &&
                     other.Links != null &&
                     Links.SequenceEqual(other.Links)
+                ) && 
+                (
+                    Selection == other.Selection ||
+                    Selection != null &&
+                    other.Selection != null &&
+                    Selection.SequenceEqual(other.Selection)
+                ) && 
+                (
+                    Placement == other.Placement ||
+                    Placement != null &&
+                    Placement.Equals(other.Placement)
                 );
         }
 
@@ -126,10 +152,14 @@ namespace PxWeb.Api2.Server.Models
                 // Suitable nullity checks etc, of course :)
                     if (Language != null)
                     hashCode = hashCode * 59 + Language.GetHashCode();
-                    if (Selection != null)
-                    hashCode = hashCode * 59 + Selection.GetHashCode();
+                    if (CodeLists != null)
+                    hashCode = hashCode * 59 + CodeLists.GetHashCode();
                     if (Links != null)
                     hashCode = hashCode * 59 + Links.GetHashCode();
+                    if (Selection != null)
+                    hashCode = hashCode * 59 + Selection.GetHashCode();
+                    if (Placement != null)
+                    hashCode = hashCode * 59 + Placement.GetHashCode();
                 return hashCode;
             }
         }

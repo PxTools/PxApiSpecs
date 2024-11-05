@@ -6,6 +6,7 @@ src/PxWeb.Api2.Server.Models/AbstractVariable.cs
 src/PxWeb.Api2.Server.Models/ApiFeature.cs
 src/PxWeb.Api2.Server.Models/CellNote.cs
 src/PxWeb.Api2.Server.Models/ClassType.cs
+src/PxWeb.Api2.Server.Models/CodeList.cs
 src/PxWeb.Api2.Server.Models/CodeListInformation.cs
 src/PxWeb.Api2.Server.Models/CodeListMetadata.cs
 src/PxWeb.Api2.Server.Models/CodeListOutputValuesType.cs
