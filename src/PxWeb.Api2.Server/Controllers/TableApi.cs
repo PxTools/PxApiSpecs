@@ -54,6 +54,7 @@ namespace PxWeb.Api2.Server.Controllers
         /// <param name="id">Id</param>
         /// <param name="lang">The language if the default is not what you want.</param>
         /// <param name="outputFormat">The format of the resulting metadata</param>
+        /// <param name="defaultSelection">If metadata should be included as if default selection would have been applied. This is a technical parameter that is used by PxWeb for initial loading of tables. </param>
         /// <response code="200">Success</response>
         /// <response code="400">Error respsone for 400</response>
         /// <response code="404">Error respsone for 404</response>
@@ -66,7 +67,7 @@ namespace PxWeb.Api2.Server.Controllers
         [SwaggerResponse(statusCode: 400, type: typeof(Problem), description: "Error respsone for 400")]
         [SwaggerResponse(statusCode: 404, type: typeof(Problem), description: "Error respsone for 404")]
         [SwaggerResponse(statusCode: 429, type: typeof(Problem), description: "Error respsone for 429")]
-        public abstract IActionResult GetMetadataById([FromRoute (Name = "id")][Required]string id, [FromQuery (Name = "lang")]string? lang, [FromQuery (Name = "outputFormat")]MetadataOutputFormatType? outputFormat);
+        public abstract IActionResult GetMetadataById([FromRoute (Name = "id")][Required]string id, [FromQuery (Name = "lang")]string? lang, [FromQuery (Name = "outputFormat")]MetadataOutputFormatType? outputFormat, [FromQuery (Name = "defaultSelection")]bool? defaultSelection);
 
         /// <summary>
         /// Get Table by {id}.

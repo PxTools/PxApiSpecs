@@ -141,6 +141,16 @@ paths:
         - $ref: '#/components/parameters/lang'
         - $ref: '#/components/parameters/id'
         - $ref: '#/components/parameters/metadataOutputFormat'
+        - in: query
+          name: defaultSelection
+          schema:
+            type: boolean
+            default: false
+          description: |
+            If metadata should be included as if default selection would have been applied.
+            This is a technical parameter that is used by PxWeb for initial loading of tables.
+
+
       responses:
         '200':
           description: Success
