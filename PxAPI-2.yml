@@ -487,7 +487,7 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/VariableSelection'
-        palcement:
+        placement:
           $ref: '#/components/schemas/VariablePlacementType'
 
     VariablePlacementType:  
@@ -504,18 +504,17 @@ components:
           items:
             type: string  
     SelectionResponse: 
+      allOf:
+        - $ref: '#/components/schemas/VariablesSelection' 
       type: object
       required:
         - "language"
-        - "selection"
         - "links"
       properties:
         language:
           type: string
           description: The language code for the language used in this response
           example: sv
-        selection:
-          $ref: '#/components/schemas/VariablesSelection'
         links: 
           type: array
           items:
