@@ -277,6 +277,37 @@ paths:
           name: outputFormat
           schema:
             type: string
+            enum: 
+              - px
+              - json-stat2
+              - csv
+              - xlsx
+              - html
+              - json-px
+              - parquet
+        - in: query
+          name: outputFormatParams
+          required: false
+          schema:
+            type: array
+            items:
+              type: string
+            oneOf:
+              - type: array
+                items:
+                  type: string
+                  enum: [UseCodes, UseTexts, UseCodesAndTexts, IncludeTitle]
+                description: List of parameters for the xlsx and html output format
+              - type: array
+                items:
+                  type: string
+                  enum: [UseCodes, UseTexts, UseCodesAndTexts, IncludeTitle, SeparatorTab, SeparatorSpace,  SeparatorSemicolon]
+                description: List of parameters for the csv output format
+              - not:
+                  type: array
+                  items:
+                    type: string
+                description: Not allowed for px, json-stat2, json-px and parquet output format
         - in: query
           name: heading
           style: form
