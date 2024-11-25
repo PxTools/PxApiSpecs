@@ -33,17 +33,17 @@ namespace PxWeb.Api2.Server.Controllers
         /// <param name="id">Id</param>
         /// <param name="lang">The language if the default is not what you want.</param>
         /// <response code="200">Success</response>
-        /// <response code="400">Error respsone for 400</response>
-        /// <response code="404">Error respsone for 404</response>
-        /// <response code="429">Error respsone for 429</response>
+        /// <response code="400">Error response for 400</response>
+        /// <response code="404">Error response for 404</response>
+        /// <response code="429">Error response for 429</response>
         [HttpGet]
         [Route("/navigation/{id}")]
         [ValidateModelState]
         [SwaggerOperation("GetNavigationById")]
         [SwaggerResponse(statusCode: 200, type: typeof(FolderResponse), description: "Success")]
-        [SwaggerResponse(statusCode: 400, type: typeof(Problem), description: "Error respsone for 400")]
-        [SwaggerResponse(statusCode: 404, type: typeof(Problem), description: "Error respsone for 404")]
-        [SwaggerResponse(statusCode: 429, type: typeof(Problem), description: "Error respsone for 429")]
+        [SwaggerResponse(statusCode: 400, type: typeof(Problem), description: "Error response for 400")]
+        [SwaggerResponse(statusCode: 404, type: typeof(Problem), description: "Error response for 404")]
+        [SwaggerResponse(statusCode: 429, type: typeof(Problem), description: "Error response for 429")]
         public abstract IActionResult GetNavigationById([FromRoute (Name = "id")][Required]string id, [FromQuery (Name = "lang")]string? lang);
 
         /// <summary>
@@ -51,17 +51,17 @@ namespace PxWeb.Api2.Server.Controllers
         /// </summary>
         /// <param name="lang">The language if the default is not what you want.</param>
         /// <response code="200">Success</response>
-        /// <response code="400">Error respsone for 400</response>
-        /// <response code="404">Error respsone for 404</response>
-        /// <response code="429">Error respsone for 429</response>
+        /// <response code="400">Error response for 400</response>
+        /// <response code="404">Error response for 404</response>
+        /// <response code="429">Error response for 429</response>
         [HttpGet]
         [Route("/navigation")]
         [ValidateModelState]
         [SwaggerOperation("GetNavigationRoot")]
         [SwaggerResponse(statusCode: 200, type: typeof(FolderResponse), description: "Success")]
-        [SwaggerResponse(statusCode: 400, type: typeof(Problem), description: "Error respsone for 400")]
-        [SwaggerResponse(statusCode: 404, type: typeof(Problem), description: "Error respsone for 404")]
-        [SwaggerResponse(statusCode: 429, type: typeof(Problem), description: "Error respsone for 429")]
+        [SwaggerResponse(statusCode: 400, type: typeof(Problem), description: "Error response for 400")]
+        [SwaggerResponse(statusCode: 404, type: typeof(Problem), description: "Error response for 404")]
+        [SwaggerResponse(statusCode: 429, type: typeof(Problem), description: "Error response for 429")]
         public abstract IActionResult GetNavigationRoot([FromQuery (Name = "lang")]string? lang);
     }
 }

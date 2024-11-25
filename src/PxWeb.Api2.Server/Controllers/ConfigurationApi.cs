@@ -31,17 +31,17 @@ namespace PxWeb.Api2.Server.Controllers
         /// Get API configuration settings.
         /// </summary>
         /// <response code="200">Success</response>
-        /// <response code="400">Error respsone for 400</response>
-        /// <response code="404">Error respsone for 404</response>
-        /// <response code="429">Error respsone for 429</response>
+        /// <response code="400">Error response for 400</response>
+        /// <response code="404">Error response for 404</response>
+        /// <response code="429">Error response for 429</response>
         [HttpGet]
         [Route("/config")]
         [ValidateModelState]
         [SwaggerOperation("GetApiConfiguration")]
         [SwaggerResponse(statusCode: 200, type: typeof(ConfigResponse), description: "Success")]
-        [SwaggerResponse(statusCode: 400, type: typeof(Problem), description: "Error respsone for 400")]
-        [SwaggerResponse(statusCode: 404, type: typeof(Problem), description: "Error respsone for 404")]
-        [SwaggerResponse(statusCode: 429, type: typeof(Problem), description: "Error respsone for 429")]
+        [SwaggerResponse(statusCode: 400, type: typeof(Problem), description: "Error response for 400")]
+        [SwaggerResponse(statusCode: 404, type: typeof(Problem), description: "Error response for 404")]
+        [SwaggerResponse(statusCode: 429, type: typeof(Problem), description: "Error response for 429")]
         public abstract IActionResult GetApiConfiguration();
     }
 }
