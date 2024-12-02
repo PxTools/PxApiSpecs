@@ -292,22 +292,23 @@ paths:
             type: array
             items:
               type: string
-            oneOf:
-              - type: array
-                items:
-                  type: string
-                  enum: [UseCodes, UseTexts, UseCodesAndTexts, IncludeTitle]
-                description: List of parameters for the xlsx and html output format
-              - type: array
-                items:
-                  type: string
-                  enum: [UseCodes, UseTexts, UseCodesAndTexts, IncludeTitle, SeparatorTab, SeparatorSpace,  SeparatorSemicolon]
-                description: List of parameters for the csv output format
-              - not:
-                  type: array
-                  items:
-                    type: string
-                description: Not allowed for px, json-stat2, json-px and parquet output format
+              enum: 
+                - UseCodes
+                - UseTexts
+                - UseCodesAndTexts
+                - IncludeTitle
+                - SeparatorTab
+                - SeparatorSpace
+                - SeparatorSemicolon
+              description: |
+                Parameters for the output format. 
+                * UseCodes: Can not be combined with UseTexts and UseCodesAndTexts. And only applicable for csv, html and xlsx output format.
+                * UseTexts: Can not be combined with UsedCodes and UseCodesAndTexts. And only applicable for csv, html and xlsx output format.
+                * UseCodesAndTexts: Can not be combined with UseCodess and UseTexts. And only applicable for csv, html and xlsx output format.
+                * IncludeTitle: Only applicable for csv, html and xlsx output format.
+                * SeparatorTab: Can not be combined with SeparatorSpace and SeparatorSemicolon. And only applicable for csv output format.
+                * SeparatorSpace: Can not be combined with SeparatorTab and SeparatorSemicolon. And only applicable for csv output format.
+                * SeparatorSemicolon: Can not be combined with SeparatorTab and SeparatorSpace. And only applicable for csv output format.
         - in: query
           name: heading
           style: form
