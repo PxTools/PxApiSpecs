@@ -34,17 +34,17 @@ namespace PxWeb.Api2.Server.Controllers
         /// <param name="id">Id</param>
         /// <param name="lang">The language if the default is not what you want.</param>
         /// <response code="200">Success</response>
-        /// <response code="400">Error respsone for 400</response>
-        /// <response code="404">Error respsone for 404</response>
-        /// <response code="429">Error respsone for 429</response>
+        /// <response code="400">Error response for 400</response>
+        /// <response code="404">Error response for 404</response>
+        /// <response code="429">Error response for 429</response>
         [HttpGet]
         [Route("/tables/{id}/defaultselection")]
         [ValidateModelState]
         [SwaggerOperation("GetDefaultSelection")]
         [SwaggerResponse(statusCode: 200, type: typeof(SelectionResponse), description: "Success")]
-        [SwaggerResponse(statusCode: 400, type: typeof(Problem), description: "Error respsone for 400")]
-        [SwaggerResponse(statusCode: 404, type: typeof(Problem), description: "Error respsone for 404")]
-        [SwaggerResponse(statusCode: 429, type: typeof(Problem), description: "Error respsone for 429")]
+        [SwaggerResponse(statusCode: 400, type: typeof(Problem), description: "Error response for 400")]
+        [SwaggerResponse(statusCode: 404, type: typeof(Problem), description: "Error response for 404")]
+        [SwaggerResponse(statusCode: 429, type: typeof(Problem), description: "Error response for 429")]
         public abstract IActionResult GetDefaultSelection([FromRoute (Name = "id")][Required]string id, [FromQuery (Name = "lang")]string? lang);
 
         /// <summary>
@@ -56,17 +56,17 @@ namespace PxWeb.Api2.Server.Controllers
         /// <param name="outputFormat">The format of the resulting metadata</param>
         /// <param name="defaultSelection">If metadata should be included as if default selection would have been applied. This is a technical parameter that is used by PxWeb for initial loading of tables. </param>
         /// <response code="200">Success</response>
-        /// <response code="400">Error respsone for 400</response>
-        /// <response code="404">Error respsone for 404</response>
-        /// <response code="429">Error respsone for 429</response>
+        /// <response code="400">Error response for 400</response>
+        /// <response code="404">Error response for 404</response>
+        /// <response code="429">Error response for 429</response>
         [HttpGet]
         [Route("/tables/{id}/metadata")]
         [ValidateModelState]
         [SwaggerOperation("GetMetadataById")]
         [SwaggerResponse(statusCode: 200, type: typeof(TableMetadataResponse), description: "Success")]
-        [SwaggerResponse(statusCode: 400, type: typeof(Problem), description: "Error respsone for 400")]
-        [SwaggerResponse(statusCode: 404, type: typeof(Problem), description: "Error respsone for 404")]
-        [SwaggerResponse(statusCode: 429, type: typeof(Problem), description: "Error respsone for 429")]
+        [SwaggerResponse(statusCode: 400, type: typeof(Problem), description: "Error response for 400")]
+        [SwaggerResponse(statusCode: 404, type: typeof(Problem), description: "Error response for 404")]
+        [SwaggerResponse(statusCode: 429, type: typeof(Problem), description: "Error response for 429")]
         public abstract IActionResult GetMetadataById([FromRoute (Name = "id")][Required]string id, [FromQuery (Name = "lang")]string? lang, [FromQuery (Name = "outputFormat")]MetadataOutputFormatType? outputFormat, [FromQuery (Name = "defaultSelection")]bool? defaultSelection);
 
         /// <summary>
@@ -75,17 +75,17 @@ namespace PxWeb.Api2.Server.Controllers
         /// <param name="id">Id</param>
         /// <param name="lang">The language if the default is not what you want.</param>
         /// <response code="200">Success</response>
-        /// <response code="400">Error respsone for 400</response>
-        /// <response code="404">Error respsone for 404</response>
-        /// <response code="429">Error respsone for 429</response>
+        /// <response code="400">Error response for 400</response>
+        /// <response code="404">Error response for 404</response>
+        /// <response code="429">Error response for 429</response>
         [HttpGet]
         [Route("/tables/{id}")]
         [ValidateModelState]
         [SwaggerOperation("GetTableById")]
         [SwaggerResponse(statusCode: 200, type: typeof(TableResponse), description: "Success")]
-        [SwaggerResponse(statusCode: 400, type: typeof(Problem), description: "Error respsone for 400")]
-        [SwaggerResponse(statusCode: 404, type: typeof(Problem), description: "Error respsone for 404")]
-        [SwaggerResponse(statusCode: 429, type: typeof(Problem), description: "Error respsone for 429")]
+        [SwaggerResponse(statusCode: 400, type: typeof(Problem), description: "Error response for 400")]
+        [SwaggerResponse(statusCode: 404, type: typeof(Problem), description: "Error response for 404")]
+        [SwaggerResponse(statusCode: 429, type: typeof(Problem), description: "Error response for 429")]
         public abstract IActionResult GetTableById([FromRoute (Name = "id")][Required]string id, [FromQuery (Name = "lang")]string? lang);
 
         /// <summary>
@@ -94,17 +94,17 @@ namespace PxWeb.Api2.Server.Controllers
         /// <param name="id">Id</param>
         /// <param name="lang">The language if the default is not what you want.</param>
         /// <response code="200">Success</response>
-        /// <response code="400">Error respsone for 400</response>
-        /// <response code="404">Error respsone for 404</response>
-        /// <response code="429">Error respsone for 429</response>
+        /// <response code="400">Error response for 400</response>
+        /// <response code="404">Error response for 404</response>
+        /// <response code="429">Error response for 429</response>
         [HttpGet]
         [Route("/codelists/{id}")]
         [ValidateModelState]
         [SwaggerOperation("GetTableCodeListById")]
         [SwaggerResponse(statusCode: 200, type: typeof(CodeListResponse), description: "Success")]
-        [SwaggerResponse(statusCode: 400, type: typeof(Problem), description: "Error respsone for 400")]
-        [SwaggerResponse(statusCode: 404, type: typeof(Problem), description: "Error respsone for 404")]
-        [SwaggerResponse(statusCode: 429, type: typeof(Problem), description: "Error respsone for 429")]
+        [SwaggerResponse(statusCode: 400, type: typeof(Problem), description: "Error response for 400")]
+        [SwaggerResponse(statusCode: 404, type: typeof(Problem), description: "Error response for 404")]
+        [SwaggerResponse(statusCode: 429, type: typeof(Problem), description: "Error response for 429")]
         public abstract IActionResult GetTableCodeListById([FromRoute (Name = "id")][Required]string id, [FromQuery (Name = "lang")]string? lang);
 
         /// <summary>
@@ -120,19 +120,19 @@ namespace PxWeb.Api2.Server.Controllers
         /// <param name="heading">Commaseparated list of variable codes that should be placed in the heading in the resulting data</param>
         /// <param name="stub">Commaseparated list of variable codes that should be placed in the stub in the resulting data</param>
         /// <response code="200">Success</response>
-        /// <response code="400">Error respsone for 400</response>
-        /// <response code="403">Error respsone for 403</response>
-        /// <response code="404">Error respsone for 404</response>
-        /// <response code="429">Error respsone for 429</response>
+        /// <response code="400">Error response for 400</response>
+        /// <response code="403">Error response for 403</response>
+        /// <response code="404">Error response for 404</response>
+        /// <response code="429">Error response for 429</response>
         [HttpGet]
         [Route("/tables/{id}/data")]
         [ValidateModelState]
         [SwaggerOperation("GetTableData")]
         [SwaggerResponse(statusCode: 200, type: typeof(string), description: "Success")]
-        [SwaggerResponse(statusCode: 400, type: typeof(Problem), description: "Error respsone for 400")]
-        [SwaggerResponse(statusCode: 403, type: typeof(Problem), description: "Error respsone for 403")]
-        [SwaggerResponse(statusCode: 404, type: typeof(Problem), description: "Error respsone for 404")]
-        [SwaggerResponse(statusCode: 429, type: typeof(Problem), description: "Error respsone for 429")]
+        [SwaggerResponse(statusCode: 400, type: typeof(Problem), description: "Error response for 400")]
+        [SwaggerResponse(statusCode: 403, type: typeof(Problem), description: "Error response for 403")]
+        [SwaggerResponse(statusCode: 404, type: typeof(Problem), description: "Error response for 404")]
+        [SwaggerResponse(statusCode: 429, type: typeof(Problem), description: "Error response for 429")]
         public abstract IActionResult GetTableData([FromRoute (Name = "id")][Required]string id, [FromQuery (Name = "lang")]string? lang, [FromQuery (Name = "valuecodes")]Dictionary<string, List<string>>? valuecodes, [FromQuery (Name = "codelist")]Dictionary<string, string>? codelist, [FromQuery (Name = "outputvalues")]Dictionary<string, CodeListOutputValuesType>? outputvalues, [FromQuery (Name = "outputFormat")]string? outputFormat, [FromQuery (Name = "outputFormatParams")]List<string>? outputFormatParams, [FromQuery (Name = "heading")]List<string>? heading, [FromQuery (Name = "stub")]List<string>? stub);
 
         /// <summary>
@@ -143,20 +143,20 @@ namespace PxWeb.Api2.Server.Controllers
         /// <param name="outputFormat"></param>
         /// <param name="variablesSelection">A selection</param>
         /// <response code="200">Success</response>
-        /// <response code="400">Error respsone for 400</response>
-        /// <response code="403">Error respsone for 403</response>
-        /// <response code="404">Error respsone for 404</response>
-        /// <response code="429">Error respsone for 429</response>
+        /// <response code="400">Error response for 400</response>
+        /// <response code="403">Error response for 403</response>
+        /// <response code="404">Error response for 404</response>
+        /// <response code="429">Error response for 429</response>
         [HttpPost]
         [Route("/tables/{id}/data")]
         [Consumes("application/json")]
         [ValidateModelState]
         [SwaggerOperation("GetTableDataByPost")]
         [SwaggerResponse(statusCode: 200, type: typeof(string), description: "Success")]
-        [SwaggerResponse(statusCode: 400, type: typeof(Problem), description: "Error respsone for 400")]
-        [SwaggerResponse(statusCode: 403, type: typeof(Problem), description: "Error respsone for 403")]
-        [SwaggerResponse(statusCode: 404, type: typeof(Problem), description: "Error respsone for 404")]
-        [SwaggerResponse(statusCode: 429, type: typeof(Problem), description: "Error respsone for 429")]
+        [SwaggerResponse(statusCode: 400, type: typeof(Problem), description: "Error response for 400")]
+        [SwaggerResponse(statusCode: 403, type: typeof(Problem), description: "Error response for 403")]
+        [SwaggerResponse(statusCode: 404, type: typeof(Problem), description: "Error response for 404")]
+        [SwaggerResponse(statusCode: 429, type: typeof(Problem), description: "Error response for 429")]
         public abstract IActionResult GetTableDataByPost([FromRoute (Name = "id")][Required]string id, [FromQuery (Name = "lang")]string? lang, [FromQuery (Name = "outputFormat")]string? outputFormat, [FromBody]VariablesSelection? variablesSelection);
 
         /// <summary>

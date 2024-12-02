@@ -1754,7 +1754,7 @@ components:
 
   responses:
     ErrorResponse429:
-      description: Error respsone for 429
+      description: Error response for 429
       content:
         application/problem+json:
           schema:
@@ -1769,7 +1769,7 @@ components:
             detail: You have reach the threshold for request limiting. 30 request per minute.
 
     ErrorResponse400:
-      description: Error respsone for 400
+      description: Error response for 400
       content:
         application/problem+json:
           schema:
@@ -1781,7 +1781,7 @@ components:
 
 
     ErrorResponse403:
-      description: Error respsone for 403
+      description: Error response for 403
       content:
         application/problem+json:
           schema:
@@ -1792,7 +1792,7 @@ components:
             detail: The query resulted in cell that exceeds the number of allowed.
 
     ErrorResponse404:
-      description: Error respsone for 404
+      description: Error response for 404
       content:
         application/problem+json:
           schema:
