@@ -277,6 +277,38 @@ paths:
           name: outputFormat
           schema:
             type: string
+            enum: 
+              - px
+              - json-stat2
+              - csv
+              - xlsx
+              - html
+              - json-px
+              - parquet
+        - in: query
+          name: outputFormatParams
+          required: false
+          schema:
+            type: array
+            items:
+              type: string
+              enum: 
+                - UseCodes
+                - UseTexts
+                - UseCodesAndTexts
+                - IncludeTitle
+                - SeparatorTab
+                - SeparatorSpace
+                - SeparatorSemicolon
+              description: |
+                Parameters for the output format. 
+                * UseCodes: Can not be combined with UseTexts and UseCodesAndTexts. And only applicable for csv, html and xlsx output format.
+                * UseTexts: Can not be combined with UsedCodes and UseCodesAndTexts. And only applicable for csv, html and xlsx output format.
+                * UseCodesAndTexts: Can not be combined with UseCodess and UseTexts. And only applicable for csv, html and xlsx output format.
+                * IncludeTitle: Only applicable for csv, html and xlsx output format.
+                * SeparatorTab: Can not be combined with SeparatorSpace and SeparatorSemicolon. And only applicable for csv output format.
+                * SeparatorSpace: Can not be combined with SeparatorTab and SeparatorSemicolon. And only applicable for csv output format.
+                * SeparatorSemicolon: Can not be combined with SeparatorTab and SeparatorSpace. And only applicable for csv output format.
         - in: query
           name: heading
           style: form
