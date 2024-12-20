@@ -1556,6 +1556,46 @@ components:
         lastPeriod:
           description: Latest time period in table
           type: string
+        timeUnit:
+          description: Indicates the time scale for the variable.
+          type: string
+          default: Other
+          enum:
+          - Annual
+          - HalfYear
+          - Quarterly
+          - Monthly
+          - Weekly
+          - Other
+        measuringType:
+          description: Indicates if data is stock, flow or average.
+          type: string
+          default: Other
+          enum:
+          - Stock
+          - Flow
+          - Average
+          - Other
+        priceType:
+          description: Indicates if data is in current or fixed prices.
+          type: string
+          enum:
+          - Undefined
+          - Current
+          - Fixed
+        adjustment:
+          description: WorkOnly means that data is adjusted e.g. to take into account the number of working days. SesOnly means that data is seasonally adjusted.
+          type: string
+          default: None
+          enum:
+          - None
+          - SesOnly
+          - WorkOnly
+          - WorkAndSes
+        baseperiod:
+          description: Base period for, for instance index series. Is shown with the footnote. If there is a contents variable the keyword is repeated for each value of the contents variable.
+          type: string
+          nullable: true
     strarray-by-str-dict:
        type: object
        additionalProperties:
