@@ -1537,7 +1537,7 @@ components:
           type: object
           additionalProperties:
             $ref: '#/components/schemas/jsonstat-noteMandatory'
-        refperiod:
+        refPeriod:
           description: Text with information on the exact period for the statistics
           type: object
           additionalProperties:
@@ -1592,7 +1592,7 @@ components:
           - SesOnly
           - WorkOnly
           - WorkAndSes
-        baseperiod:
+        basePeriod:
           description: Base period for, for instance index series. Is shown with the footnote. If there is a contents variable the keyword is repeated for each value of the contents variable.
           type: string
           nullable: true

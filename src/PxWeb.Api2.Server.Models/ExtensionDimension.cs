@@ -58,8 +58,8 @@ namespace PxWeb.Api2.Server.Models
         /// Text with information on the exact period for the statistics
         /// </summary>
         /// <value>Text with information on the exact period for the statistics</value>
-        [DataMember(Name="refperiod", EmitDefaultValue=false)]
-        public Dictionary<string, string> Refperiod { get; set; }
+        [DataMember(Name="refPeriod", EmitDefaultValue=false)]
+        public Dictionary<string, string> RefPeriod { get; set; }
 
         /// <summary>
         /// Information about how variables are presented
@@ -274,8 +274,8 @@ namespace PxWeb.Api2.Server.Models
         /// Base period for, for instance index series. Is shown with the footnote. If there is a contents variable the keyword is repeated for each value of the contents variable.
         /// </summary>
         /// <value>Base period for, for instance index series. Is shown with the footnote. If there is a contents variable the keyword is repeated for each value of the contents variable.</value>
-        [DataMember(Name="baseperiod", EmitDefaultValue=true)]
-        public string? Baseperiod { get; set; }
+        [DataMember(Name="basePeriod", EmitDefaultValue=true)]
+        public string? BasePeriod { get; set; }
 
         /// <summary>
         /// Returns the string presentation of the object
@@ -289,7 +289,7 @@ namespace PxWeb.Api2.Server.Models
             sb.Append("  EliminationValueCode: ").Append(EliminationValueCode).Append("\n");
             sb.Append("  NoteMandatory: ").Append(NoteMandatory).Append("\n");
             sb.Append("  CategoryNoteMandatory: ").Append(CategoryNoteMandatory).Append("\n");
-            sb.Append("  Refperiod: ").Append(Refperiod).Append("\n");
+            sb.Append("  RefPeriod: ").Append(RefPeriod).Append("\n");
             sb.Append("  Show: ").Append(Show).Append("\n");
             sb.Append("  CodeLists: ").Append(CodeLists).Append("\n");
             sb.Append("  Frequency: ").Append(Frequency).Append("\n");
@@ -299,7 +299,7 @@ namespace PxWeb.Api2.Server.Models
             sb.Append("  MeasuringType: ").Append(MeasuringType).Append("\n");
             sb.Append("  PriceType: ").Append(PriceType).Append("\n");
             sb.Append("  Adjustment: ").Append(Adjustment).Append("\n");
-            sb.Append("  Baseperiod: ").Append(Baseperiod).Append("\n");
+            sb.Append("  BasePeriod: ").Append(BasePeriod).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -359,10 +359,10 @@ namespace PxWeb.Api2.Server.Models
                     CategoryNoteMandatory.SequenceEqual(other.CategoryNoteMandatory)
                 ) && 
                 (
-                    Refperiod == other.Refperiod ||
-                    Refperiod != null &&
-                    other.Refperiod != null &&
-                    Refperiod.SequenceEqual(other.Refperiod)
+                    RefPeriod == other.RefPeriod ||
+                    RefPeriod != null &&
+                    other.RefPeriod != null &&
+                    RefPeriod.SequenceEqual(other.RefPeriod)
                 ) && 
                 (
                     Show == other.Show ||
@@ -411,9 +411,9 @@ namespace PxWeb.Api2.Server.Models
                     Adjustment.Equals(other.Adjustment)
                 ) && 
                 (
-                    Baseperiod == other.Baseperiod ||
-                    Baseperiod != null &&
-                    Baseperiod.Equals(other.Baseperiod)
+                    BasePeriod == other.BasePeriod ||
+                    BasePeriod != null &&
+                    BasePeriod.Equals(other.BasePeriod)
                 );
         }
 
@@ -435,8 +435,8 @@ namespace PxWeb.Api2.Server.Models
                     hashCode = hashCode * 59 + NoteMandatory.GetHashCode();
                     if (CategoryNoteMandatory != null)
                     hashCode = hashCode * 59 + CategoryNoteMandatory.GetHashCode();
-                    if (Refperiod != null)
-                    hashCode = hashCode * 59 + Refperiod.GetHashCode();
+                    if (RefPeriod != null)
+                    hashCode = hashCode * 59 + RefPeriod.GetHashCode();
                     if (Show != null)
                     hashCode = hashCode * 59 + Show.GetHashCode();
                     if (CodeLists != null)
@@ -455,8 +455,8 @@ namespace PxWeb.Api2.Server.Models
                     hashCode = hashCode * 59 + PriceType.GetHashCode();
                     
                     hashCode = hashCode * 59 + Adjustment.GetHashCode();
-                    if (Baseperiod != null)
-                    hashCode = hashCode * 59 + Baseperiod.GetHashCode();
+                    if (BasePeriod != null)
+                    hashCode = hashCode * 59 + BasePeriod.GetHashCode();
                 return hashCode;
             }
         }
