@@ -1517,6 +1517,18 @@ components:
           description: A list of contacts associated with the table.
           items: 
             $ref: '#/components/schemas/Contact'
+        nextUpdate:
+          description: Date for next update
+          $ref: '#/components/schemas/updated'
+        metaId:
+          description: Meta id for table
+          type: string
+        survey:
+          description: Survey for table
+          type: string
+        link:
+          description: Links for tables
+          type: string
     extension:
       description: extension at some level
       type: object
@@ -1547,7 +1559,7 @@ components:
           type: string
         codeLists:
          $ref: '#/components/schemas/CodeLists'
-        frequency:
+        updateFrequency:
           description: How often a table is updated
           type: string
         firstPeriod:
@@ -1557,45 +1569,27 @@ components:
           description: Latest time period in table
           type: string
         timeUnit:
-          description: Indicates the time scale for the variable.
-          type: string
-          default: Other
-          enum:
-          - Annual
-          - HalfYear
-          - Quarterly
-          - Monthly
-          - Weekly
-          - Other
+          $ref: '#/components/schemas/TimeUnit'
         measuringType:
           description: Indicates if data is stock, flow or average.
-          type: string
-          default: Other
-          enum:
-          - Stock
-          - Flow
-          - Average
-          - Other
+          type: object
+          additionalProperties:
+            $ref: '#/components/schemas/MeasuringType'
         priceType:
           description: Indicates if data is in current or fixed prices.
-          type: string
-          enum:
-          - Undefined
-          - Current
-          - Fixed
+          type: object
+          additionalProperties:
+            $ref: '#/components/schemas/PriceType'
         adjustment:
-          description: WorkOnly means that data is adjusted e.g. to take into account the number of working days. SesOnly means that data is seasonally adjusted.
-          type: string
-          default: None
-          enum:
-          - None
-          - SesOnly
-          - WorkOnly
-          - WorkAndSes
+          description: Describes adjustments made to the data
+          type: object
+          additionalProperties:
+            $ref: '#/components/schemas/Adjustment'
         basePeriod:
           description: Base period for, for instance index series. Is shown with the footnote. If there is a contents variable the keyword is repeated for each value of the contents variable.
-          type: string
-          nullable: true
+          type: object
+          additionalProperties:
+            $ref: '#/components/schemas/BasePeriod'
     strarray-by-str-dict:
        type: object
        additionalProperties:
@@ -1685,6 +1679,50 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/CodeListInformation'
+
+    Adjustment:
+      description: WorkOnly means that data is adjusted e.g. to take into account the number of working days. SesOnly means that data is seasonally adjusted.
+      type: string
+      default: None
+      enum:
+      - None
+      - SesOnly
+      - WorkOnly
+      - WorkAndSes
+
+    PriceType:
+      description: Indicates if data is in current or fixed prices.
+      type: string
+      enum:
+      - Undefined
+      - Current
+      - Fixed
+
+    MeasuringType:
+      description: Indicates if data is stock, flow or average.
+      type: string
+      default: Other
+      enum:
+      - Stock
+      - Flow
+      - Average
+      - Other
+
+    BasePeriod:
+      description: Base period for, for instance index series. Is shown with the footnote. If there is a contents variable the keyword is repeated for each value of the contents variable.
+      type: string
+
+    TimeUnit:
+      description: Indicates the time scale for the variable.
+      type: string
+      enum:
+      - Annual
+      - HalfYear
+      - Quarterly
+      - Monthly
+      - Weekly
+      - Other
+
     Dataset:
       title: JSON-stat 2.0 Dataset Schema
       description: |
