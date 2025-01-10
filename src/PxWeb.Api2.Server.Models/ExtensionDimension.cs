@@ -79,8 +79,8 @@ namespace PxWeb.Api2.Server.Models
         /// How often a table is updated
         /// </summary>
         /// <value>How often a table is updated</value>
-        [DataMember(Name="frequency", EmitDefaultValue=false)]
-        public string? Frequency { get; set; }
+        [DataMember(Name="updateFrequency", EmitDefaultValue=false)]
+        public string? UpdateFrequency { get; set; }
 
         /// <summary>
         /// Earliest time period in table
@@ -96,186 +96,39 @@ namespace PxWeb.Api2.Server.Models
         [DataMember(Name="lastPeriod", EmitDefaultValue=false)]
         public string? LastPeriod { get; set; }
 
-
         /// <summary>
-        /// Indicates the time scale for the variable.
+        /// Gets or Sets TimeUnit
         /// </summary>
-        /// <value>Indicates the time scale for the variable.</value>
-        [TypeConverter(typeof(CustomEnumConverter<TimeUnitEnum>))]
-        [JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
-        public enum TimeUnitEnum
-        {
-            
-            /// <summary>
-            /// Enum AnnualEnum for Annual
-            /// </summary>
-            [EnumMember(Value = "Annual")]
-            AnnualEnum = 1,
-            
-            /// <summary>
-            /// Enum HalfYearEnum for HalfYear
-            /// </summary>
-            [EnumMember(Value = "HalfYear")]
-            HalfYearEnum = 2,
-            
-            /// <summary>
-            /// Enum QuarterlyEnum for Quarterly
-            /// </summary>
-            [EnumMember(Value = "Quarterly")]
-            QuarterlyEnum = 3,
-            
-            /// <summary>
-            /// Enum MonthlyEnum for Monthly
-            /// </summary>
-            [EnumMember(Value = "Monthly")]
-            MonthlyEnum = 4,
-            
-            /// <summary>
-            /// Enum WeeklyEnum for Weekly
-            /// </summary>
-            [EnumMember(Value = "Weekly")]
-            WeeklyEnum = 5,
-            
-            /// <summary>
-            /// Enum OtherEnum for Other
-            /// </summary>
-            [EnumMember(Value = "Other")]
-            OtherEnum = 6
-        }
-
-        /// <summary>
-        /// Indicates the time scale for the variable.
-        /// </summary>
-        /// <value>Indicates the time scale for the variable.</value>
         [DataMember(Name="timeUnit", EmitDefaultValue=true)]
-        public TimeUnitEnum TimeUnit { get; set; } = TimeUnitEnum.OtherEnum;
-
-
-        /// <summary>
-        /// Indicates if data is stock, flow or average.
-        /// </summary>
-        /// <value>Indicates if data is stock, flow or average.</value>
-        [TypeConverter(typeof(CustomEnumConverter<MeasuringTypeEnum>))]
-        [JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
-        public enum MeasuringTypeEnum
-        {
-            
-            /// <summary>
-            /// Enum StockEnum for Stock
-            /// </summary>
-            [EnumMember(Value = "Stock")]
-            StockEnum = 1,
-            
-            /// <summary>
-            /// Enum FlowEnum for Flow
-            /// </summary>
-            [EnumMember(Value = "Flow")]
-            FlowEnum = 2,
-            
-            /// <summary>
-            /// Enum AverageEnum for Average
-            /// </summary>
-            [EnumMember(Value = "Average")]
-            AverageEnum = 3,
-            
-            /// <summary>
-            /// Enum OtherEnum for Other
-            /// </summary>
-            [EnumMember(Value = "Other")]
-            OtherEnum = 4
-        }
+        public TimeUnit TimeUnit { get; set; }
 
         /// <summary>
         /// Indicates if data is stock, flow or average.
         /// </summary>
         /// <value>Indicates if data is stock, flow or average.</value>
-        [DataMember(Name="measuringType", EmitDefaultValue=true)]
-        public MeasuringTypeEnum MeasuringType { get; set; } = MeasuringTypeEnum.OtherEnum;
-
-
-        /// <summary>
-        /// Indicates if data is in current or fixed prices.
-        /// </summary>
-        /// <value>Indicates if data is in current or fixed prices.</value>
-        [TypeConverter(typeof(CustomEnumConverter<PriceTypeEnum>))]
-        [JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
-        public enum PriceTypeEnum
-        {
-            
-            /// <summary>
-            /// Enum UndefinedEnum for Undefined
-            /// </summary>
-            [EnumMember(Value = "Undefined")]
-            UndefinedEnum = 1,
-            
-            /// <summary>
-            /// Enum CurrentEnum for Current
-            /// </summary>
-            [EnumMember(Value = "Current")]
-            CurrentEnum = 2,
-            
-            /// <summary>
-            /// Enum FixedEnum for Fixed
-            /// </summary>
-            [EnumMember(Value = "Fixed")]
-            FixedEnum = 3
-        }
+        [DataMember(Name="measuringType", EmitDefaultValue=false)]
+        public Dictionary<string, MeasuringType> MeasuringType { get; set; }
 
         /// <summary>
         /// Indicates if data is in current or fixed prices.
         /// </summary>
         /// <value>Indicates if data is in current or fixed prices.</value>
-        [DataMember(Name="priceType", EmitDefaultValue=true)]
-        public PriceTypeEnum PriceType { get; set; }
-
-
-        /// <summary>
-        /// WorkOnly means that data is adjusted e.g. to take into account the number of working days. SesOnly means that data is seasonally adjusted.
-        /// </summary>
-        /// <value>WorkOnly means that data is adjusted e.g. to take into account the number of working days. SesOnly means that data is seasonally adjusted.</value>
-        [TypeConverter(typeof(CustomEnumConverter<AdjustmentEnum>))]
-        [JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
-        public enum AdjustmentEnum
-        {
-            
-            /// <summary>
-            /// Enum NoneEnum for None
-            /// </summary>
-            [EnumMember(Value = "None")]
-            NoneEnum = 1,
-            
-            /// <summary>
-            /// Enum SesOnlyEnum for SesOnly
-            /// </summary>
-            [EnumMember(Value = "SesOnly")]
-            SesOnlyEnum = 2,
-            
-            /// <summary>
-            /// Enum WorkOnlyEnum for WorkOnly
-            /// </summary>
-            [EnumMember(Value = "WorkOnly")]
-            WorkOnlyEnum = 3,
-            
-            /// <summary>
-            /// Enum WorkAndSesEnum for WorkAndSes
-            /// </summary>
-            [EnumMember(Value = "WorkAndSes")]
-            WorkAndSesEnum = 4
-        }
+        [DataMember(Name="priceType", EmitDefaultValue=false)]
+        public Dictionary<string, PriceType> PriceType { get; set; }
 
         /// <summary>
-        /// WorkOnly means that data is adjusted e.g. to take into account the number of working days. SesOnly means that data is seasonally adjusted.
+        /// Describes adjustments made to the data
         /// </summary>
-        /// <value>WorkOnly means that data is adjusted e.g. to take into account the number of working days. SesOnly means that data is seasonally adjusted.</value>
-        [DataMember(Name="adjustment", EmitDefaultValue=true)]
-        public AdjustmentEnum Adjustment { get; set; } = AdjustmentEnum.NoneEnum;
+        /// <value>Describes adjustments made to the data</value>
+        [DataMember(Name="adjustment", EmitDefaultValue=false)]
+        public Dictionary<string, Adjustment> Adjustment { get; set; }
 
         /// <summary>
         /// Base period for, for instance index series. Is shown with the footnote. If there is a contents variable the keyword is repeated for each value of the contents variable.
         /// </summary>
         /// <value>Base period for, for instance index series. Is shown with the footnote. If there is a contents variable the keyword is repeated for each value of the contents variable.</value>
-        [DataMember(Name="basePeriod", EmitDefaultValue=true)]
-        public string? BasePeriod { get; set; }
+        [DataMember(Name="basePeriod", EmitDefaultValue=false)]
+        public Dictionary<string, string> BasePeriod { get; set; }
 
         /// <summary>
         /// Returns the string presentation of the object
@@ -292,7 +145,7 @@ namespace PxWeb.Api2.Server.Models
             sb.Append("  RefPeriod: ").Append(RefPeriod).Append("\n");
             sb.Append("  Show: ").Append(Show).Append("\n");
             sb.Append("  CodeLists: ").Append(CodeLists).Append("\n");
-            sb.Append("  Frequency: ").Append(Frequency).Append("\n");
+            sb.Append("  UpdateFrequency: ").Append(UpdateFrequency).Append("\n");
             sb.Append("  FirstPeriod: ").Append(FirstPeriod).Append("\n");
             sb.Append("  LastPeriod: ").Append(LastPeriod).Append("\n");
             sb.Append("  TimeUnit: ").Append(TimeUnit).Append("\n");
@@ -376,9 +229,9 @@ namespace PxWeb.Api2.Server.Models
                     CodeLists.SequenceEqual(other.CodeLists)
                 ) && 
                 (
-                    Frequency == other.Frequency ||
-                    Frequency != null &&
-                    Frequency.Equals(other.Frequency)
+                    UpdateFrequency == other.UpdateFrequency ||
+                    UpdateFrequency != null &&
+                    UpdateFrequency.Equals(other.UpdateFrequency)
                 ) && 
                 (
                     FirstPeriod == other.FirstPeriod ||
@@ -397,23 +250,27 @@ namespace PxWeb.Api2.Server.Models
                 ) && 
                 (
                     MeasuringType == other.MeasuringType ||
-                    
-                    MeasuringType.Equals(other.MeasuringType)
+                    MeasuringType != null &&
+                    other.MeasuringType != null &&
+                    MeasuringType.SequenceEqual(other.MeasuringType)
                 ) && 
                 (
                     PriceType == other.PriceType ||
-                    
-                    PriceType.Equals(other.PriceType)
+                    PriceType != null &&
+                    other.PriceType != null &&
+                    PriceType.SequenceEqual(other.PriceType)
                 ) && 
                 (
                     Adjustment == other.Adjustment ||
-                    
-                    Adjustment.Equals(other.Adjustment)
+                    Adjustment != null &&
+                    other.Adjustment != null &&
+                    Adjustment.SequenceEqual(other.Adjustment)
                 ) && 
                 (
                     BasePeriod == other.BasePeriod ||
                     BasePeriod != null &&
-                    BasePeriod.Equals(other.BasePeriod)
+                    other.BasePeriod != null &&
+                    BasePeriod.SequenceEqual(other.BasePeriod)
                 );
         }
 
@@ -441,19 +298,19 @@ namespace PxWeb.Api2.Server.Models
                     hashCode = hashCode * 59 + Show.GetHashCode();
                     if (CodeLists != null)
                     hashCode = hashCode * 59 + CodeLists.GetHashCode();
-                    if (Frequency != null)
-                    hashCode = hashCode * 59 + Frequency.GetHashCode();
+                    if (UpdateFrequency != null)
+                    hashCode = hashCode * 59 + UpdateFrequency.GetHashCode();
                     if (FirstPeriod != null)
                     hashCode = hashCode * 59 + FirstPeriod.GetHashCode();
                     if (LastPeriod != null)
                     hashCode = hashCode * 59 + LastPeriod.GetHashCode();
                     
                     hashCode = hashCode * 59 + TimeUnit.GetHashCode();
-                    
+                    if (MeasuringType != null)
                     hashCode = hashCode * 59 + MeasuringType.GetHashCode();
-                    
+                    if (PriceType != null)
                     hashCode = hashCode * 59 + PriceType.GetHashCode();
-                    
+                    if (Adjustment != null)
                     hashCode = hashCode * 59 + Adjustment.GetHashCode();
                     if (BasePeriod != null)
                     hashCode = hashCode * 59 + BasePeriod.GetHashCode();
