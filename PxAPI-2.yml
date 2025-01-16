@@ -1502,6 +1502,18 @@ components:
               type: string
             subject-area:
               description: Subject area
+              type: string
+            nextUpdate:
+              description: Date for next update
+              $ref: '#/components/schemas/updated'
+            metaId:
+              description: Meta id for table
+              type: string
+            survey:
+              description: Survey for table
+              type: string
+            link:
+              description: Links for tables
               type: string              
         tags:
           description: Tag for table
@@ -1517,18 +1529,6 @@ components:
           description: A list of contacts associated with the table.
           items: 
             $ref: '#/components/schemas/Contact'
-        nextUpdate:
-          description: Date for next update
-          $ref: '#/components/schemas/updated'
-        metaId:
-          description: Meta id for table
-          type: string
-        survey:
-          description: Survey for table
-          type: string
-        link:
-          description: Links for tables
-          type: string
     extension:
       description: extension at some level
       type: object

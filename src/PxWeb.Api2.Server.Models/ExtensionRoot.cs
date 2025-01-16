@@ -61,35 +61,6 @@ namespace PxWeb.Api2.Server.Models
         public List<Contact> Contact { get; set; }
 
         /// <summary>
-        /// See https://json-stat.org/full/#updated
-        /// </summary>
-        /// <value>See https://json-stat.org/full/#updated</value>
-        [RegularExpression("^((19|20)\\d\\d)\\-(0?[1-9]|1[012])\\-(0?[1-9]|[12][0-9]|3[01])$")]
-        [DataMember(Name="nextUpdate", EmitDefaultValue=false)]
-        public string? NextUpdate { get; set; }
-
-        /// <summary>
-        /// Meta id for table
-        /// </summary>
-        /// <value>Meta id for table</value>
-        [DataMember(Name="metaId", EmitDefaultValue=false)]
-        public string? MetaId { get; set; }
-
-        /// <summary>
-        /// Survey for table
-        /// </summary>
-        /// <value>Survey for table</value>
-        [DataMember(Name="survey", EmitDefaultValue=false)]
-        public string? Survey { get; set; }
-
-        /// <summary>
-        /// Links for tables
-        /// </summary>
-        /// <value>Links for tables</value>
-        [DataMember(Name="link", EmitDefaultValue=false)]
-        public string? Link { get; set; }
-
-        /// <summary>
         /// Returns the string presentation of the object
         /// </summary>
         /// <returns>String presentation of the object</returns>
@@ -102,10 +73,6 @@ namespace PxWeb.Api2.Server.Models
             sb.Append("  Tags: ").Append(Tags).Append("\n");
             sb.Append("  Discontinued: ").Append(Discontinued).Append("\n");
             sb.Append("  Contact: ").Append(Contact).Append("\n");
-            sb.Append("  NextUpdate: ").Append(NextUpdate).Append("\n");
-            sb.Append("  MetaId: ").Append(MetaId).Append("\n");
-            sb.Append("  Survey: ").Append(Survey).Append("\n");
-            sb.Append("  Link: ").Append(Link).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -169,26 +136,6 @@ namespace PxWeb.Api2.Server.Models
                     Contact != null &&
                     other.Contact != null &&
                     Contact.SequenceEqual(other.Contact)
-                ) && 
-                (
-                    NextUpdate == other.NextUpdate ||
-                    NextUpdate != null &&
-                    NextUpdate.Equals(other.NextUpdate)
-                ) && 
-                (
-                    MetaId == other.MetaId ||
-                    MetaId != null &&
-                    MetaId.Equals(other.MetaId)
-                ) && 
-                (
-                    Survey == other.Survey ||
-                    Survey != null &&
-                    Survey.Equals(other.Survey)
-                ) && 
-                (
-                    Link == other.Link ||
-                    Link != null &&
-                    Link.Equals(other.Link)
                 );
         }
 
@@ -212,14 +159,6 @@ namespace PxWeb.Api2.Server.Models
                     hashCode = hashCode * 59 + Discontinued.GetHashCode();
                     if (Contact != null)
                     hashCode = hashCode * 59 + Contact.GetHashCode();
-                    if (NextUpdate != null)
-                    hashCode = hashCode * 59 + NextUpdate.GetHashCode();
-                    if (MetaId != null)
-                    hashCode = hashCode * 59 + MetaId.GetHashCode();
-                    if (Survey != null)
-                    hashCode = hashCode * 59 + Survey.GetHashCode();
-                    if (Link != null)
-                    hashCode = hashCode * 59 + Link.GetHashCode();
                 return hashCode;
             }
         }
