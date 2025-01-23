@@ -79,8 +79,8 @@ namespace PxWeb.Api2.Server.Models
         /// How often a table is updated
         /// </summary>
         /// <value>How often a table is updated</value>
-        [DataMember(Name="frequency", EmitDefaultValue=false)]
-        public string? Frequency { get; set; }
+        [DataMember(Name="updateFrequency", EmitDefaultValue=false)]
+        public string? UpdateFrequency { get; set; }
 
         /// <summary>
         /// Earliest time period in table
@@ -145,7 +145,7 @@ namespace PxWeb.Api2.Server.Models
             sb.Append("  Refperiod: ").Append(Refperiod).Append("\n");
             sb.Append("  Show: ").Append(Show).Append("\n");
             sb.Append("  CodeLists: ").Append(CodeLists).Append("\n");
-            sb.Append("  Frequency: ").Append(Frequency).Append("\n");
+            sb.Append("  UpdateFrequency: ").Append(UpdateFrequency).Append("\n");
             sb.Append("  FirstPeriod: ").Append(FirstPeriod).Append("\n");
             sb.Append("  LastPeriod: ").Append(LastPeriod).Append("\n");
             sb.Append("  TimeUnit: ").Append(TimeUnit).Append("\n");
@@ -229,9 +229,9 @@ namespace PxWeb.Api2.Server.Models
                     CodeLists.SequenceEqual(other.CodeLists)
                 ) && 
                 (
-                    Frequency == other.Frequency ||
-                    Frequency != null &&
-                    Frequency.Equals(other.Frequency)
+                    UpdateFrequency == other.UpdateFrequency ||
+                    UpdateFrequency != null &&
+                    UpdateFrequency.Equals(other.UpdateFrequency)
                 ) && 
                 (
                     FirstPeriod == other.FirstPeriod ||
@@ -298,8 +298,8 @@ namespace PxWeb.Api2.Server.Models
                     hashCode = hashCode * 59 + Show.GetHashCode();
                     if (CodeLists != null)
                     hashCode = hashCode * 59 + CodeLists.GetHashCode();
-                    if (Frequency != null)
-                    hashCode = hashCode * 59 + Frequency.GetHashCode();
+                    if (UpdateFrequency != null)
+                    hashCode = hashCode * 59 + UpdateFrequency.GetHashCode();
                     if (FirstPeriod != null)
                     hashCode = hashCode * 59 + FirstPeriod.GetHashCode();
                     if (LastPeriod != null)

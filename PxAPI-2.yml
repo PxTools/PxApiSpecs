@@ -1556,7 +1556,7 @@ components:
           type: string
         codeLists:
          $ref: '#/components/schemas/CodeLists'
-        frequency:
+        updateFrequency:
           description: How often a table is updated
           type: string
         firstPeriod:
