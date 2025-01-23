@@ -1506,9 +1506,6 @@ components:
             nextUpdate:
               description: Date for next update
               $ref: '#/components/schemas/updated'
-            metaId:
-              description: Meta id for table
-              type: string
             survey:
               description: Survey for table
               type: string
@@ -1549,7 +1546,7 @@ components:
           type: object
           additionalProperties:
             $ref: '#/components/schemas/jsonstat-noteMandatory'
-        refPeriod:
+        refperiod:
           description: Text with information on the exact period for the statistics
           type: object
           additionalProperties:
@@ -1559,7 +1556,7 @@ components:
           type: string
         codeLists:
          $ref: '#/components/schemas/CodeLists'
-        updateFrequency:
+        frequency:
           description: How often a table is updated
           type: string
         firstPeriod:

@@ -58,8 +58,8 @@ namespace PxWeb.Api2.Server.Models
         /// Text with information on the exact period for the statistics
         /// </summary>
         /// <value>Text with information on the exact period for the statistics</value>
-        [DataMember(Name="refPeriod", EmitDefaultValue=false)]
-        public Dictionary<string, string> RefPeriod { get; set; }
+        [DataMember(Name="refperiod", EmitDefaultValue=false)]
+        public Dictionary<string, string> Refperiod { get; set; }
 
         /// <summary>
         /// Information about how variables are presented
@@ -79,8 +79,8 @@ namespace PxWeb.Api2.Server.Models
         /// How often a table is updated
         /// </summary>
         /// <value>How often a table is updated</value>
-        [DataMember(Name="updateFrequency", EmitDefaultValue=false)]
-        public string? UpdateFrequency { get; set; }
+        [DataMember(Name="frequency", EmitDefaultValue=false)]
+        public string? Frequency { get; set; }
 
         /// <summary>
         /// Earliest time period in table
@@ -142,10 +142,10 @@ namespace PxWeb.Api2.Server.Models
             sb.Append("  EliminationValueCode: ").Append(EliminationValueCode).Append("\n");
             sb.Append("  NoteMandatory: ").Append(NoteMandatory).Append("\n");
             sb.Append("  CategoryNoteMandatory: ").Append(CategoryNoteMandatory).Append("\n");
-            sb.Append("  RefPeriod: ").Append(RefPeriod).Append("\n");
+            sb.Append("  Refperiod: ").Append(Refperiod).Append("\n");
             sb.Append("  Show: ").Append(Show).Append("\n");
             sb.Append("  CodeLists: ").Append(CodeLists).Append("\n");
-            sb.Append("  UpdateFrequency: ").Append(UpdateFrequency).Append("\n");
+            sb.Append("  Frequency: ").Append(Frequency).Append("\n");
             sb.Append("  FirstPeriod: ").Append(FirstPeriod).Append("\n");
             sb.Append("  LastPeriod: ").Append(LastPeriod).Append("\n");
             sb.Append("  TimeUnit: ").Append(TimeUnit).Append("\n");
@@ -212,10 +212,10 @@ namespace PxWeb.Api2.Server.Models
                     CategoryNoteMandatory.SequenceEqual(other.CategoryNoteMandatory)
                 ) && 
                 (
-                    RefPeriod == other.RefPeriod ||
-                    RefPeriod != null &&
-                    other.RefPeriod != null &&
-                    RefPeriod.SequenceEqual(other.RefPeriod)
+                    Refperiod == other.Refperiod ||
+                    Refperiod != null &&
+                    other.Refperiod != null &&
+                    Refperiod.SequenceEqual(other.Refperiod)
                 ) && 
                 (
                     Show == other.Show ||
@@ -229,9 +229,9 @@ namespace PxWeb.Api2.Server.Models
                     CodeLists.SequenceEqual(other.CodeLists)
                 ) && 
                 (
-                    UpdateFrequency == other.UpdateFrequency ||
-                    UpdateFrequency != null &&
-                    UpdateFrequency.Equals(other.UpdateFrequency)
+                    Frequency == other.Frequency ||
+                    Frequency != null &&
+                    Frequency.Equals(other.Frequency)
                 ) && 
                 (
                     FirstPeriod == other.FirstPeriod ||
@@ -292,14 +292,14 @@ namespace PxWeb.Api2.Server.Models
                     hashCode = hashCode * 59 + NoteMandatory.GetHashCode();
                     if (CategoryNoteMandatory != null)
                     hashCode = hashCode * 59 + CategoryNoteMandatory.GetHashCode();
-                    if (RefPeriod != null)
-                    hashCode = hashCode * 59 + RefPeriod.GetHashCode();
+                    if (Refperiod != null)
+                    hashCode = hashCode * 59 + Refperiod.GetHashCode();
                     if (Show != null)
                     hashCode = hashCode * 59 + Show.GetHashCode();
                     if (CodeLists != null)
                     hashCode = hashCode * 59 + CodeLists.GetHashCode();
-                    if (UpdateFrequency != null)
-                    hashCode = hashCode * 59 + UpdateFrequency.GetHashCode();
+                    if (Frequency != null)
+                    hashCode = hashCode * 59 + Frequency.GetHashCode();
                     if (FirstPeriod != null)
                     hashCode = hashCode * 59 + FirstPeriod.GetHashCode();
                     if (LastPeriod != null)

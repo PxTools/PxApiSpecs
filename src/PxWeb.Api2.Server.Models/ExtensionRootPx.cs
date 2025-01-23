@@ -140,13 +140,6 @@ namespace PxWeb.Api2.Server.Models
         public string? NextUpdate { get; set; }
 
         /// <summary>
-        /// Meta id for table
-        /// </summary>
-        /// <value>Meta id for table</value>
-        [DataMember(Name="metaId", EmitDefaultValue=false)]
-        public string? MetaId { get; set; }
-
-        /// <summary>
         /// Survey for table
         /// </summary>
         /// <value>Survey for table</value>
@@ -184,7 +177,6 @@ namespace PxWeb.Api2.Server.Models
             sb.Append("  SubjectCode: ").Append(SubjectCode).Append("\n");
             sb.Append("  SubjectArea: ").Append(SubjectArea).Append("\n");
             sb.Append("  NextUpdate: ").Append(NextUpdate).Append("\n");
-            sb.Append("  MetaId: ").Append(MetaId).Append("\n");
             sb.Append("  Survey: ").Append(Survey).Append("\n");
             sb.Append("  Link: ").Append(Link).Append("\n");
             sb.Append("}\n");
@@ -306,11 +298,6 @@ namespace PxWeb.Api2.Server.Models
                     NextUpdate.Equals(other.NextUpdate)
                 ) && 
                 (
-                    MetaId == other.MetaId ||
-                    MetaId != null &&
-                    MetaId.Equals(other.MetaId)
-                ) && 
-                (
                     Survey == other.Survey ||
                     Survey != null &&
                     Survey.Equals(other.Survey)
@@ -364,8 +351,6 @@ namespace PxWeb.Api2.Server.Models
                     hashCode = hashCode * 59 + SubjectArea.GetHashCode();
                     if (NextUpdate != null)
                     hashCode = hashCode * 59 + NextUpdate.GetHashCode();
-                    if (MetaId != null)
-                    hashCode = hashCode * 59 + MetaId.GetHashCode();
                     if (Survey != null)
                     hashCode = hashCode * 59 + Survey.GetHashCode();
                     if (Link != null)
