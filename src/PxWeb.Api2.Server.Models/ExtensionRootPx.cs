@@ -154,6 +154,13 @@ namespace PxWeb.Api2.Server.Models
         public string? Link { get; set; }
 
         /// <summary>
+        /// How often a table is updated
+        /// </summary>
+        /// <value>How often a table is updated</value>
+        [DataMember(Name="updateFrequency", EmitDefaultValue=false)]
+        public string? UpdateFrequency { get; set; }
+
+        /// <summary>
         /// Returns the string presentation of the object
         /// </summary>
         /// <returns>String presentation of the object</returns>
@@ -179,6 +186,7 @@ namespace PxWeb.Api2.Server.Models
             sb.Append("  NextUpdate: ").Append(NextUpdate).Append("\n");
             sb.Append("  Survey: ").Append(Survey).Append("\n");
             sb.Append("  Link: ").Append(Link).Append("\n");
+            sb.Append("  UpdateFrequency: ").Append(UpdateFrequency).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -306,6 +314,11 @@ namespace PxWeb.Api2.Server.Models
                     Link == other.Link ||
                     Link != null &&
                     Link.Equals(other.Link)
+                ) && 
+                (
+                    UpdateFrequency == other.UpdateFrequency ||
+                    UpdateFrequency != null &&
+                    UpdateFrequency.Equals(other.UpdateFrequency)
                 );
         }
 
@@ -355,6 +368,8 @@ namespace PxWeb.Api2.Server.Models
                     hashCode = hashCode * 59 + Survey.GetHashCode();
                     if (Link != null)
                     hashCode = hashCode * 59 + Link.GetHashCode();
+                    if (UpdateFrequency != null)
+                    hashCode = hashCode * 59 + UpdateFrequency.GetHashCode();
                 return hashCode;
             }
         }

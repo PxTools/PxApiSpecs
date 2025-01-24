@@ -1511,7 +1511,10 @@ components:
               type: string
             link:
               description: Links for tables
-              type: string              
+              type: string
+            updateFrequency:
+              description: How often a table is updated
+              type: string
         tags:
           description: Tag for table
           type: array
@@ -1556,9 +1559,6 @@ components:
           type: string
         codeLists:
          $ref: '#/components/schemas/CodeLists'
-        updateFrequency:
-          description: How often a table is updated
-          type: string
         firstPeriod:
           description: Earliest time period in table 
           type: string
