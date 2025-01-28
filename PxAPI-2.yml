@@ -417,6 +417,8 @@ paths:
         - Saved Queries
       parameters:
         - $ref: '#/components/parameters/id'
+        - $ref: '#/components/parameters/outputFormat'
+        - $ref: '#/components/parameters/outputFormatParams'
       summary: Retrieves the content of a saved query.
       operationId: GetSaveQuery
       responses:
@@ -428,6 +430,43 @@ paths:
                 $ref: '#/components/schemas/SavedQuery'
         '400':
           $ref: '#/components/responses/ErrorResponse400'
+        '404':
+          $ref: '#/components/responses/ErrorResponse404'
+        '429':
+          $ref: '#/components/responses/ErrorResponse429'
+          
+  /savedqueries/{id}/data:
+    get:
+      tags:
+        - Saved Queries
+      parameters:
+        - $ref: '#/components/parameters/id'
+      summary: Retrieves the data by running the saved query.
+      operationId: RunSaveQuery
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: string
+            plain/text:
+              schema:
+                type: string
+            application/xml:
+              schema:
+                type: string
+                format: binary
+            application/octet-stream:
+              schema:
+                type: string
+                format: binary
+        '400':
+          $ref: '#/components/responses/ErrorResponse400'
+        '403':
+          $ref: '#/components/responses/ErrorResponse403'  
+        '404':
+          $ref: '#/components/responses/ErrorResponse404'            
         '429':
           $ref: '#/components/responses/ErrorResponse429'
 
