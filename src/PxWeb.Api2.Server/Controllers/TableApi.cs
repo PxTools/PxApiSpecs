@@ -133,7 +133,7 @@ namespace PxWeb.Api2.Server.Controllers
         [SwaggerResponse(statusCode: 403, type: typeof(Problem), description: "Error response for 403")]
         [SwaggerResponse(statusCode: 404, type: typeof(Problem), description: "Error response for 404")]
         [SwaggerResponse(statusCode: 429, type: typeof(Problem), description: "Error response for 429")]
-        public abstract IActionResult GetTableData([FromRoute (Name = "id")][Required]string id, [FromQuery (Name = "lang")]string? lang, [FromQuery (Name = "valuecodes")]Dictionary<string, List<string>>? valuecodes, [FromQuery (Name = "codelist")]Dictionary<string, string>? codelist, [FromQuery (Name = "outputvalues")]Dictionary<string, CodeListOutputValuesType>? outputvalues, [FromQuery (Name = "outputFormat")]string? outputFormat, [FromQuery (Name = "outputFormatParams")]List<string>? outputFormatParams, [FromQuery (Name = "heading")]List<string>? heading, [FromQuery (Name = "stub")]List<string>? stub);
+        public abstract IActionResult GetTableData([FromRoute (Name = "id")][Required]string id, [FromQuery (Name = "lang")]string? lang, [FromQuery (Name = "valuecodes")]Dictionary<string, List<string>>? valuecodes, [FromQuery (Name = "codelist")]Dictionary<string, string>? codelist, [FromQuery (Name = "outputvalues")]Dictionary<string, CodeListOutputValuesType>? outputvalues, [FromQuery (Name = "outputFormat")]OutputFormatType? outputFormat, [FromQuery (Name = "outputFormatParams")]List<OutputFormatParamType>? outputFormatParams, [FromQuery (Name = "heading")]List<string>? heading, [FromQuery (Name = "stub")]List<string>? stub);
 
         /// <summary>
         /// Get data from table by {id}.
@@ -158,7 +158,7 @@ namespace PxWeb.Api2.Server.Controllers
         [SwaggerResponse(statusCode: 403, type: typeof(Problem), description: "Error response for 403")]
         [SwaggerResponse(statusCode: 404, type: typeof(Problem), description: "Error response for 404")]
         [SwaggerResponse(statusCode: 429, type: typeof(Problem), description: "Error response for 429")]
-        public abstract IActionResult GetTableDataByPost([FromRoute (Name = "id")][Required]string id, [FromQuery (Name = "lang")]string? lang, [FromQuery (Name = "outputFormat")]string? outputFormat, [FromQuery (Name = "outputFormatParams")]List<string>? outputFormatParams, [FromBody]VariablesSelection? variablesSelection);
+        public abstract IActionResult GetTableDataByPost([FromRoute (Name = "id")][Required]string id, [FromQuery (Name = "lang")]string? lang, [FromQuery (Name = "outputFormat")]OutputFormatType? outputFormat, [FromQuery (Name = "outputFormatParams")]List<OutputFormatParamType>? outputFormatParams, [FromBody]VariablesSelection? variablesSelection);
 
         /// <summary>
         /// Get all Tables.
