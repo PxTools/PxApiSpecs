@@ -394,11 +394,11 @@ paths:
       summary: Save a query for later use.
       operationId: CreateSaveQuery
       requestBody:
-        description: A selection
+        description: A saved query
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/VariablesSelection'  
+              $ref: '#/components/schemas/SavedQuery'  
       responses:
         '200':
           description: Success
@@ -408,10 +408,26 @@ paths:
                 type: string
         '400':
           $ref: '#/components/responses/ErrorResponse400'
-        '403':
-          $ref: '#/components/responses/ErrorResponse403'  
-        '404':
-          $ref: '#/components/responses/ErrorResponse404'            
+        '429':
+          $ref: '#/components/responses/ErrorResponse429'
+
+  /savedqueries/{id}:
+    get:
+      tags:
+        - Saved Queries
+      parameters:
+        - $ref: '#/components/parameters/id'
+      summary: Retrieves the content of a saved query.
+      operationId: GetSaveQuery
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SavedQuery'
+        '400':
+          $ref: '#/components/responses/ErrorResponse400'
         '429':
           $ref: '#/components/responses/ErrorResponse429'
 
