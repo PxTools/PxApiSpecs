@@ -1504,7 +1504,19 @@ components:
               type: string
             subject-area:
               description: Subject area
-              type: string              
+              type: string
+            nextUpdate:
+              description: Date for next update
+              $ref: '#/components/schemas/updated'
+            survey:
+              description: Survey for table
+              type: string
+            link:
+              description: Links for tables
+              type: string
+            updateFrequency:
+              description: How often a table is updated
+              type: string
         tags:
           description: Tag for table
           type: array
@@ -1549,15 +1561,34 @@ components:
           type: string
         codeLists:
          $ref: '#/components/schemas/CodeLists'
-        frequency:
-          description: How often a table is updated
-          type: string
         firstPeriod:
           description: Earliest time period in table 
           type: string
         lastPeriod:
           description: Latest time period in table
           type: string
+        timeUnit:
+          $ref: '#/components/schemas/TimeUnit'
+        measuringType:
+          description: Indicates if data is stock, flow or average.
+          type: object
+          additionalProperties:
+            $ref: '#/components/schemas/MeasuringType'
+        priceType:
+          description: Indicates if data is in current or fixed prices.
+          type: object
+          additionalProperties:
+            $ref: '#/components/schemas/PriceType'
+        adjustment:
+          description: Describes adjustments made to the data
+          type: object
+          additionalProperties:
+            $ref: '#/components/schemas/Adjustment'
+        basePeriod:
+          description: Base period for, for instance index series. Is shown with the footnote. If there is a contents variable the keyword is repeated for each value of the contents variable.
+          type: object
+          additionalProperties:
+            $ref: '#/components/schemas/BasePeriod'
     strarray-by-str-dict:
        type: object
        additionalProperties:
@@ -1647,6 +1678,50 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/CodeListInformation'
+
+    Adjustment:
+      description: WorkOnly means that data is adjusted e.g. to take into account the number of working days. SesOnly means that data is seasonally adjusted.
+      type: string
+      default: None
+      enum:
+      - None
+      - SesOnly
+      - WorkOnly
+      - WorkAndSes
+
+    PriceType:
+      description: Indicates if data is in current or fixed prices.
+      type: string
+      enum:
+      - Undefined
+      - Current
+      - Fixed
+
+    MeasuringType:
+      description: Indicates if data is stock, flow or average.
+      type: string
+      default: Other
+      enum:
+      - Stock
+      - Flow
+      - Average
+      - Other
+
+    BasePeriod:
+      description: Base period for, for instance index series. Is shown with the footnote. If there is a contents variable the keyword is repeated for each value of the contents variable.
+      type: string
+
+    TimeUnit:
+      description: Indicates the time scale for the variable.
+      type: string
+      enum:
+      - Annual
+      - HalfYear
+      - Quarterly
+      - Monthly
+      - Weekly
+      - Other
+
     Dataset:
       title: JSON-stat 2.0 Dataset Schema
       description: |
