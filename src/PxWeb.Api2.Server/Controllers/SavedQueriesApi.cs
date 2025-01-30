@@ -48,8 +48,6 @@ namespace PxWeb.Api2.Server.Controllers
         /// Retrieves the content of a saved query.
         /// </summary>
         /// <param name="id">Id</param>
-        /// <param name="outputFormat"></param>
-        /// <param name="outputFormatParams"></param>
         /// <response code="200">Success</response>
         /// <response code="400">Error response for 400</response>
         /// <response code="404">Error response for 404</response>
@@ -62,12 +60,14 @@ namespace PxWeb.Api2.Server.Controllers
         [SwaggerResponse(statusCode: 400, type: typeof(Problem), description: "Error response for 400")]
         [SwaggerResponse(statusCode: 404, type: typeof(Problem), description: "Error response for 404")]
         [SwaggerResponse(statusCode: 429, type: typeof(Problem), description: "Error response for 429")]
-        public abstract IActionResult GetSaveQuery([FromRoute (Name = "id")][Required]string id, [FromQuery (Name = "outputFormat")]OutputFormatType? outputFormat, [FromQuery (Name = "outputFormatParams")]List<OutputFormatParamType>? outputFormatParams);
+        public abstract IActionResult GetSaveQuery([FromRoute (Name = "id")][Required]string id);
 
         /// <summary>
         /// Retrieves the data by running the saved query.
         /// </summary>
         /// <param name="id">Id</param>
+        /// <param name="outputFormat"></param>
+        /// <param name="outputFormatParams"></param>
         /// <response code="200">Success</response>
         /// <response code="400">Error response for 400</response>
         /// <response code="403">Error response for 403</response>
@@ -82,6 +82,6 @@ namespace PxWeb.Api2.Server.Controllers
         [SwaggerResponse(statusCode: 403, type: typeof(Problem), description: "Error response for 403")]
         [SwaggerResponse(statusCode: 404, type: typeof(Problem), description: "Error response for 404")]
         [SwaggerResponse(statusCode: 429, type: typeof(Problem), description: "Error response for 429")]
-        public abstract IActionResult RunSaveQuery([FromRoute (Name = "id")][Required]string id);
+        public abstract IActionResult RunSaveQuery([FromRoute (Name = "id")][Required]string id, [FromQuery (Name = "outputFormat")]OutputFormatType? outputFormat, [FromQuery (Name = "outputFormatParams")]List<OutputFormatParamType>? outputFormatParams);
     }
 }
