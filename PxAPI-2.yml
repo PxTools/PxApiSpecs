@@ -1693,7 +1693,7 @@ components:
       description: Indicates if data is in current or fixed prices.
       type: string
       enum:
-      - Undefined
+      - NotApplicable
       - Current
       - Fixed
 
