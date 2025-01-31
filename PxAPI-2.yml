@@ -390,7 +390,7 @@ paths:
   /savedqueries:
     post:
       tags:
-        - Saved Queries
+      - Saved Queries
       summary: Save a query for later use.
       operationId: CreateSaveQuery
       requestBody:
@@ -400,12 +400,12 @@ paths:
             schema:
               $ref: '#/components/schemas/SavedQuery'  
       responses:
-        '200':
-          description: Success
+        '201':
+          description: Saved query created
           content:
             application/json:
               schema:
-                type: string
+                $ref: '#/components/schemas/SavedQuery' 
         '400':
           $ref: '#/components/responses/ErrorResponse400'
         '429':
@@ -608,6 +608,9 @@ components:
         - "language"
         - "tableId"
       properties:
+        id: 
+          type: string
+          description: The id of the saved query
         selection:
           $ref: '#/components/schemas/VariablesSelection'
         language:
