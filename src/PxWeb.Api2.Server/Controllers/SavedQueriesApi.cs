@@ -31,7 +31,7 @@ namespace PxWeb.Api2.Server.Controllers
         /// Save a query for later use.
         /// </summary>
         /// <param name="savedQuery">A saved query</param>
-        /// <response code="200">Success</response>
+        /// <response code="201">Saved query created</response>
         /// <response code="400">Error response for 400</response>
         /// <response code="429">Error response for 429</response>
         [HttpPost]
@@ -39,7 +39,7 @@ namespace PxWeb.Api2.Server.Controllers
         [Consumes("application/json")]
         [ValidateModelState]
         [SwaggerOperation("CreateSaveQuery")]
-        [SwaggerResponse(statusCode: 200, type: typeof(string), description: "Success")]
+        [SwaggerResponse(statusCode: 201, type: typeof(SavedQuery), description: "Saved query created")]
         [SwaggerResponse(statusCode: 400, type: typeof(Problem), description: "Error response for 400")]
         [SwaggerResponse(statusCode: 429, type: typeof(Problem), description: "Error response for 429")]
         public abstract IActionResult CreateSaveQuery([FromBody]SavedQuery? savedQuery);

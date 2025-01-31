@@ -27,6 +27,13 @@ namespace PxWeb.Api2.Server.Models
     public class SavedQuery : IEquatable<SavedQuery>
     {
         /// <summary>
+        /// The id of the saved query
+        /// </summary>
+        /// <value>The id of the saved query</value>
+        [DataMember(Name="id", EmitDefaultValue=false)]
+        public string? Id { get; set; }
+
+        /// <summary>
         /// Gets or Sets Selection
         /// </summary>
         [Required]
@@ -69,6 +76,7 @@ namespace PxWeb.Api2.Server.Models
         {
             var sb = new StringBuilder();
             sb.Append("class SavedQuery {\n");
+            sb.Append("  Id: ").Append(Id).Append("\n");
             sb.Append("  Selection: ").Append(Selection).Append("\n");
             sb.Append("  Language: ").Append(Language).Append("\n");
             sb.Append("  TableId: ").Append(TableId).Append("\n");
@@ -111,6 +119,11 @@ namespace PxWeb.Api2.Server.Models
 
             return 
                 (
+                    Id == other.Id ||
+                    Id != null &&
+                    Id.Equals(other.Id)
+                ) && 
+                (
                     Selection == other.Selection ||
                     Selection != null &&
                     Selection.Equals(other.Selection)
@@ -148,6 +161,8 @@ namespace PxWeb.Api2.Server.Models
             {
                 var hashCode = 41;
                 // Suitable nullity checks etc, of course :)
+                    if (Id != null)
+                    hashCode = hashCode * 59 + Id.GetHashCode();
                     if (Selection != null)
                     hashCode = hashCode * 59 + Selection.GetHashCode();
                     if (Language != null)
