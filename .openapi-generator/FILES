@@ -42,10 +42,13 @@ src/PxWeb.Api2.Server.Models/Link.cs
 src/PxWeb.Api2.Server.Models/MeasuringType.cs
 src/PxWeb.Api2.Server.Models/MetadataOutputFormatType.cs
 src/PxWeb.Api2.Server.Models/Note.cs
+src/PxWeb.Api2.Server.Models/OutputFormatParamType.cs
+src/PxWeb.Api2.Server.Models/OutputFormatType.cs
 src/PxWeb.Api2.Server.Models/PageInfo.cs
 src/PxWeb.Api2.Server.Models/PriceType.cs
 src/PxWeb.Api2.Server.Models/Problem.cs
 src/PxWeb.Api2.Server.Models/RegularVariable.cs
+src/PxWeb.Api2.Server.Models/SavedQuery.cs
 src/PxWeb.Api2.Server.Models/SelectionResponse.cs
 src/PxWeb.Api2.Server.Models/SourceReference.cs
 src/PxWeb.Api2.Server.Models/Table.cs
@@ -65,6 +68,7 @@ src/PxWeb.Api2.Server/Attributes/ValidateModelStateAttribute.cs
 src/PxWeb.Api2.Server/Authentication/ApiAuthentication.cs
 src/PxWeb.Api2.Server/Controllers/ConfigurationApi.cs
 src/PxWeb.Api2.Server/Controllers/NavigationApi.cs
+src/PxWeb.Api2.Server/Controllers/SavedQueriesApi.cs
 src/PxWeb.Api2.Server/Controllers/TableApi.cs
 src/PxWeb.Api2.Server/Filters/BasePathFilter.cs
 src/PxWeb.Api2.Server/Filters/GeneratePathParamsValidationFilter.cs
