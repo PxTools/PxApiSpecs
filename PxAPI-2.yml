@@ -22,6 +22,9 @@ tags:
     description: Find a table
   - name: Table
     description: Use a table
+  - name: Saved Queries
+    description: Save a query for later use
+
 paths:
   /navigation:
     get:
@@ -149,7 +152,6 @@ paths:
           description: |
             If metadata should be included as if default selection would have been applied.
             This is a technical parameter that is used by PxWeb for initial loading of tables.
-
       responses:
         "200":
           description: Success
@@ -301,7 +303,7 @@ paths:
             application/json:
               schema:
                 type: string
-            plain/text:
+            text/plain:
               schema:
                 type: string
             application/xml:
@@ -345,7 +347,7 @@ paths:
             application/json:
               schema:
                 type: string
-            plain/text:
+            text/plain:
               schema:
                 type: string
             application/xml:
@@ -380,6 +382,89 @@ paths:
                 $ref: "#/components/schemas/ConfigResponse"
         "400":
           $ref: "#/components/responses/ErrorResponse400"
+        "404":
+          $ref: "#/components/responses/ErrorResponse404"
+        "429":
+          $ref: "#/components/responses/ErrorResponse429"
+
+  /savedqueries:
+    post:
+      tags:
+      - Saved Queries
+      summary: Save a query for later use.
+      operationId: CreateSaveQuery
+      requestBody:
+        description: A saved query
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/SavedQuery"
+      responses:
+        "201":
+          description: Saved query created
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SavedQuery"
+        "400":
+          $ref: "#/components/responses/ErrorResponse400"
+        "429":
+          $ref: "#/components/responses/ErrorResponse429"
+
+  /savedqueries/{id}:
+    get:
+      tags:
+        - Saved Queries
+      parameters:
+        - $ref: "#/components/parameters/id"
+      summary: Retrieves the content of a saved query.
+      operationId: GetSaveQuery
+      responses:
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SavedQuery"
+        "400":
+          $ref: "#/components/responses/ErrorResponse400"
+        "404":
+          $ref: "#/components/responses/ErrorResponse404"
+        "429":
+          $ref: "#/components/responses/ErrorResponse429"
+
+  /savedqueries/{id}/data:
+    get:
+      tags:
+        - Saved Queries
+      parameters:
+        - $ref: "#/components/parameters/id"
+        - $ref: "#/components/parameters/outputFormat"
+        - $ref: "#/components/parameters/outputFormatParams"
+      summary: Retrieves the data by running the saved query.
+      operationId: RunSaveQuery
+      responses:
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: string
+            text/plain:
+              schema:
+                type: string
+            application/xml:
+              schema:
+                type: string
+                format: binary
+            application/octet-stream:
+              schema:
+                type: string
+                format: binary
+        "400":
+          $ref: "#/components/responses/ErrorResponse400"
+        "403":
+          $ref: "#/components/responses/ErrorResponse403"
         "404":
           $ref: "#/components/responses/ErrorResponse404"
         "429":
@@ -475,15 +560,7 @@ components:
       name: outputFormat
       in: query
       schema:
-        type: string
-        enum:
-          - px
-          - json-stat2
-          - csv
-          - xlsx
-          - html
-          - json-px
-          - parquet
+        $ref: "#/components/schemas/OutputFormatType"
     outputFormatParams:
       name: outputFormatParams
       in: query
@@ -491,25 +568,64 @@ components:
       schema:
         type: array
         items:
-          type: string
-          enum:
-            - UseCodes
-            - UseTexts
-            - UseCodesAndTexts
-            - IncludeTitle
-            - SeparatorTab
-            - SeparatorSpace
-            - SeparatorSemicolon
-          description: |
-            Parameters for the output format.
-            * UseCodes: Can not be combined with UseTexts and UseCodesAndTexts. And only applicable for csv, html and xlsx output format.
-            * UseTexts: Can not be combined with UsedCodes and UseCodesAndTexts. And only applicable for csv, html and xlsx output format.
-            * UseCodesAndTexts: Can not be combined with UseCodess and UseTexts. And only applicable for csv, html and xlsx output format.
-            * IncludeTitle: Only applicable for csv, html and xlsx output format.
-            * SeparatorTab: Can not be combined with SeparatorSpace and SeparatorSemicolon. And only applicable for csv output format.
-            * SeparatorSpace: Can not be combined with SeparatorTab and SeparatorSemicolon. And only applicable for csv output format.
-            * SeparatorSemicolon: Can not be combined with SeparatorTab and SeparatorSpace. And only applicable for csv output format.
+          $ref: "#/components/schemas/OutputFormatParamType"
   schemas:
+    OutputFormatType:
+      type: string
+      enum:
+        - px
+        - json-stat2
+        - csv
+        - xlsx
+        - html
+        - json-px
+        - parquet
+
+    OutputFormatParamType:
+      type: string
+      enum:
+        - UseCodes
+        - UseTexts
+        - UseCodesAndTexts
+        - IncludeTitle
+        - SeparatorTab
+        - SeparatorSpace
+        - SeparatorSemicolon
+      description: |
+        Parameters for the output format.
+        * UseCodes: Can not be combined with UseTexts and UseCodesAndTexts. And only applicable for csv, html and xlsx output format.
+        * UseTexts: Can not be combined with UsedCodes and UseCodesAndTexts. And only applicable for csv, html and xlsx output format.
+        * UseCodesAndTexts: Can not be combined with UseCodess and UseTexts. And only applicable for csv, html and xlsx output format.
+        * IncludeTitle: Only applicable for csv, html and xlsx output format.
+        * SeparatorTab: Can not be combined with SeparatorSpace and SeparatorSemicolon. And only applicable for csv output format.
+        * SeparatorSpace: Can not be combined with SeparatorTab and SeparatorSemicolon. And only applicable for csv output format.
+        * SeparatorSemicolon: Can not be combined with SeparatorTab and SeparatorSpace. And only applicable for csv output format.
+
+    SavedQuery:
+      type: object
+      required:
+        - "selection"
+        - "language"
+        - "tableId"
+      properties:
+        id:
+          type: string
+          description: The id of the saved query
+        selection:
+          $ref: "#/components/schemas/VariablesSelection"
+        language:
+          type: string
+          description: language code for the language used in this response
+        tableId:
+          type: string
+          description: which table the query is for
+        outputFormat:
+          $ref: "#/components/schemas/OutputFormatType"
+        outputFormatParams:
+          type: array
+          items:
+            $ref: "#/components/schemas/OutputFormatParamType"
+
     VariablesSelection:
       type: object
       required:
