@@ -1690,9 +1690,9 @@ components:
       description: Indicates if data is in current or fixed prices.
       type: string
       enum:
-        - Undefined
-        - Current
-        - Fixed
+      - NotApplicable
+      - Current
+      - Fixed
 
     MeasuringType:
       description: Indicates if data is stock, flow or average.
