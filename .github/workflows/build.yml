@@ -28,7 +28,7 @@ jobs:
           generator: aspnetcore
           openapi-file: PxAPI-2.yml
           config-file: aspnetcore-generator-config.yml
-          generator-tag: v7.9.0
+          generator-tag: v7.11.0
           command-args: -o .
 
       - name: Check for staged changes

@@ -29,15 +29,15 @@ namespace PxWeb.Api2.Server.Models
         {
             
             /// <summary>
-            /// Enum PxEnum for json-px
+            /// Enum JsonPxEnum for json-px
             /// </summary>
             [EnumMember(Value = "json-px")]
-            PxEnum = 1,
+            JsonPxEnum = 1,
             
             /// <summary>
-            /// Enum Stat2Enum for json-stat2
+            /// Enum JsonStat2Enum for json-stat2
             /// </summary>
             [EnumMember(Value = "json-stat2")]
-            Stat2Enum = 2
+            JsonStat2Enum = 2
         }
 }
