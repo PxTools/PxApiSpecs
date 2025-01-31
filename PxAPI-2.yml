@@ -18,12 +18,12 @@ info:
     | 50X            | Internal Server Error | The service might be down |
 
 tags:
-- name: Navigation
-  description:  Find a table
-- name: Table
-  description: Use a table
-- name: Saved Queries
-  description: Save a query for later use
+  - name: Navigation
+    description:  Find a table
+  - name: Table
+    description: Use a table
+  - name: Saved Queries
+    description: Save a query for later use
 
 paths:
   /navigation:
@@ -379,13 +379,13 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ConfigResponse'
-        '400':
-          $ref: '#/components/responses/ErrorResponse400'
-        '404':
-          $ref: '#/components/responses/ErrorResponse404'
-        '429':
-          $ref: '#/components/responses/ErrorResponse429'
+                $ref: "#/components/schemas/ConfigResponse"
+        "400":
+          $ref: "#/components/responses/ErrorResponse400"
+        "404":
+          $ref: "#/components/responses/ErrorResponse404"
+        "429":
+          $ref: "#/components/responses/ErrorResponse429"
 
   /savedqueries:
     post:
@@ -398,53 +398,53 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/SavedQuery'
+              $ref: "#/components/schemas/SavedQuery"
       responses:
-        '201':
+        "201":
           description: Saved query created
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/SavedQuery'
-        '400':
-          $ref: '#/components/responses/ErrorResponse400'
-        '429':
-          $ref: '#/components/responses/ErrorResponse429'
+                $ref: "#/components/schemas/SavedQuery"
+        "400":
+          $ref: "#/components/responses/ErrorResponse400"
+        "429":
+          $ref: "#/components/responses/ErrorResponse429"
 
   /savedqueries/{id}:
     get:
       tags:
         - Saved Queries
       parameters:
-        - $ref: '#/components/parameters/id'
+        - $ref: "#/components/parameters/id"
       summary: Retrieves the content of a saved query.
       operationId: GetSaveQuery
       responses:
-        '200':
+        "200":
           description: Success
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/SavedQuery'
-        '400':
-          $ref: '#/components/responses/ErrorResponse400'
-        '404':
-          $ref: '#/components/responses/ErrorResponse404'
-        '429':
-          $ref: '#/components/responses/ErrorResponse429'
+                $ref: "#/components/schemas/SavedQuery"
+        "400":
+          $ref: "#/components/responses/ErrorResponse400"
+        "404":
+          $ref: "#/components/responses/ErrorResponse404"
+        "429":
+          $ref: "#/components/responses/ErrorResponse429"
 
   /savedqueries/{id}/data:
     get:
       tags:
         - Saved Queries
       parameters:
-        - $ref: '#/components/parameters/id'
-        - $ref: '#/components/parameters/outputFormat'
-        - $ref: '#/components/parameters/outputFormatParams'
+        - $ref: "#/components/parameters/id"
+        - $ref: "#/components/parameters/outputFormat"
+        - $ref: "#/components/parameters/outputFormatParams"
       summary: Retrieves the data by running the saved query.
       operationId: RunSaveQuery
       responses:
-        '200':
+        "200":
           description: Success
           content:
             application/json:
@@ -461,14 +461,14 @@ paths:
               schema:
                 type: string
                 format: binary
-        '400':
-          $ref: '#/components/responses/ErrorResponse400'
-        '403':
-          $ref: '#/components/responses/ErrorResponse403'
-        '404':
-          $ref: '#/components/responses/ErrorResponse404'
-        '429':
-          $ref: '#/components/responses/ErrorResponse429'
+        "400":
+          $ref: "#/components/responses/ErrorResponse400"
+        "403":
+          $ref: "#/components/responses/ErrorResponse403"
+        "404":
+          $ref: "#/components/responses/ErrorResponse404"
+        "429":
+          $ref: "#/components/responses/ErrorResponse429"
 
 components:
   parameters:
@@ -560,7 +560,7 @@ components:
       name: outputFormat
       in: query
       schema:
-        $ref: '#/components/schemas/OutputFormatType'
+        $ref: "#/components/schemas/OutputFormatType"
     outputFormatParams:
       name: outputFormatParams
       in: query
@@ -568,7 +568,7 @@ components:
       schema:
         type: array
         items:
-          $ref: '#/components/schemas/OutputFormatParamType'
+          $ref: "#/components/schemas/OutputFormatParamType"
   schemas:
     OutputFormatType:
       type: string
@@ -612,7 +612,7 @@ components:
           type: string
           description: The id of the saved query
         selection:
-          $ref: '#/components/schemas/VariablesSelection'
+          $ref: "#/components/schemas/VariablesSelection"
         language:
           type: string
           description: language code for the language used in this response
@@ -620,11 +620,11 @@ components:
           type: string
           description: which table the query is for
         outputFormat:
-          $ref: '#/components/schemas/OutputFormatType'
+          $ref: "#/components/schemas/OutputFormatType"
         outputFormatParams:
           type: array
           items:
-            $ref: '#/components/schemas/OutputFormatParamType'
+            $ref: "#/components/schemas/OutputFormatParamType"
 
     VariablesSelection:
       type: object
