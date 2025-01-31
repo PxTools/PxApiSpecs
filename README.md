@@ -1,10 +1,10 @@
 # PxApiSpecs
 
-https://petstore.swagger.io/?url=https://raw.githubusercontent.com/PxTools/PxApiSpecs/master/PxAPI-2.yml
+<https://petstore.swagger.io/?url=https://raw.githubusercontent.com/PxTools/PxApiSpecs/master/PxAPI-2.yml>
 
 Documentation for the PxApi
 
-# Updating PxApi-2.yml
+## Updating PxApi-2.yml
 
 When creating a PR for updatedating [PxAPI-2.yml](PxAPI-2.yml)
 please use the following command to also include changes in generated server code.
@@ -15,13 +15,14 @@ docker run --rm -v ${PWD}:/local openapitools/openapi-generator-cli:v7.9.0  gene
 
 Replace `${PWD}` with `$(pwd)` when running on Linux
 
-# PxWeb.Api2.Server - ASP.NET Core 6.0 Server
+## PxWeb.Api2.Server - ASP.NET Core 8.0 Server
 
 This api lets you do 2 things; Find a table(Navigation) and use a table (Table).
 
 _Table below is added to show how tables can be described in yml._
 
-**Table contains status code this API may return**
+### Table contains status code this API may return
+
 | Status code | Description | Reason |
 | ----------- | --------------------- | -------------------- |
 | 200 | Success | The endpoint has delivered response for the request |
@@ -31,7 +32,7 @@ _Table below is added to show how tables can be described in yml._
 | 429 | Too many request | Requests exceed the API time limit. Large queries should be run in sequence |
 | 50X | Internal Server Error | The service might be down |
 
-## Upgrade NuGet Packages
+### Upgrade NuGet Packages
 
 NuGet packages get frequently updated.
 
@@ -39,32 +40,32 @@ To upgrade this solution to the latest version of all NuGet packages, use the do
 
 Install dotnet-outdated tool:
 
-```
+```sh
 dotnet tool install --global dotnet-outdated-tool
 ```
 
 Upgrade only to new minor versions of packages
 
-```
+```sh
 dotnet outdated --upgrade --version-lock Major
 ```
 
 Upgrade to all new versions of packages (more likely to include breaking API changes)
 
-```
+```sh
 dotnet outdated --upgrade
 ```
 
-## Run
+### Run
 
 Linux/OS X:
 
-```
+```sh
 sh build.sh
 ```
 
 Windows:
 
-```
+```sh
 build.bat
 ```

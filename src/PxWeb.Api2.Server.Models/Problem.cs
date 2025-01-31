@@ -59,9 +59,9 @@ namespace PxWeb.Api2.Server.Models
         public string? Detail { get; set; }
 
         /// <summary>
-        /// An absolute URI that identifies the specific occurrence of the problem. It may or may not yield further information if dereferenced.    
+        /// An absolute URI that identifies the specific occurrence of the problem. It may or may not yield further information if dereferenced. 
         /// </summary>
-        /// <value>An absolute URI that identifies the specific occurrence of the problem. It may or may not yield further information if dereferenced.    </value>
+        /// <value>An absolute URI that identifies the specific occurrence of the problem. It may or may not yield further information if dereferenced. </value>
         [DataMember(Name="instance", EmitDefaultValue=false)]
         public string? Instance { get; set; }
 
