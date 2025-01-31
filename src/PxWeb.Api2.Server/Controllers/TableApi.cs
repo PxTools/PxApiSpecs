@@ -50,7 +50,7 @@ namespace PxWeb.Api2.Server.Controllers
         /// <summary>
         /// Get Metadata about Table by {id}.
         /// </summary>
-        /// <remarks>**Used for listing detailed information about a specific table** * List all variables and values and all other metadata needed to be able to fetch data  * Also links to where to:   + Fetch   - Where to get information about codelists  * 2 output formats   + Custom json    - JSON-stat2  </remarks>
+        /// <remarks>**Used for listing detailed information about a specific table** * List all variables and values and all other metadata needed to be able to fetch data  * Also links to where to:   + Fetch   - Where to get information about codelists  * 2 output formats   + Custom json   - JSON-stat2 </remarks>
         /// <param name="id">Id</param>
         /// <param name="lang">The language if the default is not what you want.</param>
         /// <param name="outputFormat">The format of the resulting metadata</param>

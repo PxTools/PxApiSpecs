@@ -20,8 +20,8 @@ info:
 tags:
  - name: Navigation
    description:  Find a table
- - name: Table 
-   description: Use a table  
+ - name: Table
+   description: Use a table
 paths:
   /navigation:
       get:
@@ -70,7 +70,7 @@ paths:
         '400':
           $ref: '#/components/responses/ErrorResponse400'
         '404':
-          $ref: '#/components/responses/ErrorResponse404'            
+          $ref: '#/components/responses/ErrorResponse404'
         '429':
           $ref: '#/components/responses/ErrorResponse429'
 
@@ -116,9 +116,9 @@ paths:
         '400':
           $ref: '#/components/responses/ErrorResponse400'
         '404':
-          $ref: '#/components/responses/ErrorResponse404'            
+          $ref: '#/components/responses/ErrorResponse404'
         '429':
-          $ref: '#/components/responses/ErrorResponse429'                
+          $ref: '#/components/responses/ErrorResponse429'
 
   /tables/{id}/metadata:
     get:
@@ -134,8 +134,8 @@ paths:
           - Where to get information about codelists
 
         * 2 output formats
-          + Custom json 
-          - JSON-stat2 
+          + Custom json
+          - JSON-stat2
       operationId: GetMetadataById
       parameters:
         - $ref: '#/components/parameters/lang'
@@ -174,7 +174,7 @@ paths:
         '400':
           $ref: '#/components/responses/ErrorResponse400'
         '404':
-          $ref: '#/components/responses/ErrorResponse404'            
+          $ref: '#/components/responses/ErrorResponse404'
         '429':
           $ref: '#/components/responses/ErrorResponse429'
 
@@ -198,10 +198,10 @@ paths:
         '400':
           $ref: '#/components/responses/ErrorResponse400'
         '404':
-          $ref: '#/components/responses/ErrorResponse404'            
+          $ref: '#/components/responses/ErrorResponse404'
         '429':
-          $ref: '#/components/responses/ErrorResponse429'                            
- 
+          $ref: '#/components/responses/ErrorResponse429'
+
   /codelists/{id}:
     get:
       tags:
@@ -221,9 +221,9 @@ paths:
         '400':
           $ref: '#/components/responses/ErrorResponse400'
         '404':
-          $ref: '#/components/responses/ErrorResponse404'            
+          $ref: '#/components/responses/ErrorResponse404'
         '429':
-          $ref: '#/components/responses/ErrorResponse429'                
+          $ref: '#/components/responses/ErrorResponse429'
 
   /tables/{id}/data:
     get:
@@ -272,13 +272,13 @@ paths:
                 {"variable_1": "single"}
               ]
           style: deepObject
-          explode: true    
+          explode: true
         - $ref: '#/components/parameters/outputFormat'
         - $ref: '#/components/parameters/outputFormatParams'
         - in: query
           name: heading
           style: form
-          explode: false 
+          explode: false
           required: false
           description: Commaseparated list of variable codes that should be placed in the heading in the resulting data
           schema:
@@ -288,13 +288,13 @@ paths:
         - in: query
           name: stub
           style: form
-          explode: false 
+          explode: false
           required: false
           description: Commaseparated list of variable codes that should be placed in the stub in the resulting data
           schema:
             type: array
             items:
-              type: string          
+              type: string
       responses:
         '200':
           description: Success
@@ -316,9 +316,9 @@ paths:
         '400':
           $ref: '#/components/responses/ErrorResponse400'
         '403':
-          $ref: '#/components/responses/ErrorResponse403'  
+          $ref: '#/components/responses/ErrorResponse403'
         '404':
-          $ref: '#/components/responses/ErrorResponse404'            
+          $ref: '#/components/responses/ErrorResponse404'
         '429':
           $ref: '#/components/responses/ErrorResponse429'
 
@@ -337,9 +337,9 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/VariablesSelection'  
+              $ref: '#/components/schemas/VariablesSelection'
 
-         
+
       responses:
         '200':
           description: Success
@@ -361,9 +361,9 @@ paths:
         '400':
           $ref: '#/components/responses/ErrorResponse400'
         '403':
-          $ref: '#/components/responses/ErrorResponse403'  
+          $ref: '#/components/responses/ErrorResponse403'
         '404':
-          $ref: '#/components/responses/ErrorResponse404'            
+          $ref: '#/components/responses/ErrorResponse404'
         '429':
           $ref: '#/components/responses/ErrorResponse429'
 
@@ -383,10 +383,10 @@ paths:
         '400':
           $ref: '#/components/responses/ErrorResponse400'
         '404':
-          $ref: '#/components/responses/ErrorResponse404'            
+          $ref: '#/components/responses/ErrorResponse404'
         '429':
-          $ref: '#/components/responses/ErrorResponse429'     
-    
+          $ref: '#/components/responses/ErrorResponse429'
+
 components:
   parameters:
     lang:
@@ -478,7 +478,7 @@ components:
       in: query
       schema:
         type: string
-        enum: 
+        enum:
           - px
           - json-stat2
           - csv
@@ -494,7 +494,7 @@ components:
         type: array
         items:
           type: string
-          enum: 
+          enum:
             - UseCodes
             - UseTexts
             - UseCodesAndTexts
@@ -503,7 +503,7 @@ components:
             - SeparatorSpace
             - SeparatorSemicolon
           description: |
-            Parameters for the output format. 
+            Parameters for the output format.
             * UseCodes: Can not be combined with UseTexts and UseCodesAndTexts. And only applicable for csv, html and xlsx output format.
             * UseTexts: Can not be combined with UsedCodes and UseCodesAndTexts. And only applicable for csv, html and xlsx output format.
             * UseCodesAndTexts: Can not be combined with UseCodess and UseTexts. And only applicable for csv, html and xlsx output format.
@@ -524,7 +524,7 @@ components:
         placement:
           $ref: '#/components/schemas/VariablePlacementType'
 
-    VariablePlacementType:  
+    VariablePlacementType:
       type: object
       properties:
         heading:
@@ -536,10 +536,10 @@ components:
           description: List of variables that should be placed in the stub in the resulting data
           type: array
           items:
-            type: string  
-    SelectionResponse: 
+            type: string
+    SelectionResponse:
       allOf:
-        - $ref: '#/components/schemas/VariablesSelection' 
+        - $ref: '#/components/schemas/VariablesSelection'
       type: object
       required:
         - "language"
@@ -549,7 +549,7 @@ components:
           type: string
           description: The language code for the language used in this response
           example: sv
-        links: 
+        links:
           type: array
           items:
             $ref: '#/components/schemas/Link'
@@ -607,7 +607,7 @@ components:
         languages:
           type: array
           description: A list of language that exists for the data.
-          items: 
+          items:
             $ref: '#/components/schemas/Language'
         defaultLanguage:
           type: string
@@ -648,7 +648,7 @@ components:
           description: A list of features for the API
           items:
             $ref: '#/components/schemas/ApiFeature'
-    
+
     Language:
       type: object
       description: Language information
@@ -672,22 +672,22 @@ components:
       properties:
         language:
           type: string
-          description: The language id 
+          description: The language id
         text:
           type: string
           description: The text that should be displayed
-    
+
     ApiFeature:
       type: object
       required:
         - "id"
       properties:
-        id: 
+        id:
           type: string
           description: The identifyer for the feature
         params:
           type: array
-          items: 
+          items:
             $ref: '#/components/schemas/KeyValuePair'
 
     KeyValuePair:
@@ -730,7 +730,7 @@ components:
         - "id"
         - "label"
       properties:
-        type: 
+        type:
           $ref: '#/components/schemas/FolderContentItemTypeEnum'
           description: One of Heading, Table or FolderInformation
           nullable: false
@@ -822,7 +822,7 @@ components:
       properties:
         language:
           type: string
-          description: The language code (ISO 639) for this response    
+          description: The language code (ISO 639) for this response
 
     Table:
       allOf:
@@ -859,7 +859,7 @@ components:
               nullable: true
             category:
               type: string
-              description: Mostly for internal use. Which category table belongs to. internal, public, private or section. 
+              description: Mostly for internal use. Which category table belongs to. internal, public, private or section.
               default: public
               enum:
               - internal
@@ -924,11 +924,11 @@ components:
       properties:
         language:
           type: string
-          description: The language code (ISO 639) for this response      
+          description: The language code (ISO 639) for this response
         tables:
           type: array
           items:
-              $ref: '#/components/schemas/Table'    
+              $ref: '#/components/schemas/Table'
         page:
           $ref: '#/components/schemas/PageInfo'
         links:
@@ -955,7 +955,7 @@ components:
       properties:
         language:
           type: string
-          description: The language code (ISO 639) for this response      
+          description: The language code (ISO 639) for this response
         id:
           type: string
           description: Identifier for the table.
@@ -1005,21 +1005,21 @@ components:
           type: boolean
           description: If the table is discontinued or not. That is if it no longer updated with new figures.
           nullable: true
-        notes: 
+        notes:
           type: array
           description: A list of notes associated with the table as a whole or a specific area of the table
           items:
             $ref: '#/components/schemas/CellNote'
-        contacts: 
+        contacts:
           type: array
           description: A list of contacts associated with the table.
-          items: 
+          items:
             $ref: '#/components/schemas/Contact'
         variables:
           type: array
           items:
             $ref: '#/components/schemas/AbstractVariable'
-        links: 
+        links:
           type: array
           items:
             $ref: '#/components/schemas/Link'
@@ -1030,9 +1030,9 @@ components:
           ContentsVariable: "#/components/schemas/ContentsVariable"
           TimeVariable: "#/components/schemas/TimeVariable"
           GeographicalVariable: "#/components/schemas/GeographicalVariable"
-          RegularVariable: "#/components/schemas/RegularVariable"          
+          RegularVariable: "#/components/schemas/RegularVariable"
       type: object
-      required: 
+      required:
         - id
         - label
         - type
@@ -1043,17 +1043,17 @@ components:
         label:
           type: string
           example: Import and export
-        type: 
+        type:
           $ref: '#/components/schemas/VariableTypeEnum'
-        notes: 
+        notes:
           type: array
           items:
             $ref: '#/components/schemas/Note'
-        links: 
+        links:
           type: array
           items:
             $ref: '#/components/schemas/Link'
-      
+
     Note:
       type: object
       required:
@@ -1073,7 +1073,7 @@ components:
       properties:
         conditions:
           type: array
-          description: A set of condition that must be fulfilled for the note to be valid. 
+          description: A set of condition that must be fulfilled for the note to be valid.
           items:
             $ref: '#/components/schemas/Condition'
           nullable: true
@@ -1175,7 +1175,7 @@ components:
           description: A textual name for the CodeList
         type:
           $ref: '#/components/schemas/CodeListType'
-        links: 
+        links:
           type: array
           description: Links to associated information about the code list
           items:
@@ -1186,18 +1186,18 @@ components:
         - "code"
         - "label"
       properties:
-        code: 
+        code:
           type: string
           description: A code representing the value.
         label:
           type: string
           description: A Textual name for the value
-        notes: 
+        notes:
           type: array
           description: Optional notes that are associated with the value
           items:
             $ref: '#/components/schemas/Note'
-        links: 
+        links:
           type: array
           items:
             $ref: '#/components/schemas/Link'
@@ -1245,7 +1245,7 @@ components:
       required:
         - "raw"
       properties:
-        name: 
+        name:
           type: string
           example: Inga Svensson
         phone:
@@ -1270,7 +1270,7 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/CodeListMetadata'
-        links: 
+        links:
           type: array
           items:
             $ref: '#/components/schemas/Link'
@@ -1282,17 +1282,17 @@ components:
         - "type"
         - "links"
       properties:
-        id: 
+        id:
           type: string
           description: The identiyer for the codelist
           example: agg_RegionNUTS2_2008
         label:
           type: string
-          description: The textual name  for the codelist. 
+          description: The textual name  for the codelist.
           example: NUTS2 fr.o.m 2008
         type:
           $ref: '#/components/schemas/CodeListType'
-        links: 
+        links:
           type: array
           items:
             $ref: '#/components/schemas/Link'
@@ -1304,7 +1304,7 @@ components:
         - Aggregation
         - Valueset
 
-    CodeListResponse: 
+    CodeListResponse:
       type: object
       required:
         - "id"
@@ -1314,14 +1314,14 @@ components:
         - "values"
         - "links"
       properties:
-        id: 
+        id:
           type: string
           description: The identiyer for the codelist
           example: agg_RegionNUTS2_2008
         label:
           type: string
-          description: The textual name  for the codelist. 
-          example: NUTS2 fr.o.m 2008 
+          description: The textual name  for the codelist.
+          example: NUTS2 fr.o.m 2008
         language:
           type: string
           description: The language code for the language used in this response
@@ -1332,7 +1332,7 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/ValueMap'
-        links: 
+        links:
           type: array
           items:
             $ref: '#/components/schemas/Link'
@@ -1348,7 +1348,7 @@ components:
           type: string
           description: The code for the value.
           example: "SE22"
-        label: 
+        label:
           type: string
           description: The textual representation for the value
           example: Sydsverige
@@ -1358,7 +1358,7 @@ components:
           example: '["10", "12"]'
           items:
             type: string
-        notes: 
+        notes:
           type: array
           description: Optional notes that are associated with the value
           items:
@@ -1423,7 +1423,7 @@ components:
           description: |
             An absolute URI that identifies the specific occurrence of the problem.
             It may or may not yield further information if dereferenced.
-              
+
     strarray:
       type: array
       items:
@@ -1452,7 +1452,7 @@ components:
         px:
           description: |
             Properties corresponds to keywords in the px-file.
-            
+
             See [PX file format](https://www.scb.se/en/services/statistical-programs-for-px-files/px-file-format/)
           type: object
           properties:
@@ -1470,7 +1470,7 @@ components:
               type: boolean
             aggregallowed:
               description: If the contents of the table cannot be aggregated
-              type: boolean            
+              type: boolean
             copyright:
               description: Copyright is given as YES or NO
               type: string
@@ -1520,7 +1520,7 @@ components:
         tags:
           description: Tag for table
           type: array
-          items: 
+          items:
             type: string
         discontinued:
           description: Table will no longer be updated
@@ -1529,7 +1529,7 @@ components:
         contact:
           type: array
           description: A list of contacts associated with the table.
-          items: 
+          items:
             $ref: '#/components/schemas/Contact'
     extension:
       description: extension at some level
@@ -1562,7 +1562,7 @@ components:
         codeLists:
          $ref: '#/components/schemas/CodeLists'
         firstPeriod:
-          description: Earliest time period in table 
+          description: Earliest time period in table
           type: string
         lastPeriod:
           description: Latest time period in table
@@ -1595,17 +1595,17 @@ components:
           type: array
           items:
             type: string
-          uniqueItems: true  
+          uniqueItems: true
     jsonstat-link:
       type: object
-      additionalProperties: 
+      additionalProperties:
         type: array
         items:
           type: object
           title: jsonstatLink
           properties:
             type:
-              type: string  
+              type: string
             href:
               "$ref": "#/components/schemas/href"
           additionalProperties: false
@@ -1624,9 +1624,9 @@ components:
                  additionalProperties:
                     description: A string
                     type: string
-                    
-            additionalProperties: false       
-      additionalProperties: false         
+
+            additionalProperties: false
+      additionalProperties: false
     jsonstat-note:
       description: Spesification on json-stat.org -> [here](https://json-stat.org/full/#note)
       type: array
@@ -1670,7 +1670,7 @@ components:
                 description: It is the base unit (person, gram, euro, etc.).
                 type: string
               decimals:
-                description: Number of decimals 
+                description: Number of decimals
                 type: integer
       additionalProperties: false
     CodeLists:
@@ -1726,7 +1726,7 @@ components:
       title: JSON-stat 2.0 Dataset Schema
       description: |
          Representation of TableMetaData/TableData according to JSON-stat 2.0 Dataset Schema (2018-09-05 10:55), see full specification of JSON-stat format [here](https://json-stat.org/full/)
-         
+
          Properties in **extension** are mostly from PX-file format, see [PX file format](https://www.scb.se/en/services/statistical-programs-for-px-files/px-file-format/)
       type: object
       properties:
@@ -1735,7 +1735,7 @@ components:
           type: string
           enum:
             - '2.0'
-          default: '2.0'      
+          default: '2.0'
         class:
           "$ref": "#/components/schemas/ClassType"
           # description: "Is always dataset"
@@ -1769,7 +1769,7 @@ components:
             metric:
               description: Specification on json-stat.org -> [here](https://json-stat.org/full/#metric)
               "$ref": "#/components/schemas/strarray"
-          additionalProperties: false  
+          additionalProperties: false
         id:
           description: Specification on json-stat.org -> [here](https://json-stat.org/full/#id)
           "$ref": "#/components/schemas/strarray"
@@ -1785,21 +1785,21 @@ components:
              type: object
              properties:
               label:
-                description: Specification on json-stat.org -> [here](https://json-stat.org/full/#label) 
+                description: Specification on json-stat.org -> [here](https://json-stat.org/full/#label)
                 "$ref": "#/components/schemas/label"
               note:
                 description: Notes for variable
                 "$ref": "#/components/schemas/jsonstat-note"
               category:
                 description: Specification on json-stat.org -> [here](https://json-stat.org/full/#category)
-                "$ref": "#/components/schemas/jsonstat-category"  
+                "$ref": "#/components/schemas/jsonstat-category"
               extension:
                 "$ref": "#/components/schemas/extension-dimension"
               link:
                 "$ref": "#/components/schemas/jsonstat-extension-link"
-             additionalProperties: false            
+             additionalProperties: false
         extension:
-          "$ref": "#/components/schemas/extension-root"  
+          "$ref": "#/components/schemas/extension-root"
         value:
           description: Specification on json-stat.org -> [here](https://json-stat.org/full/#value)
           type: array
@@ -1827,7 +1827,7 @@ components:
       type: string
       enum:
         - dataset
-      default: dataset                   
+      default: dataset
 
   responses:
     ErrorResponse429:
@@ -1836,7 +1836,7 @@ components:
         application/problem+json:
           schema:
             $ref: '#/components/schemas/Problem'
-            #Reference: 
+            #Reference:
             # https://dzone.com/articles/rest-api-error-handling-problem-details-response
             # https://datatracker.ietf.org/doc/html/rfc7807
             # https://nordicapis.com/best-practices-api-error-handling/
@@ -1878,6 +1878,6 @@ components:
             title: Not Found
             status: 404
             detail: Node with id, xxx can not be found
-            
 
-  
+
+
