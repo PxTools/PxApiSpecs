@@ -76,13 +76,6 @@ namespace PxWeb.Api2.Server.Models
         public List<CodeListInformation> CodeLists { get; set; }
 
         /// <summary>
-        /// How often a table is updated
-        /// </summary>
-        /// <value>How often a table is updated</value>
-        [DataMember(Name="frequency", EmitDefaultValue=false)]
-        public string? Frequency { get; set; }
-
-        /// <summary>
         /// Earliest time period in table
         /// </summary>
         /// <value>Earliest time period in table</value>
@@ -95,6 +88,40 @@ namespace PxWeb.Api2.Server.Models
         /// <value>Latest time period in table</value>
         [DataMember(Name="lastPeriod", EmitDefaultValue=false)]
         public string? LastPeriod { get; set; }
+
+        /// <summary>
+        /// Gets or Sets TimeUnit
+        /// </summary>
+        [DataMember(Name="timeUnit", EmitDefaultValue=true)]
+        public TimeUnit TimeUnit { get; set; }
+
+        /// <summary>
+        /// Indicates if data is stock, flow or average.
+        /// </summary>
+        /// <value>Indicates if data is stock, flow or average.</value>
+        [DataMember(Name="measuringType", EmitDefaultValue=false)]
+        public Dictionary<string, MeasuringType> MeasuringType { get; set; }
+
+        /// <summary>
+        /// Indicates if data is in current or fixed prices.
+        /// </summary>
+        /// <value>Indicates if data is in current or fixed prices.</value>
+        [DataMember(Name="priceType", EmitDefaultValue=false)]
+        public Dictionary<string, PriceType> PriceType { get; set; }
+
+        /// <summary>
+        /// Describes adjustments made to the data
+        /// </summary>
+        /// <value>Describes adjustments made to the data</value>
+        [DataMember(Name="adjustment", EmitDefaultValue=false)]
+        public Dictionary<string, Adjustment> Adjustment { get; set; }
+
+        /// <summary>
+        /// Base period for, for instance index series. Is shown with the footnote. If there is a contents variable the keyword is repeated for each value of the contents variable.
+        /// </summary>
+        /// <value>Base period for, for instance index series. Is shown with the footnote. If there is a contents variable the keyword is repeated for each value of the contents variable.</value>
+        [DataMember(Name="basePeriod", EmitDefaultValue=false)]
+        public Dictionary<string, string> BasePeriod { get; set; }
 
         /// <summary>
         /// Returns the string presentation of the object
@@ -111,9 +138,13 @@ namespace PxWeb.Api2.Server.Models
             sb.Append("  Refperiod: ").Append(Refperiod).Append("\n");
             sb.Append("  Show: ").Append(Show).Append("\n");
             sb.Append("  CodeLists: ").Append(CodeLists).Append("\n");
-            sb.Append("  Frequency: ").Append(Frequency).Append("\n");
             sb.Append("  FirstPeriod: ").Append(FirstPeriod).Append("\n");
             sb.Append("  LastPeriod: ").Append(LastPeriod).Append("\n");
+            sb.Append("  TimeUnit: ").Append(TimeUnit).Append("\n");
+            sb.Append("  MeasuringType: ").Append(MeasuringType).Append("\n");
+            sb.Append("  PriceType: ").Append(PriceType).Append("\n");
+            sb.Append("  Adjustment: ").Append(Adjustment).Append("\n");
+            sb.Append("  BasePeriod: ").Append(BasePeriod).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -190,11 +221,6 @@ namespace PxWeb.Api2.Server.Models
                     CodeLists.SequenceEqual(other.CodeLists)
                 ) && 
                 (
-                    Frequency == other.Frequency ||
-                    Frequency != null &&
-                    Frequency.Equals(other.Frequency)
-                ) && 
-                (
                     FirstPeriod == other.FirstPeriod ||
                     FirstPeriod != null &&
                     FirstPeriod.Equals(other.FirstPeriod)
@@ -203,6 +229,35 @@ namespace PxWeb.Api2.Server.Models
                     LastPeriod == other.LastPeriod ||
                     LastPeriod != null &&
                     LastPeriod.Equals(other.LastPeriod)
+                ) && 
+                (
+                    TimeUnit == other.TimeUnit ||
+                    
+                    TimeUnit.Equals(other.TimeUnit)
+                ) && 
+                (
+                    MeasuringType == other.MeasuringType ||
+                    MeasuringType != null &&
+                    other.MeasuringType != null &&
+                    MeasuringType.SequenceEqual(other.MeasuringType)
+                ) && 
+                (
+                    PriceType == other.PriceType ||
+                    PriceType != null &&
+                    other.PriceType != null &&
+                    PriceType.SequenceEqual(other.PriceType)
+                ) && 
+                (
+                    Adjustment == other.Adjustment ||
+                    Adjustment != null &&
+                    other.Adjustment != null &&
+                    Adjustment.SequenceEqual(other.Adjustment)
+                ) && 
+                (
+                    BasePeriod == other.BasePeriod ||
+                    BasePeriod != null &&
+                    other.BasePeriod != null &&
+                    BasePeriod.SequenceEqual(other.BasePeriod)
                 );
         }
 
@@ -230,12 +285,20 @@ namespace PxWeb.Api2.Server.Models
                     hashCode = hashCode * 59 + Show.GetHashCode();
                     if (CodeLists != null)
                     hashCode = hashCode * 59 + CodeLists.GetHashCode();
-                    if (Frequency != null)
-                    hashCode = hashCode * 59 + Frequency.GetHashCode();
                     if (FirstPeriod != null)
                     hashCode = hashCode * 59 + FirstPeriod.GetHashCode();
                     if (LastPeriod != null)
                     hashCode = hashCode * 59 + LastPeriod.GetHashCode();
+                    
+                    hashCode = hashCode * 59 + TimeUnit.GetHashCode();
+                    if (MeasuringType != null)
+                    hashCode = hashCode * 59 + MeasuringType.GetHashCode();
+                    if (PriceType != null)
+                    hashCode = hashCode * 59 + PriceType.GetHashCode();
+                    if (Adjustment != null)
+                    hashCode = hashCode * 59 + Adjustment.GetHashCode();
+                    if (BasePeriod != null)
+                    hashCode = hashCode * 59 + BasePeriod.GetHashCode();
                 return hashCode;
             }
         }
