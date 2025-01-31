@@ -19,7 +19,7 @@ info:
 
 tags:
   - name: Navigation
-    description:  Find a table
+    description: Find a table
   - name: Table
     description: Use a table
   - name: Saved Queries
