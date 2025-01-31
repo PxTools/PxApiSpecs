@@ -30,10 +30,10 @@ namespace PxWeb.Api2.Server.Models
         {
             
             /// <summary>
-            /// Enum UndefinedEnum for Undefined
+            /// Enum NotApplicableEnum for NotApplicable
             /// </summary>
-            [EnumMember(Value = "Undefined")]
-            UndefinedEnum = 1,
+            [EnumMember(Value = "NotApplicable")]
+            NotApplicableEnum = 1,
             
             /// <summary>
             /// Enum CurrentEnum for Current

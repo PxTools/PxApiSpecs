@@ -1,7 +1,7 @@
-openapi: '3.0.2'
+openapi: "3.0.2"
 info:
   title: PxApi
-  version: '2.0'
+  version: "2.0"
   description: |
     This api lets you do 2 things; Find a table(Navigation) and use a table (Table).
 
@@ -18,35 +18,35 @@ info:
     | 50X            | Internal Server Error | The service might be down |
 
 tags:
- - name: Navigation
-   description:  Find a table
- - name: Table 
-   description: Use a table  
+  - name: Navigation
+    description: Find a table
+  - name: Table
+    description: Use a table
 paths:
   /navigation:
-      get:
-        tags:
-          - Navigation
-        summary: Get root Folder.
-        operationId: GetNavigationRoot
-        parameters:
-          - $ref: '#/components/parameters/lang'
-        responses:
-          '200':
-            description: Success
-            content:
-              application/json:
-                schema:
-                  $ref: '#/components/schemas/FolderResponse'
-                examples:
-                  NavigateRoot:
-                    $ref: './examplesAsYml/folder-root.yml#/folder-root'
-          '400':
-            $ref: '#/components/responses/ErrorResponse400'
-          '404':
-            $ref: '#/components/responses/ErrorResponse404'
-          '429':
-            $ref: '#/components/responses/ErrorResponse429'
+    get:
+      tags:
+        - Navigation
+      summary: Get root Folder.
+      operationId: GetNavigationRoot
+      parameters:
+        - $ref: "#/components/parameters/lang"
+      responses:
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/FolderResponse"
+              examples:
+                NavigateRoot:
+                  $ref: "./examplesAsYml/folder-root.yml#/folder-root"
+        "400":
+          $ref: "#/components/responses/ErrorResponse400"
+        "404":
+          $ref: "#/components/responses/ErrorResponse404"
+        "429":
+          $ref: "#/components/responses/ErrorResponse429"
 
   /navigation/{id}:
     get:
@@ -55,24 +55,24 @@ paths:
       summary: Gets Folder by {id}.
       operationId: GetNavigationById
       parameters:
-        - $ref: '#/components/parameters/id'
-        - $ref: '#/components/parameters/lang'
+        - $ref: "#/components/parameters/id"
+        - $ref: "#/components/parameters/lang"
       responses:
-        '200':
+        "200":
           description: Success
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/FolderResponse'
+                $ref: "#/components/schemas/FolderResponse"
               examples:
-                  Navigation-BE:
-                    $ref: './examplesAsYml/folder-be.yml#/folder-be'
-        '400':
-          $ref: '#/components/responses/ErrorResponse400'
-        '404':
-          $ref: '#/components/responses/ErrorResponse404'            
-        '429':
-          $ref: '#/components/responses/ErrorResponse429'
+                Navigation-BE:
+                  $ref: "./examplesAsYml/folder-be.yml#/folder-be"
+        "400":
+          $ref: "#/components/responses/ErrorResponse400"
+        "404":
+          $ref: "#/components/responses/ErrorResponse404"
+        "429":
+          $ref: "#/components/responses/ErrorResponse429"
 
   /tables:
     get:
@@ -81,22 +81,22 @@ paths:
       summary: Get all Tables.
       operationId: ListAllTables
       parameters:
-        - $ref: '#/components/parameters/lang'
-        - $ref: '#/components/parameters/query'
-        - $ref: '#/components/parameters/pastDays'
-        - $ref: '#/components/parameters/include_discontinued'
-        - $ref: '#/components/parameters/pageNumber'
-        - $ref: '#/components/parameters/pageSize'
+        - $ref: "#/components/parameters/lang"
+        - $ref: "#/components/parameters/query"
+        - $ref: "#/components/parameters/pastDays"
+        - $ref: "#/components/parameters/include_discontinued"
+        - $ref: "#/components/parameters/pageNumber"
+        - $ref: "#/components/parameters/pageSize"
       responses:
-        '200':
+        "200":
           description: Success
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/TablesResponse'
+                $ref: "#/components/schemas/TablesResponse"
               examples:
-                  tables:
-                    $ref: './examplesAsYml/tablesResponse.yml#/tablesResponse'
+                tables:
+                  $ref: "./examplesAsYml/tablesResponse.yml#/tablesResponse"
   /tables/{id}:
     get:
       tags:
@@ -104,21 +104,21 @@ paths:
       summary: Get Table by {id}.
       operationId: GetTableById
       parameters:
-        - $ref: '#/components/parameters/lang'
-        - $ref: '#/components/parameters/id'
+        - $ref: "#/components/parameters/lang"
+        - $ref: "#/components/parameters/id"
       responses:
-        '200':
+        "200":
           description: Success
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/TableResponse'
-        '400':
-          $ref: '#/components/responses/ErrorResponse400'
-        '404':
-          $ref: '#/components/responses/ErrorResponse404'            
-        '429':
-          $ref: '#/components/responses/ErrorResponse429'                
+                $ref: "#/components/schemas/TableResponse"
+        "400":
+          $ref: "#/components/responses/ErrorResponse400"
+        "404":
+          $ref: "#/components/responses/ErrorResponse404"
+        "429":
+          $ref: "#/components/responses/ErrorResponse429"
 
   /tables/{id}/metadata:
     get:
@@ -134,13 +134,13 @@ paths:
           - Where to get information about codelists
 
         * 2 output formats
-          + Custom json 
-          - JSON-stat2 
+          + Custom json
+          - JSON-stat2
       operationId: GetMetadataById
       parameters:
-        - $ref: '#/components/parameters/lang'
-        - $ref: '#/components/parameters/id'
-        - $ref: '#/components/parameters/metadataOutputFormat'
+        - $ref: "#/components/parameters/lang"
+        - $ref: "#/components/parameters/id"
+        - $ref: "#/components/parameters/metadataOutputFormat"
         - in: query
           name: defaultSelection
           schema:
@@ -150,33 +150,32 @@ paths:
             If metadata should be included as if default selection would have been applied.
             This is a technical parameter that is used by PxWeb for initial loading of tables.
 
-
       responses:
-        '200':
+        "200":
           description: Success
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/TableMetadataResponse'
+                $ref: "#/components/schemas/TableMetadataResponse"
               examples:
-                  TableMetadata:
-                    $ref: './examplesAsYml/tableMetadata.yml#/tableMetadata'
+                TableMetadata:
+                  $ref: "./examplesAsYml/tableMetadata.yml#/tableMetadata"
             application/jsonstat:
               schema:
-                $ref: '#/components/schemas/Dataset'
+                $ref: "#/components/schemas/Dataset"
               examples:
-                  Dataset-meta:
-                    $ref: './examplesAsYml/dataset-meta.yml#/dataset-meta'
+                Dataset-meta:
+                  $ref: "./examplesAsYml/dataset-meta.yml#/dataset-meta"
             application/vnd.json-stat2+json:
               schema:
                 externalDocs:
                   url: "https://json-stat.org/schema/"
-        '400':
-          $ref: '#/components/responses/ErrorResponse400'
-        '404':
-          $ref: '#/components/responses/ErrorResponse404'            
-        '429':
-          $ref: '#/components/responses/ErrorResponse429'
+        "400":
+          $ref: "#/components/responses/ErrorResponse400"
+        "404":
+          $ref: "#/components/responses/ErrorResponse404"
+        "429":
+          $ref: "#/components/responses/ErrorResponse429"
 
   /tables/{id}/defaultselection:
     get:
@@ -186,22 +185,22 @@ paths:
       description: Get information about what is selected for the table by default when no selection is made i the /data endpoint.
       operationId: GetDefaultSelection
       parameters:
-        - $ref: '#/components/parameters/lang'
-        - $ref: '#/components/parameters/id'
+        - $ref: "#/components/parameters/lang"
+        - $ref: "#/components/parameters/id"
       responses:
-        '200':
+        "200":
           description: Success
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/SelectionResponse'
-        '400':
-          $ref: '#/components/responses/ErrorResponse400'
-        '404':
-          $ref: '#/components/responses/ErrorResponse404'            
-        '429':
-          $ref: '#/components/responses/ErrorResponse429'                            
- 
+                $ref: "#/components/schemas/SelectionResponse"
+        "400":
+          $ref: "#/components/responses/ErrorResponse400"
+        "404":
+          $ref: "#/components/responses/ErrorResponse404"
+        "429":
+          $ref: "#/components/responses/ErrorResponse429"
+
   /codelists/{id}:
     get:
       tags:
@@ -209,21 +208,21 @@ paths:
       summary: Get Codelist by {id}.
       operationId: GetTableCodeListById
       parameters:
-        - $ref: '#/components/parameters/lang'
-        - $ref: '#/components/parameters/id'
+        - $ref: "#/components/parameters/lang"
+        - $ref: "#/components/parameters/id"
       responses:
-        '200':
+        "200":
           description: Success
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/CodeListResponse'
-        '400':
-          $ref: '#/components/responses/ErrorResponse400'
-        '404':
-          $ref: '#/components/responses/ErrorResponse404'            
-        '429':
-          $ref: '#/components/responses/ErrorResponse429'                
+                $ref: "#/components/schemas/CodeListResponse"
+        "400":
+          $ref: "#/components/responses/ErrorResponse400"
+        "404":
+          $ref: "#/components/responses/ErrorResponse404"
+        "429":
+          $ref: "#/components/responses/ErrorResponse429"
 
   /tables/{id}/data:
     get:
@@ -232,8 +231,8 @@ paths:
       summary: Get data from table by {id}.
       operationId: GetTableData
       parameters:
-        - $ref: '#/components/parameters/lang'
-        - $ref: '#/components/parameters/id'
+        - $ref: "#/components/parameters/lang"
+        - $ref: "#/components/parameters/id"
         - in: query
           name: valuecodes
           schema:
@@ -266,19 +265,19 @@ paths:
           schema:
             type: object
             additionalProperties:
-              $ref: '#/components/schemas/CodeListOutputValuesType'
+              $ref: "#/components/schemas/CodeListOutputValuesType"
             example: |
               [
                 {"variable_1": "single"}
               ]
           style: deepObject
-          explode: true    
-        - $ref: '#/components/parameters/outputFormat'
-        - $ref: '#/components/parameters/outputFormatParams'
+          explode: true
+        - $ref: "#/components/parameters/outputFormat"
+        - $ref: "#/components/parameters/outputFormatParams"
         - in: query
           name: heading
           style: form
-          explode: false 
+          explode: false
           required: false
           description: Commaseparated list of variable codes that should be placed in the heading in the resulting data
           schema:
@@ -288,15 +287,15 @@ paths:
         - in: query
           name: stub
           style: form
-          explode: false 
+          explode: false
           required: false
           description: Commaseparated list of variable codes that should be placed in the stub in the resulting data
           schema:
             type: array
             items:
-              type: string          
+              type: string
       responses:
-        '200':
+        "200":
           description: Success
           content:
             application/json:
@@ -313,14 +312,14 @@ paths:
               schema:
                 type: string
                 format: binary
-        '400':
-          $ref: '#/components/responses/ErrorResponse400'
-        '403':
-          $ref: '#/components/responses/ErrorResponse403'  
-        '404':
-          $ref: '#/components/responses/ErrorResponse404'            
-        '429':
-          $ref: '#/components/responses/ErrorResponse429'
+        "400":
+          $ref: "#/components/responses/ErrorResponse400"
+        "403":
+          $ref: "#/components/responses/ErrorResponse403"
+        "404":
+          $ref: "#/components/responses/ErrorResponse404"
+        "429":
+          $ref: "#/components/responses/ErrorResponse429"
 
     post:
       tags:
@@ -328,20 +327,19 @@ paths:
       summary: Get data from table by {id}.
       operationId: GetTableDataByPost
       parameters:
-        - $ref: '#/components/parameters/lang'
-        - $ref: '#/components/parameters/id'
-        - $ref: '#/components/parameters/outputFormat'
-        - $ref: '#/components/parameters/outputFormatParams'
+        - $ref: "#/components/parameters/lang"
+        - $ref: "#/components/parameters/id"
+        - $ref: "#/components/parameters/outputFormat"
+        - $ref: "#/components/parameters/outputFormatParams"
       requestBody:
         description: A selection
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/VariablesSelection'  
+              $ref: "#/components/schemas/VariablesSelection"
 
-         
       responses:
-        '200':
+        "200":
           description: Success
           content:
             application/json:
@@ -358,14 +356,14 @@ paths:
               schema:
                 type: string
                 format: binary
-        '400':
-          $ref: '#/components/responses/ErrorResponse400'
-        '403':
-          $ref: '#/components/responses/ErrorResponse403'  
-        '404':
-          $ref: '#/components/responses/ErrorResponse404'            
-        '429':
-          $ref: '#/components/responses/ErrorResponse429'
+        "400":
+          $ref: "#/components/responses/ErrorResponse400"
+        "403":
+          $ref: "#/components/responses/ErrorResponse403"
+        "404":
+          $ref: "#/components/responses/ErrorResponse404"
+        "429":
+          $ref: "#/components/responses/ErrorResponse429"
 
   /config:
     get:
@@ -374,19 +372,19 @@ paths:
       summary: Get API configuration settings.
       operationId: GetApiConfiguration
       responses:
-        '200':
+        "200":
           description: Success
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ConfigResponse'
-        '400':
-          $ref: '#/components/responses/ErrorResponse400'
-        '404':
-          $ref: '#/components/responses/ErrorResponse404'            
-        '429':
-          $ref: '#/components/responses/ErrorResponse429'     
-    
+                $ref: "#/components/schemas/ConfigResponse"
+        "400":
+          $ref: "#/components/responses/ErrorResponse400"
+        "404":
+          $ref: "#/components/responses/ErrorResponse404"
+        "429":
+          $ref: "#/components/responses/ErrorResponse429"
+
 components:
   parameters:
     lang:
@@ -472,13 +470,13 @@ components:
       description: The format of the resulting metadata
       required: false
       schema:
-        $ref: '#/components/schemas/MetadataOutputFormatType'
+        $ref: "#/components/schemas/MetadataOutputFormatType"
     outputFormat:
       name: outputFormat
       in: query
       schema:
         type: string
-        enum: 
+        enum:
           - px
           - json-stat2
           - csv
@@ -494,7 +492,7 @@ components:
         type: array
         items:
           type: string
-          enum: 
+          enum:
             - UseCodes
             - UseTexts
             - UseCodesAndTexts
@@ -503,7 +501,7 @@ components:
             - SeparatorSpace
             - SeparatorSemicolon
           description: |
-            Parameters for the output format. 
+            Parameters for the output format.
             * UseCodes: Can not be combined with UseTexts and UseCodesAndTexts. And only applicable for csv, html and xlsx output format.
             * UseTexts: Can not be combined with UsedCodes and UseCodesAndTexts. And only applicable for csv, html and xlsx output format.
             * UseCodesAndTexts: Can not be combined with UseCodess and UseTexts. And only applicable for csv, html and xlsx output format.
@@ -520,11 +518,11 @@ components:
         selection:
           type: array
           items:
-            $ref: '#/components/schemas/VariableSelection'
+            $ref: "#/components/schemas/VariableSelection"
         placement:
-          $ref: '#/components/schemas/VariablePlacementType'
+          $ref: "#/components/schemas/VariablePlacementType"
 
-    VariablePlacementType:  
+    VariablePlacementType:
       type: object
       properties:
         heading:
@@ -536,10 +534,10 @@ components:
           description: List of variables that should be placed in the stub in the resulting data
           type: array
           items:
-            type: string  
-    SelectionResponse: 
+            type: string
+    SelectionResponse:
       allOf:
-        - $ref: '#/components/schemas/VariablesSelection' 
+        - $ref: "#/components/schemas/VariablesSelection"
       type: object
       required:
         - "language"
@@ -549,10 +547,10 @@ components:
           type: string
           description: The language code for the language used in this response
           example: sv
-        links: 
+        links:
           type: array
           items:
-            $ref: '#/components/schemas/Link'
+            $ref: "#/components/schemas/Link"
 
     VariableSelection:
       type: object
@@ -568,7 +566,7 @@ components:
           description: The identifier of the codelist that should be applied
           nullable: true
         outputValues:
-          $ref: '#/components/schemas/CodeListOutputValuesType'
+          $ref: "#/components/schemas/CodeListOutputValuesType"
           description: If an codelist has been applied then how the resulting values should be constructed.
           default: Aggregated
           nullable: true
@@ -607,8 +605,8 @@ components:
         languages:
           type: array
           description: A list of language that exists for the data.
-          items: 
-            $ref: '#/components/schemas/Language'
+          items:
+            $ref: "#/components/schemas/Language"
         defaultLanguage:
           type: string
           description: The id of the language that is the default language.
@@ -631,9 +629,9 @@ components:
           type: array
           description: A list of how the data should be cite for diffrent languages.
           items:
-            $ref: '#/components/schemas/SourceReference'
+            $ref: "#/components/schemas/SourceReference"
         defaultMetadataFormat:
-          $ref: '#/components/schemas/MetadataOutputFormatType'
+          $ref: "#/components/schemas/MetadataOutputFormatType"
           description: The default metadata format to used when no format is specified in the request.
         defaultDataFormat:
           type: string
@@ -647,8 +645,8 @@ components:
           type: array
           description: A list of features for the API
           items:
-            $ref: '#/components/schemas/ApiFeature'
-    
+            $ref: "#/components/schemas/ApiFeature"
+
     Language:
       type: object
       description: Language information
@@ -672,23 +670,23 @@ components:
       properties:
         language:
           type: string
-          description: The language id 
+          description: The language id
         text:
           type: string
           description: The text that should be displayed
-    
+
     ApiFeature:
       type: object
       required:
         - "id"
       properties:
-        id: 
+        id:
           type: string
           description: The identifyer for the feature
         params:
           type: array
-          items: 
-            $ref: '#/components/schemas/KeyValuePair'
+          items:
+            $ref: "#/components/schemas/KeyValuePair"
 
     KeyValuePair:
       type: object
@@ -702,7 +700,6 @@ components:
         value:
           type: string
           description: The value associated with the key
-
 
     CodeListOutputValuesType:
       type: string
@@ -730,8 +727,8 @@ components:
         - "id"
         - "label"
       properties:
-        type: 
-          $ref: '#/components/schemas/FolderContentItemTypeEnum'
+        type:
+          $ref: "#/components/schemas/FolderContentItemTypeEnum"
           description: One of Heading, Table or FolderInformation
           nullable: false
         id:
@@ -781,52 +778,52 @@ components:
         folderContents:
           type: array
           items:
-            $ref: '#/components/schemas/FolderContentItem'
+            $ref: "#/components/schemas/FolderContentItem"
           nullable: true
         links:
           type: array
           items:
-            $ref: '#/components/schemas/Link'
+            $ref: "#/components/schemas/Link"
           description: Links to ...
           nullable: true
     FolderInformation:
       allOf:
-        - $ref: '#/components/schemas/FolderContentItem'
+        - $ref: "#/components/schemas/FolderContentItem"
       type: object
       description: Folder information item
       required:
         - "links"
       properties:
-            tags:
-              type: array
-              items:
-                type: string
-                description: tag for folder
-            links:
-              type: array
-              items:
-                $ref: '#/components/schemas/Link'
-              description: Links to ...
-              nullable: true
+        tags:
+          type: array
+          items:
+            type: string
+            description: tag for folder
+        links:
+          type: array
+          items:
+            $ref: "#/components/schemas/Link"
+          description: Links to ...
+          nullable: true
     Heading:
       allOf:
-        - $ref: '#/components/schemas/FolderContentItem'
+        - $ref: "#/components/schemas/FolderContentItem"
       type: object
       description: Heading item
 
     TableResponse:
       allOf:
-        - $ref: '#/components/schemas/Table'
+        - $ref: "#/components/schemas/Table"
       required:
         - "language"
       properties:
         language:
           type: string
-          description: The language code (ISO 639) for this response    
+          description: The language code (ISO 639) for this response
 
     Table:
       allOf:
-        - $ref: '#/components/schemas/FolderContentItem'
+        - $ref: "#/components/schemas/FolderContentItem"
       type: object
       description: Table item
       required:
@@ -836,50 +833,50 @@ components:
         - "variableNames"
         - "links"
       properties:
-            tags:
-              type: array
-              items:
-                type: string
-                description: tag for table
-            updated:
-              type: string
-              description: Date and time when the figures in the table was last updated, in UTC time.
-              pattern: "^((19|20)\\d\\d)\\-(0?[1-9]|1[012])\\-(0?[1-9]|[12][0-9]|3[01])$"
-              format: date-time
-              nullable: true
-            firstPeriod:
-              type: string
-              description: First period
-              example: 2017
-              nullable: true
-            lastPeriod:
-              type: string
-              description: Last period
-              example: 2022
-              nullable: true
-            category:
-              type: string
-              description: Mostly for internal use. Which category table belongs to. internal, public, private or section. 
-              default: public
-              enum:
-              - internal
-              - public
-              - private
-              - section
-            variableNames:
-              type: array
-              description: List of varibles name
-              items:
-                type: string
-            discontinued:
-              type: boolean
-              nullable: true
-            links:
-              type: array
-              items:
-                $ref: '#/components/schemas/Link'
-              description: Links to ...
-              nullable: true
+        tags:
+          type: array
+          items:
+            type: string
+            description: tag for table
+        updated:
+          type: string
+          description: Date and time when the figures in the table was last updated, in UTC time.
+          pattern: "^((19|20)\\d\\d)\\-(0?[1-9]|1[012])\\-(0?[1-9]|[12][0-9]|3[01])$"
+          format: date-time
+          nullable: true
+        firstPeriod:
+          type: string
+          description: First period
+          example: 2017
+          nullable: true
+        lastPeriod:
+          type: string
+          description: Last period
+          example: 2022
+          nullable: true
+        category:
+          type: string
+          description: Mostly for internal use. Which category table belongs to. internal, public, private or section.
+          default: public
+          enum:
+            - internal
+            - public
+            - private
+            - section
+        variableNames:
+          type: array
+          description: List of varibles name
+          items:
+            type: string
+        discontinued:
+          type: boolean
+          nullable: true
+        links:
+          type: array
+          items:
+            $ref: "#/components/schemas/Link"
+          description: Links to ...
+          nullable: true
 
     PageInfo:
       type: object
@@ -913,7 +910,7 @@ components:
         links:
           type: array
           items:
-             $ref: '#/components/schemas/Link'
+            $ref: "#/components/schemas/Link"
 
     TablesResponse:
       type: object
@@ -924,17 +921,17 @@ components:
       properties:
         language:
           type: string
-          description: The language code (ISO 639) for this response      
+          description: The language code (ISO 639) for this response
         tables:
           type: array
           items:
-              $ref: '#/components/schemas/Table'    
+            $ref: "#/components/schemas/Table"
         page:
-          $ref: '#/components/schemas/PageInfo'
+          $ref: "#/components/schemas/PageInfo"
         links:
           type: array
           items:
-             $ref: '#/components/schemas/Link'
+            $ref: "#/components/schemas/Link"
 
     VariableTypeEnum:
       type: string
@@ -955,7 +952,7 @@ components:
       properties:
         language:
           type: string
-          description: The language code (ISO 639) for this response      
+          description: The language code (ISO 639) for this response
         id:
           type: string
           description: Identifier for the table.
@@ -996,33 +993,33 @@ components:
           items:
             type: string
         updated:
-            type: string
-            description: Date and time when the figures in the table was last updated, in UTC time.
-            pattern: "^((19|20)\\d\\d)\\-(0?[1-9]|1[012])\\-(0?[1-9]|[12][0-9]|3[01])$"
-            format: date-time
-            nullable: true
+          type: string
+          description: Date and time when the figures in the table was last updated, in UTC time.
+          pattern: "^((19|20)\\d\\d)\\-(0?[1-9]|1[012])\\-(0?[1-9]|[12][0-9]|3[01])$"
+          format: date-time
+          nullable: true
         discontinued:
           type: boolean
           description: If the table is discontinued or not. That is if it no longer updated with new figures.
           nullable: true
-        notes: 
+        notes:
           type: array
           description: A list of notes associated with the table as a whole or a specific area of the table
           items:
-            $ref: '#/components/schemas/CellNote'
-        contacts: 
+            $ref: "#/components/schemas/CellNote"
+        contacts:
           type: array
           description: A list of contacts associated with the table.
-          items: 
-            $ref: '#/components/schemas/Contact'
+          items:
+            $ref: "#/components/schemas/Contact"
         variables:
           type: array
           items:
-            $ref: '#/components/schemas/AbstractVariable'
-        links: 
+            $ref: "#/components/schemas/AbstractVariable"
+        links:
           type: array
           items:
-            $ref: '#/components/schemas/Link'
+            $ref: "#/components/schemas/Link"
     AbstractVariable:
       discriminator:
         propertyName: type
@@ -1030,9 +1027,9 @@ components:
           ContentsVariable: "#/components/schemas/ContentsVariable"
           TimeVariable: "#/components/schemas/TimeVariable"
           GeographicalVariable: "#/components/schemas/GeographicalVariable"
-          RegularVariable: "#/components/schemas/RegularVariable"          
+          RegularVariable: "#/components/schemas/RegularVariable"
       type: object
-      required: 
+      required:
         - id
         - label
         - type
@@ -1043,17 +1040,17 @@ components:
         label:
           type: string
           example: Import and export
-        type: 
-          $ref: '#/components/schemas/VariableTypeEnum'
-        notes: 
+        type:
+          $ref: "#/components/schemas/VariableTypeEnum"
+        notes:
           type: array
           items:
-            $ref: '#/components/schemas/Note'
-        links: 
+            $ref: "#/components/schemas/Note"
+        links:
           type: array
           items:
-            $ref: '#/components/schemas/Link'
-      
+            $ref: "#/components/schemas/Link"
+
     Note:
       type: object
       required:
@@ -1067,15 +1064,15 @@ components:
           type: string
     CellNote:
       allOf:
-        - $ref: '#/components/schemas/Note'
+        - $ref: "#/components/schemas/Note"
       type: object
       description: Note for a table or a part of it
       properties:
         conditions:
           type: array
-          description: A set of condition that must be fulfilled for the note to be valid. 
+          description: A set of condition that must be fulfilled for the note to be valid.
           items:
-            $ref: '#/components/schemas/Condition'
+            $ref: "#/components/schemas/Condition"
           nullable: true
     Condition:
       description: Condition determining to what the CellNote applies
@@ -1093,7 +1090,7 @@ components:
     TimeVariable:
       description: Time variable
       allOf:
-        - $ref: '#/components/schemas/AbstractVariable'
+        - $ref: "#/components/schemas/AbstractVariable"
       type: object
       properties:
         timeUnit:
@@ -1116,23 +1113,23 @@ components:
         values:
           type: array
           items:
-            $ref: '#/components/schemas/Value'
+            $ref: "#/components/schemas/Value"
     ContentsVariable:
       description: Content variable
       allOf:
-        - $ref: '#/components/schemas/AbstractVariable'
+        - $ref: "#/components/schemas/AbstractVariable"
       type: object
       required:
         - "values"
       properties:
-            values:
-              type: array
-              items:
-                $ref: '#/components/schemas/ContentValue'
+        values:
+          type: array
+          items:
+            $ref: "#/components/schemas/ContentValue"
     AbstractCodeListVariable:
       description: Filter variable
       allOf:
-      - $ref: '#/components/schemas/AbstractVariable'
+        - $ref: "#/components/schemas/AbstractVariable"
       type: object
       required:
         - "values"
@@ -1144,12 +1141,12 @@ components:
         values:
           type: array
           items:
-            $ref: '#/components/schemas/Value'
+            $ref: "#/components/schemas/Value"
         codeLists:
-          $ref: '#/components/schemas/CodeLists'
+          $ref: "#/components/schemas/CodeLists"
     GeographicalVariable:
       allOf:
-      - $ref: '#/components/schemas/AbstractCodeListVariable'
+        - $ref: "#/components/schemas/AbstractCodeListVariable"
       type: object
       properties:
         map:
@@ -1157,7 +1154,7 @@ components:
     RegularVariable:
       description: All other type of variaiable except for time, contents or geographical
       allOf:
-      - $ref: '#/components/schemas/AbstractCodeListVariable'
+        - $ref: "#/components/schemas/AbstractCodeListVariable"
       type: object
     CodeListInformation:
       type: object
@@ -1174,78 +1171,78 @@ components:
           type: string
           description: A textual name for the CodeList
         type:
-          $ref: '#/components/schemas/CodeListType'
-        links: 
+          $ref: "#/components/schemas/CodeListType"
+        links:
           type: array
           description: Links to associated information about the code list
           items:
-            $ref: '#/components/schemas/Link'
+            $ref: "#/components/schemas/Link"
     Value:
       type: object
       required:
         - "code"
         - "label"
       properties:
-        code: 
+        code:
           type: string
           description: A code representing the value.
         label:
           type: string
           description: A Textual name for the value
-        notes: 
+        notes:
           type: array
           description: Optional notes that are associated with the value
           items:
-            $ref: '#/components/schemas/Note'
-        links: 
+            $ref: "#/components/schemas/Note"
+        links:
           type: array
           items:
-            $ref: '#/components/schemas/Link'
+            $ref: "#/components/schemas/Link"
     ContentValue:
       allOf:
-        - $ref: '#/components/schemas/Value'
+        - $ref: "#/components/schemas/Value"
       type: object
       description: Content value
       required:
-            - unit
+        - unit
       properties:
-            baseperiod:
-              type: string
-              nullable: true
-            adjustment:
-              type: string
-              default: None
-              enum:
-              - None
-              - SesOnly
-              - WorkOnly
-              - WorkAndSes
-            measuringType:
-              type: string
-              default: Other
-              enum:
-              - Stock
-              - Flow
-              - Average
-              - Other
-            preferedNumberOfDecimals:
-              type: integer
-            priceType:
-              type: string
-              enum:
-              - Undefined
-              - Current
-              - Fixed
-            unit:
-              type: string
-            refrencePeriod:
-              type: string
+        baseperiod:
+          type: string
+          nullable: true
+        adjustment:
+          type: string
+          default: None
+          enum:
+            - None
+            - SesOnly
+            - WorkOnly
+            - WorkAndSes
+        measuringType:
+          type: string
+          default: Other
+          enum:
+            - Stock
+            - Flow
+            - Average
+            - Other
+        preferedNumberOfDecimals:
+          type: integer
+        priceType:
+          type: string
+          enum:
+            - Undefined
+            - Current
+            - Fixed
+        unit:
+          type: string
+        refrencePeriod:
+          type: string
     Contact:
       type: object
       required:
         - "raw"
       properties:
-        name: 
+        name:
           type: string
           example: Inga Svensson
         phone:
@@ -1269,11 +1266,11 @@ components:
         codeLists:
           type: array
           items:
-            $ref: '#/components/schemas/CodeListMetadata'
-        links: 
+            $ref: "#/components/schemas/CodeListMetadata"
+        links:
           type: array
           items:
-            $ref: '#/components/schemas/Link'
+            $ref: "#/components/schemas/Link"
     CodeListMetadata:
       type: object
       required:
@@ -1282,20 +1279,20 @@ components:
         - "type"
         - "links"
       properties:
-        id: 
+        id:
           type: string
           description: The identiyer for the codelist
           example: agg_RegionNUTS2_2008
         label:
           type: string
-          description: The textual name  for the codelist. 
+          description: The textual name  for the codelist.
           example: NUTS2 fr.o.m 2008
         type:
-          $ref: '#/components/schemas/CodeListType'
-        links: 
+          $ref: "#/components/schemas/CodeListType"
+        links:
           type: array
           items:
-            $ref: '#/components/schemas/Link'
+            $ref: "#/components/schemas/Link"
 
     CodeListType:
       type: string
@@ -1304,7 +1301,7 @@ components:
         - Aggregation
         - Valueset
 
-    CodeListResponse: 
+    CodeListResponse:
       type: object
       required:
         - "id"
@@ -1314,28 +1311,28 @@ components:
         - "values"
         - "links"
       properties:
-        id: 
+        id:
           type: string
           description: The identiyer for the codelist
           example: agg_RegionNUTS2_2008
         label:
           type: string
-          description: The textual name  for the codelist. 
-          example: NUTS2 fr.o.m 2008 
+          description: The textual name  for the codelist.
+          example: NUTS2 fr.o.m 2008
         language:
           type: string
           description: The language code for the language used in this response
           example: sv
         type:
-          $ref: '#/components/schemas/CodeListType'
+          $ref: "#/components/schemas/CodeListType"
         values:
           type: array
           items:
-            $ref: '#/components/schemas/ValueMap'
-        links: 
+            $ref: "#/components/schemas/ValueMap"
+        links:
           type: array
           items:
-            $ref: '#/components/schemas/Link'
+            $ref: "#/components/schemas/Link"
 
     ValueMap:
       type: object
@@ -1348,7 +1345,7 @@ components:
           type: string
           description: The code for the value.
           example: "SE22"
-        label: 
+        label:
           type: string
           description: The textual representation for the value
           example: Sydsverige
@@ -1358,11 +1355,11 @@ components:
           example: '["10", "12"]'
           items:
             type: string
-        notes: 
+        notes:
           type: array
           description: Optional notes that are associated with the value
           items:
-            $ref: '#/components/schemas/Note'
+            $ref: "#/components/schemas/Note"
 
     Link:
       type: object
@@ -1423,7 +1420,7 @@ components:
           description: |
             An absolute URI that identifies the specific occurrence of the problem.
             It may or may not yield further information if dereferenced.
-              
+
     strarray:
       type: array
       items:
@@ -1448,11 +1445,11 @@ components:
       type: object
       properties:
         noteMandatory:
-          $ref: '#/components/schemas/jsonstat-noteMandatory'
+          $ref: "#/components/schemas/jsonstat-noteMandatory"
         px:
           description: |
             Properties corresponds to keywords in the px-file.
-            
+
             See [PX file format](https://www.scb.se/en/services/statistical-programs-for-px-files/px-file-format/)
           type: object
           properties:
@@ -1470,7 +1467,7 @@ components:
               type: boolean
             aggregallowed:
               description: If the contents of the table cannot be aggregated
-              type: boolean            
+              type: boolean
             copyright:
               description: Copyright is given as YES or NO
               type: string
@@ -1507,7 +1504,7 @@ components:
               type: string
             nextUpdate:
               description: Date for next update
-              $ref: '#/components/schemas/updated'
+              $ref: "#/components/schemas/updated"
             survey:
               description: Survey for table
               type: string
@@ -1520,7 +1517,7 @@ components:
         tags:
           description: Tag for table
           type: array
-          items: 
+          items:
             type: string
         discontinued:
           description: Table will no longer be updated
@@ -1529,8 +1526,8 @@ components:
         contact:
           type: array
           description: A list of contacts associated with the table.
-          items: 
-            $ref: '#/components/schemas/Contact'
+          items:
+            $ref: "#/components/schemas/Contact"
     extension:
       description: extension at some level
       type: object
@@ -1545,12 +1542,12 @@ components:
           description: Elimination value code
           type: string
         noteMandatory:
-          $ref: '#/components/schemas/jsonstat-noteMandatory'
+          $ref: "#/components/schemas/jsonstat-noteMandatory"
         categoryNoteMandatory:
           description: Describes which value note are mandatory
           type: object
           additionalProperties:
-            $ref: '#/components/schemas/jsonstat-noteMandatory'
+            $ref: "#/components/schemas/jsonstat-noteMandatory"
         refperiod:
           description: Text with information on the exact period for the statistics
           type: object
@@ -1560,52 +1557,52 @@ components:
           description: Information about how variables are presented
           type: string
         codeLists:
-         $ref: '#/components/schemas/CodeLists'
+          $ref: "#/components/schemas/CodeLists"
         firstPeriod:
-          description: Earliest time period in table 
+          description: Earliest time period in table
           type: string
         lastPeriod:
           description: Latest time period in table
           type: string
         timeUnit:
-          $ref: '#/components/schemas/TimeUnit'
+          $ref: "#/components/schemas/TimeUnit"
         measuringType:
           description: Indicates if data is stock, flow or average.
           type: object
           additionalProperties:
-            $ref: '#/components/schemas/MeasuringType'
+            $ref: "#/components/schemas/MeasuringType"
         priceType:
           description: Indicates if data is in current or fixed prices.
           type: object
           additionalProperties:
-            $ref: '#/components/schemas/PriceType'
+            $ref: "#/components/schemas/PriceType"
         adjustment:
           description: Describes adjustments made to the data
           type: object
           additionalProperties:
-            $ref: '#/components/schemas/Adjustment'
+            $ref: "#/components/schemas/Adjustment"
         basePeriod:
           description: Base period for, for instance index series. Is shown with the footnote. If there is a contents variable the keyword is repeated for each value of the contents variable.
           type: object
           additionalProperties:
-            $ref: '#/components/schemas/BasePeriod'
+            $ref: "#/components/schemas/BasePeriod"
     strarray-by-str-dict:
-       type: object
-       additionalProperties:
-          type: array
-          items:
-            type: string
-          uniqueItems: true  
+      type: object
+      additionalProperties:
+        type: array
+        items:
+          type: string
+        uniqueItems: true
     jsonstat-link:
       type: object
-      additionalProperties: 
+      additionalProperties:
         type: array
         items:
           type: object
           title: jsonstatLink
           properties:
             type:
-              type: string  
+              type: string
             href:
               "$ref": "#/components/schemas/href"
           additionalProperties: false
@@ -1619,14 +1616,14 @@ components:
             title: DimensionExtension
             properties:
               extension:
-                 description: A extension object
-                 type: object
-                 additionalProperties:
-                    description: A string
-                    type: string
-                    
-            additionalProperties: false       
-      additionalProperties: false         
+                description: A extension object
+                type: object
+                additionalProperties:
+                  description: A string
+                  type: string
+
+            additionalProperties: false
+      additionalProperties: false
     jsonstat-note:
       description: Spesification on json-stat.org -> [here](https://json-stat.org/full/#note)
       type: array
@@ -1670,42 +1667,42 @@ components:
                 description: It is the base unit (person, gram, euro, etc.).
                 type: string
               decimals:
-                description: Number of decimals 
+                description: Number of decimals
                 type: integer
       additionalProperties: false
     CodeLists:
-          description: Available codelists for this dimension
-          type: array
-          items:
-            $ref: '#/components/schemas/CodeListInformation'
+      description: Available codelists for this dimension
+      type: array
+      items:
+        $ref: "#/components/schemas/CodeListInformation"
 
     Adjustment:
       description: WorkOnly means that data is adjusted e.g. to take into account the number of working days. SesOnly means that data is seasonally adjusted.
       type: string
       default: None
       enum:
-      - None
-      - SesOnly
-      - WorkOnly
-      - WorkAndSes
+        - None
+        - SesOnly
+        - WorkOnly
+        - WorkAndSes
 
     PriceType:
       description: Indicates if data is in current or fixed prices.
       type: string
       enum:
-      - Undefined
-      - Current
-      - Fixed
+        - NotApplicable
+        - Current
+        - Fixed
 
     MeasuringType:
       description: Indicates if data is stock, flow or average.
       type: string
       default: Other
       enum:
-      - Stock
-      - Flow
-      - Average
-      - Other
+        - Stock
+        - Flow
+        - Average
+        - Other
 
     BasePeriod:
       description: Base period for, for instance index series. Is shown with the footnote. If there is a contents variable the keyword is repeated for each value of the contents variable.
@@ -1715,27 +1712,27 @@ components:
       description: Indicates the time scale for the variable.
       type: string
       enum:
-      - Annual
-      - HalfYear
-      - Quarterly
-      - Monthly
-      - Weekly
-      - Other
+        - Annual
+        - HalfYear
+        - Quarterly
+        - Monthly
+        - Weekly
+        - Other
 
     Dataset:
       title: JSON-stat 2.0 Dataset Schema
       description: |
-         Representation of TableMetaData/TableData according to JSON-stat 2.0 Dataset Schema (2018-09-05 10:55), see full specification of JSON-stat format [here](https://json-stat.org/full/)
-         
-         Properties in **extension** are mostly from PX-file format, see [PX file format](https://www.scb.se/en/services/statistical-programs-for-px-files/px-file-format/)
+        Representation of TableMetaData/TableData according to JSON-stat 2.0 Dataset Schema (2018-09-05 10:55), see full specification of JSON-stat format [here](https://json-stat.org/full/)
+
+        Properties in **extension** are mostly from PX-file format, see [PX file format](https://www.scb.se/en/services/statistical-programs-for-px-files/px-file-format/)
       type: object
       properties:
         version:
           description: JSON-stat version 2.0
           type: string
           enum:
-            - '2.0'
-          default: '2.0'      
+            - "2.0"
+          default: "2.0"
         class:
           "$ref": "#/components/schemas/ClassType"
           # description: "Is always dataset"
@@ -1755,7 +1752,7 @@ components:
           "$ref": "#/components/schemas/jsonstat-link"
         note:
           description: Note for table
-          $ref: '#/components/schemas/jsonstat-note'
+          $ref: "#/components/schemas/jsonstat-note"
         role:
           description: Specification on json-stat.org -> [here](https://json-stat.org/full/#role)
           type: object
@@ -1769,7 +1766,7 @@ components:
             metric:
               description: Specification on json-stat.org -> [here](https://json-stat.org/full/#metric)
               "$ref": "#/components/schemas/strarray"
-          additionalProperties: false  
+          additionalProperties: false
         id:
           description: Specification on json-stat.org -> [here](https://json-stat.org/full/#id)
           "$ref": "#/components/schemas/strarray"
@@ -1777,29 +1774,29 @@ components:
           description: Specification on json-stat.org -> [here](https://json-stat.org/full/#size)
           type: array
           items:
-             type: integer
+            type: integer
         dimension:
           description: Specification on json-stat.org -> [here](https://json-stat.org/full/#dimension)
           type: object
           additionalProperties:
-             type: object
-             properties:
+            type: object
+            properties:
               label:
-                description: Specification on json-stat.org -> [here](https://json-stat.org/full/#label) 
+                description: Specification on json-stat.org -> [here](https://json-stat.org/full/#label)
                 "$ref": "#/components/schemas/label"
               note:
                 description: Notes for variable
                 "$ref": "#/components/schemas/jsonstat-note"
               category:
                 description: Specification on json-stat.org -> [here](https://json-stat.org/full/#category)
-                "$ref": "#/components/schemas/jsonstat-category"  
+                "$ref": "#/components/schemas/jsonstat-category"
               extension:
                 "$ref": "#/components/schemas/extension-dimension"
               link:
                 "$ref": "#/components/schemas/jsonstat-extension-link"
-             additionalProperties: false            
+            additionalProperties: false
         extension:
-          "$ref": "#/components/schemas/extension-root"  
+          "$ref": "#/components/schemas/extension-root"
         value:
           description: Specification on json-stat.org -> [here](https://json-stat.org/full/#value)
           type: array
@@ -1827,7 +1824,7 @@ components:
       type: string
       enum:
         - dataset
-      default: dataset                   
+      default: dataset
 
   responses:
     ErrorResponse429:
@@ -1835,8 +1832,8 @@ components:
       content:
         application/problem+json:
           schema:
-            $ref: '#/components/schemas/Problem'
-            #Reference: 
+            $ref: "#/components/schemas/Problem"
+            #Reference:
             # https://dzone.com/articles/rest-api-error-handling-problem-details-response
             # https://datatracker.ietf.org/doc/html/rfc7807
             # https://nordicapis.com/best-practices-api-error-handling/
@@ -1850,19 +1847,18 @@ components:
       content:
         application/problem+json:
           schema:
-            $ref: '#/components/schemas/Problem'
+            $ref: "#/components/schemas/Problem"
           example:
             title: Bad Request
             status: 400
             detail: Value, xxx is not a valid value code for variable yyy
-
 
     ErrorResponse403:
       description: Error response for 403
       content:
         application/problem+json:
           schema:
-            $ref: '#/components/schemas/Problem'
+            $ref: "#/components/schemas/Problem"
           example:
             title: Forbiden
             status: 403
@@ -1873,11 +1869,8 @@ components:
       content:
         application/problem+json:
           schema:
-            $ref: '#/components/schemas/Problem'
+            $ref: "#/components/schemas/Problem"
           example:
             title: Not Found
             status: 404
             detail: Node with id, xxx can not be found
-            
-
-  

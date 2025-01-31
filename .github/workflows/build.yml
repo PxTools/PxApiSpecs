@@ -7,6 +7,9 @@ on:
 
   workflow_dispatch:
 
+permissions:
+  contents: read
+
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -20,7 +23,7 @@ jobs:
 
       # Use the action to generate a server library
       - name: Generate ASPNET Core server
-        uses: openapi-generators/openapitools-generator-action@v1
+        uses: openapi-generators/openapitools-generator-action@b729d184e6b3459572c37c0e37f88a832e69b552 #v1.5.0
         with:
           generator: aspnetcore
           openapi-file: PxAPI-2.yml
