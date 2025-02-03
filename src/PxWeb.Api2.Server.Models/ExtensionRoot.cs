@@ -40,6 +40,12 @@ namespace PxWeb.Api2.Server.Models
         public ExtensionRootPx? Px { get; set; }
 
         /// <summary>
+        /// Gets or Sets TimeUnit
+        /// </summary>
+        [DataMember(Name="timeUnit", EmitDefaultValue=true)]
+        public TimeUnit? TimeUnit { get; set; }
+
+        /// <summary>
         /// Tag for table
         /// </summary>
         /// <value>Tag for table</value>
@@ -70,6 +76,7 @@ namespace PxWeb.Api2.Server.Models
             sb.Append("class ExtensionRoot {\n");
             sb.Append("  NoteMandatory: ").Append(NoteMandatory).Append("\n");
             sb.Append("  Px: ").Append(Px).Append("\n");
+            sb.Append("  TimeUnit: ").Append(TimeUnit).Append("\n");
             sb.Append("  Tags: ").Append(Tags).Append("\n");
             sb.Append("  Discontinued: ").Append(Discontinued).Append("\n");
             sb.Append("  Contact: ").Append(Contact).Append("\n");
@@ -121,6 +128,11 @@ namespace PxWeb.Api2.Server.Models
                     Px.Equals(other.Px)
                 ) && 
                 (
+                    TimeUnit == other.TimeUnit ||
+                    
+                    TimeUnit.Equals(other.TimeUnit)
+                ) && 
+                (
                     Tags == other.Tags ||
                     Tags != null &&
                     other.Tags != null &&
@@ -153,6 +165,8 @@ namespace PxWeb.Api2.Server.Models
                     hashCode = hashCode * 59 + NoteMandatory.GetHashCode();
                     if (Px != null)
                     hashCode = hashCode * 59 + Px.GetHashCode();
+                    
+                    hashCode = hashCode * 59 + TimeUnit.GetHashCode();
                     if (Tags != null)
                     hashCode = hashCode * 59 + Tags.GetHashCode();
                     if (Discontinued != null)

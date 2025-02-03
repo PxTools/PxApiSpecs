@@ -1632,6 +1632,8 @@ components:
             updateFrequency:
               description: How often a table is updated
               type: string
+        timeUnit:
+          $ref: "#/components/schemas/TimeUnit"
         tags:
           description: Tag for table
           type: array
@@ -1680,8 +1682,6 @@ components:
         lastPeriod:
           description: Latest time period in table
           type: string
-        timeUnit:
-          $ref: "#/components/schemas/TimeUnit"
         measuringType:
           description: Indicates if data is stock, flow or average.
           type: object
