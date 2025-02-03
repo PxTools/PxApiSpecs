@@ -390,7 +390,7 @@ paths:
   /savedqueries:
     post:
       tags:
-      - Saved Queries
+        - Saved Queries
       summary: Save a query for later use.
       operationId: CreateSaveQuery
       requestBody:
@@ -985,14 +985,18 @@ components:
           items:
             type: string
         discontinued:
-          type: boolean
-          nullable: true
+          $ref: "#/components/schemas/Discontinued"
         links:
           type: array
           items:
             $ref: "#/components/schemas/Link"
           description: Links to ...
           nullable: true
+
+    Discontinued:
+      description: If the table is discontinued or not. That is if it no longer updated with new figures.
+      type: boolean
+      nullable: true
 
     PageInfo:
       type: object
@@ -1115,9 +1119,7 @@ components:
           format: date-time
           nullable: true
         discontinued:
-          type: boolean
-          description: If the table is discontinued or not. That is if it no longer updated with new figures.
-          nullable: true
+          $ref: "#/components/schemas/Discontinued"
         notes:
           type: array
           description: A list of notes associated with the table as a whole or a specific area of the table
@@ -1636,9 +1638,7 @@ components:
           items:
             type: string
         discontinued:
-          description: Table will no longer be updated
-          type: boolean
-          nullable: true
+          $ref: "#/components/schemas/Discontinued"
         contact:
           type: array
           description: A list of contacts associated with the table.
@@ -1827,6 +1827,7 @@ components:
     TimeUnit:
       description: Indicates the time scale for the variable.
       type: string
+      nullable: true
       enum:
         - Annual
         - HalfYear

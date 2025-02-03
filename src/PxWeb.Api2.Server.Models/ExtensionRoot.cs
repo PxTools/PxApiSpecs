@@ -47,9 +47,9 @@ namespace PxWeb.Api2.Server.Models
         public List<string> Tags { get; set; }
 
         /// <summary>
-        /// Table will no longer be updated
+        /// If the table is discontinued or not. That is if it no longer updated with new figures.
         /// </summary>
-        /// <value>Table will no longer be updated</value>
+        /// <value>If the table is discontinued or not. That is if it no longer updated with new figures.</value>
         [DataMember(Name="discontinued", EmitDefaultValue=true)]
         public bool? Discontinued { get; set; }
 

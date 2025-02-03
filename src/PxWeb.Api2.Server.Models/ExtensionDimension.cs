@@ -93,7 +93,7 @@ namespace PxWeb.Api2.Server.Models
         /// Gets or Sets TimeUnit
         /// </summary>
         [DataMember(Name="timeUnit", EmitDefaultValue=true)]
-        public TimeUnit TimeUnit { get; set; }
+        public TimeUnit? TimeUnit { get; set; }
 
         /// <summary>
         /// Indicates if data is stock, flow or average.
