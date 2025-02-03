@@ -40,6 +40,20 @@ namespace PxWeb.Api2.Server.Models
         public ExtensionRootPx? Px { get; set; }
 
         /// <summary>
+        /// Earliest time period in table
+        /// </summary>
+        /// <value>Earliest time period in table</value>
+        [DataMember(Name="firstPeriod", EmitDefaultValue=false)]
+        public string? FirstPeriod { get; set; }
+
+        /// <summary>
+        /// Latest time period in table
+        /// </summary>
+        /// <value>Latest time period in table</value>
+        [DataMember(Name="lastPeriod", EmitDefaultValue=false)]
+        public string? LastPeriod { get; set; }
+
+        /// <summary>
         /// Gets or Sets TimeUnit
         /// </summary>
         [DataMember(Name="timeUnit", EmitDefaultValue=true)]
@@ -76,6 +90,8 @@ namespace PxWeb.Api2.Server.Models
             sb.Append("class ExtensionRoot {\n");
             sb.Append("  NoteMandatory: ").Append(NoteMandatory).Append("\n");
             sb.Append("  Px: ").Append(Px).Append("\n");
+            sb.Append("  FirstPeriod: ").Append(FirstPeriod).Append("\n");
+            sb.Append("  LastPeriod: ").Append(LastPeriod).Append("\n");
             sb.Append("  TimeUnit: ").Append(TimeUnit).Append("\n");
             sb.Append("  Tags: ").Append(Tags).Append("\n");
             sb.Append("  Discontinued: ").Append(Discontinued).Append("\n");
@@ -128,6 +144,16 @@ namespace PxWeb.Api2.Server.Models
                     Px.Equals(other.Px)
                 ) && 
                 (
+                    FirstPeriod == other.FirstPeriod ||
+                    FirstPeriod != null &&
+                    FirstPeriod.Equals(other.FirstPeriod)
+                ) && 
+                (
+                    LastPeriod == other.LastPeriod ||
+                    LastPeriod != null &&
+                    LastPeriod.Equals(other.LastPeriod)
+                ) && 
+                (
                     TimeUnit == other.TimeUnit ||
                     
                     TimeUnit.Equals(other.TimeUnit)
@@ -165,6 +191,10 @@ namespace PxWeb.Api2.Server.Models
                     hashCode = hashCode * 59 + NoteMandatory.GetHashCode();
                     if (Px != null)
                     hashCode = hashCode * 59 + Px.GetHashCode();
+                    if (FirstPeriod != null)
+                    hashCode = hashCode * 59 + FirstPeriod.GetHashCode();
+                    if (LastPeriod != null)
+                    hashCode = hashCode * 59 + LastPeriod.GetHashCode();
                     
                     hashCode = hashCode * 59 + TimeUnit.GetHashCode();
                     if (Tags != null)

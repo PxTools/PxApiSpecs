@@ -1632,6 +1632,12 @@ components:
             updateFrequency:
               description: How often a table is updated
               type: string
+        firstPeriod:
+          description: Earliest time period in table
+          type: string
+        lastPeriod:
+          description: Latest time period in table
+          type: string
         timeUnit:
           $ref: "#/components/schemas/TimeUnit"
         tags:
@@ -1676,12 +1682,6 @@ components:
           type: string
         codeLists:
           $ref: "#/components/schemas/CodeLists"
-        firstPeriod:
-          description: Earliest time period in table
-          type: string
-        lastPeriod:
-          description: Latest time period in table
-          type: string
         measuringType:
           description: Indicates if data is stock, flow or average.
           type: object

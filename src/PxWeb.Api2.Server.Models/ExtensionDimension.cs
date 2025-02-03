@@ -76,20 +76,6 @@ namespace PxWeb.Api2.Server.Models
         public List<CodeListInformation> CodeLists { get; set; }
 
         /// <summary>
-        /// Earliest time period in table
-        /// </summary>
-        /// <value>Earliest time period in table</value>
-        [DataMember(Name="firstPeriod", EmitDefaultValue=false)]
-        public string? FirstPeriod { get; set; }
-
-        /// <summary>
-        /// Latest time period in table
-        /// </summary>
-        /// <value>Latest time period in table</value>
-        [DataMember(Name="lastPeriod", EmitDefaultValue=false)]
-        public string? LastPeriod { get; set; }
-
-        /// <summary>
         /// Indicates if data is stock, flow or average.
         /// </summary>
         /// <value>Indicates if data is stock, flow or average.</value>
@@ -132,8 +118,6 @@ namespace PxWeb.Api2.Server.Models
             sb.Append("  Refperiod: ").Append(Refperiod).Append("\n");
             sb.Append("  Show: ").Append(Show).Append("\n");
             sb.Append("  CodeLists: ").Append(CodeLists).Append("\n");
-            sb.Append("  FirstPeriod: ").Append(FirstPeriod).Append("\n");
-            sb.Append("  LastPeriod: ").Append(LastPeriod).Append("\n");
             sb.Append("  MeasuringType: ").Append(MeasuringType).Append("\n");
             sb.Append("  PriceType: ").Append(PriceType).Append("\n");
             sb.Append("  Adjustment: ").Append(Adjustment).Append("\n");
@@ -214,16 +198,6 @@ namespace PxWeb.Api2.Server.Models
                     CodeLists.SequenceEqual(other.CodeLists)
                 ) && 
                 (
-                    FirstPeriod == other.FirstPeriod ||
-                    FirstPeriod != null &&
-                    FirstPeriod.Equals(other.FirstPeriod)
-                ) && 
-                (
-                    LastPeriod == other.LastPeriod ||
-                    LastPeriod != null &&
-                    LastPeriod.Equals(other.LastPeriod)
-                ) && 
-                (
                     MeasuringType == other.MeasuringType ||
                     MeasuringType != null &&
                     other.MeasuringType != null &&
@@ -273,10 +247,6 @@ namespace PxWeb.Api2.Server.Models
                     hashCode = hashCode * 59 + Show.GetHashCode();
                     if (CodeLists != null)
                     hashCode = hashCode * 59 + CodeLists.GetHashCode();
-                    if (FirstPeriod != null)
-                    hashCode = hashCode * 59 + FirstPeriod.GetHashCode();
-                    if (LastPeriod != null)
-                    hashCode = hashCode * 59 + LastPeriod.GetHashCode();
                     if (MeasuringType != null)
                     hashCode = hashCode * 59 + MeasuringType.GetHashCode();
                     if (PriceType != null)
