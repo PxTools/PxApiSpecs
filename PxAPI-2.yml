@@ -379,7 +379,7 @@ paths:
   /savedqueries:
     post:
       tags:
-      - Saved Queries
+        - Saved Queries
       summary: Save a query for later use.
       operationId: CreateSaveQuery
       requestBody:
@@ -958,14 +958,18 @@ components:
           items:
             type: string
         discontinued:
-          type: boolean
-          nullable: true
+          $ref: "#/components/schemas/Discontinued"
         links:
           type: array
           items:
             $ref: "#/components/schemas/Link"
           description: Links to ...
           nullable: true
+
+    Discontinued:
+      description: If the table is discontinued or not. That is if it no longer updated with new figures.
+      type: boolean
+      nullable: true
 
     PageInfo:
       type: object
@@ -1332,15 +1336,21 @@ components:
             updateFrequency:
               description: How often a table is updated
               type: string
+        firstPeriod:
+          description: Earliest time period in table
+          type: string
+        lastPeriod:
+          description: Latest time period in table
+          type: string
+        timeUnit:
+          $ref: "#/components/schemas/TimeUnit"
         tags:
           description: Tag for table
           type: array
           items:
             type: string
         discontinued:
-          description: Table will no longer be updated
-          type: boolean
-          nullable: true
+          $ref: "#/components/schemas/Discontinued"
         contact:
           type: array
           description: A list of contacts associated with the table.
@@ -1376,14 +1386,6 @@ components:
           type: string
         codeLists:
           $ref: "#/components/schemas/CodeLists"
-        firstPeriod:
-          description: Earliest time period in table
-          type: string
-        lastPeriod:
-          description: Latest time period in table
-          type: string
-        timeUnit:
-          $ref: "#/components/schemas/TimeUnit"
         measuringType:
           description: Indicates if data is stock, flow or average.
           type: object
@@ -1529,6 +1531,7 @@ components:
     TimeUnit:
       description: Indicates the time scale for the variable.
       type: string
+      nullable: true
       enum:
         - Annual
         - HalfYear

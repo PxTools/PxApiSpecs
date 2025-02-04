@@ -110,8 +110,9 @@ namespace PxWeb.Api2.Server.Models
         public List<string> VariableNames { get; set; }
 
         /// <summary>
-        /// Gets or Sets Discontinued
+        /// If the table is discontinued or not. That is if it no longer updated with new figures.
         /// </summary>
+        /// <value>If the table is discontinued or not. That is if it no longer updated with new figures.</value>
         [DataMember(Name="discontinued", EmitDefaultValue=true)]
         public bool? Discontinued { get; set; }
 
