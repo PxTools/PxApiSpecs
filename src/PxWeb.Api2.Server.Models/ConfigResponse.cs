@@ -98,13 +98,6 @@ namespace PxWeb.Api2.Server.Models
         public List<SourceReference> SourceReferences { get; set; }
 
         /// <summary>
-        /// Gets or Sets DefaultMetadataFormat
-        /// </summary>
-        [Required]
-        [DataMember(Name="defaultMetadataFormat", EmitDefaultValue=true)]
-        public MetadataOutputFormatType DefaultMetadataFormat { get; set; }
-
-        /// <summary>
         /// The default data format to used when no format is specified in the request.
         /// </summary>
         /// <value>The default data format to used when no format is specified in the request.</value>
@@ -144,7 +137,6 @@ namespace PxWeb.Api2.Server.Models
             sb.Append("  TimeWindow: ").Append(TimeWindow).Append("\n");
             sb.Append("  License: ").Append(License).Append("\n");
             sb.Append("  SourceReferences: ").Append(SourceReferences).Append("\n");
-            sb.Append("  DefaultMetadataFormat: ").Append(DefaultMetadataFormat).Append("\n");
             sb.Append("  DefaultDataFormat: ").Append(DefaultDataFormat).Append("\n");
             sb.Append("  DataFormats: ").Append(DataFormats).Append("\n");
             sb.Append("  Features: ").Append(Features).Append("\n");
@@ -232,11 +224,6 @@ namespace PxWeb.Api2.Server.Models
                     SourceReferences.SequenceEqual(other.SourceReferences)
                 ) && 
                 (
-                    DefaultMetadataFormat == other.DefaultMetadataFormat ||
-                    
-                    DefaultMetadataFormat.Equals(other.DefaultMetadataFormat)
-                ) && 
-                (
                     DefaultDataFormat == other.DefaultDataFormat ||
                     DefaultDataFormat != null &&
                     DefaultDataFormat.Equals(other.DefaultDataFormat)
@@ -283,8 +270,6 @@ namespace PxWeb.Api2.Server.Models
                     hashCode = hashCode * 59 + License.GetHashCode();
                     if (SourceReferences != null)
                     hashCode = hashCode * 59 + SourceReferences.GetHashCode();
-                    
-                    hashCode = hashCode * 59 + DefaultMetadataFormat.GetHashCode();
                     if (DefaultDataFormat != null)
                     hashCode = hashCode * 59 + DefaultDataFormat.GetHashCode();
                     if (DataFormats != null)

@@ -143,7 +143,6 @@ paths:
       parameters:
         - $ref: "#/components/parameters/lang"
         - $ref: "#/components/parameters/id"
-        - $ref: "#/components/parameters/metadataOutputFormat"
         - in: query
           name: defaultSelection
           schema:
@@ -158,20 +157,10 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/TableMetadataResponse"
-              examples:
-                TableMetadata:
-                  $ref: "./examplesAsYml/tableMetadata.yml#/tableMetadata"
-            application/jsonstat:
-              schema:
                 $ref: "#/components/schemas/Dataset"
               examples:
                 Dataset-meta:
                   $ref: "./examplesAsYml/dataset-meta.yml#/dataset-meta"
-            application/vnd.json-stat2+json:
-              schema:
-                externalDocs:
-                  url: "https://json-stat.org/schema/"
         "400":
           $ref: "#/components/responses/ErrorResponse400"
         "404":
@@ -549,13 +538,6 @@ components:
       schema:
         type: integer
         #Default value depends on site?
-    metadataOutputFormat:
-      name: outputFormat
-      in: query
-      description: The format of the resulting metadata
-      required: false
-      schema:
-        $ref: "#/components/schemas/MetadataOutputFormatType"
     outputFormat:
       name: outputFormat
       in: query
@@ -691,11 +673,6 @@ components:
           description: An array of string that specifies wich values sould be selected. Either as value codes or value expressions
           items:
             type: string
-    MetadataOutputFormatType:
-      type: string
-      enum:
-        - json-px
-        - json-stat2
     ConfigResponse:
       type: object
       description: API configuration
@@ -708,7 +685,6 @@ components:
         - "maxCallsPerTimeWindow"
         - "timeWindow"
         - "license"
-        - "defaultMetadataFormat"
         - "defaultDataFormat"
         - "dataFormats"
       properties:
@@ -746,9 +722,6 @@ components:
           description: A list of how the data should be cite for diffrent languages.
           items:
             $ref: "#/components/schemas/SourceReference"
-        defaultMetadataFormat:
-          $ref: "#/components/schemas/MetadataOutputFormatType"
-          description: The default metadata format to used when no format is specified in the request.
         defaultDataFormat:
           type: string
           description: The default data format to used when no format is specified in the request.
@@ -1049,123 +1022,6 @@ components:
           items:
             $ref: "#/components/schemas/Link"
 
-    VariableTypeEnum:
-      type: string
-      enum:
-        - ContentsVariable
-        - TimeVariable
-        - GeographicalVariable
-        - RegularVariable
-
-    TableMetadataResponse:
-      type: object
-      required:
-        - "language"
-        - "id"
-        - "label"
-        - "variables"
-        - "links"
-      properties:
-        language:
-          type: string
-          description: The language code (ISO 639) for this response
-        id:
-          type: string
-          description: Identifier for the table.
-          example: "TAB0001"
-        label:
-          type: string
-          description: A title for the table that describes the content of it.
-          example: Corporations Financial Assets and Liabilities. Quarterly 1998K2 - 2021K4
-        description:
-          type: string
-          description: A description of the table.
-          example: Corporations Financial Assets and Liabilities by item. Quarterly 1998K2 - 2021K4 [2022-03-11]
-        aggregationAllowed:
-          type: boolean
-          description: If all content of the table can be aggregated.
-        officialStatistics:
-          type: boolean
-          description: A marker if the table is a part of the national official statistics.
-        subjectCode:
-          type: string
-          description: The code for the subject area that the table belongs to.
-          example: BE
-        subjectLabel:
-          type: string
-          description: The label for the subject area that the table belongs to.
-          example: Population
-        source:
-          type: string
-          description: The name of the organization responsible for the table.
-          example: Statistics Sweden
-        license:
-          type: string
-          description: A copyright statement for the data it could also be SPDX (https://spdx.org/licenses/) identifier
-          example: CC0-1.0
-        tags:
-          type: array
-          description: A list of strings/tags associated with the table
-          items:
-            type: string
-        updated:
-          type: string
-          description: Date and time when the figures in the table was last updated, in UTC time.
-          pattern: "^((19|20)\\d\\d)\\-(0?[1-9]|1[012])\\-(0?[1-9]|[12][0-9]|3[01])$"
-          format: date-time
-          nullable: true
-        discontinued:
-          type: boolean
-          description: If the table is discontinued or not. That is if it no longer updated with new figures.
-          nullable: true
-        notes:
-          type: array
-          description: A list of notes associated with the table as a whole or a specific area of the table
-          items:
-            $ref: "#/components/schemas/CellNote"
-        contacts:
-          type: array
-          description: A list of contacts associated with the table.
-          items:
-            $ref: "#/components/schemas/Contact"
-        variables:
-          type: array
-          items:
-            $ref: "#/components/schemas/AbstractVariable"
-        links:
-          type: array
-          items:
-            $ref: "#/components/schemas/Link"
-    AbstractVariable:
-      discriminator:
-        propertyName: type
-        mapping:
-          ContentsVariable: "#/components/schemas/ContentsVariable"
-          TimeVariable: "#/components/schemas/TimeVariable"
-          GeographicalVariable: "#/components/schemas/GeographicalVariable"
-          RegularVariable: "#/components/schemas/RegularVariable"
-      type: object
-      required:
-        - id
-        - label
-        - type
-      properties:
-        id:
-          type: string
-          example: impex01
-        label:
-          type: string
-          example: Import and export
-        type:
-          $ref: "#/components/schemas/VariableTypeEnum"
-        notes:
-          type: array
-          items:
-            $ref: "#/components/schemas/Note"
-        links:
-          type: array
-          items:
-            $ref: "#/components/schemas/Link"
 
     Note:
       type: object
@@ -1178,100 +1034,6 @@ components:
           description: Must be shown to end user if true
         text:
           type: string
-    CellNote:
-      allOf:
-        - $ref: "#/components/schemas/Note"
-      type: object
-      description: Note for a table or a part of it
-      properties:
-        conditions:
-          type: array
-          description: A set of condition that must be fulfilled for the note to be valid.
-          items:
-            $ref: "#/components/schemas/Condition"
-          nullable: true
-    Condition:
-      description: Condition determining to what the CellNote applies
-      type: object
-      required:
-        - "variable"
-        - "value"
-      properties:
-        variable:
-          type: string
-          description: The code of the variable
-        value:
-          type: string
-          description: The code of the value
-    TimeVariable:
-      description: Time variable
-      allOf:
-        - $ref: "#/components/schemas/AbstractVariable"
-      type: object
-      properties:
-        timeUnit:
-          description: Indicates the time scale for the variable.
-          type: string
-          default: Other
-          enum:
-            - Annual
-            - HalfYear
-            - Quarterly
-            - Monthly
-            - Weekly
-            - Other
-        firstPeriod:
-          description: Earliest time period in table
-          type: string
-        lastPeriod:
-          description: Latest time period in table
-          type: string
-        values:
-          type: array
-          items:
-            $ref: "#/components/schemas/Value"
-    ContentsVariable:
-      description: Content variable
-      allOf:
-        - $ref: "#/components/schemas/AbstractVariable"
-      type: object
-      required:
-        - "values"
-      properties:
-        values:
-          type: array
-          items:
-            $ref: "#/components/schemas/ContentValue"
-    AbstractCodeListVariable:
-      description: Filter variable
-      allOf:
-        - $ref: "#/components/schemas/AbstractVariable"
-      type: object
-      required:
-        - "values"
-      properties:
-        elimination:
-          type: boolean
-        eliminationValueCode:
-          type: string
-        values:
-          type: array
-          items:
-            $ref: "#/components/schemas/Value"
-        codeLists:
-          $ref: "#/components/schemas/CodeLists"
-    GeographicalVariable:
-      allOf:
-        - $ref: "#/components/schemas/AbstractCodeListVariable"
-      type: object
-      properties:
-        map:
-          type: string
-    RegularVariable:
-      description: All other type of variaiable except for time, contents or geographical
-      allOf:
-        - $ref: "#/components/schemas/AbstractCodeListVariable"
-      type: object
     CodeListInformation:
       type: object
       required:
@@ -1293,66 +1055,6 @@ components:
           description: Links to associated information about the code list
           items:
             $ref: "#/components/schemas/Link"
-    Value:
-      type: object
-      required:
-        - "code"
-        - "label"
-      properties:
-        code:
-          type: string
-          description: A code representing the value.
-        label:
-          type: string
-          description: A Textual name for the value
-        notes:
-          type: array
-          description: Optional notes that are associated with the value
-          items:
-            $ref: "#/components/schemas/Note"
-        links:
-          type: array
-          items:
-            $ref: "#/components/schemas/Link"
-    ContentValue:
-      allOf:
-        - $ref: "#/components/schemas/Value"
-      type: object
-      description: Content value
-      required:
-        - unit
-      properties:
-        baseperiod:
-          type: string
-          nullable: true
-        adjustment:
-          type: string
-          default: None
-          enum:
-            - None
-            - SesOnly
-            - WorkOnly
-            - WorkAndSes
-        measuringType:
-          type: string
-          default: Other
-          enum:
-            - Stock
-            - Flow
-            - Average
-            - Other
-        preferedNumberOfDecimals:
-          type: integer
-        priceType:
-          type: string
-          enum:
-            - Undefined
-            - Current
-            - Fixed
-        unit:
-          type: string
-        refrencePeriod:
-          type: string
     Contact:
       type: object
       required:
