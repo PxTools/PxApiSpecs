@@ -9,7 +9,6 @@ src/PxWeb.Api2.Server.Models/CellNote.cs
 src/PxWeb.Api2.Server.Models/ClassType.cs
 src/PxWeb.Api2.Server.Models/CodeListInformation.cs
 src/PxWeb.Api2.Server.Models/CodeListMetadata.cs
-src/PxWeb.Api2.Server.Models/CodeListOutputValuesType.cs
 src/PxWeb.Api2.Server.Models/CodeListResponse.cs
 src/PxWeb.Api2.Server.Models/CodeListType.cs
 src/PxWeb.Api2.Server.Models/CodeListsResponse.cs
