@@ -15,6 +15,12 @@
     <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
     <DockerfileContext>..\..</DockerfileContext>
     <IncludeSourceRevisionInInformationalVersion>false</IncludeSourceRevisionInInformationalVersion>
+    <PackageProjectUrl>https://github.com/PxTools/PxApiSpecs</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/PxTools/PxApiSpecs.git</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
+    <PackageTags>PX</PackageTags>
+    <PackageLicenseFile>LICENSE</PackageLicenseFile>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
   </PropertyGroup>
   <ItemGroup>
     <ProjectReference Include="../PxWeb.Api2.Server.Models/PxWeb.Api2.Server.Models.csproj"/>
@@ -27,5 +33,15 @@
   </ItemGroup>
   <ItemGroup>
     <!--<DotNetCliToolReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="8.0.0" />-->
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\..\LICENSE">
+      <Pack>True</Pack>
+      <PackagePath></PackagePath>
+    </None>
+    <None Include="..\..\README.md">
+      <Pack>True</Pack>
+      <PackagePath></PackagePath>
+    </None>
   </ItemGroup>
 </Project>
