@@ -42,12 +42,6 @@ namespace PxWeb.Api2.Server.Models
         public string? CodeList { get; set; }
 
         /// <summary>
-        /// Gets or Sets OutputValues
-        /// </summary>
-        [DataMember(Name="outputValues", EmitDefaultValue=true)]
-        public CodeListOutputValuesType OutputValues { get; set; }
-
-        /// <summary>
         /// An array of string that specifies wich values sould be selected. Either as value codes or value expressions
         /// </summary>
         /// <value>An array of string that specifies wich values sould be selected. Either as value codes or value expressions</value>
@@ -64,7 +58,6 @@ namespace PxWeb.Api2.Server.Models
             sb.Append("class VariableSelection {\n");
             sb.Append("  VariableCode: ").Append(VariableCode).Append("\n");
             sb.Append("  CodeList: ").Append(CodeList).Append("\n");
-            sb.Append("  OutputValues: ").Append(OutputValues).Append("\n");
             sb.Append("  ValueCodes: ").Append(ValueCodes).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
@@ -113,11 +106,6 @@ namespace PxWeb.Api2.Server.Models
                     CodeList.Equals(other.CodeList)
                 ) && 
                 (
-                    OutputValues == other.OutputValues ||
-                    
-                    OutputValues.Equals(other.OutputValues)
-                ) && 
-                (
                     ValueCodes == other.ValueCodes ||
                     ValueCodes != null &&
                     other.ValueCodes != null &&
@@ -139,8 +127,6 @@ namespace PxWeb.Api2.Server.Models
                     hashCode = hashCode * 59 + VariableCode.GetHashCode();
                     if (CodeList != null)
                     hashCode = hashCode * 59 + CodeList.GetHashCode();
-                    
-                    hashCode = hashCode * 59 + OutputValues.GetHashCode();
                     if (ValueCodes != null)
                     hashCode = hashCode * 59 + ValueCodes.GetHashCode();
                 return hashCode;
