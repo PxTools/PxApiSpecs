@@ -1339,6 +1339,9 @@ components:
         name:
           type: string
           example: Inga Svensson
+        organization:
+          type: string
+          example: Statistics Sweden
         phone:
           type: string
           example: "+46101111111"
