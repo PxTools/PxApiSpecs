@@ -426,6 +426,7 @@ paths:
       tags:
         - Saved Queries
       parameters:
+        - $ref: "#/components/parameters/lang"
         - $ref: "#/components/parameters/id"
         - $ref: "#/components/parameters/outputFormat"
         - $ref: "#/components/parameters/outputFormatParams"
