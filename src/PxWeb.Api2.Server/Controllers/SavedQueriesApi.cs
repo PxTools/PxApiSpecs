@@ -66,6 +66,7 @@ namespace PxWeb.Api2.Server.Controllers
         /// Retrieves the data by running the saved query.
         /// </summary>
         /// <param name="id">Id</param>
+        /// <param name="lang">The language if the default is not what you want.</param>
         /// <param name="outputFormat"></param>
         /// <param name="outputFormatParams"></param>
         /// <response code="200">Success</response>
@@ -82,6 +83,6 @@ namespace PxWeb.Api2.Server.Controllers
         [SwaggerResponse(statusCode: 403, type: typeof(Problem), description: "Error response for 403")]
         [SwaggerResponse(statusCode: 404, type: typeof(Problem), description: "Error response for 404")]
         [SwaggerResponse(statusCode: 429, type: typeof(Problem), description: "Error response for 429")]
-        public abstract IActionResult RunSaveQuery([FromRoute (Name = "id")][Required]string id, [FromQuery (Name = "outputFormat")]OutputFormatType? outputFormat, [FromQuery (Name = "outputFormatParams")]List<OutputFormatParamType>? outputFormatParams);
+        public abstract IActionResult RunSaveQuery([FromRoute (Name = "id")][Required]string id, [FromQuery (Name = "lang")]string? lang, [FromQuery (Name = "outputFormat")]OutputFormatType? outputFormat, [FromQuery (Name = "outputFormatParams")]List<OutputFormatParamType>? outputFormatParams);
     }
 }
