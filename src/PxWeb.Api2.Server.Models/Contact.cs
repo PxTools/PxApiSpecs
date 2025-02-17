@@ -34,6 +34,13 @@ namespace PxWeb.Api2.Server.Models
         public string? Name { get; set; }
 
         /// <summary>
+        /// Gets or Sets Organization
+        /// </summary>
+        /* <example>Statistics Sweden</example> */
+        [DataMember(Name="organization", EmitDefaultValue=false)]
+        public string? Organization { get; set; }
+
+        /// <summary>
         /// Gets or Sets Phone
         /// </summary>
         /* <example>+46101111111</example> */
@@ -64,6 +71,7 @@ namespace PxWeb.Api2.Server.Models
             var sb = new StringBuilder();
             sb.Append("class Contact {\n");
             sb.Append("  Name: ").Append(Name).Append("\n");
+            sb.Append("  Organization: ").Append(Organization).Append("\n");
             sb.Append("  Phone: ").Append(Phone).Append("\n");
             sb.Append("  Mail: ").Append(Mail).Append("\n");
             sb.Append("  Raw: ").Append(Raw).Append("\n");
@@ -109,6 +117,11 @@ namespace PxWeb.Api2.Server.Models
                     Name.Equals(other.Name)
                 ) && 
                 (
+                    Organization == other.Organization ||
+                    Organization != null &&
+                    Organization.Equals(other.Organization)
+                ) && 
+                (
                     Phone == other.Phone ||
                     Phone != null &&
                     Phone.Equals(other.Phone)
@@ -137,6 +150,8 @@ namespace PxWeb.Api2.Server.Models
                 // Suitable nullity checks etc, of course :)
                     if (Name != null)
                     hashCode = hashCode * 59 + Name.GetHashCode();
+                    if (Organization != null)
+                    hashCode = hashCode * 59 + Organization.GetHashCode();
                     if (Phone != null)
                     hashCode = hashCode * 59 + Phone.GetHashCode();
                     if (Mail != null)

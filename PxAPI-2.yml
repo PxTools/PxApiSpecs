@@ -251,18 +251,6 @@ paths:
               ]
           style: deepObject
           explode: true
-        - in: query
-          name: outputvalues
-          schema:
-            type: object
-            additionalProperties:
-              $ref: "#/components/schemas/CodeListOutputValuesType"
-            example: |
-              [
-                {"variable_1": "single"}
-              ]
-          style: deepObject
-          explode: true
         - $ref: "#/components/parameters/outputFormat"
         - $ref: "#/components/parameters/outputFormatParams"
         - in: query
@@ -427,6 +415,7 @@ paths:
       tags:
         - Saved Queries
       parameters:
+        - $ref: "#/components/parameters/lang"
         - $ref: "#/components/parameters/id"
         - $ref: "#/components/parameters/outputFormat"
         - $ref: "#/components/parameters/outputFormatParams"
@@ -663,11 +652,6 @@ components:
           type: string
           description: The identifier of the codelist that should be applied
           nullable: true
-        outputValues:
-          $ref: "#/components/schemas/CodeListOutputValuesType"
-          description: If an codelist has been applied then how the resulting values should be constructed.
-          default: Aggregated
-          nullable: true
         valueCodes:
           type: array
           description: An array of string that specifies wich values sould be selected. Either as value codes or value expressions
@@ -789,13 +773,6 @@ components:
         value:
           type: string
           description: The value associated with the key
-
-    CodeListOutputValuesType:
-      type: string
-      enum:
-        - aggregated
-        - single
-
     FolderContentItemTypeEnum:
       type: string
       enum:
@@ -1067,6 +1044,9 @@ components:
         name:
           type: string
           example: Inga Svensson
+        organization:
+          type: string
+          example: Statistics Sweden
         phone:
           type: string
           example: "+46101111111"
