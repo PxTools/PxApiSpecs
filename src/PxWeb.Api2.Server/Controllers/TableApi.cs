@@ -53,7 +53,6 @@ namespace PxWeb.Api2.Server.Controllers
         /// <remarks>**Used for listing detailed information about a specific table** * List all variables and values and all other metadata needed to be able to fetch data  * Also links to where to:   + Fetch   - Where to get information about codelists  * 2 output formats   + Custom json   - JSON-stat2 </remarks>
         /// <param name="id">Id</param>
         /// <param name="lang">The language if the default is not what you want.</param>
-        /// <param name="outputFormat">The format of the resulting metadata</param>
         /// <param name="defaultSelection">If metadata should be included as if default selection would have been applied. This is a technical parameter that is used by PxWeb for initial loading of tables. </param>
         /// <response code="200">Success</response>
         /// <response code="400">Error response for 400</response>
@@ -63,11 +62,11 @@ namespace PxWeb.Api2.Server.Controllers
         [Route("/tables/{id}/metadata")]
         [ValidateModelState]
         [SwaggerOperation("GetMetadataById")]
-        [SwaggerResponse(statusCode: 200, type: typeof(TableMetadataResponse), description: "Success")]
+        [SwaggerResponse(statusCode: 200, type: typeof(Dataset), description: "Success")]
         [SwaggerResponse(statusCode: 400, type: typeof(Problem), description: "Error response for 400")]
         [SwaggerResponse(statusCode: 404, type: typeof(Problem), description: "Error response for 404")]
         [SwaggerResponse(statusCode: 429, type: typeof(Problem), description: "Error response for 429")]
-        public abstract IActionResult GetMetadataById([FromRoute (Name = "id")][Required]string id, [FromQuery (Name = "lang")]string? lang, [FromQuery (Name = "outputFormat")]MetadataOutputFormatType? outputFormat, [FromQuery (Name = "defaultSelection")]bool? defaultSelection);
+        public abstract IActionResult GetMetadataById([FromRoute (Name = "id")][Required]string id, [FromQuery (Name = "lang")]string? lang, [FromQuery (Name = "defaultSelection")]bool? defaultSelection);
 
         /// <summary>
         /// Get Table by {id}.
