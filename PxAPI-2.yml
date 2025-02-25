@@ -1322,8 +1322,6 @@ components:
         lastPeriod:
           description: Latest time period in table
           type: string
-        timeUnit:
-          $ref: "#/components/schemas/TimeUnit"
         tags:
           description: Tag for table
           type: array
@@ -1542,18 +1540,6 @@ components:
     BasePeriod:
       description: Base period for, for instance index series. Is shown with the footnote. If there is a contents variable the keyword is repeated for each value of the contents variable.
       type: string
-
-    TimeUnit:
-      description: Indicates the time scale for the variable.
-      type: string
-      nullable: true
-      enum:
-        - Annual
-        - HalfYear
-        - Quarterly
-        - Monthly
-        - Weekly
-        - Other
 
     Dataset:
       title: JSON-stat 2.0 Dataset Schema

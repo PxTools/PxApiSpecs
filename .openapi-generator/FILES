@@ -44,7 +44,6 @@ src/PxWeb.Api2.Server.Models/SourceReference.cs
 src/PxWeb.Api2.Server.Models/Table.cs
 src/PxWeb.Api2.Server.Models/TableResponse.cs
 src/PxWeb.Api2.Server.Models/TablesResponse.cs
-src/PxWeb.Api2.Server.Models/TimeUnit.cs
 src/PxWeb.Api2.Server.Models/ValueMap.cs
 src/PxWeb.Api2.Server.Models/VariablePlacementType.cs
 src/PxWeb.Api2.Server.Models/VariableSelection.cs
