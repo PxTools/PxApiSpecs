@@ -104,7 +104,7 @@ namespace PxWeb.Api2.Server.Models
         /// Gets or Sets Role
         /// </summary>
         [DataMember(Name="role", EmitDefaultValue=false)]
-        public DatasetRole? Role { get; set; }
+        public Role? Role { get; set; }
 
         /// <summary>
         /// Gets or Sets Id
@@ -127,7 +127,7 @@ namespace PxWeb.Api2.Server.Models
         /// <value>Specification on json-stat.org -&gt; [here](https://json-stat.org/full/#dimension)</value>
         [Required]
         [DataMember(Name="dimension", EmitDefaultValue=false)]
-        public Dictionary<string, DatasetDimensionValue> Dimension { get; set; }
+        public List<Dimension> Dimension { get; set; }
 
         /// <summary>
         /// Gets or Sets Extension

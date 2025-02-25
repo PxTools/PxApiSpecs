@@ -21,28 +21,42 @@ using PxWeb.Api2.Server.Converters;
 namespace PxWeb.Api2.Server.Models
 { 
     /// <summary>
-    /// Specification on json-stat.org -&gt; [here](https://json-stat.org/full/#role)
+    /// Specification on json-stat.org -&gt; [here](https://json-stat.org/full/#dimension)
     /// </summary>
     [DataContract]
-    public class DatasetRole : IEquatable<DatasetRole>
+    public class Dimension : IEquatable<Dimension>
     {
         /// <summary>
-        /// Gets or Sets Time
+        /// Specification on json-stat.org -&gt; [here](https://json-stat.org/full/#label)
         /// </summary>
-        [DataMember(Name="time", EmitDefaultValue=false)]
-        public List<string> Time { get; set; }
+        /// <value>Specification on json-stat.org -&gt; [here](https://json-stat.org/full/#label)</value>
+        [DataMember(Name="label", EmitDefaultValue=false)]
+        public string? Label { get; set; }
 
         /// <summary>
-        /// Gets or Sets Geo
+        /// Spesification on json-stat.org -&gt; [here](https://json-stat.org/full/#note)
         /// </summary>
-        [DataMember(Name="geo", EmitDefaultValue=false)]
-        public List<string> Geo { get; set; }
+        /// <value>Spesification on json-stat.org -&gt; [here](https://json-stat.org/full/#note)</value>
+        [DataMember(Name="note", EmitDefaultValue=false)]
+        public List<string> Note { get; set; }
 
         /// <summary>
-        /// Gets or Sets Metric
+        /// Gets or Sets Category
         /// </summary>
-        [DataMember(Name="metric", EmitDefaultValue=false)]
-        public List<string> Metric { get; set; }
+        [DataMember(Name="category", EmitDefaultValue=false)]
+        public JsonstatCategory? Category { get; set; }
+
+        /// <summary>
+        /// Gets or Sets Extension
+        /// </summary>
+        [DataMember(Name="extension", EmitDefaultValue=false)]
+        public ExtensionDimension? Extension { get; set; }
+
+        /// <summary>
+        /// Gets or Sets Link
+        /// </summary>
+        [DataMember(Name="link", EmitDefaultValue=false)]
+        public JsonstatExtensionLink? Link { get; set; }
 
         /// <summary>
         /// Returns the string presentation of the object
@@ -51,10 +65,12 @@ namespace PxWeb.Api2.Server.Models
         public override string ToString()
         {
             var sb = new StringBuilder();
-            sb.Append("class DatasetRole {\n");
-            sb.Append("  Time: ").Append(Time).Append("\n");
-            sb.Append("  Geo: ").Append(Geo).Append("\n");
-            sb.Append("  Metric: ").Append(Metric).Append("\n");
+            sb.Append("class Dimension {\n");
+            sb.Append("  Label: ").Append(Label).Append("\n");
+            sb.Append("  Note: ").Append(Note).Append("\n");
+            sb.Append("  Category: ").Append(Category).Append("\n");
+            sb.Append("  Extension: ").Append(Extension).Append("\n");
+            sb.Append("  Link: ").Append(Link).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -77,37 +93,45 @@ namespace PxWeb.Api2.Server.Models
         {
             if (obj is null) return false;
             if (ReferenceEquals(this, obj)) return true;
-            return obj.GetType() == GetType() && Equals((DatasetRole)obj);
+            return obj.GetType() == GetType() && Equals((Dimension)obj);
         }
 
         /// <summary>
-        /// Returns true if DatasetRole instances are equal
+        /// Returns true if Dimension instances are equal
         /// </summary>
-        /// <param name="other">Instance of DatasetRole to be compared</param>
+        /// <param name="other">Instance of Dimension to be compared</param>
         /// <returns>Boolean</returns>
-        public bool Equals(DatasetRole other)
+        public bool Equals(Dimension other)
         {
             if (other is null) return false;
             if (ReferenceEquals(this, other)) return true;
 
             return 
                 (
-                    Time == other.Time ||
-                    Time != null &&
-                    other.Time != null &&
-                    Time.SequenceEqual(other.Time)
+                    Label == other.Label ||
+                    Label != null &&
+                    Label.Equals(other.Label)
                 ) && 
                 (
-                    Geo == other.Geo ||
-                    Geo != null &&
-                    other.Geo != null &&
-                    Geo.SequenceEqual(other.Geo)
+                    Note == other.Note ||
+                    Note != null &&
+                    other.Note != null &&
+                    Note.SequenceEqual(other.Note)
                 ) && 
                 (
-                    Metric == other.Metric ||
-                    Metric != null &&
-                    other.Metric != null &&
-                    Metric.SequenceEqual(other.Metric)
+                    Category == other.Category ||
+                    Category != null &&
+                    Category.Equals(other.Category)
+                ) && 
+                (
+                    Extension == other.Extension ||
+                    Extension != null &&
+                    Extension.Equals(other.Extension)
+                ) && 
+                (
+                    Link == other.Link ||
+                    Link != null &&
+                    Link.Equals(other.Link)
                 );
         }
 
@@ -121,12 +145,16 @@ namespace PxWeb.Api2.Server.Models
             {
                 var hashCode = 41;
                 // Suitable nullity checks etc, of course :)
-                    if (Time != null)
-                    hashCode = hashCode * 59 + Time.GetHashCode();
-                    if (Geo != null)
-                    hashCode = hashCode * 59 + Geo.GetHashCode();
-                    if (Metric != null)
-                    hashCode = hashCode * 59 + Metric.GetHashCode();
+                    if (Label != null)
+                    hashCode = hashCode * 59 + Label.GetHashCode();
+                    if (Note != null)
+                    hashCode = hashCode * 59 + Note.GetHashCode();
+                    if (Category != null)
+                    hashCode = hashCode * 59 + Category.GetHashCode();
+                    if (Extension != null)
+                    hashCode = hashCode * 59 + Extension.GetHashCode();
+                    if (Link != null)
+                    hashCode = hashCode * 59 + Link.GetHashCode();
                 return hashCode;
             }
         }
@@ -134,12 +162,12 @@ namespace PxWeb.Api2.Server.Models
         #region Operators
         #pragma warning disable 1591
 
-        public static bool operator ==(DatasetRole left, DatasetRole right)
+        public static bool operator ==(Dimension left, Dimension right)
         {
             return Equals(left, right);
         }
 
-        public static bool operator !=(DatasetRole left, DatasetRole right)
+        public static bool operator !=(Dimension left, Dimension right)
         {
             return !Equals(left, right);
         }
