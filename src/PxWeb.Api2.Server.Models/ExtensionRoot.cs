@@ -54,12 +54,6 @@ namespace PxWeb.Api2.Server.Models
         public string? LastPeriod { get; set; }
 
         /// <summary>
-        /// Gets or Sets TimeUnit
-        /// </summary>
-        [DataMember(Name="timeUnit", EmitDefaultValue=true)]
-        public TimeUnit? TimeUnit { get; set; }
-
-        /// <summary>
         /// Tag for table
         /// </summary>
         /// <value>Tag for table</value>
@@ -92,7 +86,6 @@ namespace PxWeb.Api2.Server.Models
             sb.Append("  Px: ").Append(Px).Append("\n");
             sb.Append("  FirstPeriod: ").Append(FirstPeriod).Append("\n");
             sb.Append("  LastPeriod: ").Append(LastPeriod).Append("\n");
-            sb.Append("  TimeUnit: ").Append(TimeUnit).Append("\n");
             sb.Append("  Tags: ").Append(Tags).Append("\n");
             sb.Append("  Discontinued: ").Append(Discontinued).Append("\n");
             sb.Append("  Contact: ").Append(Contact).Append("\n");
@@ -154,11 +147,6 @@ namespace PxWeb.Api2.Server.Models
                     LastPeriod.Equals(other.LastPeriod)
                 ) && 
                 (
-                    TimeUnit == other.TimeUnit ||
-                    
-                    TimeUnit.Equals(other.TimeUnit)
-                ) && 
-                (
                     Tags == other.Tags ||
                     Tags != null &&
                     other.Tags != null &&
@@ -195,8 +183,6 @@ namespace PxWeb.Api2.Server.Models
                     hashCode = hashCode * 59 + FirstPeriod.GetHashCode();
                     if (LastPeriod != null)
                     hashCode = hashCode * 59 + LastPeriod.GetHashCode();
-                    
-                    hashCode = hashCode * 59 + TimeUnit.GetHashCode();
                     if (Tags != null)
                     hashCode = hashCode * 59 + Tags.GetHashCode();
                     if (Discontinued != null)
