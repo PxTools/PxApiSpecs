@@ -1487,21 +1487,23 @@ components:
     Dimension:
       description: Specification on json-stat.org -> [here](https://json-stat.org/full/#dimension)
       type: object
-      properties:
-        label:
-          description: Specification on json-stat.org -> [here](https://json-stat.org/full/#label)
-          $ref: "#/components/schemas/label"
-        note:
-          description: Notes for variable
-          $ref: "#/components/schemas/jsonstat-note"
-        category:
-          description: Specification on json-stat.org -> [here](https://json-stat.org/full/#category)
-          $ref: "#/components/schemas/jsonstat-category"
-        extension:
-          $ref: "#/components/schemas/extension-dimension"
-        link:
-          $ref: "#/components/schemas/jsonstat-extension-link"
-      additionalProperties: false
+      additionalProperties:
+        type: object
+        properties:
+          label:
+            description: Specification on json-stat.org -> [here](https://json-stat.org/full/#label)
+            $ref: "#/components/schemas/label"
+          note:
+            description: Notes for variable
+            $ref: "#/components/schemas/jsonstat-note"
+          category:
+            description: Specification on json-stat.org -> [here](https://json-stat.org/full/#category)
+            $ref: "#/components/schemas/jsonstat-category"
+          extension:
+            $ref: "#/components/schemas/extension-dimension"
+          link:
+            $ref: "#/components/schemas/jsonstat-extension-link"
+        additionalProperties: false
 
     CodeLists:
       description: Available codelists for this dimension
@@ -1588,9 +1590,7 @@ components:
             type: integer
         dimension:
           description: Specification on json-stat.org -> [here](https://json-stat.org/full/#dimension)
-          type: array
-          items: 
-            "$ref": "#/components/schemas/Dimension"
+          "$ref": "#/components/schemas/Dimension"
         extension:
           "$ref": "#/components/schemas/extension-root"
         value:

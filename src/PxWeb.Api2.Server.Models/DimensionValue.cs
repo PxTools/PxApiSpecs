@@ -21,10 +21,10 @@ using PxWeb.Api2.Server.Converters;
 namespace PxWeb.Api2.Server.Models
 { 
     /// <summary>
-    /// Specification on json-stat.org -&gt; [here](https://json-stat.org/full/#dimension)
+    /// 
     /// </summary>
     [DataContract]
-    public class Dimension : IEquatable<Dimension>
+    public class DimensionValue : IEquatable<DimensionValue>
     {
         /// <summary>
         /// Specification on json-stat.org -&gt; [here](https://json-stat.org/full/#label)
@@ -65,7 +65,7 @@ namespace PxWeb.Api2.Server.Models
         public override string ToString()
         {
             var sb = new StringBuilder();
-            sb.Append("class Dimension {\n");
+            sb.Append("class DimensionValue {\n");
             sb.Append("  Label: ").Append(Label).Append("\n");
             sb.Append("  Note: ").Append(Note).Append("\n");
             sb.Append("  Category: ").Append(Category).Append("\n");
@@ -93,15 +93,15 @@ namespace PxWeb.Api2.Server.Models
         {
             if (obj is null) return false;
             if (ReferenceEquals(this, obj)) return true;
-            return obj.GetType() == GetType() && Equals((Dimension)obj);
+            return obj.GetType() == GetType() && Equals((DimensionValue)obj);
         }
 
         /// <summary>
-        /// Returns true if Dimension instances are equal
+        /// Returns true if DimensionValue instances are equal
         /// </summary>
-        /// <param name="other">Instance of Dimension to be compared</param>
+        /// <param name="other">Instance of DimensionValue to be compared</param>
         /// <returns>Boolean</returns>
-        public bool Equals(Dimension other)
+        public bool Equals(DimensionValue other)
         {
             if (other is null) return false;
             if (ReferenceEquals(this, other)) return true;
@@ -162,12 +162,12 @@ namespace PxWeb.Api2.Server.Models
         #region Operators
         #pragma warning disable 1591
 
-        public static bool operator ==(Dimension left, Dimension right)
+        public static bool operator ==(DimensionValue left, DimensionValue right)
         {
             return Equals(left, right);
         }
 
-        public static bool operator !=(Dimension left, Dimension right)
+        public static bool operator !=(DimensionValue left, DimensionValue right)
         {
             return !Equals(left, right);
         }
