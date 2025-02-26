@@ -127,7 +127,7 @@ namespace PxWeb.Api2.Server.Models
         /// <value>Specification on json-stat.org -&gt; [here](https://json-stat.org/full/#dimension)</value>
         [Required]
         [DataMember(Name="dimension", EmitDefaultValue=false)]
-        public List<Dimension> Dimension { get; set; }
+        public Dictionary<string, DimensionValue> Dimension { get; set; }
 
         /// <summary>
         /// Gets or Sets Extension
