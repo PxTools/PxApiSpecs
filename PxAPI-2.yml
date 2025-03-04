@@ -136,9 +136,7 @@ paths:
           + Fetch
           - Where to get information about codelists
 
-        * 2 output formats
-          + Custom json
-          - JSON-stat2
+        * output format is JSON-stat2
       operationId: GetMetadataById
       parameters:
         - $ref: "#/components/parameters/lang"
