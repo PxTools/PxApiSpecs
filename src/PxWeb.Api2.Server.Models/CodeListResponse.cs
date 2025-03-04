@@ -54,6 +54,28 @@ namespace PxWeb.Api2.Server.Models
         public string Language { get; set; }
 
         /// <summary>
+        /// The languages that the codelist is available in
+        /// </summary>
+        /// <value>The languages that the codelist is available in</value>
+        [Required]
+        [DataMember(Name="languages", EmitDefaultValue=false)]
+        public List<string> Languages { get; set; }
+
+        /// <summary>
+        /// If the codelist is eliminatable
+        /// </summary>
+        /// <value>If the codelist is eliminatable</value>
+        [DataMember(Name="elimination", EmitDefaultValue=true)]
+        public bool? Elimination { get; set; } = false;
+
+        /// <summary>
+        /// The value code that should be used for elimination. If not set the variable will be eliminated by summing up all values.
+        /// </summary>
+        /// <value>The value code that should be used for elimination. If not set the variable will be eliminated by summing up all values.</value>
+        [DataMember(Name="eliminationValueCode", EmitDefaultValue=false)]
+        public string? EliminationValueCode { get; set; }
+
+        /// <summary>
         /// Gets or Sets Type
         /// </summary>
         [Required]
@@ -85,6 +107,9 @@ namespace PxWeb.Api2.Server.Models
             sb.Append("  Id: ").Append(Id).Append("\n");
             sb.Append("  Label: ").Append(Label).Append("\n");
             sb.Append("  Language: ").Append(Language).Append("\n");
+            sb.Append("  Languages: ").Append(Languages).Append("\n");
+            sb.Append("  Elimination: ").Append(Elimination).Append("\n");
+            sb.Append("  EliminationValueCode: ").Append(EliminationValueCode).Append("\n");
             sb.Append("  Type: ").Append(Type).Append("\n");
             sb.Append("  Values: ").Append(Values).Append("\n");
             sb.Append("  Links: ").Append(Links).Append("\n");
@@ -140,6 +165,22 @@ namespace PxWeb.Api2.Server.Models
                     Language.Equals(other.Language)
                 ) && 
                 (
+                    Languages == other.Languages ||
+                    Languages != null &&
+                    other.Languages != null &&
+                    Languages.SequenceEqual(other.Languages)
+                ) && 
+                (
+                    Elimination == other.Elimination ||
+                    
+                    Elimination.Equals(other.Elimination)
+                ) && 
+                (
+                    EliminationValueCode == other.EliminationValueCode ||
+                    EliminationValueCode != null &&
+                    EliminationValueCode.Equals(other.EliminationValueCode)
+                ) && 
+                (
                     Type == other.Type ||
                     
                     Type.Equals(other.Type)
@@ -174,6 +215,12 @@ namespace PxWeb.Api2.Server.Models
                     hashCode = hashCode * 59 + Label.GetHashCode();
                     if (Language != null)
                     hashCode = hashCode * 59 + Language.GetHashCode();
+                    if (Languages != null)
+                    hashCode = hashCode * 59 + Languages.GetHashCode();
+                    
+                    hashCode = hashCode * 59 + Elimination.GetHashCode();
+                    if (EliminationValueCode != null)
+                    hashCode = hashCode * 59 + EliminationValueCode.GetHashCode();
                     
                     hashCode = hashCode * 59 + Type.GetHashCode();
                     if (Values != null)
