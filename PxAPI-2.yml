@@ -1109,6 +1109,7 @@ components:
         - "id"
         - "label"
         - "language"
+        - "languages"
         - "type"
         - "values"
         - "links"
@@ -1125,6 +1126,18 @@ components:
           type: string
           description: The language code for the language used in this response
           example: sv
+        languages:
+          type: array
+          items:
+            type: string
+          description: The languages that the codelist is available in
+        elimination:
+          type: boolean
+          default: false
+          description: If the codelist is eliminatable
+        eliminationValueCode:
+          type: string
+          description: The value code that should be used for elimination. If not set the variable will be eliminated by summing up all values.
         type:
           $ref: "#/components/schemas/CodeListType"
         values:
