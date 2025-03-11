@@ -35,6 +35,7 @@ src/PxWeb.Api2.Server.Models/Note.cs
 src/PxWeb.Api2.Server.Models/OutputFormatParamType.cs
 src/PxWeb.Api2.Server.Models/OutputFormatType.cs
 src/PxWeb.Api2.Server.Models/PageInfo.cs
+src/PxWeb.Api2.Server.Models/PathElement.cs
 src/PxWeb.Api2.Server.Models/PriceType.cs
 src/PxWeb.Api2.Server.Models/Problem.cs
 src/PxWeb.Api2.Server.Models/Role.cs
@@ -44,6 +45,7 @@ src/PxWeb.Api2.Server.Models/SourceReference.cs
 src/PxWeb.Api2.Server.Models/Table.cs
 src/PxWeb.Api2.Server.Models/TableResponse.cs
 src/PxWeb.Api2.Server.Models/TablesResponse.cs
+src/PxWeb.Api2.Server.Models/TimeUnit.cs
 src/PxWeb.Api2.Server.Models/ValueMap.cs
 src/PxWeb.Api2.Server.Models/VariablePlacementType.cs
 src/PxWeb.Api2.Server.Models/VariableSelection.cs
