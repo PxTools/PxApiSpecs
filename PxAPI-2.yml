@@ -1284,8 +1284,8 @@ components:
               description: If the contents of the table cannot be aggregated
               type: boolean
             copyright:
-              description: Copyright is given as YES or NO
-              type: string
+              description: If the table is protected by copyright
+              type: boolean
             language:
               description: code (two characters) for language
               type: string
