@@ -887,6 +887,19 @@ components:
           type: string
           description: The language code (ISO 639) for this response
 
+    PathElement:
+      type: object
+      required:
+        - "id"
+        - "label"
+      properties:
+        id:
+          type: string
+          description: The identity of the PathElement
+        label:
+          type: string
+          description: A textual name for the PathElement
+
     Table:
       allOf:
         - $ref: "#/components/schemas/FolderContentItem"
@@ -936,6 +949,19 @@ components:
             type: string
         discontinued:
           $ref: "#/components/schemas/Discontinued"
+        source:
+          type: string
+          description: The source of the table
+        timeUnit:
+          $ref: "#/components/schemas/TimeUnit"
+          description: The time unit for the table
+        paths:
+          type: array
+          items:
+            type: array
+            items:
+              $ref: "#/components/schemas/PathElement"
+          description: The path to the table
         links:
           type: array
           items:
@@ -1551,6 +1577,16 @@ components:
         - Flow
         - Average
         - Other
+
+    TimeUnit:
+      description: Indicates the time scale for the variable.
+      type: string
+      enum:
+      - Annual
+      - Quarterly
+      - Monthly
+      - Weekly
+      - Other
 
     BasePeriod:
       description: Base period for, for instance index series. Is shown with the footnote. If there is a contents variable the keyword is repeated for each value of the contents variable.

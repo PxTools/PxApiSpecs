@@ -117,6 +117,26 @@ namespace PxWeb.Api2.Server.Models
         public bool? Discontinued { get; set; }
 
         /// <summary>
+        /// The source of the table
+        /// </summary>
+        /// <value>The source of the table</value>
+        [DataMember(Name="source", EmitDefaultValue=false)]
+        public string? Source { get; set; }
+
+        /// <summary>
+        /// Gets or Sets TimeUnit
+        /// </summary>
+        [DataMember(Name="timeUnit", EmitDefaultValue=true)]
+        public TimeUnit TimeUnit { get; set; }
+
+        /// <summary>
+        /// The path to the table
+        /// </summary>
+        /// <value>The path to the table</value>
+        [DataMember(Name="paths", EmitDefaultValue=false)]
+        public List<List<PathElement>> Paths { get; set; }
+
+        /// <summary>
         /// Links to ...
         /// </summary>
         /// <value>Links to ...</value>
@@ -139,6 +159,9 @@ namespace PxWeb.Api2.Server.Models
             sb.Append("  Category: ").Append(Category).Append("\n");
             sb.Append("  VariableNames: ").Append(VariableNames).Append("\n");
             sb.Append("  Discontinued: ").Append(Discontinued).Append("\n");
+            sb.Append("  Source: ").Append(Source).Append("\n");
+            sb.Append("  TimeUnit: ").Append(TimeUnit).Append("\n");
+            sb.Append("  Paths: ").Append(Paths).Append("\n");
             sb.Append("  Links: ").Append(Links).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
@@ -214,6 +237,22 @@ namespace PxWeb.Api2.Server.Models
                     Discontinued.Equals(other.Discontinued)
                 ) && 
                 (
+                    Source == other.Source ||
+                    Source != null &&
+                    Source.Equals(other.Source)
+                ) && 
+                (
+                    TimeUnit == other.TimeUnit ||
+                    
+                    TimeUnit.Equals(other.TimeUnit)
+                ) && 
+                (
+                    Paths == other.Paths ||
+                    Paths != null &&
+                    other.Paths != null &&
+                    Paths.SequenceEqual(other.Paths)
+                ) && 
+                (
                     Links == other.Links ||
                     Links != null &&
                     other.Links != null &&
@@ -245,6 +284,12 @@ namespace PxWeb.Api2.Server.Models
                     hashCode = hashCode * 59 + VariableNames.GetHashCode();
                     if (Discontinued != null)
                     hashCode = hashCode * 59 + Discontinued.GetHashCode();
+                    if (Source != null)
+                    hashCode = hashCode * 59 + Source.GetHashCode();
+                    
+                    hashCode = hashCode * 59 + TimeUnit.GetHashCode();
+                    if (Paths != null)
+                    hashCode = hashCode * 59 + Paths.GetHashCode();
                     if (Links != null)
                     hashCode = hashCode * 59 + Links.GetHashCode();
                 return hashCode;
