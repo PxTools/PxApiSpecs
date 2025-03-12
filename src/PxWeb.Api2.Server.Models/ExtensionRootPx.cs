@@ -62,11 +62,11 @@ namespace PxWeb.Api2.Server.Models
         public bool? Aggregallowed { get; set; }
 
         /// <summary>
-        /// Copyright is given as YES or NO
+        /// If the table is protected by copyright
         /// </summary>
-        /// <value>Copyright is given as YES or NO</value>
-        [DataMember(Name="copyright", EmitDefaultValue=false)]
-        public string? Copyright { get; set; }
+        /// <value>If the table is protected by copyright</value>
+        [DataMember(Name="copyright", EmitDefaultValue=true)]
+        public bool? Copyright { get; set; }
 
         /// <summary>
         /// code (two characters) for language
@@ -250,7 +250,7 @@ namespace PxWeb.Api2.Server.Models
                 ) && 
                 (
                     Copyright == other.Copyright ||
-                    Copyright != null &&
+                    
                     Copyright.Equals(other.Copyright)
                 ) && 
                 (
@@ -342,7 +342,7 @@ namespace PxWeb.Api2.Server.Models
                     hashCode = hashCode * 59 + OfficialStatistics.GetHashCode();
                     
                     hashCode = hashCode * 59 + Aggregallowed.GetHashCode();
-                    if (Copyright != null)
+                    
                     hashCode = hashCode * 59 + Copyright.GetHashCode();
                     if (Language != null)
                     hashCode = hashCode * 59 + Language.GetHashCode();
