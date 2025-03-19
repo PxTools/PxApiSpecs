@@ -26,6 +26,7 @@ src/PxWeb.Api2.Server.Models/Heading.cs
 src/PxWeb.Api2.Server.Models/JsonstatCategory.cs
 src/PxWeb.Api2.Server.Models/JsonstatCategoryUnitValue.cs
 src/PxWeb.Api2.Server.Models/JsonstatExtensionLink.cs
+src/PxWeb.Api2.Server.Models/JsonstatExtensionLinkRelation.cs
 src/PxWeb.Api2.Server.Models/JsonstatLink.cs
 src/PxWeb.Api2.Server.Models/KeyValuePair.cs
 src/PxWeb.Api2.Server.Models/Language.cs
@@ -38,6 +39,7 @@ src/PxWeb.Api2.Server.Models/PageInfo.cs
 src/PxWeb.Api2.Server.Models/PathElement.cs
 src/PxWeb.Api2.Server.Models/PriceType.cs
 src/PxWeb.Api2.Server.Models/Problem.cs
+src/PxWeb.Api2.Server.Models/RelationLink.cs
 src/PxWeb.Api2.Server.Models/Role.cs
 src/PxWeb.Api2.Server.Models/SavedQuery.cs
 src/PxWeb.Api2.Server.Models/SelectionResponse.cs

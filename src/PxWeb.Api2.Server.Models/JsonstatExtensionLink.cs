@@ -33,6 +33,12 @@ namespace PxWeb.Api2.Server.Models
         public List<DimensionExtension> Describedby { get; set; }
 
         /// <summary>
+        /// Gets or Sets Relation
+        /// </summary>
+        [DataMember(Name="relation", EmitDefaultValue=false)]
+        public List<JsonstatExtensionLinkRelation> Relation { get; set; }
+
+        /// <summary>
         /// Returns the string presentation of the object
         /// </summary>
         /// <returns>String presentation of the object</returns>
@@ -41,6 +47,7 @@ namespace PxWeb.Api2.Server.Models
             var sb = new StringBuilder();
             sb.Append("class JsonstatExtensionLink {\n");
             sb.Append("  Describedby: ").Append(Describedby).Append("\n");
+            sb.Append("  Relation: ").Append(Relation).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -82,6 +89,12 @@ namespace PxWeb.Api2.Server.Models
                     Describedby != null &&
                     other.Describedby != null &&
                     Describedby.SequenceEqual(other.Describedby)
+                ) && 
+                (
+                    Relation == other.Relation ||
+                    Relation != null &&
+                    other.Relation != null &&
+                    Relation.SequenceEqual(other.Relation)
                 );
         }
 
@@ -97,6 +110,8 @@ namespace PxWeb.Api2.Server.Models
                 // Suitable nullity checks etc, of course :)
                     if (Describedby != null)
                     hashCode = hashCode * 59 + Describedby.GetHashCode();
+                    if (Relation != null)
+                    hashCode = hashCode * 59 + Relation.GetHashCode();
                 return hashCode;
             }
         }
