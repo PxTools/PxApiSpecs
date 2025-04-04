@@ -13,7 +13,6 @@ src/PxWeb.Api2.Server.Models/ConfigResponse.cs
 src/PxWeb.Api2.Server.Models/Contact.cs
 src/PxWeb.Api2.Server.Models/Converters/CustomEnumConverter.cs
 src/PxWeb.Api2.Server.Models/Dataset.cs
-src/PxWeb.Api2.Server.Models/DimensionExtension.cs
 src/PxWeb.Api2.Server.Models/DimensionValue.cs
 src/PxWeb.Api2.Server.Models/ExtensionDimension.cs
 src/PxWeb.Api2.Server.Models/ExtensionRoot.cs
@@ -26,8 +25,10 @@ src/PxWeb.Api2.Server.Models/Heading.cs
 src/PxWeb.Api2.Server.Models/JsonstatCategory.cs
 src/PxWeb.Api2.Server.Models/JsonstatCategoryUnitValue.cs
 src/PxWeb.Api2.Server.Models/JsonstatExtensionLink.cs
+src/PxWeb.Api2.Server.Models/JsonstatExtensionLinkDescribedby.cs
 src/PxWeb.Api2.Server.Models/JsonstatExtensionLinkRelation.cs
 src/PxWeb.Api2.Server.Models/JsonstatLink.cs
+src/PxWeb.Api2.Server.Models/JsonstatUpLink.cs
 src/PxWeb.Api2.Server.Models/KeyValuePair.cs
 src/PxWeb.Api2.Server.Models/Language.cs
 src/PxWeb.Api2.Server.Models/Link.cs

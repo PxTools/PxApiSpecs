@@ -24,12 +24,12 @@ namespace PxWeb.Api2.Server.Models
     /// 
     /// </summary>
     [DataContract]
-    public class DimensionExtension : IEquatable<DimensionExtension>
+    public class JsonstatExtensionLinkDescribedby : IEquatable<JsonstatExtensionLinkDescribedby>
     {
         /// <summary>
-        /// A extension object
+        /// An object holding raw META-IDs for backward compatability. Better to use the same info from relation.
         /// </summary>
-        /// <value>A extension object</value>
+        /// <value>An object holding raw META-IDs for backward compatability. Better to use the same info from relation.</value>
         [DataMember(Name="extension", EmitDefaultValue=false)]
         public Dictionary<string, string> Extension { get; set; }
 
@@ -40,7 +40,7 @@ namespace PxWeb.Api2.Server.Models
         public override string ToString()
         {
             var sb = new StringBuilder();
-            sb.Append("class DimensionExtension {\n");
+            sb.Append("class JsonstatExtensionLinkDescribedby {\n");
             sb.Append("  Extension: ").Append(Extension).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
@@ -64,15 +64,15 @@ namespace PxWeb.Api2.Server.Models
         {
             if (obj is null) return false;
             if (ReferenceEquals(this, obj)) return true;
-            return obj.GetType() == GetType() && Equals((DimensionExtension)obj);
+            return obj.GetType() == GetType() && Equals((JsonstatExtensionLinkDescribedby)obj);
         }
 
         /// <summary>
-        /// Returns true if DimensionExtension instances are equal
+        /// Returns true if JsonstatExtensionLinkDescribedby instances are equal
         /// </summary>
-        /// <param name="other">Instance of DimensionExtension to be compared</param>
+        /// <param name="other">Instance of JsonstatExtensionLinkDescribedby to be compared</param>
         /// <returns>Boolean</returns>
-        public bool Equals(DimensionExtension other)
+        public bool Equals(JsonstatExtensionLinkDescribedby other)
         {
             if (other is null) return false;
             if (ReferenceEquals(this, other)) return true;
@@ -105,12 +105,12 @@ namespace PxWeb.Api2.Server.Models
         #region Operators
         #pragma warning disable 1591
 
-        public static bool operator ==(DimensionExtension left, DimensionExtension right)
+        public static bool operator ==(JsonstatExtensionLinkDescribedby left, JsonstatExtensionLinkDescribedby right)
         {
             return Equals(left, right);
         }
 
-        public static bool operator !=(DimensionExtension left, DimensionExtension right)
+        public static bool operator !=(JsonstatExtensionLinkDescribedby left, JsonstatExtensionLinkDescribedby right)
         {
             return !Equals(left, right);
         }

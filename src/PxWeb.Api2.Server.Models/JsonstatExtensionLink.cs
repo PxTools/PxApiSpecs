@@ -30,7 +30,7 @@ namespace PxWeb.Api2.Server.Models
         /// Gets or Sets Describedby
         /// </summary>
         [DataMember(Name="describedby", EmitDefaultValue=false)]
-        public List<DimensionExtension> Describedby { get; set; }
+        public List<JsonstatExtensionLinkDescribedby> Describedby { get; set; }
 
         /// <summary>
         /// Gets or Sets Relation
