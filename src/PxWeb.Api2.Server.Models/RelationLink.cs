@@ -24,13 +24,42 @@ namespace PxWeb.Api2.Server.Models
     /// 
     /// </summary>
     [DataContract]
-    public class JsonstatLink : IEquatable<JsonstatLink>
+    public class RelationLink : IEquatable<RelationLink>
     {
         /// <summary>
-        /// Gets or Sets Relation
+        /// Type of relation, like about-statistics
         /// </summary>
+        /// <value>Type of relation, like about-statistics</value>
         [DataMember(Name="relation", EmitDefaultValue=false)]
-        public List<JsonstatExtensionLinkRelation> Relation { get; set; }
+        public string? Relation { get; set; }
+
+        /// <summary>
+        /// Source Meta ID for this link
+        /// </summary>
+        /// <value>Source Meta ID for this link</value>
+        [DataMember(Name="metaid", EmitDefaultValue=false)]
+        public string? Metaid { get; set; }
+
+        /// <summary>
+        /// URL link
+        /// </summary>
+        /// <value>URL link</value>
+        [DataMember(Name="href", EmitDefaultValue=false)]
+        public string? Href { get; set; }
+
+        /// <summary>
+        /// Label for the link
+        /// </summary>
+        /// <value>Label for the link</value>
+        [DataMember(Name="label", EmitDefaultValue=false)]
+        public string? Label { get; set; }
+
+        /// <summary>
+        /// Type of the link, like text/html
+        /// </summary>
+        /// <value>Type of the link, like text/html</value>
+        [DataMember(Name="type", EmitDefaultValue=false)]
+        public string? Type { get; set; }
 
         /// <summary>
         /// Returns the string presentation of the object
@@ -39,8 +68,12 @@ namespace PxWeb.Api2.Server.Models
         public override string ToString()
         {
             var sb = new StringBuilder();
-            sb.Append("class JsonstatLink {\n");
+            sb.Append("class RelationLink {\n");
             sb.Append("  Relation: ").Append(Relation).Append("\n");
+            sb.Append("  Metaid: ").Append(Metaid).Append("\n");
+            sb.Append("  Href: ").Append(Href).Append("\n");
+            sb.Append("  Label: ").Append(Label).Append("\n");
+            sb.Append("  Type: ").Append(Type).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -63,15 +96,15 @@ namespace PxWeb.Api2.Server.Models
         {
             if (obj is null) return false;
             if (ReferenceEquals(this, obj)) return true;
-            return obj.GetType() == GetType() && Equals((JsonstatLink)obj);
+            return obj.GetType() == GetType() && Equals((RelationLink)obj);
         }
 
         /// <summary>
-        /// Returns true if JsonstatLink instances are equal
+        /// Returns true if RelationLink instances are equal
         /// </summary>
-        /// <param name="other">Instance of JsonstatLink to be compared</param>
+        /// <param name="other">Instance of RelationLink to be compared</param>
         /// <returns>Boolean</returns>
-        public bool Equals(JsonstatLink other)
+        public bool Equals(RelationLink other)
         {
             if (other is null) return false;
             if (ReferenceEquals(this, other)) return true;
@@ -80,8 +113,27 @@ namespace PxWeb.Api2.Server.Models
                 (
                     Relation == other.Relation ||
                     Relation != null &&
-                    other.Relation != null &&
-                    Relation.SequenceEqual(other.Relation)
+                    Relation.Equals(other.Relation)
+                ) && 
+                (
+                    Metaid == other.Metaid ||
+                    Metaid != null &&
+                    Metaid.Equals(other.Metaid)
+                ) && 
+                (
+                    Href == other.Href ||
+                    Href != null &&
+                    Href.Equals(other.Href)
+                ) && 
+                (
+                    Label == other.Label ||
+                    Label != null &&
+                    Label.Equals(other.Label)
+                ) && 
+                (
+                    Type == other.Type ||
+                    Type != null &&
+                    Type.Equals(other.Type)
                 );
         }
 
@@ -97,6 +149,14 @@ namespace PxWeb.Api2.Server.Models
                 // Suitable nullity checks etc, of course :)
                     if (Relation != null)
                     hashCode = hashCode * 59 + Relation.GetHashCode();
+                    if (Metaid != null)
+                    hashCode = hashCode * 59 + Metaid.GetHashCode();
+                    if (Href != null)
+                    hashCode = hashCode * 59 + Href.GetHashCode();
+                    if (Label != null)
+                    hashCode = hashCode * 59 + Label.GetHashCode();
+                    if (Type != null)
+                    hashCode = hashCode * 59 + Type.GetHashCode();
                 return hashCode;
             }
         }
@@ -104,12 +164,12 @@ namespace PxWeb.Api2.Server.Models
         #region Operators
         #pragma warning disable 1591
 
-        public static bool operator ==(JsonstatLink left, JsonstatLink right)
+        public static bool operator ==(RelationLink left, RelationLink right)
         {
             return Equals(left, right);
         }
 
-        public static bool operator !=(JsonstatLink left, JsonstatLink right)
+        public static bool operator !=(RelationLink left, RelationLink right)
         {
             return !Equals(left, right);
         }
