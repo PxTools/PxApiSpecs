@@ -1430,22 +1430,11 @@ components:
     jsonstat-link:
       type: object
       properties:
-        up:
-          type: array
-          items: 
-            type: object
-            title: JsonstatUpLink
-            description: URL link to the /tables/{id} for the table.
-            properties:
-              href:
-                type: string
-                format: uri
         relation:
           type: array
           items:
             $ref: "#/components/schemas/JsonstatExtensionLinkRelation"
-      required:
-        - up      
+            
     jsonstat-extension-link:
       type: object
       properties:
@@ -1697,11 +1686,10 @@ components:
       required:
         - version
         - class
-        - link
+        - value
         - id
         - size
         - dimension
-        - value
 
     ClassType:
       description: "Is always dataset"

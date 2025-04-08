@@ -90,9 +90,8 @@ namespace PxWeb.Api2.Server.Models
         /// <summary>
         /// Gets or Sets Link
         /// </summary>
-        [Required]
         [DataMember(Name="link", EmitDefaultValue=false)]
-        public JsonstatLink Link { get; set; }
+        public JsonstatLink? Link { get; set; }
 
         /// <summary>
         /// Spesification on json-stat.org -&gt; [here](https://json-stat.org/full/#note)

@@ -28,7 +28,6 @@ src/PxWeb.Api2.Server.Models/JsonstatExtensionLink.cs
 src/PxWeb.Api2.Server.Models/JsonstatExtensionLinkDescribedby.cs
 src/PxWeb.Api2.Server.Models/JsonstatExtensionLinkRelation.cs
 src/PxWeb.Api2.Server.Models/JsonstatLink.cs
-src/PxWeb.Api2.Server.Models/JsonstatUpLink.cs
 src/PxWeb.Api2.Server.Models/KeyValuePair.cs
 src/PxWeb.Api2.Server.Models/Language.cs
 src/PxWeb.Api2.Server.Models/Link.cs

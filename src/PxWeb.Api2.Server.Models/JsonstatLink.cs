@@ -27,13 +27,6 @@ namespace PxWeb.Api2.Server.Models
     public class JsonstatLink : IEquatable<JsonstatLink>
     {
         /// <summary>
-        /// Gets or Sets Up
-        /// </summary>
-        [Required]
-        [DataMember(Name="up", EmitDefaultValue=false)]
-        public List<JsonstatUpLink> Up { get; set; }
-
-        /// <summary>
         /// Gets or Sets Relation
         /// </summary>
         [DataMember(Name="relation", EmitDefaultValue=false)]
@@ -47,7 +40,6 @@ namespace PxWeb.Api2.Server.Models
         {
             var sb = new StringBuilder();
             sb.Append("class JsonstatLink {\n");
-            sb.Append("  Up: ").Append(Up).Append("\n");
             sb.Append("  Relation: ").Append(Relation).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
@@ -86,12 +78,6 @@ namespace PxWeb.Api2.Server.Models
 
             return 
                 (
-                    Up == other.Up ||
-                    Up != null &&
-                    other.Up != null &&
-                    Up.SequenceEqual(other.Up)
-                ) && 
-                (
                     Relation == other.Relation ||
                     Relation != null &&
                     other.Relation != null &&
@@ -109,8 +95,6 @@ namespace PxWeb.Api2.Server.Models
             {
                 var hashCode = 41;
                 // Suitable nullity checks etc, of course :)
-                    if (Up != null)
-                    hashCode = hashCode * 59 + Up.GetHashCode();
                     if (Relation != null)
                     hashCode = hashCode * 59 + Relation.GetHashCode();
                 return hashCode;
