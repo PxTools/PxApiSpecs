@@ -21,23 +21,22 @@ using PxWeb.Api2.Server.Converters;
 namespace PxWeb.Api2.Server.Models
 { 
     /// <summary>
-    /// 
+    /// Specification on json-stat.org -&gt; [here](https://json-stat.org/full/#link)
     /// </summary>
     [DataContract]
     public class JsonstatLink : IEquatable<JsonstatLink>
     {
         /// <summary>
-        /// Gets or Sets Type
+        /// Gets or Sets Describedby
         /// </summary>
-        [DataMember(Name="type", EmitDefaultValue=false)]
-        public string? Type { get; set; }
+        [DataMember(Name="describedby", EmitDefaultValue=false)]
+        public List<JsonstatLinkDescribedby> Describedby { get; set; }
 
         /// <summary>
-        /// Specification on json-stat.org -&gt; [here](https://json-stat.org/full/#href)
+        /// Gets or Sets Related
         /// </summary>
-        /// <value>Specification on json-stat.org -&gt; [here](https://json-stat.org/full/#href)</value>
-        [DataMember(Name="href", EmitDefaultValue=false)]
-        public string? Href { get; set; }
+        [DataMember(Name="related", EmitDefaultValue=false)]
+        public List<JsonstatLinkRelated> Related { get; set; }
 
         /// <summary>
         /// Returns the string presentation of the object
@@ -47,8 +46,8 @@ namespace PxWeb.Api2.Server.Models
         {
             var sb = new StringBuilder();
             sb.Append("class JsonstatLink {\n");
-            sb.Append("  Type: ").Append(Type).Append("\n");
-            sb.Append("  Href: ").Append(Href).Append("\n");
+            sb.Append("  Describedby: ").Append(Describedby).Append("\n");
+            sb.Append("  Related: ").Append(Related).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -86,14 +85,16 @@ namespace PxWeb.Api2.Server.Models
 
             return 
                 (
-                    Type == other.Type ||
-                    Type != null &&
-                    Type.Equals(other.Type)
+                    Describedby == other.Describedby ||
+                    Describedby != null &&
+                    other.Describedby != null &&
+                    Describedby.SequenceEqual(other.Describedby)
                 ) && 
                 (
-                    Href == other.Href ||
-                    Href != null &&
-                    Href.Equals(other.Href)
+                    Related == other.Related ||
+                    Related != null &&
+                    other.Related != null &&
+                    Related.SequenceEqual(other.Related)
                 );
         }
 
@@ -107,10 +108,10 @@ namespace PxWeb.Api2.Server.Models
             {
                 var hashCode = 41;
                 // Suitable nullity checks etc, of course :)
-                    if (Type != null)
-                    hashCode = hashCode * 59 + Type.GetHashCode();
-                    if (Href != null)
-                    hashCode = hashCode * 59 + Href.GetHashCode();
+                    if (Describedby != null)
+                    hashCode = hashCode * 59 + Describedby.GetHashCode();
+                    if (Related != null)
+                    hashCode = hashCode * 59 + Related.GetHashCode();
                 return hashCode;
             }
         }

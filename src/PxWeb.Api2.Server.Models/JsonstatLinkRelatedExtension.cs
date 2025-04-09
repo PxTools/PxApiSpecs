@@ -24,39 +24,42 @@ namespace PxWeb.Api2.Server.Models
     /// 
     /// </summary>
     [DataContract]
-    public class DimensionValue : IEquatable<DimensionValue>
+    public class JsonstatLinkRelatedExtension : IEquatable<JsonstatLinkRelatedExtension>
     {
         /// <summary>
-        /// Specification on json-stat.org -&gt; [here](https://json-stat.org/full/#label)
+        /// Type of relation, like about-statistics
         /// </summary>
-        /// <value>Specification on json-stat.org -&gt; [here](https://json-stat.org/full/#label)</value>
+        /// <value>Type of relation, like about-statistics</value>
+        [DataMember(Name="relation", EmitDefaultValue=false)]
+        public string? Relation { get; set; }
+
+        /// <summary>
+        /// Source Meta ID for this link
+        /// </summary>
+        /// <value>Source Meta ID for this link</value>
+        [DataMember(Name="metaid", EmitDefaultValue=false)]
+        public string? Metaid { get; set; }
+
+        /// <summary>
+        /// Specification on json-stat.org -&gt; [here](https://json-stat.org/full/#href)
+        /// </summary>
+        /// <value>Specification on json-stat.org -&gt; [here](https://json-stat.org/full/#href)</value>
+        [DataMember(Name="href", EmitDefaultValue=false)]
+        public string? Href { get; set; }
+
+        /// <summary>
+        /// Label for the link
+        /// </summary>
+        /// <value>Label for the link</value>
         [DataMember(Name="label", EmitDefaultValue=false)]
         public string? Label { get; set; }
 
         /// <summary>
-        /// Spesification on json-stat.org -&gt; [here](https://json-stat.org/full/#note)
+        /// Type of the link, like text/html
         /// </summary>
-        /// <value>Spesification on json-stat.org -&gt; [here](https://json-stat.org/full/#note)</value>
-        [DataMember(Name="note", EmitDefaultValue=false)]
-        public List<string> Note { get; set; }
-
-        /// <summary>
-        /// Gets or Sets Category
-        /// </summary>
-        [DataMember(Name="category", EmitDefaultValue=false)]
-        public JsonstatCategory? Category { get; set; }
-
-        /// <summary>
-        /// Gets or Sets Extension
-        /// </summary>
-        [DataMember(Name="extension", EmitDefaultValue=false)]
-        public ExtensionDimension? Extension { get; set; }
-
-        /// <summary>
-        /// Gets or Sets Link
-        /// </summary>
-        [DataMember(Name="link", EmitDefaultValue=false)]
-        public JsonstatLink? Link { get; set; }
+        /// <value>Type of the link, like text/html</value>
+        [DataMember(Name="type", EmitDefaultValue=false)]
+        public string? Type { get; set; }
 
         /// <summary>
         /// Returns the string presentation of the object
@@ -65,12 +68,12 @@ namespace PxWeb.Api2.Server.Models
         public override string ToString()
         {
             var sb = new StringBuilder();
-            sb.Append("class DimensionValue {\n");
+            sb.Append("class JsonstatLinkRelatedExtension {\n");
+            sb.Append("  Relation: ").Append(Relation).Append("\n");
+            sb.Append("  Metaid: ").Append(Metaid).Append("\n");
+            sb.Append("  Href: ").Append(Href).Append("\n");
             sb.Append("  Label: ").Append(Label).Append("\n");
-            sb.Append("  Note: ").Append(Note).Append("\n");
-            sb.Append("  Category: ").Append(Category).Append("\n");
-            sb.Append("  Extension: ").Append(Extension).Append("\n");
-            sb.Append("  Link: ").Append(Link).Append("\n");
+            sb.Append("  Type: ").Append(Type).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -93,45 +96,44 @@ namespace PxWeb.Api2.Server.Models
         {
             if (obj is null) return false;
             if (ReferenceEquals(this, obj)) return true;
-            return obj.GetType() == GetType() && Equals((DimensionValue)obj);
+            return obj.GetType() == GetType() && Equals((JsonstatLinkRelatedExtension)obj);
         }
 
         /// <summary>
-        /// Returns true if DimensionValue instances are equal
+        /// Returns true if JsonstatLinkRelatedExtension instances are equal
         /// </summary>
-        /// <param name="other">Instance of DimensionValue to be compared</param>
+        /// <param name="other">Instance of JsonstatLinkRelatedExtension to be compared</param>
         /// <returns>Boolean</returns>
-        public bool Equals(DimensionValue other)
+        public bool Equals(JsonstatLinkRelatedExtension other)
         {
             if (other is null) return false;
             if (ReferenceEquals(this, other)) return true;
 
             return 
                 (
+                    Relation == other.Relation ||
+                    Relation != null &&
+                    Relation.Equals(other.Relation)
+                ) && 
+                (
+                    Metaid == other.Metaid ||
+                    Metaid != null &&
+                    Metaid.Equals(other.Metaid)
+                ) && 
+                (
+                    Href == other.Href ||
+                    Href != null &&
+                    Href.Equals(other.Href)
+                ) && 
+                (
                     Label == other.Label ||
                     Label != null &&
                     Label.Equals(other.Label)
                 ) && 
                 (
-                    Note == other.Note ||
-                    Note != null &&
-                    other.Note != null &&
-                    Note.SequenceEqual(other.Note)
-                ) && 
-                (
-                    Category == other.Category ||
-                    Category != null &&
-                    Category.Equals(other.Category)
-                ) && 
-                (
-                    Extension == other.Extension ||
-                    Extension != null &&
-                    Extension.Equals(other.Extension)
-                ) && 
-                (
-                    Link == other.Link ||
-                    Link != null &&
-                    Link.Equals(other.Link)
+                    Type == other.Type ||
+                    Type != null &&
+                    Type.Equals(other.Type)
                 );
         }
 
@@ -145,16 +147,16 @@ namespace PxWeb.Api2.Server.Models
             {
                 var hashCode = 41;
                 // Suitable nullity checks etc, of course :)
+                    if (Relation != null)
+                    hashCode = hashCode * 59 + Relation.GetHashCode();
+                    if (Metaid != null)
+                    hashCode = hashCode * 59 + Metaid.GetHashCode();
+                    if (Href != null)
+                    hashCode = hashCode * 59 + Href.GetHashCode();
                     if (Label != null)
                     hashCode = hashCode * 59 + Label.GetHashCode();
-                    if (Note != null)
-                    hashCode = hashCode * 59 + Note.GetHashCode();
-                    if (Category != null)
-                    hashCode = hashCode * 59 + Category.GetHashCode();
-                    if (Extension != null)
-                    hashCode = hashCode * 59 + Extension.GetHashCode();
-                    if (Link != null)
-                    hashCode = hashCode * 59 + Link.GetHashCode();
+                    if (Type != null)
+                    hashCode = hashCode * 59 + Type.GetHashCode();
                 return hashCode;
             }
         }
@@ -162,12 +164,12 @@ namespace PxWeb.Api2.Server.Models
         #region Operators
         #pragma warning disable 1591
 
-        public static bool operator ==(DimensionValue left, DimensionValue right)
+        public static bool operator ==(JsonstatLinkRelatedExtension left, JsonstatLinkRelatedExtension right)
         {
             return Equals(left, right);
         }
 
-        public static bool operator !=(DimensionValue left, DimensionValue right)
+        public static bool operator !=(JsonstatLinkRelatedExtension left, JsonstatLinkRelatedExtension right)
         {
             return !Equals(left, right);
         }
