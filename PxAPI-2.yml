@@ -1500,7 +1500,7 @@ components:
           type: string
           description: Source Meta ID for this link
         href:
-          "$ref": "#/components/schemas/href"
+          $ref: "#/components/schemas/href"
         label:
           type: string
           description: Label for the link
@@ -1539,10 +1539,10 @@ components:
           description: Notes for values
           type: object
           additionalProperties:
-            "$ref": "#/components/schemas/jsonstat-note"
+            $ref: "#/components/schemas/jsonstat-note"
         child:
           description: Specification on json-stat.org -> [here](https://json-stat.org/full/#child)
-          "$ref": "#/components/schemas/strarray-by-str-dict"
+          $ref: "#/components/schemas/strarray-by-str-dict"
         unit:
           description: Specification on json-stat.org -> [here](https://json-stat.org/full/#unit)
           type: object
@@ -1656,26 +1656,26 @@ components:
             - "2.0"
           default: "2.0"
         class:
-          "$ref": "#/components/schemas/ClassType"
+          $ref: "#/components/schemas/ClassType"
         href:
-          "$ref": "#/components/schemas/href"
+          $ref: "#/components/schemas/href"
         label:
-          "$ref": "#/components/schemas/label"
+          $ref: "#/components/schemas/label"
         source:
-          "$ref": "#/components/schemas/source"
+          $ref: "#/components/schemas/source"
         updated:
-          "$ref": "#/components/schemas/updated"
+          $ref: "#/components/schemas/updated"
         link:
-          "$ref": "#/components/schemas/jsonstat-link"
+          $ref: "#/components/schemas/jsonstat-link"
         note:
           description: Note for table
           $ref: "#/components/schemas/jsonstat-note"
         role:
           description: Specification on json-stat.org -> [here](https://json-stat.org/full/#role)
-          "$ref": "#/components/schemas/Role"
+          $ref: "#/components/schemas/Role"
         id:
           description: Specification on json-stat.org -> [here](https://json-stat.org/full/#id)
-          "$ref": "#/components/schemas/strarray"
+          $ref: "#/components/schemas/strarray"
         size:
           description: Specification on json-stat.org -> [here](https://json-stat.org/full/#size)
           type: array
@@ -1683,9 +1683,9 @@ components:
             type: integer
         dimension:
           description: Specification on json-stat.org -> [here](https://json-stat.org/full/#dimension)
-          "$ref": "#/components/schemas/Dimension"
+          $ref: "#/components/schemas/Dimension"
         extension:
-          "$ref": "#/components/schemas/extension-root"
+          $ref: "#/components/schemas/extension-root"
         value:
           description: Specification on json-stat.org -> [here](https://json-stat.org/full/#value)
           type: array
