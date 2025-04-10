@@ -1,11 +1,11 @@
 {
   "name": "pxwebapi-client",
   "version": "0.0.1",
-  "description": "OpenAPI client for pxwebapi-client",
+  "description": "OpenAPI client for PxWebApi 2.0",
   "author": "OpenAPI-Generator",
   "repository": {
     "type": "git",
-    "url": "https://github.com/GIT_USER_ID/GIT_REPO_ID.git"
+    "url": "https://github.com/PxTools/PxApiSpecs.git"
   },
   "license": "Apache-2.0",
   "main": "./dist/index.js",

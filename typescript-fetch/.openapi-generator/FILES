@@ -1,7 +1,6 @@
 .gitignore
 .npmignore
 README.md
-package.json
 src/apis/ConfigurationApi.ts
 src/apis/NavigationApi.ts
 src/apis/SavedQueriesApi.ts
