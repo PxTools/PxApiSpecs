@@ -1,0 +1,6 @@
+additionalProperties:
+  licenseName: Apache-2.0
+  npmName: pxwebapi-client
+  npmVersion: 0.0.1
+  npmDescription: Client library for PxWebApi 2.0.0-beta
+  npmOrganization: pxtools

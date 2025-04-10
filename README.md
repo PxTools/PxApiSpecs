@@ -9,8 +9,16 @@ Documentation for the PxApi
 When creating a PR for updatedating [PxAPI-2.yml](PxAPI-2.yml)
 please use the following command to also include changes in generated server code.
 
+ASP.NET Core 8.0 Server
+
 ```sh
 docker run --rm -v ${PWD}:/local openapitools/openapi-generator-cli:v7.11.0  generate -i /local/PxAPI-2.yml -g aspnetcore -c /local/aspnetcore-generator-config.yml -o /local
+```
+
+Client
+
+```sh
+docker run --rm -v ${PWD}:/local openapitools/openapi-generator-cli:v7.11.0  generate -i /local/PxAPI-2.yml -g typescript-fetch -c /local/typescript-fetch-generator-config.yml -o /local/typescript-fetch
 ```
 
 Replace `${PWD}` with `$(pwd)` when running on Linux
