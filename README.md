@@ -15,7 +15,7 @@ ASP.NET Core 8.0 Server
 docker run --rm -v ${PWD}:/local openapitools/openapi-generator-cli:v7.11.0  generate -i /local/PxAPI-2.yml -g aspnetcore -c /local/aspnetcore-generator-config.yml -o /local
 ```
 
-Client
+TypeScript/JavaScript client that utilizes [Fetch API](https://fetch.spec.whatwg.org/)
 
 ```sh
 docker run --rm -v ${PWD}:/local openapitools/openapi-generator-cli:v7.11.0  generate -i /local/PxAPI-2.yml -g typescript-fetch -c /local/typescript-fetch-generator-config.yml -o /local/typescript-fetch
