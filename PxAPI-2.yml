@@ -151,6 +151,19 @@ paths:
           description: |
             If metadata should be included as if default selection would have been applied.
             This is a technical parameter that is used by PxWeb for initial loading of tables.
+        - in: query
+          name: codelist
+          schema:
+            type: object
+            additionalProperties:
+              type: string
+            example: |
+              [
+                {"variable_1": "NUTS_2008"}
+              ]
+          style: deepObject
+          explode: true
+
       responses:
         "200":
           description: Success
