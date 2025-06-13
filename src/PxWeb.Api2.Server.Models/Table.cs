@@ -124,6 +124,13 @@ namespace PxWeb.Api2.Server.Models
         public string? Source { get; set; }
 
         /// <summary>
+        /// The subject code of the table
+        /// </summary>
+        /// <value>The subject code of the table</value>
+        [DataMember(Name="subjectCode", EmitDefaultValue=false)]
+        public string? SubjectCode { get; set; }
+
+        /// <summary>
         /// Gets or Sets TimeUnit
         /// </summary>
         [DataMember(Name="timeUnit", EmitDefaultValue=true)]
@@ -160,6 +167,7 @@ namespace PxWeb.Api2.Server.Models
             sb.Append("  VariableNames: ").Append(VariableNames).Append("\n");
             sb.Append("  Discontinued: ").Append(Discontinued).Append("\n");
             sb.Append("  Source: ").Append(Source).Append("\n");
+            sb.Append("  SubjectCode: ").Append(SubjectCode).Append("\n");
             sb.Append("  TimeUnit: ").Append(TimeUnit).Append("\n");
             sb.Append("  Paths: ").Append(Paths).Append("\n");
             sb.Append("  Links: ").Append(Links).Append("\n");
@@ -242,6 +250,11 @@ namespace PxWeb.Api2.Server.Models
                     Source.Equals(other.Source)
                 ) && 
                 (
+                    SubjectCode == other.SubjectCode ||
+                    SubjectCode != null &&
+                    SubjectCode.Equals(other.SubjectCode)
+                ) && 
+                (
                     TimeUnit == other.TimeUnit ||
                     
                     TimeUnit.Equals(other.TimeUnit)
@@ -286,6 +299,8 @@ namespace PxWeb.Api2.Server.Models
                     hashCode = hashCode * 59 + Discontinued.GetHashCode();
                     if (Source != null)
                     hashCode = hashCode * 59 + Source.GetHashCode();
+                    if (SubjectCode != null)
+                    hashCode = hashCode * 59 + SubjectCode.GetHashCode();
                     
                     hashCode = hashCode * 59 + TimeUnit.GetHashCode();
                     if (Paths != null)
