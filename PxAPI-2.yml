@@ -965,9 +965,13 @@ components:
         source:
           type: string
           description: The source of the table
+        subjectCode:
+          type: string
+          description: The subject code of the table
         timeUnit:
           $ref: "#/components/schemas/TimeUnit"
           description: The time unit for the table
+
         paths:
           type: array
           items:
