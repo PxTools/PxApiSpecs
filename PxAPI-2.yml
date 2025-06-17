@@ -337,14 +337,14 @@ paths:
             application/json:
               schema:
                 type: string
+            application/octet-stream:
+              schema:
+                type: string
+                format: binary
             text/plain:
               schema:
                 type: string
             application/xml:
-              schema:
-                type: string
-                format: binary
-            application/octet-stream:
               schema:
                 type: string
                 format: binary
