@@ -24,13 +24,14 @@ namespace PxWeb.Api2.Server.Models
     /// 
     /// </summary>
     [DataContract]
-    public class JsonstatLink : IEquatable<JsonstatLink>
+    public class JsonstatExtensionLinkDescribedby : IEquatable<JsonstatExtensionLinkDescribedby>
     {
         /// <summary>
-        /// Gets or Sets Relation
+        /// An object holding raw META-IDs for backward compatability. Better to use the same info from relation.
         /// </summary>
-        [DataMember(Name="relation", EmitDefaultValue=false)]
-        public List<JsonstatExtensionLinkRelation> Relation { get; set; }
+        /// <value>An object holding raw META-IDs for backward compatability. Better to use the same info from relation.</value>
+        [DataMember(Name="extension", EmitDefaultValue=false)]
+        public Dictionary<string, string> Extension { get; set; }
 
         /// <summary>
         /// Returns the string presentation of the object
@@ -39,8 +40,8 @@ namespace PxWeb.Api2.Server.Models
         public override string ToString()
         {
             var sb = new StringBuilder();
-            sb.Append("class JsonstatLink {\n");
-            sb.Append("  Relation: ").Append(Relation).Append("\n");
+            sb.Append("class JsonstatExtensionLinkDescribedby {\n");
+            sb.Append("  Extension: ").Append(Extension).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -63,25 +64,25 @@ namespace PxWeb.Api2.Server.Models
         {
             if (obj is null) return false;
             if (ReferenceEquals(this, obj)) return true;
-            return obj.GetType() == GetType() && Equals((JsonstatLink)obj);
+            return obj.GetType() == GetType() && Equals((JsonstatExtensionLinkDescribedby)obj);
         }
 
         /// <summary>
-        /// Returns true if JsonstatLink instances are equal
+        /// Returns true if JsonstatExtensionLinkDescribedby instances are equal
         /// </summary>
-        /// <param name="other">Instance of JsonstatLink to be compared</param>
+        /// <param name="other">Instance of JsonstatExtensionLinkDescribedby to be compared</param>
         /// <returns>Boolean</returns>
-        public bool Equals(JsonstatLink other)
+        public bool Equals(JsonstatExtensionLinkDescribedby other)
         {
             if (other is null) return false;
             if (ReferenceEquals(this, other)) return true;
 
             return 
                 (
-                    Relation == other.Relation ||
-                    Relation != null &&
-                    other.Relation != null &&
-                    Relation.SequenceEqual(other.Relation)
+                    Extension == other.Extension ||
+                    Extension != null &&
+                    other.Extension != null &&
+                    Extension.SequenceEqual(other.Extension)
                 );
         }
 
@@ -95,8 +96,8 @@ namespace PxWeb.Api2.Server.Models
             {
                 var hashCode = 41;
                 // Suitable nullity checks etc, of course :)
-                    if (Relation != null)
-                    hashCode = hashCode * 59 + Relation.GetHashCode();
+                    if (Extension != null)
+                    hashCode = hashCode * 59 + Extension.GetHashCode();
                 return hashCode;
             }
         }
@@ -104,12 +105,12 @@ namespace PxWeb.Api2.Server.Models
         #region Operators
         #pragma warning disable 1591
 
-        public static bool operator ==(JsonstatLink left, JsonstatLink right)
+        public static bool operator ==(JsonstatExtensionLinkDescribedby left, JsonstatExtensionLinkDescribedby right)
         {
             return Equals(left, right);
         }
 
-        public static bool operator !=(JsonstatLink left, JsonstatLink right)
+        public static bool operator !=(JsonstatExtensionLinkDescribedby left, JsonstatExtensionLinkDescribedby right)
         {
             return !Equals(left, right);
         }

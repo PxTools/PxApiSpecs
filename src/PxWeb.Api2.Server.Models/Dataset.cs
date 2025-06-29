@@ -91,7 +91,7 @@ namespace PxWeb.Api2.Server.Models
         /// Gets or Sets Link
         /// </summary>
         [DataMember(Name="link", EmitDefaultValue=false)]
-        public Dictionary<string, List<JsonstatLink>> Link { get; set; }
+        public JsonstatLink? Link { get; set; }
 
         /// <summary>
         /// Spesification on json-stat.org -&gt; [here](https://json-stat.org/full/#note)
@@ -242,8 +242,7 @@ namespace PxWeb.Api2.Server.Models
                 (
                     Link == other.Link ||
                     Link != null &&
-                    other.Link != null &&
-                    Link.SequenceEqual(other.Link)
+                    Link.Equals(other.Link)
                 ) && 
                 (
                     Note == other.Note ||
