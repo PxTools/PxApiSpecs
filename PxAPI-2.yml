@@ -152,6 +152,13 @@ paths:
             If metadata should be included as if default selection would have been applied.
             This is a technical parameter that is used by PxWeb for initial loading of tables.
         - in: query
+          name: savedQuery
+          schema:
+            type: string
+            nullable: true
+          description: |
+            Id for a saved query that should be be applied before metadata is returned.
+        - in: query
           name: codelist
           schema:
             type: object
@@ -461,6 +468,30 @@ paths:
         "429":
           $ref: "#/components/responses/ErrorResponse429"
 
+  /savedqueries/{id}/selection:
+    get:
+      tags:
+        - Saved Queries
+      parameters:
+        - $ref: "#/components/parameters/lang"
+        - $ref: "#/components/parameters/id"
+      summary: Retrieves the selection that the saved query will result in.
+      operationId: GetSavedQuerySelection
+      responses:
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SelectionResponse"
+        "400":
+          $ref: "#/components/responses/ErrorResponse400"
+        "403":
+          $ref: "#/components/responses/ErrorResponse403"
+        "404":
+          $ref: "#/components/responses/ErrorResponse404"
+        "429":
+          $ref: "#/components/responses/ErrorResponse429"
 components:
   parameters:
     lang:

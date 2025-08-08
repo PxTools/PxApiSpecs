@@ -63,6 +63,27 @@ namespace PxWeb.Api2.Server.Controllers
         public abstract IActionResult GetSaveQuery([FromRoute (Name = "id")][Required]string id);
 
         /// <summary>
+        /// Retrieves the selection that the saved query will result in.
+        /// </summary>
+        /// <param name="id">Id</param>
+        /// <param name="lang">The language if the default is not what you want.</param>
+        /// <response code="200">Success</response>
+        /// <response code="400">Error response for 400</response>
+        /// <response code="403">Error response for 403</response>
+        /// <response code="404">Error response for 404</response>
+        /// <response code="429">Error response for 429</response>
+        [HttpGet]
+        [Route("/savedqueries/{id}/selection")]
+        [ValidateModelState]
+        [SwaggerOperation("GetSavedQuerySelection")]
+        [SwaggerResponse(statusCode: 200, type: typeof(SelectionResponse), description: "Success")]
+        [SwaggerResponse(statusCode: 400, type: typeof(Problem), description: "Error response for 400")]
+        [SwaggerResponse(statusCode: 403, type: typeof(Problem), description: "Error response for 403")]
+        [SwaggerResponse(statusCode: 404, type: typeof(Problem), description: "Error response for 404")]
+        [SwaggerResponse(statusCode: 429, type: typeof(Problem), description: "Error response for 429")]
+        public abstract IActionResult GetSavedQuerySelection([FromRoute (Name = "id")][Required]string id, [FromQuery (Name = "lang")]string? lang);
+
+        /// <summary>
         /// Retrieves the data by running the saved query.
         /// </summary>
         /// <param name="id">Id</param>
