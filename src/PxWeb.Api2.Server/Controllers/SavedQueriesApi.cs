@@ -76,7 +76,7 @@ namespace PxWeb.Api2.Server.Controllers
         [Route("/savedqueries/{id}/selection")]
         [ValidateModelState]
         [SwaggerOperation("GetSavedQuerySelection")]
-        [SwaggerResponse(statusCode: 200, type: typeof(System.IO.Stream), description: "Success")]
+        [SwaggerResponse(statusCode: 200, type: typeof(SelectionResponse), description: "Success")]
         [SwaggerResponse(statusCode: 400, type: typeof(Problem), description: "Error response for 400")]
         [SwaggerResponse(statusCode: 403, type: typeof(Problem), description: "Error response for 403")]
         [SwaggerResponse(statusCode: 404, type: typeof(Problem), description: "Error response for 404")]
