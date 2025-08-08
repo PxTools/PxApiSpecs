@@ -54,6 +54,7 @@ namespace PxWeb.Api2.Server.Controllers
         /// <param name="id">Id</param>
         /// <param name="lang">The language if the default is not what you want.</param>
         /// <param name="defaultSelection">If metadata should be included as if default selection would have been applied. This is a technical parameter that is used by PxWeb for initial loading of tables. </param>
+        /// <param name="savedQuery">Id for a saved query that should be be applied before metadata is returned. </param>
         /// <param name="codelist"></param>
         /// <response code="200">Success</response>
         /// <response code="400">Error response for 400</response>
@@ -67,7 +68,7 @@ namespace PxWeb.Api2.Server.Controllers
         [SwaggerResponse(statusCode: 400, type: typeof(Problem), description: "Error response for 400")]
         [SwaggerResponse(statusCode: 404, type: typeof(Problem), description: "Error response for 404")]
         [SwaggerResponse(statusCode: 429, type: typeof(Problem), description: "Error response for 429")]
-        public abstract IActionResult GetMetadataById([FromRoute (Name = "id")][Required]string id, [FromQuery (Name = "lang")]string? lang, [FromQuery (Name = "defaultSelection")]bool? defaultSelection, [FromQuery (Name = "codelist")]Dictionary<string, string>? codelist);
+        public abstract IActionResult GetMetadataById([FromRoute (Name = "id")][Required]string id, [FromQuery (Name = "lang")]string? lang, [FromQuery (Name = "defaultSelection")]bool? defaultSelection, [FromQuery (Name = "savedQuery")]string? savedQuery, [FromQuery (Name = "codelist")]Dictionary<string, string>? codelist);
 
         /// <summary>
         /// Get Table by {id}.
