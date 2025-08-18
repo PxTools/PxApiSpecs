@@ -129,16 +129,13 @@ paths:
         - Table
       summary: Get Metadata about Table by {id}.
       description: |
-        **Used for listing detailed information about a specific table**
+        **Used for listing detailed information about a specific table, in json-stat2**
         * List all variables and values and all other metadata needed to be able to fetch data
 
         * Also links to where to:
           + Fetch
           - Where to get information about codelists
 
-        * 2 output formats
-          + Custom json
-          - JSON-stat2
       operationId: GetMetadataById
       parameters:
         - $ref: "#/components/parameters/lang"
@@ -1480,17 +1477,12 @@ components:
         uniqueItems: true
     jsonstat-link:
       type: object
-      additionalProperties:
-        type: array
-        items:
-          type: object
-          title: jsonstatLink
-          properties:
-            type:
-              type: string
-            href:
-              "$ref": "#/components/schemas/href"
-          additionalProperties: false
+      properties:
+        relation:
+          type: array
+          items:
+            $ref: "#/components/schemas/JsonstatExtensionLinkRelation"
+            
     jsonstat-extension-link:
       type: object
       properties:
@@ -1498,17 +1490,52 @@ components:
           type: array
           items:
             type: object
-            title: DimensionExtension
+            title: JsonstatExtensionLinkDescribedby
             properties:
               extension:
-                description: A extension object
+                description: An object holding raw META-IDs for backward compatability. Better to use the same info from relation.
                 type: object
                 additionalProperties:
                   description: A string
                   type: string
-
-            additionalProperties: false
+        relation:
+          type: array
+          items:
+            $ref: "#/components/schemas/JsonstatExtensionLinkRelation"
       additionalProperties: false
+
+    JsonstatExtensionLinkRelation:
+      type: object
+      properties:
+        extension:
+          type: object
+          description: An extension object holding RelationLinks
+          additionalProperties:
+            type: array
+            items:
+              $ref: "#/components/schemas/RelationLink"
+      additionalProperties: false
+      
+    RelationLink:
+      type: object
+      properties:
+        relation:
+          type: string
+          description: Type of relation, like about-statistics
+        metaid:
+          type: string
+          description: Source Meta ID for this link
+        href:
+          type: string
+          format: uri
+          description: URL link
+        label:
+          type: string
+          description: Label for the link
+        type:
+          type: string
+          description: Type of the link, like text/html
+          
     jsonstat-note:
       description: Spesification on json-stat.org -> [here](https://json-stat.org/full/#note)
       type: array
