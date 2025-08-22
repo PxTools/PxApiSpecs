@@ -38,6 +38,7 @@ src/PxWeb.Api2.Server.Models/SavedQuery.cs
 src/PxWeb.Api2.Server.Models/SelectionResponse.cs
 src/PxWeb.Api2.Server.Models/SourceReference.cs
 src/PxWeb.Api2.Server.Models/Table.cs
+src/PxWeb.Api2.Server.Models/TableCategory.cs
 src/PxWeb.Api2.Server.Models/TableResponse.cs
 src/PxWeb.Api2.Server.Models/TablesResponse.cs
 src/PxWeb.Api2.Server.Models/TimeUnit.cs

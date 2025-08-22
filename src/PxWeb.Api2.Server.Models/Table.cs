@@ -88,47 +88,11 @@ namespace PxWeb.Api2.Server.Models
         [DataMember(Name="lastPeriod", EmitDefaultValue=true)]
         public string? LastPeriod { get; set; }
 
-
         /// <summary>
-        /// Mostly for internal use. Which category table belongs to. internal, public, private or section.
+        /// Gets or Sets Category
         /// </summary>
-        /// <value>Mostly for internal use. Which category table belongs to. internal, public, private or section.</value>
-        [TypeConverter(typeof(CustomEnumConverter<CategoryEnum>))]
-        [JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
-        public enum CategoryEnum
-        {
-            
-            /// <summary>
-            /// Enum InternalEnum for internal
-            /// </summary>
-            [EnumMember(Value = "internal")]
-            InternalEnum = 1,
-            
-            /// <summary>
-            /// Enum PublicEnum for public
-            /// </summary>
-            [EnumMember(Value = "public")]
-            PublicEnum = 2,
-            
-            /// <summary>
-            /// Enum PrivateEnum for private
-            /// </summary>
-            [EnumMember(Value = "private")]
-            PrivateEnum = 3,
-            
-            /// <summary>
-            /// Enum SectionEnum for section
-            /// </summary>
-            [EnumMember(Value = "section")]
-            SectionEnum = 4
-        }
-
-        /// <summary>
-        /// Mostly for internal use. Which category table belongs to. internal, public, private or section.
-        /// </summary>
-        /// <value>Mostly for internal use. Which category table belongs to. internal, public, private or section.</value>
         [DataMember(Name="category", EmitDefaultValue=true)]
-        public CategoryEnum Category { get; set; } = CategoryEnum.PublicEnum;
+        public TableCategory Category { get; set; }
 
         /// <summary>
         /// List of varibles name

@@ -838,14 +838,7 @@ components:
           example: 2022
           nullable: true
         category:
-          type: string
-          description: Mostly for internal use. Which category table belongs to. internal, public, private or section.
-          default: public
-          enum:
-            - internal
-            - public
-            - private
-            - section
+          $ref: "#/components/schemas/TableCategory"
         variableNames:
           type: array
           description: List of varibles name
@@ -1499,6 +1492,16 @@ components:
     BasePeriod:
       description: Base period for, for instance index series. Is shown with the footnote. If there is a contents variable the keyword is repeated for each value of the contents variable.
       type: string
+
+    TableCategory:
+      type: string
+      description: Mostly for internal use. Which category table belongs to. internal, public, private or section.
+      default: public
+      enum:
+        - internal
+        - public
+        - private
+        - section
 
     Dataset:
       title: JSON-stat 2.0 Dataset Schema
