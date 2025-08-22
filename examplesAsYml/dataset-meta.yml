@@ -4,17 +4,10 @@ dataset-meta:
   value:
     version: "2.0"
     class: dataset
-    href: https://my-site.com/api/v2/tables/TAB638/metadata
     label: Folkmängden efter region, civilstånd, ålder, kön, tabellinnehåll och år
     source: SCB
-    updated: 2022-02-07T14:32:00.0000000Z
-    link:
-      describes:
-      - type: application/json
-        href: https://my-site.com/api/v2/tables/TAB638/data
-      describedby:
-      - type: application/json
-        href: https://my-other-site.com/definitions/TAB638
+    updated: 2022-02-07T14:32:00Z
+    note: This is a table note!
     role:
       time:
       - Tid
@@ -1092,20 +1085,30 @@ dataset-meta:
         official-statistics: true
         aggregallowed: false
         copyright: CC-0
+        contents: Population
         language: sv
         description: ""
+        descriptiondefault: false
         matrix: TAB638
         subject-code: BE
+        subject-area: Population
+        heading:
+        - ContentsCode
+        - Tid
+        stub:
+        - Region
+        - Civilstand
+        - Alder
+        - Kon
       tags:
       - ""
       discontinued: false
       contact:
       - name: Tomas Johansson
+        organization: SCB
         phone: +46 010-479 64 26
         mail: tomas.johansson@scb.se
-      - name: Statistikservice
-        phone: +46 010-479 50 0
-        mail: information@scb.se
+        raw: Tomas Johansson#SCB#+46 010-479 64 26#tomas.johansson@scb.se
       note:
       - mandatory: true
         text: 'Fr o m 2007-01-01 överförs Heby kommun från Västmanlands län till Uppsala län. Hebys kommunkod ändras från 1917 till 0331. '
@@ -1114,4 +1117,3 @@ dataset-meta:
       - mandatory: true
         text: Fr o m 2007-01-01 utökas Uppsala län med Heby kommun. Observera att länssiffrorna inte är jämförbara med länssiffrorna bakåt i tiden.
     value: []
-    
