@@ -1,7 +1,7 @@
 /*
  * PxApi
  *
- * This api lets you do 2 things; Find a table(Navigation) and use a table (Table).  _Table below is added to show how tables can be described in yml._  **Table contains status code this API may return** | Status code    | Description      | Reason                      | | - -- -- --        | - -- -- -- -- --      | - -- -- -- -- -- -- -- -- -- --       | | 200            | Success          | The endpoint has delivered response for the request                      | | 400            | Bad request      | If the request is not valid | | 403            | Forbidden        | number of cells exceed the API limit | | 404            | Not found        | If the URL in request does not exist | | 429            | Too many request | Requests exceed the API time limit. Large queries should be run in sequence | | 50X            | Internal Server Error | The service might be down | 
+ * This api lets you: Find a table and extract table metadata and data. 
  *
  * The version of the OpenAPI document: 2.0
  * 
@@ -30,8 +30,8 @@ namespace PxWeb.Api2.Server.Controllers
         /// <summary>
         /// Save a query for later use.
         /// </summary>
-        /// <param name="savedQuery">A saved query</param>
-        /// <response code="201">Saved query created</response>
+        /// <param name="savedQuery">A saved query in JSON format without an Id.</param>
+        /// <response code="201">Saved query created and returned with the id specified.</response>
         /// <response code="400">Error response for 400</response>
         /// <response code="429">Error response for 429</response>
         [HttpPost]
@@ -39,7 +39,7 @@ namespace PxWeb.Api2.Server.Controllers
         [Consumes("application/json")]
         [ValidateModelState]
         [SwaggerOperation("CreateSaveQuery")]
-        [SwaggerResponse(statusCode: 201, type: typeof(SavedQuery), description: "Saved query created")]
+        [SwaggerResponse(statusCode: 201, type: typeof(SavedQuery), description: "Saved query created and returned with the id specified.")]
         [SwaggerResponse(statusCode: 400, type: typeof(Problem), description: "Error response for 400")]
         [SwaggerResponse(statusCode: 429, type: typeof(Problem), description: "Error response for 429")]
         public abstract IActionResult CreateSaveQuery([FromBody]SavedQuery? savedQuery);
@@ -47,6 +47,7 @@ namespace PxWeb.Api2.Server.Controllers
         /// <summary>
         /// Retrieves the content of a saved query.
         /// </summary>
+        /// <remarks>**Used for retrieving a saved query** * Get the saved query by id. * The saved query contains the selection and other parameters that were used when the query was created. </remarks>
         /// <param name="id">Id</param>
         /// <response code="200">Success</response>
         /// <response code="400">Error response for 400</response>
@@ -63,7 +64,7 @@ namespace PxWeb.Api2.Server.Controllers
         public abstract IActionResult GetSaveQuery([FromRoute (Name = "id")][Required]string id);
 
         /// <summary>
-        /// Retrieves the selection that the saved query will result in.
+        /// Retrieves the selection that the saved query will result in. Selection expressions will be transformed into actual value codes.
         /// </summary>
         /// <param name="id">Id</param>
         /// <param name="lang">The language if the default is not what you want.</param>
@@ -86,6 +87,7 @@ namespace PxWeb.Api2.Server.Controllers
         /// <summary>
         /// Retrieves the data by running the saved query.
         /// </summary>
+        /// <remarks>**Used for retrieving data by running a saved query** * Get the data by running the saved query. * The saved query contains the selection and other parameters that were used when the query was created. </remarks>
         /// <param name="id">Id</param>
         /// <param name="lang">The language if the default is not what you want.</param>
         /// <param name="outputFormat"></param>

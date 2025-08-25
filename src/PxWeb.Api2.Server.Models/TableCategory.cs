@@ -21,36 +21,36 @@ using PxWeb.Api2.Server.Converters;
 namespace PxWeb.Api2.Server.Models
 { 
         /// <summary>
-        /// Indicates if data is stock, flow or average.
+        /// Mostly for internal use. Which category table belongs to. internal, public, private or section.
         /// </summary>
-        /// <value>Indicates if data is stock, flow or average.</value>
-        [TypeConverter(typeof(CustomEnumConverter<MeasuringType>))]
+        /// <value>Mostly for internal use. Which category table belongs to. internal, public, private or section.</value>
+        [TypeConverter(typeof(CustomEnumConverter<TableCategory>))]
         [JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
-        public enum MeasuringType
+        public enum TableCategory
         {
             
             /// <summary>
-            /// Enum StockEnum for Stock
+            /// Enum InternalEnum for internal
             /// </summary>
-            [EnumMember(Value = "Stock")]
-            StockEnum = 1,
+            [EnumMember(Value = "internal")]
+            InternalEnum = 1,
             
             /// <summary>
-            /// Enum FlowEnum for Flow
+            /// Enum PublicEnum for public
             /// </summary>
-            [EnumMember(Value = "Flow")]
-            FlowEnum = 2,
+            [EnumMember(Value = "public")]
+            PublicEnum = 2,
             
             /// <summary>
-            /// Enum AverageEnum for Average
+            /// Enum PrivateEnum for private
             /// </summary>
-            [EnumMember(Value = "Average")]
-            AverageEnum = 3,
+            [EnumMember(Value = "private")]
+            PrivateEnum = 3,
             
             /// <summary>
-            /// Enum OtherEnum for Other
+            /// Enum SectionEnum for section
             /// </summary>
-            [EnumMember(Value = "Other")]
-            OtherEnum = 4
+            [EnumMember(Value = "section")]
+            SectionEnum = 4
         }
 }

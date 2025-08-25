@@ -1,7 +1,7 @@
 /*
  * PxApi
  *
- * This api lets you do 2 things; Find a table(Navigation) and use a table (Table).  _Table below is added to show how tables can be described in yml._  **Table contains status code this API may return** | Status code    | Description      | Reason                      | | - -- -- --        | - -- -- -- -- --      | - -- -- -- -- -- -- -- -- -- --       | | 200            | Success          | The endpoint has delivered response for the request                      | | 400            | Bad request      | If the request is not valid | | 403            | Forbidden        | number of cells exceed the API limit | | 404            | Not found        | If the URL in request does not exist | | 429            | Too many request | Requests exceed the API time limit. Large queries should be run in sequence | | 50X            | Internal Server Error | The service might be down | 
+ * This api lets you: Find a table and extract table metadata and data. 
  *
  * The version of the OpenAPI document: 2.0
  * 
@@ -24,8 +24,37 @@ namespace PxWeb.Api2.Server.Models
     /// Table item
     /// </summary>
     [DataContract]
-    public class Table : FolderContentItem, IEquatable<Table>
+    public class Table : IEquatable<Table>
     {
+        /// <summary>
+        /// Gets or Sets Id
+        /// </summary>
+        [Required]
+        [DataMember(Name="id", EmitDefaultValue=false)]
+        public string Id { get; set; }
+
+        /// <summary>
+        /// Display text
+        /// </summary>
+        /// <value>Display text</value>
+        [Required]
+        [DataMember(Name="label", EmitDefaultValue=true)]
+        public string? Label { get; set; }
+
+        /// <summary>
+        /// Longer text describing node.
+        /// </summary>
+        /// <value>Longer text describing node.</value>
+        [DataMember(Name="description", EmitDefaultValue=true)]
+        public string? Description { get; set; }
+
+        /// <summary>
+        /// String for sorting the contents in folder
+        /// </summary>
+        /// <value>String for sorting the contents in folder</value>
+        [DataMember(Name="sortCode", EmitDefaultValue=false)]
+        public string? SortCode { get; set; }
+
         /// <summary>
         /// Gets or Sets Tags
         /// </summary>
@@ -59,47 +88,11 @@ namespace PxWeb.Api2.Server.Models
         [DataMember(Name="lastPeriod", EmitDefaultValue=true)]
         public string? LastPeriod { get; set; }
 
-
         /// <summary>
-        /// Mostly for internal use. Which category table belongs to. internal, public, private or section.
+        /// Gets or Sets Category
         /// </summary>
-        /// <value>Mostly for internal use. Which category table belongs to. internal, public, private or section.</value>
-        [TypeConverter(typeof(CustomEnumConverter<CategoryEnum>))]
-        [JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
-        public enum CategoryEnum
-        {
-            
-            /// <summary>
-            /// Enum InternalEnum for internal
-            /// </summary>
-            [EnumMember(Value = "internal")]
-            InternalEnum = 1,
-            
-            /// <summary>
-            /// Enum PublicEnum for public
-            /// </summary>
-            [EnumMember(Value = "public")]
-            PublicEnum = 2,
-            
-            /// <summary>
-            /// Enum PrivateEnum for private
-            /// </summary>
-            [EnumMember(Value = "private")]
-            PrivateEnum = 3,
-            
-            /// <summary>
-            /// Enum SectionEnum for section
-            /// </summary>
-            [EnumMember(Value = "section")]
-            SectionEnum = 4
-        }
-
-        /// <summary>
-        /// Mostly for internal use. Which category table belongs to. internal, public, private or section.
-        /// </summary>
-        /// <value>Mostly for internal use. Which category table belongs to. internal, public, private or section.</value>
         [DataMember(Name="category", EmitDefaultValue=true)]
-        public CategoryEnum Category { get; set; } = CategoryEnum.PublicEnum;
+        public TableCategory Category { get; set; }
 
         /// <summary>
         /// List of varibles name
@@ -159,6 +152,10 @@ namespace PxWeb.Api2.Server.Models
         {
             var sb = new StringBuilder();
             sb.Append("class Table {\n");
+            sb.Append("  Id: ").Append(Id).Append("\n");
+            sb.Append("  Label: ").Append(Label).Append("\n");
+            sb.Append("  Description: ").Append(Description).Append("\n");
+            sb.Append("  SortCode: ").Append(SortCode).Append("\n");
             sb.Append("  Tags: ").Append(Tags).Append("\n");
             sb.Append("  Updated: ").Append(Updated).Append("\n");
             sb.Append("  FirstPeriod: ").Append(FirstPeriod).Append("\n");
@@ -179,7 +176,7 @@ namespace PxWeb.Api2.Server.Models
         /// Returns the JSON string presentation of the object
         /// </summary>
         /// <returns>JSON string presentation of the object</returns>
-        public new string ToJson()
+        public string ToJson()
         {
             return JsonConvert.SerializeObject(this, Formatting.Indented);
         }
@@ -207,6 +204,26 @@ namespace PxWeb.Api2.Server.Models
             if (ReferenceEquals(this, other)) return true;
 
             return 
+                (
+                    Id == other.Id ||
+                    Id != null &&
+                    Id.Equals(other.Id)
+                ) && 
+                (
+                    Label == other.Label ||
+                    Label != null &&
+                    Label.Equals(other.Label)
+                ) && 
+                (
+                    Description == other.Description ||
+                    Description != null &&
+                    Description.Equals(other.Description)
+                ) && 
+                (
+                    SortCode == other.SortCode ||
+                    SortCode != null &&
+                    SortCode.Equals(other.SortCode)
+                ) && 
                 (
                     Tags == other.Tags ||
                     Tags != null &&
@@ -283,6 +300,14 @@ namespace PxWeb.Api2.Server.Models
             {
                 var hashCode = 41;
                 // Suitable nullity checks etc, of course :)
+                    if (Id != null)
+                    hashCode = hashCode * 59 + Id.GetHashCode();
+                    if (Label != null)
+                    hashCode = hashCode * 59 + Label.GetHashCode();
+                    if (Description != null)
+                    hashCode = hashCode * 59 + Description.GetHashCode();
+                    if (SortCode != null)
+                    hashCode = hashCode * 59 + SortCode.GetHashCode();
                     if (Tags != null)
                     hashCode = hashCode * 59 + Tags.GetHashCode();
                     if (Updated != null)

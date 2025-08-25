@@ -1,7 +1,7 @@
 /*
  * PxApi
  *
- * This api lets you do 2 things; Find a table(Navigation) and use a table (Table).  _Table below is added to show how tables can be described in yml._  **Table contains status code this API may return** | Status code    | Description      | Reason                      | | - -- -- --        | - -- -- -- -- --      | - -- -- -- -- -- -- -- -- -- --       | | 200            | Success          | The endpoint has delivered response for the request                      | | 400            | Bad request      | If the request is not valid | | 403            | Forbidden        | number of cells exceed the API limit | | 404            | Not found        | If the URL in request does not exist | | 429            | Too many request | Requests exceed the API time limit. Large queries should be run in sequence | | 50X            | Internal Server Error | The service might be down | 
+ * This api lets you: Find a table and extract table metadata and data. 
  *
  * The version of the OpenAPI document: 2.0
  * 
@@ -24,7 +24,7 @@ namespace PxWeb.Api2.Server.Models
     /// 
     /// </summary>
     [DataContract]
-    public class CodeListResponse : IEquatable<CodeListResponse>
+    public class CodelistResponse : IEquatable<CodelistResponse>
     {
         /// <summary>
         /// The identiyer for the codelist
@@ -80,7 +80,7 @@ namespace PxWeb.Api2.Server.Models
         /// </summary>
         [Required]
         [DataMember(Name="type", EmitDefaultValue=true)]
-        public CodeListType Type { get; set; }
+        public CodelistType Type { get; set; }
 
         /// <summary>
         /// Gets or Sets Values
@@ -103,7 +103,7 @@ namespace PxWeb.Api2.Server.Models
         public override string ToString()
         {
             var sb = new StringBuilder();
-            sb.Append("class CodeListResponse {\n");
+            sb.Append("class CodelistResponse {\n");
             sb.Append("  Id: ").Append(Id).Append("\n");
             sb.Append("  Label: ").Append(Label).Append("\n");
             sb.Append("  Language: ").Append(Language).Append("\n");
@@ -135,15 +135,15 @@ namespace PxWeb.Api2.Server.Models
         {
             if (obj is null) return false;
             if (ReferenceEquals(this, obj)) return true;
-            return obj.GetType() == GetType() && Equals((CodeListResponse)obj);
+            return obj.GetType() == GetType() && Equals((CodelistResponse)obj);
         }
 
         /// <summary>
-        /// Returns true if CodeListResponse instances are equal
+        /// Returns true if CodelistResponse instances are equal
         /// </summary>
-        /// <param name="other">Instance of CodeListResponse to be compared</param>
+        /// <param name="other">Instance of CodelistResponse to be compared</param>
         /// <returns>Boolean</returns>
-        public bool Equals(CodeListResponse other)
+        public bool Equals(CodelistResponse other)
         {
             if (other is null) return false;
             if (ReferenceEquals(this, other)) return true;
@@ -234,12 +234,12 @@ namespace PxWeb.Api2.Server.Models
         #region Operators
         #pragma warning disable 1591
 
-        public static bool operator ==(CodeListResponse left, CodeListResponse right)
+        public static bool operator ==(CodelistResponse left, CodelistResponse right)
         {
             return Equals(left, right);
         }
 
-        public static bool operator !=(CodeListResponse left, CodeListResponse right)
+        public static bool operator !=(CodelistResponse left, CodelistResponse right)
         {
             return !Equals(left, right);
         }

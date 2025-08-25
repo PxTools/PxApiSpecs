@@ -2,8 +2,9 @@
 tablesResponse:
   description: List all tables with pagination
   value:
+    language: en
     tables:
-    - objectType: table
+    - type: Table
       id: TAB0001
       label: Population. Year 1968 - 2021
       description: Population by region, marital status, age and sex. Year 1968 - 2021
@@ -17,6 +18,15 @@ tablesResponse:
       - marital status
       - age
       discontinued: false
+      source: Statistics Sweden
+      subjectCode: EN
+      timeUnit: Annual
+      paths:
+      -
+        - id: BE
+          label: Population
+        - id: BE01
+          label: Population statistics
       links:
       - rel: self
         href: https://my-site.com/api/v2/tables/TAB0001
@@ -38,6 +48,15 @@ tablesResponse:
       - marital status
       - age
       discontinued: false
+      source: Statistics Sweden
+      subjectCode: EN
+      timeUnit: Annual
+      paths:
+      -
+        - id: BE
+          label: Population
+        - id: BE01
+          label: Population projections
       links:
       - rel: self
         href: https://my-site.com/api/v2/tables/TAB0001A
@@ -61,4 +80,3 @@ tablesResponse:
         href: https://my-site.com/api/v2/tables/?pageNumber=11
       - rel: prev
         href: https://my-site.com/api/v2/tables/?pageNumber=9
-    

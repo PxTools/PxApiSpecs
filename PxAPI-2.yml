@@ -3,91 +3,28 @@ info:
   title: PxApi
   version: "2.0"
   description: |
-    This api lets you do 2 things; Find a table(Navigation) and use a table (Table).
-
-    _Table below is added to show how tables can be described in yml._
-
-    **Table contains status code this API may return**
-    | Status code    | Description      | Reason                      |
-    | -------        | -----------      | ---------------------       |
-    | 200            | Success          | The endpoint has delivered response for the request                      |
-    | 400            | Bad request      | If the request is not valid |
-    | 403            | Forbidden        | number of cells exceed the API limit |
-    | 404            | Not found        | If the URL in request does not exist |
-    | 429            | Too many request | Requests exceed the API time limit. Large queries should be run in sequence |
-    | 50X            | Internal Server Error | The service might be down |
+    This api lets you: Find a table and extract table metadata and data.
 
 tags:
-  - name: Navigation
-    description: Find a table
-  - name: Table
-    description: Use a table
+  - name: Tables
+    description: See information about  tables and extract table data.
   - name: Saved Queries
-    description: Save a query for later use
+    description: Save a query for later use.
+  - name: Codelists
+    description: See information about  codelists.
 
 paths:
-  /navigation:
-    get:
-      tags:
-        - Navigation
-      summary: Get root Folder.
-      operationId: GetNavigationRoot
-      parameters:
-        - $ref: "#/components/parameters/lang"
-      responses:
-        "200":
-          description: Success
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/FolderResponse"
-              examples:
-                NavigateRoot:
-                  $ref: "./examplesAsYml/folder-root.yml#/folder-root"
-        "400":
-          $ref: "#/components/responses/ErrorResponse400"
-        "404":
-          $ref: "#/components/responses/ErrorResponse404"
-        "429":
-          $ref: "#/components/responses/ErrorResponse429"
-
-  /navigation/{id}:
-    get:
-      tags:
-        - Navigation
-      summary: Gets Folder by {id}.
-      operationId: GetNavigationById
-      parameters:
-        - $ref: "#/components/parameters/id"
-        - $ref: "#/components/parameters/lang"
-      responses:
-        "200":
-          description: Success
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/FolderResponse"
-              examples:
-                Navigation-BE:
-                  $ref: "./examplesAsYml/folder-be.yml#/folder-be"
-        "400":
-          $ref: "#/components/responses/ErrorResponse400"
-        "404":
-          $ref: "#/components/responses/ErrorResponse404"
-        "429":
-          $ref: "#/components/responses/ErrorResponse429"
-
   /tables:
     get:
       tags:
-        - Table
+        - Tables
       summary: Get all Tables.
       operationId: ListAllTables
       parameters:
         - $ref: "#/components/parameters/lang"
         - $ref: "#/components/parameters/query"
         - $ref: "#/components/parameters/pastDays"
-        - $ref: "#/components/parameters/include_discontinued"
+        - $ref: "#/components/parameters/includeDiscontinued"
         - $ref: "#/components/parameters/pageNumber"
         - $ref: "#/components/parameters/pageSize"
       responses:
@@ -103,7 +40,7 @@ paths:
   /tables/{id}:
     get:
       tags:
-        - Table
+        - Tables
       summary: Get Table by {id}.
       operationId: GetTableById
       parameters:
@@ -126,19 +63,11 @@ paths:
   /tables/{id}/metadata:
     get:
       tags:
-        - Table
-      summary: Get Metadata about Table by {id}.
+        - Tables
+      summary: Get metadata about table by {id}.
       description: |
         **Used for listing detailed information about a specific table**
         * List all variables and values and all other metadata needed to be able to fetch data
-
-        * Also links to where to:
-          + Fetch
-          - Where to get information about codelists
-
-        * 2 output formats
-          + Custom json
-          - JSON-stat2
       operationId: GetMetadataById
       parameters:
         - $ref: "#/components/parameters/lang"
@@ -149,17 +78,22 @@ paths:
             type: boolean
             default: false
           description: |
-            If metadata should be included as if default selection would have been applied.
             This is a technical parameter that is used by PxWeb for initial loading of tables.
+            If metadata should be included as if default selection would have been applied see /tables{id}/defaultselection endpoint.
         - in: query
           name: savedQuery
           schema:
             type: string
             nullable: true
           description: |
-            Id for a saved query that should be be applied before metadata is returned.
+            This is a technical parameter that is used by PxWeb for initial loading of tables.
+            Id for a saved query that should be be applied before metadata is returned see /savedqueries.
         - in: query
           name: codelist
+          description: |
+            This is a technical parameter that is used by PxWeb.
+            The identifier of the codelist that should be applied to the metadata.
+            If not specified no codelist will be applied.
           schema:
             type: object
             additionalProperties:
@@ -170,7 +104,6 @@ paths:
               ]
           style: deepObject
           explode: true
-
       responses:
         "200":
           description: Success
@@ -191,9 +124,11 @@ paths:
   /tables/{id}/defaultselection:
     get:
       tags:
-        - Table
-      summary: Get the default selection for Table by {id}.
-      description: Get information about what is selected for the table by default when no selection is made i the /data endpoint.
+        - Tables
+      summary: Get the default selection for table by {id}.
+      description: |
+            This is a technical parameter that is used by PxWeb for initial loading of tables.
+            Get information about the default selection for the /tables/{id}/data endpoint.
       operationId: GetDefaultSelection
       parameters:
         - $ref: "#/components/parameters/lang"
@@ -212,34 +147,18 @@ paths:
         "429":
           $ref: "#/components/responses/ErrorResponse429"
 
-  /codelists/{id}:
-    get:
-      tags:
-        - Table
-      summary: Get Codelist by {id}.
-      operationId: GetTableCodeListById
-      parameters:
-        - $ref: "#/components/parameters/lang"
-        - $ref: "#/components/parameters/id"
-      responses:
-        "200":
-          description: Success
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/CodeListResponse"
-        "400":
-          $ref: "#/components/responses/ErrorResponse400"
-        "404":
-          $ref: "#/components/responses/ErrorResponse404"
-        "429":
-          $ref: "#/components/responses/ErrorResponse429"
-
   /tables/{id}/data:
     get:
       tags:
-        - Table
-      summary: Get data from table by {id}.
+        - Tables
+      summary: Get data for table by {id}.
+      description: |
+        **Used for fetching data from a table**
+        * Get data from a table by id.
+        * The data can be filtered by variable codes and values.
+        * The response can be formatted in different formats.
+        * The placement of the variables can be customized with heading and stub variables.
+        * If no selection is specified for filtering the data the default selection will be applied.
       operationId: GetTableData
       parameters:
         - $ref: "#/components/parameters/lang"
@@ -278,7 +197,7 @@ paths:
           style: form
           explode: false
           required: false
-          description: Commaseparated list of variable codes that should be placed in the heading in the resulting data
+          description: Comma separated list of variable codes that should be placed in the heading in the resulting data
           schema:
             type: array
             items:
@@ -288,7 +207,7 @@ paths:
           style: form
           explode: false
           required: false
-          description: Commaseparated list of variable codes that should be placed in the stub in the resulting data
+          description: Comma separated list of variable codes that should be placed in the stub in the resulting data
           schema:
             type: array
             items:
@@ -322,8 +241,8 @@ paths:
 
     post:
       tags:
-        - Table
-      summary: Get data from table by {id}.
+        - Tables
+      summary: Get data for table by {id}.
       operationId: GetTableDataByPost
       parameters:
         - $ref: "#/components/parameters/lang"
@@ -331,7 +250,7 @@ paths:
         - $ref: "#/components/parameters/outputFormat"
         - $ref: "#/components/parameters/outputFormatParams"
       requestBody:
-        description: A selection
+        description: A selection in JSON format for filtering the data. If no selection is specified the default selection will be applied.
         content:
           application/json:
             schema:
@@ -364,11 +283,34 @@ paths:
         "429":
           $ref: "#/components/responses/ErrorResponse429"
 
+  /codelists/{id}:
+    get:
+      tags:
+        - Codelists
+      summary: Get codelist by {id}.
+      operationId: GetCodelistById
+      parameters:
+        - $ref: "#/components/parameters/lang"
+        - $ref: "#/components/parameters/id"
+      responses:
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CodelistResponse"
+        "400":
+          $ref: "#/components/responses/ErrorResponse400"
+        "404":
+          $ref: "#/components/responses/ErrorResponse404"
+        "429":
+          $ref: "#/components/responses/ErrorResponse429"
+
   /config:
     get:
       tags:
         - Configuration
-      summary: Get API configuration settings.
+      summary: Get API configuration.
       operationId: GetApiConfiguration
       responses:
         "200":
@@ -391,14 +333,14 @@ paths:
       summary: Save a query for later use.
       operationId: CreateSaveQuery
       requestBody:
-        description: A saved query
+        description: A saved query in JSON format without an Id.
         content:
           application/json:
             schema:
               $ref: "#/components/schemas/SavedQuery"
       responses:
         "201":
-          description: Saved query created
+          description: Saved query created and returned with the id specified.
           content:
             application/json:
               schema:
@@ -415,6 +357,10 @@ paths:
       parameters:
         - $ref: "#/components/parameters/id"
       summary: Retrieves the content of a saved query.
+      description: |
+        **Used for retrieving a saved query**
+        * Get the saved query by id.
+        * The saved query contains the selection and other parameters that were used when the query was created.
       operationId: GetSaveQuery
       responses:
         "200":
@@ -440,6 +386,10 @@ paths:
         - $ref: "#/components/parameters/outputFormat"
         - $ref: "#/components/parameters/outputFormatParams"
       summary: Retrieves the data by running the saved query.
+      description: |
+        **Used for retrieving data by running a saved query**
+        * Get the data by running the saved query.
+        * The saved query contains the selection and other parameters that were used when the query was created.
       operationId: RunSaveQuery
       responses:
         "200":
@@ -475,7 +425,7 @@ paths:
       parameters:
         - $ref: "#/components/parameters/lang"
         - $ref: "#/components/parameters/id"
-      summary: Retrieves the selection that the saved query will result in.
+      summary: Retrieves the selection that the saved query will result in. Selection expressions will be transformed into actual value codes.
       operationId: GetSavedQuerySelection
       responses:
         "200":
@@ -516,10 +466,10 @@ components:
       required: true
       schema:
         type: string
-    codeListId:
-      name: codeListId
+    codelistId:
+      name: codelistId
       in: path
-      description: Identifier for a code list
+      description: Identifier for a codelist
       required: true
       schema:
         type: string
@@ -532,12 +482,12 @@ components:
         type: string
       examples:
         X1:
-          value: befolkning
-          summary: Search for tables with name `befolkning`
+          value: population
+          summary: Search for tables containing `population` in its metadata.
     pastDays:
       name: pastDays
       in: query
-      description: Selects only tables that was updated from the time of execution going back number of days stated by the parameter pastDays. Valid values for past days are integers between 1 and ?
+      description: Selects only tables that was updated from the time of execution going back number of days stated by the parameter pastDays. Valid values for past days are positive integers.
       required: false
       schema:
         type: integer
@@ -546,7 +496,7 @@ components:
         X1:
           value: 5
           summary: Search for tables which has been updated in the last 5 days
-    include_discontinued:
+    includeDiscontinued:
       name: includeDiscontinued
       in: query
       description: Decides if discontinued tables are included in response.
@@ -570,7 +520,6 @@ components:
       required: false
       schema:
         type: integer
-        #Default value depends on site?
     outputFormat:
       name: outputFormat
       in: query
@@ -817,109 +766,6 @@ components:
         value:
           type: string
           description: The value associated with the key
-    FolderContentItemTypeEnum:
-      type: string
-      enum:
-        - Heading
-        - FolderInformation
-        - Table
-    FolderContentItem:
-      discriminator:
-        propertyName: objectType
-        mapping:
-          Heading: "#/components/schemas/Heading"
-          FolderInformation: "#/components/schemas/FolderInformation"
-          Table: "#/components/schemas/Table"
-      type: object
-      description: Navigation item.
-      required:
-        - "type"
-        - "id"
-        - "label"
-      properties:
-        type:
-          $ref: "#/components/schemas/FolderContentItemTypeEnum"
-          description: One of Heading, Table or FolderInformation
-          nullable: false
-        id:
-          type: string
-          nullable: false
-        label:
-          type: string
-          nullable: true
-          description: Display text
-        description:
-          type: string
-          nullable: true
-          description: Longer text describing node.
-        sortCode:
-          type: string
-          description: String for sorting the contents in folder
-    FolderResponse:
-      type: object
-      description: Folder item
-      required:
-        - "language"
-        - "id"
-        - "label"
-        - "folderContents"
-        - "links"
-      properties:
-        language:
-          type: string
-          description: The language code (ISO 639) for this response
-        id:
-          type: string
-          nullable: true
-          #nullable = true beacause root is empty
-        label:
-          type: string
-          nullable: true
-          description: Display text
-        description:
-          type: string
-          nullable: true
-          description: Longer text describing node.
-        tags:
-          type: array
-          items:
-            type: string
-            description: tag for folder
-        folderContents:
-          type: array
-          items:
-            $ref: "#/components/schemas/FolderContentItem"
-          nullable: true
-        links:
-          type: array
-          items:
-            $ref: "#/components/schemas/Link"
-          description: Links to ...
-          nullable: true
-    FolderInformation:
-      allOf:
-        - $ref: "#/components/schemas/FolderContentItem"
-      type: object
-      description: Folder information item
-      required:
-        - "links"
-      properties:
-        tags:
-          type: array
-          items:
-            type: string
-            description: tag for folder
-        links:
-          type: array
-          items:
-            $ref: "#/components/schemas/Link"
-          description: Links to ...
-          nullable: true
-    Heading:
-      allOf:
-        - $ref: "#/components/schemas/FolderContentItem"
-      type: object
-      description: Heading item
 
     TableResponse:
       allOf:
@@ -945,17 +791,31 @@ components:
           description: A textual name for the PathElement
 
     Table:
-      allOf:
-        - $ref: "#/components/schemas/FolderContentItem"
       type: object
       description: Table item
       required:
+        - "id"
+        - "label"
         - "updated"
         - "firstPeriod"
         - "lastPeriod"
         - "variableNames"
         - "links"
       properties:
+        id:
+          type: string
+          nullable: false
+        label:
+          type: string
+          nullable: true
+          description: Display text
+        description:
+          type: string
+          nullable: true
+          description: Longer text describing node.
+        sortCode:
+          type: string
+          description: String for sorting the contents in folder
         tags:
           type: array
           items:
@@ -978,14 +838,7 @@ components:
           example: 2022
           nullable: true
         category:
-          type: string
-          description: Mostly for internal use. Which category table belongs to. internal, public, private or section.
-          default: public
-          enum:
-            - internal
-            - public
-            - private
-            - section
+          $ref: "#/components/schemas/TableCategory"
         variableNames:
           type: array
           description: List of varibles name
@@ -1089,7 +942,7 @@ components:
           description: Must be shown to end user if true
         text:
           type: string
-    CodeListInformation:
+    CodelistInformation:
       type: object
       required:
         - "id"
@@ -1104,7 +957,7 @@ components:
           type: string
           description: A textual name for the CodeList
         type:
-          $ref: "#/components/schemas/CodeListType"
+          $ref: "#/components/schemas/CodelistType"
         links:
           type: array
           description: Links to associated information about the code list
@@ -1130,7 +983,7 @@ components:
         raw:
           type: string
           description: Raw contact information for compatability with PX files
-    CodeListsResponse:
+    CodelistsResponse:
       type: object
       required:
         - "language"
@@ -1142,12 +995,12 @@ components:
         codeLists:
           type: array
           items:
-            $ref: "#/components/schemas/CodeListMetadata"
+            $ref: "#/components/schemas/CodelistMetadata"
         links:
           type: array
           items:
             $ref: "#/components/schemas/Link"
-    CodeListMetadata:
+    CodelistMetadata:
       type: object
       required:
         - "id"
@@ -1164,20 +1017,20 @@ components:
           description: The textual name  for the codelist.
           example: NUTS2 fr.o.m 2008
         type:
-          $ref: "#/components/schemas/CodeListType"
+          $ref: "#/components/schemas/CodelistType"
         links:
           type: array
           items:
             $ref: "#/components/schemas/Link"
 
-    CodeListType:
+    CodelistType:
       type: string
       description: Type of codelist
       enum:
         - Aggregation
         - Valueset
 
-    CodeListResponse:
+    CodelistResponse:
       type: object
       required:
         - "id"
@@ -1213,7 +1066,7 @@ components:
           type: string
           description: The value code that should be used for elimination. If not set the variable will be eliminated by summing up all values.
         type:
-          $ref: "#/components/schemas/CodeListType"
+          $ref: "#/components/schemas/CodelistType"
         values:
           type: array
           items:
@@ -1450,7 +1303,7 @@ components:
           description: Information about how variables are presented
           type: string
         codeLists:
-          $ref: "#/components/schemas/CodeLists"
+          $ref: "#/components/schemas/Codelists"
         measuringType:
           description: Indicates if data is stock, flow or average.
           type: object
@@ -1592,11 +1445,11 @@ components:
             $ref: "#/components/schemas/jsonstat-extension-link"
         additionalProperties: false
 
-    CodeLists:
+    Codelists:
       description: Available codelists for this dimension
       type: array
       items:
-        $ref: "#/components/schemas/CodeListInformation"
+        $ref: "#/components/schemas/CodelistInformation"
 
     Adjustment:
       description: WorkOnly means that data is adjusted e.g. to take into account the number of working days. SesOnly means that data is seasonally adjusted.
@@ -1639,6 +1492,16 @@ components:
     BasePeriod:
       description: Base period for, for instance index series. Is shown with the footnote. If there is a contents variable the keyword is repeated for each value of the contents variable.
       type: string
+
+    TableCategory:
+      type: string
+      description: Mostly for internal use. Which category table belongs to. internal, public, private or section.
+      default: public
+      enum:
+        - internal
+        - public
+        - private
+        - section
 
     Dataset:
       title: JSON-stat 2.0 Dataset Schema

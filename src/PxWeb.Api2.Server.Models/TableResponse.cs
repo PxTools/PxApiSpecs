@@ -1,7 +1,7 @@
 /*
  * PxApi
  *
- * This api lets you do 2 things; Find a table(Navigation) and use a table (Table).  _Table below is added to show how tables can be described in yml._  **Table contains status code this API may return** | Status code    | Description      | Reason                      | | - -- -- --        | - -- -- -- -- --      | - -- -- -- -- -- -- -- -- -- --       | | 200            | Success          | The endpoint has delivered response for the request                      | | 400            | Bad request      | If the request is not valid | | 403            | Forbidden        | number of cells exceed the API limit | | 404            | Not found        | If the URL in request does not exist | | 429            | Too many request | Requests exceed the API time limit. Large queries should be run in sequence | | 50X            | Internal Server Error | The service might be down | 
+ * This api lets you: Find a table and extract table metadata and data. 
  *
  * The version of the OpenAPI document: 2.0
  * 
@@ -24,7 +24,7 @@ namespace PxWeb.Api2.Server.Models
     /// 
     /// </summary>
     [DataContract]
-    public class TableResponse : Table, IEquatable<TableResponse>
+    public class TableResponse : IEquatable<TableResponse>
     {
         /// <summary>
         /// The language code (ISO 639) for this response
@@ -35,6 +35,124 @@ namespace PxWeb.Api2.Server.Models
         public string Language { get; set; }
 
         /// <summary>
+        /// Gets or Sets Id
+        /// </summary>
+        [Required]
+        [DataMember(Name="id", EmitDefaultValue=false)]
+        public string Id { get; set; }
+
+        /// <summary>
+        /// Display text
+        /// </summary>
+        /// <value>Display text</value>
+        [Required]
+        [DataMember(Name="label", EmitDefaultValue=true)]
+        public string? Label { get; set; }
+
+        /// <summary>
+        /// Longer text describing node.
+        /// </summary>
+        /// <value>Longer text describing node.</value>
+        [DataMember(Name="description", EmitDefaultValue=true)]
+        public string? Description { get; set; }
+
+        /// <summary>
+        /// String for sorting the contents in folder
+        /// </summary>
+        /// <value>String for sorting the contents in folder</value>
+        [DataMember(Name="sortCode", EmitDefaultValue=false)]
+        public string? SortCode { get; set; }
+
+        /// <summary>
+        /// Gets or Sets Tags
+        /// </summary>
+        [DataMember(Name="tags", EmitDefaultValue=false)]
+        public List<string> Tags { get; set; }
+
+        /// <summary>
+        /// Date and time when the figures in the table was last updated, in UTC time.
+        /// </summary>
+        /// <value>Date and time when the figures in the table was last updated, in UTC time.</value>
+        [Required]
+        [RegularExpression("^((19|20)\\d\\d)\\-(0?[1-9]|1[012])\\-(0?[1-9]|[12][0-9]|3[01])$")]
+        [DataMember(Name="updated", EmitDefaultValue=true)]
+        public DateTime? Updated { get; set; }
+
+        /// <summary>
+        /// First period
+        /// </summary>
+        /// <value>First period</value>
+        /* <example>2017</example> */
+        [Required]
+        [DataMember(Name="firstPeriod", EmitDefaultValue=true)]
+        public string? FirstPeriod { get; set; }
+
+        /// <summary>
+        /// Last period
+        /// </summary>
+        /// <value>Last period</value>
+        /* <example>2022</example> */
+        [Required]
+        [DataMember(Name="lastPeriod", EmitDefaultValue=true)]
+        public string? LastPeriod { get; set; }
+
+        /// <summary>
+        /// Gets or Sets Category
+        /// </summary>
+        [DataMember(Name="category", EmitDefaultValue=true)]
+        public TableCategory Category { get; set; }
+
+        /// <summary>
+        /// List of varibles name
+        /// </summary>
+        /// <value>List of varibles name</value>
+        [Required]
+        [DataMember(Name="variableNames", EmitDefaultValue=false)]
+        public List<string> VariableNames { get; set; }
+
+        /// <summary>
+        /// If the table is discontinued or not. That is if it no longer updated with new figures.
+        /// </summary>
+        /// <value>If the table is discontinued or not. That is if it no longer updated with new figures.</value>
+        [DataMember(Name="discontinued", EmitDefaultValue=true)]
+        public bool? Discontinued { get; set; }
+
+        /// <summary>
+        /// The source of the table
+        /// </summary>
+        /// <value>The source of the table</value>
+        [DataMember(Name="source", EmitDefaultValue=false)]
+        public string? Source { get; set; }
+
+        /// <summary>
+        /// The subject code of the table
+        /// </summary>
+        /// <value>The subject code of the table</value>
+        [DataMember(Name="subjectCode", EmitDefaultValue=false)]
+        public string? SubjectCode { get; set; }
+
+        /// <summary>
+        /// Gets or Sets TimeUnit
+        /// </summary>
+        [DataMember(Name="timeUnit", EmitDefaultValue=true)]
+        public TimeUnit TimeUnit { get; set; }
+
+        /// <summary>
+        /// The path to the table
+        /// </summary>
+        /// <value>The path to the table</value>
+        [DataMember(Name="paths", EmitDefaultValue=false)]
+        public List<List<PathElement>> Paths { get; set; }
+
+        /// <summary>
+        /// Links to ...
+        /// </summary>
+        /// <value>Links to ...</value>
+        [Required]
+        [DataMember(Name="links", EmitDefaultValue=true)]
+        public List<Link> Links { get; set; }
+
+        /// <summary>
         /// Returns the string presentation of the object
         /// </summary>
         /// <returns>String presentation of the object</returns>
@@ -43,6 +161,22 @@ namespace PxWeb.Api2.Server.Models
             var sb = new StringBuilder();
             sb.Append("class TableResponse {\n");
             sb.Append("  Language: ").Append(Language).Append("\n");
+            sb.Append("  Id: ").Append(Id).Append("\n");
+            sb.Append("  Label: ").Append(Label).Append("\n");
+            sb.Append("  Description: ").Append(Description).Append("\n");
+            sb.Append("  SortCode: ").Append(SortCode).Append("\n");
+            sb.Append("  Tags: ").Append(Tags).Append("\n");
+            sb.Append("  Updated: ").Append(Updated).Append("\n");
+            sb.Append("  FirstPeriod: ").Append(FirstPeriod).Append("\n");
+            sb.Append("  LastPeriod: ").Append(LastPeriod).Append("\n");
+            sb.Append("  Category: ").Append(Category).Append("\n");
+            sb.Append("  VariableNames: ").Append(VariableNames).Append("\n");
+            sb.Append("  Discontinued: ").Append(Discontinued).Append("\n");
+            sb.Append("  Source: ").Append(Source).Append("\n");
+            sb.Append("  SubjectCode: ").Append(SubjectCode).Append("\n");
+            sb.Append("  TimeUnit: ").Append(TimeUnit).Append("\n");
+            sb.Append("  Paths: ").Append(Paths).Append("\n");
+            sb.Append("  Links: ").Append(Links).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -51,7 +185,7 @@ namespace PxWeb.Api2.Server.Models
         /// Returns the JSON string presentation of the object
         /// </summary>
         /// <returns>JSON string presentation of the object</returns>
-        public new string ToJson()
+        public string ToJson()
         {
             return JsonConvert.SerializeObject(this, Formatting.Indented);
         }
@@ -83,6 +217,90 @@ namespace PxWeb.Api2.Server.Models
                     Language == other.Language ||
                     Language != null &&
                     Language.Equals(other.Language)
+                ) && 
+                (
+                    Id == other.Id ||
+                    Id != null &&
+                    Id.Equals(other.Id)
+                ) && 
+                (
+                    Label == other.Label ||
+                    Label != null &&
+                    Label.Equals(other.Label)
+                ) && 
+                (
+                    Description == other.Description ||
+                    Description != null &&
+                    Description.Equals(other.Description)
+                ) && 
+                (
+                    SortCode == other.SortCode ||
+                    SortCode != null &&
+                    SortCode.Equals(other.SortCode)
+                ) && 
+                (
+                    Tags == other.Tags ||
+                    Tags != null &&
+                    other.Tags != null &&
+                    Tags.SequenceEqual(other.Tags)
+                ) && 
+                (
+                    Updated == other.Updated ||
+                    Updated != null &&
+                    Updated.Equals(other.Updated)
+                ) && 
+                (
+                    FirstPeriod == other.FirstPeriod ||
+                    FirstPeriod != null &&
+                    FirstPeriod.Equals(other.FirstPeriod)
+                ) && 
+                (
+                    LastPeriod == other.LastPeriod ||
+                    LastPeriod != null &&
+                    LastPeriod.Equals(other.LastPeriod)
+                ) && 
+                (
+                    Category == other.Category ||
+                    
+                    Category.Equals(other.Category)
+                ) && 
+                (
+                    VariableNames == other.VariableNames ||
+                    VariableNames != null &&
+                    other.VariableNames != null &&
+                    VariableNames.SequenceEqual(other.VariableNames)
+                ) && 
+                (
+                    Discontinued == other.Discontinued ||
+                    Discontinued != null &&
+                    Discontinued.Equals(other.Discontinued)
+                ) && 
+                (
+                    Source == other.Source ||
+                    Source != null &&
+                    Source.Equals(other.Source)
+                ) && 
+                (
+                    SubjectCode == other.SubjectCode ||
+                    SubjectCode != null &&
+                    SubjectCode.Equals(other.SubjectCode)
+                ) && 
+                (
+                    TimeUnit == other.TimeUnit ||
+                    
+                    TimeUnit.Equals(other.TimeUnit)
+                ) && 
+                (
+                    Paths == other.Paths ||
+                    Paths != null &&
+                    other.Paths != null &&
+                    Paths.SequenceEqual(other.Paths)
+                ) && 
+                (
+                    Links == other.Links ||
+                    Links != null &&
+                    other.Links != null &&
+                    Links.SequenceEqual(other.Links)
                 );
         }
 
@@ -98,6 +316,38 @@ namespace PxWeb.Api2.Server.Models
                 // Suitable nullity checks etc, of course :)
                     if (Language != null)
                     hashCode = hashCode * 59 + Language.GetHashCode();
+                    if (Id != null)
+                    hashCode = hashCode * 59 + Id.GetHashCode();
+                    if (Label != null)
+                    hashCode = hashCode * 59 + Label.GetHashCode();
+                    if (Description != null)
+                    hashCode = hashCode * 59 + Description.GetHashCode();
+                    if (SortCode != null)
+                    hashCode = hashCode * 59 + SortCode.GetHashCode();
+                    if (Tags != null)
+                    hashCode = hashCode * 59 + Tags.GetHashCode();
+                    if (Updated != null)
+                    hashCode = hashCode * 59 + Updated.GetHashCode();
+                    if (FirstPeriod != null)
+                    hashCode = hashCode * 59 + FirstPeriod.GetHashCode();
+                    if (LastPeriod != null)
+                    hashCode = hashCode * 59 + LastPeriod.GetHashCode();
+                    
+                    hashCode = hashCode * 59 + Category.GetHashCode();
+                    if (VariableNames != null)
+                    hashCode = hashCode * 59 + VariableNames.GetHashCode();
+                    if (Discontinued != null)
+                    hashCode = hashCode * 59 + Discontinued.GetHashCode();
+                    if (Source != null)
+                    hashCode = hashCode * 59 + Source.GetHashCode();
+                    if (SubjectCode != null)
+                    hashCode = hashCode * 59 + SubjectCode.GetHashCode();
+                    
+                    hashCode = hashCode * 59 + TimeUnit.GetHashCode();
+                    if (Paths != null)
+                    hashCode = hashCode * 59 + Paths.GetHashCode();
+                    if (Links != null)
+                    hashCode = hashCode * 59 + Links.GetHashCode();
                 return hashCode;
             }
         }

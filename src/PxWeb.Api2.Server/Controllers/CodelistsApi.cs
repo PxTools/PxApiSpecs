@@ -25,23 +25,25 @@ namespace PxWeb.Api2.Server.Controllers
     /// 
     /// </summary>
     [ApiController]
-    public abstract class ConfigurationApiController : ControllerBase
+    public abstract class CodelistsApiController : ControllerBase
     { 
         /// <summary>
-        /// Get API configuration.
+        /// Get codelist by {id}.
         /// </summary>
+        /// <param name="id">Id</param>
+        /// <param name="lang">The language if the default is not what you want.</param>
         /// <response code="200">Success</response>
         /// <response code="400">Error response for 400</response>
         /// <response code="404">Error response for 404</response>
         /// <response code="429">Error response for 429</response>
         [HttpGet]
-        [Route("/config")]
+        [Route("/codelists/{id}")]
         [ValidateModelState]
-        [SwaggerOperation("GetApiConfiguration")]
-        [SwaggerResponse(statusCode: 200, type: typeof(ConfigResponse), description: "Success")]
+        [SwaggerOperation("GetCodelistById")]
+        [SwaggerResponse(statusCode: 200, type: typeof(CodelistResponse), description: "Success")]
         [SwaggerResponse(statusCode: 400, type: typeof(Problem), description: "Error response for 400")]
         [SwaggerResponse(statusCode: 404, type: typeof(Problem), description: "Error response for 404")]
         [SwaggerResponse(statusCode: 429, type: typeof(Problem), description: "Error response for 429")]
-        public abstract IActionResult GetApiConfiguration();
+        public abstract IActionResult GetCodelistById([FromRoute (Name = "id")][Required]string id, [FromQuery (Name = "lang")]string? lang);
     }
 }
