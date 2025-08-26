@@ -368,7 +368,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/SavedQuery"
+                $ref: "#/components/schemas/SavedQueryResponse"
         "400":
           $ref: "#/components/responses/ErrorResponse400"
         "404":
@@ -564,6 +564,28 @@ components:
         * SeparatorTab: Can not be combined with SeparatorSpace and SeparatorSemicolon. And only applicable for csv output format.
         * SeparatorSpace: Can not be combined with SeparatorTab and SeparatorSemicolon. And only applicable for csv output format.
         * SeparatorSemicolon: Can not be combined with SeparatorTab and SeparatorSpace. And only applicable for csv output format.
+
+    SavedQueryResponse:
+      type: object
+      required:
+        - "language"
+        - "id"
+        - "savedQuery"
+        - "links"
+      properties:
+        language:
+          type: string
+          description: The language code for the language requested
+        id:
+          type: string
+          description: The id of the saved query
+        savedQuery:
+          $ref: "#/components/schemas/SavedQuery"
+        links:
+          type: array
+          items:
+            $ref: "#/components/schemas/Link"
+
 
     SavedQuery:
       type: object
