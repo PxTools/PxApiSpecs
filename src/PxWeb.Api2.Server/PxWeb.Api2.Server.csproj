@@ -23,13 +23,13 @@
     <PackageReadmeFile>README.md</PackageReadmeFile>
   </PropertyGroup>
   <ItemGroup>
-    <ProjectReference Include="../PxWeb.Api2.Server.Models/PxWeb.Api2.Server.Models.csproj"/>
+    <ProjectReference Include="../PxWeb.Api2.Server.Models/PxWeb.Api2.Server.Models.csproj" />
     <FrameworkReference Include="Microsoft.AspNetCore.App" />
     <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.10.8" />
-    <PackageReference Include="Swashbuckle.AspNetCore.Newtonsoft" Version="6.4.0"/>
-    <PackageReference Include="Swashbuckle.AspNetCore.SwaggerUI" Version="6.4.0"/>
-    <PackageReference Include="Swashbuckle.AspNetCore.Annotations" Version="6.4.0" />
-    <PackageReference Include="JsonSubTypes" Version="1.8.0" />
+    <PackageReference Include="Swashbuckle.AspNetCore.Newtonsoft" Version="6.9.0" />
+    <PackageReference Include="Swashbuckle.AspNetCore.SwaggerUI" Version="6.9.0" />
+    <PackageReference Include="Swashbuckle.AspNetCore.Annotations" Version="6.9.0" />
+    <PackageReference Include="JsonSubTypes" Version="1.9.0" />
   </ItemGroup>
   <ItemGroup>
     <!--<DotNetCliToolReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="8.0.0" />-->

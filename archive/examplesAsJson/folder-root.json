@@ -1,0 +1,57 @@
+{
+  "language": "sv",
+  "objectType": "folder",
+  "id": null,
+  "label": null,
+  "description": null,
+  "folderContents": [
+    {
+      "objectType": "folder-information",
+      "id": "JO",
+      "label": "Agriculture, forestry and fishery",
+      "description": "Animals, economy, employment, production, and more.",
+      "links": [
+        {
+          "rel": "self",
+          "hreflang": "sv",
+          "href": "https://my-site.com/api/v2/navigation/JO"
+        },
+        {
+          "rel": "self",
+          "hreflang": "en",
+          "href": "https://my-site.com/api/v2/navigation/JO?lang=en"
+        }
+      ]
+    },
+    {
+      "objectType": "folder-information",
+      "id": "NV",
+      "label": "Financial markets",
+      "description": "Assets, banks, insurance companies, liabilities, shares, and more.",
+      "links": [
+        {
+          "rel": "self",
+          "hreflang": "sv",
+          "href": "https://my-site.com/api/v2/navigation/NV"
+        },
+        {
+          "rel": "self",
+          "hreflang": "en",
+          "href": "https://my-site.com/api/v2/navigation/NV?lang=en"
+        }
+      ]
+    }
+  ],
+  "links": [
+    {
+      "rel": "self",
+      "hreflang": "sv",
+      "href": "https://my-site.com/api/v2/navigation"
+    },
+    {
+      "rel": "self",
+      "hreflang": "en",
+      "href": "https://my-site.com/api/v2/navigation?lang=en"
+    }
+  ]
+}
