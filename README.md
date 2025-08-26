@@ -1,5 +1,5 @@
 # PxWeb API 2.0 Specification
-This is the home of the PxWeb API 2.0 Specificatio. You can look at the current state of the specification in [Swagger UI](https://petstore.swagger.io/?url=https://raw.githubusercontent.com/PxTools/PxApiSpecs/master/PxAPI-2.yml).
+This is the home of the PxWeb API 2.0 OpenAPI Specification. You can look at the current state of the specification in [Swagger UI](https://petstore.swagger.io/?url=https://raw.githubusercontent.com/PxTools/PxApiSpecs/master/PxAPI-2.yml).
 
 
 ## Updating PxApi-2.yml
