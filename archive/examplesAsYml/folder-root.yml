@@ -1,0 +1,27 @@
+# this file is generated
+folder-root:
+  description: Example for 200 response for navigation endpoint root
+  value:
+    objectType: folder
+    id: 
+    label: 
+    description: 
+    folderContents:
+    - objectType: folder-information
+      id: JO
+      label: Agriculture, forestry and fishery
+      description: Animals, economy, employment, production, and more.
+      links:
+      - rel: self
+        href: https://my-site.com/api/v2/navigation/JO
+    - objectType: folder-information
+      id: NV
+      label: Financial markets
+      description: Assets, banks, insurance companies, liabilities, shares, and more.
+      links:
+      - rel: self
+        href: https://my-site.com/api/v2/navigation/NV
+    links:
+    - rel: self
+      href: https://my-site.com/api/v2/navigation
+    

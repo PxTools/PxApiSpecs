@@ -1,0 +1,48 @@
+# this file is generated
+folder-be:
+  description: Example for 200 response for navigation endpoint
+  value:
+    objectType: folder
+    id: BE0101
+    label: Balance statistics
+    description: Balance statistics
+    folderContents:
+    - objectType: folder-information
+      id: "01"
+      label: Annual statistics
+      description: Annual statistics
+      links:
+      - rel: folder
+        href: https://my-site.com/api/v2/navigation/01
+    - objectType: heading
+      id: BEH1
+      label: I am heading
+      description: I am heading
+    - objectType: table
+      id: TAB0001
+      label: Corporations Financial Assets and Liabilities. Quarterly 1998K2 - 2021K4
+      description: Corporations Financial Assets and Liabilities by item. Quarterly 1998K2 - 2021K4 [2022-03-11]
+      tags:
+      - Money
+      - Gold
+      updated: 2017-09-08T06:00:00.7140000Z
+      firstPeriod: 1998K2
+      lastPeriod: 2021K4
+      category: public
+      variableNames:
+      - observations
+      - region
+      - marital status
+      - age
+      discontinued: false
+      links:
+      - rel: self
+        href: https://my-site.com/api/v2/tables/TAB0001
+      - rel: metadata
+        href: https://my-site.com/api/v2/tables/TAB0001/metadata
+      - rel: data
+        href: https://my-site.com/api/v2/tables/TAB0001/data
+    links:
+    - rel: self
+      href: https://my-site.com/api/v2/navigation/BE0101
+    

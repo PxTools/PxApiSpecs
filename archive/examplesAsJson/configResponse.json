@@ -1,0 +1,39 @@
+{
+    "ApiVersion": "2.0",
+    "Languages": [
+        {
+            "Id": "sv",
+            "Lable": "Svenska"
+        },
+        {
+            "Id": "en",
+            "Lable": "English"
+        }
+    ],
+    "DefaultLanguage": "sv",
+    "MaxDataCells": 10000,
+    "MaxCalls": 30,
+    "TimeWindow": 10,
+    "SourceReferences": [
+        {
+            "Language": "sv",
+            "Text": "Källa: SCB"
+        },
+        {
+            "Language": "en",
+            "Text": "Source: Statistics Sweden"
+        }
+    ],
+    "License": "https://creativecommons.org/share-your-work/public-domain/cc0/",
+    "Features": [
+        {
+            "Id": "CORS",
+            "Params": [
+                {
+                    "Key": "enabled",
+                    "Value": "True"
+                }
+            ]
+        }
+    ]
+}
