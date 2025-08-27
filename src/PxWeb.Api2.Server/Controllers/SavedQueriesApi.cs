@@ -57,7 +57,7 @@ namespace PxWeb.Api2.Server.Controllers
         [Route("/savedqueries/{id}")]
         [ValidateModelState]
         [SwaggerOperation("GetSaveQuery")]
-        [SwaggerResponse(statusCode: 200, type: typeof(SavedQuery), description: "Success")]
+        [SwaggerResponse(statusCode: 200, type: typeof(SavedQueryResponse), description: "Success")]
         [SwaggerResponse(statusCode: 400, type: typeof(Problem), description: "Error response for 400")]
         [SwaggerResponse(statusCode: 404, type: typeof(Problem), description: "Error response for 404")]
         [SwaggerResponse(statusCode: 429, type: typeof(Problem), description: "Error response for 429")]
