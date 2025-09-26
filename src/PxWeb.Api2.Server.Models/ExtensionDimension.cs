@@ -72,8 +72,8 @@ namespace PxWeb.Api2.Server.Models
         /// Available codelists for this dimension
         /// </summary>
         /// <value>Available codelists for this dimension</value>
-        [DataMember(Name="codeLists", EmitDefaultValue=false)]
-        public List<CodelistInformation> CodeLists { get; set; }
+        [DataMember(Name="codelists", EmitDefaultValue=false)]
+        public List<CodelistInformation> Codelists { get; set; }
 
         /// <summary>
         /// Indicates if data is stock, flow or average.
@@ -117,7 +117,7 @@ namespace PxWeb.Api2.Server.Models
             sb.Append("  CategoryNoteMandatory: ").Append(CategoryNoteMandatory).Append("\n");
             sb.Append("  Refperiod: ").Append(Refperiod).Append("\n");
             sb.Append("  Show: ").Append(Show).Append("\n");
-            sb.Append("  CodeLists: ").Append(CodeLists).Append("\n");
+            sb.Append("  Codelists: ").Append(Codelists).Append("\n");
             sb.Append("  MeasuringType: ").Append(MeasuringType).Append("\n");
             sb.Append("  PriceType: ").Append(PriceType).Append("\n");
             sb.Append("  Adjustment: ").Append(Adjustment).Append("\n");
@@ -192,10 +192,10 @@ namespace PxWeb.Api2.Server.Models
                     Show.Equals(other.Show)
                 ) && 
                 (
-                    CodeLists == other.CodeLists ||
-                    CodeLists != null &&
-                    other.CodeLists != null &&
-                    CodeLists.SequenceEqual(other.CodeLists)
+                    Codelists == other.Codelists ||
+                    Codelists != null &&
+                    other.Codelists != null &&
+                    Codelists.SequenceEqual(other.Codelists)
                 ) && 
                 (
                     MeasuringType == other.MeasuringType ||
@@ -245,8 +245,8 @@ namespace PxWeb.Api2.Server.Models
                     hashCode = hashCode * 59 + Refperiod.GetHashCode();
                     if (Show != null)
                     hashCode = hashCode * 59 + Show.GetHashCode();
-                    if (CodeLists != null)
-                    hashCode = hashCode * 59 + CodeLists.GetHashCode();
+                    if (Codelists != null)
+                    hashCode = hashCode * 59 + Codelists.GetHashCode();
                     if (MeasuringType != null)
                     hashCode = hashCode * 59 + MeasuringType.GetHashCode();
                     if (PriceType != null)

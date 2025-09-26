@@ -36,10 +36,10 @@ namespace PxWeb.Api2.Server.Models
         public string Language { get; set; }
 
         /// <summary>
-        /// Gets or Sets CodeLists
+        /// Gets or Sets Codelists
         /// </summary>
-        [DataMember(Name="codeLists", EmitDefaultValue=false)]
-        public List<CodelistMetadata> CodeLists { get; set; }
+        [DataMember(Name="codelists", EmitDefaultValue=false)]
+        public List<CodelistMetadata> Codelists { get; set; }
 
         /// <summary>
         /// Gets or Sets Links
@@ -56,7 +56,7 @@ namespace PxWeb.Api2.Server.Models
             var sb = new StringBuilder();
             sb.Append("class CodelistsResponse {\n");
             sb.Append("  Language: ").Append(Language).Append("\n");
-            sb.Append("  CodeLists: ").Append(CodeLists).Append("\n");
+            sb.Append("  Codelists: ").Append(Codelists).Append("\n");
             sb.Append("  Links: ").Append(Links).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
@@ -100,10 +100,10 @@ namespace PxWeb.Api2.Server.Models
                     Language.Equals(other.Language)
                 ) && 
                 (
-                    CodeLists == other.CodeLists ||
-                    CodeLists != null &&
-                    other.CodeLists != null &&
-                    CodeLists.SequenceEqual(other.CodeLists)
+                    Codelists == other.Codelists ||
+                    Codelists != null &&
+                    other.Codelists != null &&
+                    Codelists.SequenceEqual(other.Codelists)
                 ) && 
                 (
                     Links == other.Links ||
@@ -125,8 +125,8 @@ namespace PxWeb.Api2.Server.Models
                 // Suitable nullity checks etc, of course :)
                     if (Language != null)
                     hashCode = hashCode * 59 + Language.GetHashCode();
-                    if (CodeLists != null)
-                    hashCode = hashCode * 59 + CodeLists.GetHashCode();
+                    if (Codelists != null)
+                    hashCode = hashCode * 59 + Codelists.GetHashCode();
                     if (Links != null)
                     hashCode = hashCode * 59 + Links.GetHashCode();
                 return hashCode;

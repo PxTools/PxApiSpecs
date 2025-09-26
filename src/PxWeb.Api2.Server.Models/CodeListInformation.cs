@@ -27,17 +27,17 @@ namespace PxWeb.Api2.Server.Models
     public class CodelistInformation : IEquatable<CodelistInformation>
     {
         /// <summary>
-        /// The identity of the CodeList
+        /// The identity of the codelist
         /// </summary>
-        /// <value>The identity of the CodeList</value>
+        /// <value>The identity of the codelist</value>
         [Required]
         [DataMember(Name="id", EmitDefaultValue=false)]
         public string Id { get; set; }
 
         /// <summary>
-        /// A textual name for the CodeList
+        /// A textual name for the codelist
         /// </summary>
-        /// <value>A textual name for the CodeList</value>
+        /// <value>A textual name for the codelist</value>
         [Required]
         [DataMember(Name="label", EmitDefaultValue=false)]
         public string Label { get; set; }
