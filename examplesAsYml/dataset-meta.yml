@@ -684,7 +684,7 @@ dataset-meta:
             "0181":
             - mandatory: true
               text: Ny regional indelning fr.o.m. 1999-01-01. Delar av Södertälje kommun (kod 0181) bildar en ny kommun benämnd Nykvarn (kod 0140).
-          codeLists:
+          codelists:
           - id: vs_RegionKommun07
             label: Kommuner
             links:
@@ -997,7 +997,7 @@ dataset-meta:
         extension:
           elimination: true
           eliminationValueCode: tot
-          codeLists:
+          codelists:
           - id: vs_Ålder1årA
             label: Ålder, 1 års-klasser
             links:
