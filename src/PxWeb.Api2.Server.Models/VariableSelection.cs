@@ -38,8 +38,8 @@ namespace PxWeb.Api2.Server.Models
         /// The identifier of the codelist that should be applied
         /// </summary>
         /// <value>The identifier of the codelist that should be applied</value>
-        [DataMember(Name="codeList", EmitDefaultValue=true)]
-        public string? CodeList { get; set; }
+        [DataMember(Name="codelist", EmitDefaultValue=true)]
+        public string? Codelist { get; set; }
 
         /// <summary>
         /// An array of string that specifies wich values sould be selected. Either as value codes or value expressions
@@ -57,7 +57,7 @@ namespace PxWeb.Api2.Server.Models
             var sb = new StringBuilder();
             sb.Append("class VariableSelection {\n");
             sb.Append("  VariableCode: ").Append(VariableCode).Append("\n");
-            sb.Append("  CodeList: ").Append(CodeList).Append("\n");
+            sb.Append("  Codelist: ").Append(Codelist).Append("\n");
             sb.Append("  ValueCodes: ").Append(ValueCodes).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
@@ -101,9 +101,9 @@ namespace PxWeb.Api2.Server.Models
                     VariableCode.Equals(other.VariableCode)
                 ) && 
                 (
-                    CodeList == other.CodeList ||
-                    CodeList != null &&
-                    CodeList.Equals(other.CodeList)
+                    Codelist == other.Codelist ||
+                    Codelist != null &&
+                    Codelist.Equals(other.Codelist)
                 ) && 
                 (
                     ValueCodes == other.ValueCodes ||
@@ -125,8 +125,8 @@ namespace PxWeb.Api2.Server.Models
                 // Suitable nullity checks etc, of course :)
                     if (VariableCode != null)
                     hashCode = hashCode * 59 + VariableCode.GetHashCode();
-                    if (CodeList != null)
-                    hashCode = hashCode * 59 + CodeList.GetHashCode();
+                    if (Codelist != null)
+                    hashCode = hashCode * 59 + Codelist.GetHashCode();
                     if (ValueCodes != null)
                     hashCode = hashCode * 59 + ValueCodes.GetHashCode();
                 return hashCode;

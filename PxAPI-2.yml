@@ -663,7 +663,7 @@ components:
         variableCode:
           type: string
           description: The variable code.
-        codeList:
+        codelist:
           type: string
           description: The identifier of the codelist that should be applied
           nullable: true
@@ -974,10 +974,10 @@ components:
       properties:
         id:
           type: string
-          description: The identity of the CodeList
+          description: The identity of the codelist
         label:
           type: string
-          description: A textual name for the CodeList
+          description: A textual name for the codelist
         type:
           $ref: "#/components/schemas/CodelistType"
         links:
@@ -1014,7 +1014,7 @@ components:
           type: string
           description: The language code for the language used in this response
           example: sv
-        codeLists:
+        codelists:
           type: array
           items:
             $ref: "#/components/schemas/CodelistMetadata"
@@ -1324,7 +1324,7 @@ components:
         show:
           description: Information about how variables are presented
           type: string
-        codeLists:
+        codelists:
           $ref: "#/components/schemas/Codelists"
         measuringType:
           description: Indicates if data is stock, flow or average.

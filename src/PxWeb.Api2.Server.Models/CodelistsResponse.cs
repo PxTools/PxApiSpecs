@@ -24,36 +24,26 @@ namespace PxWeb.Api2.Server.Models
     /// 
     /// </summary>
     [DataContract]
-    public class CodelistInformation : IEquatable<CodelistInformation>
+    public class CodelistsResponse : IEquatable<CodelistsResponse>
     {
         /// <summary>
-        /// The identity of the CodeList
+        /// The language code for the language used in this response
         /// </summary>
-        /// <value>The identity of the CodeList</value>
+        /// <value>The language code for the language used in this response</value>
+        /* <example>sv</example> */
         [Required]
-        [DataMember(Name="id", EmitDefaultValue=false)]
-        public string Id { get; set; }
+        [DataMember(Name="language", EmitDefaultValue=false)]
+        public string Language { get; set; }
 
         /// <summary>
-        /// A textual name for the CodeList
+        /// Gets or Sets Codelists
         /// </summary>
-        /// <value>A textual name for the CodeList</value>
-        [Required]
-        [DataMember(Name="label", EmitDefaultValue=false)]
-        public string Label { get; set; }
+        [DataMember(Name="codelists", EmitDefaultValue=false)]
+        public List<CodelistMetadata> Codelists { get; set; }
 
         /// <summary>
-        /// Gets or Sets Type
+        /// Gets or Sets Links
         /// </summary>
-        [Required]
-        [DataMember(Name="type", EmitDefaultValue=true)]
-        public CodelistType Type { get; set; }
-
-        /// <summary>
-        /// Links to associated information about the code list
-        /// </summary>
-        /// <value>Links to associated information about the code list</value>
-        [Required]
         [DataMember(Name="links", EmitDefaultValue=false)]
         public List<Link> Links { get; set; }
 
@@ -64,10 +54,9 @@ namespace PxWeb.Api2.Server.Models
         public override string ToString()
         {
             var sb = new StringBuilder();
-            sb.Append("class CodelistInformation {\n");
-            sb.Append("  Id: ").Append(Id).Append("\n");
-            sb.Append("  Label: ").Append(Label).Append("\n");
-            sb.Append("  Type: ").Append(Type).Append("\n");
+            sb.Append("class CodelistsResponse {\n");
+            sb.Append("  Language: ").Append(Language).Append("\n");
+            sb.Append("  Codelists: ").Append(Codelists).Append("\n");
             sb.Append("  Links: ").Append(Links).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
@@ -91,34 +80,30 @@ namespace PxWeb.Api2.Server.Models
         {
             if (obj is null) return false;
             if (ReferenceEquals(this, obj)) return true;
-            return obj.GetType() == GetType() && Equals((CodelistInformation)obj);
+            return obj.GetType() == GetType() && Equals((CodelistsResponse)obj);
         }
 
         /// <summary>
-        /// Returns true if CodelistInformation instances are equal
+        /// Returns true if CodelistsResponse instances are equal
         /// </summary>
-        /// <param name="other">Instance of CodelistInformation to be compared</param>
+        /// <param name="other">Instance of CodelistsResponse to be compared</param>
         /// <returns>Boolean</returns>
-        public bool Equals(CodelistInformation other)
+        public bool Equals(CodelistsResponse other)
         {
             if (other is null) return false;
             if (ReferenceEquals(this, other)) return true;
 
             return 
                 (
-                    Id == other.Id ||
-                    Id != null &&
-                    Id.Equals(other.Id)
+                    Language == other.Language ||
+                    Language != null &&
+                    Language.Equals(other.Language)
                 ) && 
                 (
-                    Label == other.Label ||
-                    Label != null &&
-                    Label.Equals(other.Label)
-                ) && 
-                (
-                    Type == other.Type ||
-                    
-                    Type.Equals(other.Type)
+                    Codelists == other.Codelists ||
+                    Codelists != null &&
+                    other.Codelists != null &&
+                    Codelists.SequenceEqual(other.Codelists)
                 ) && 
                 (
                     Links == other.Links ||
@@ -138,12 +123,10 @@ namespace PxWeb.Api2.Server.Models
             {
                 var hashCode = 41;
                 // Suitable nullity checks etc, of course :)
-                    if (Id != null)
-                    hashCode = hashCode * 59 + Id.GetHashCode();
-                    if (Label != null)
-                    hashCode = hashCode * 59 + Label.GetHashCode();
-                    
-                    hashCode = hashCode * 59 + Type.GetHashCode();
+                    if (Language != null)
+                    hashCode = hashCode * 59 + Language.GetHashCode();
+                    if (Codelists != null)
+                    hashCode = hashCode * 59 + Codelists.GetHashCode();
                     if (Links != null)
                     hashCode = hashCode * 59 + Links.GetHashCode();
                 return hashCode;
@@ -153,12 +136,12 @@ namespace PxWeb.Api2.Server.Models
         #region Operators
         #pragma warning disable 1591
 
-        public static bool operator ==(CodelistInformation left, CodelistInformation right)
+        public static bool operator ==(CodelistsResponse left, CodelistsResponse right)
         {
             return Equals(left, right);
         }
 
-        public static bool operator !=(CodelistInformation left, CodelistInformation right)
+        public static bool operator !=(CodelistsResponse left, CodelistsResponse right)
         {
             return !Equals(left, right);
         }
