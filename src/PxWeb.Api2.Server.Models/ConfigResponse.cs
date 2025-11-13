@@ -75,9 +75,9 @@ namespace PxWeb.Api2.Server.Models
         public int MaxCallsPerTimeWindow { get; set; }
 
         /// <summary>
-        /// The time window restricting how many call that can be done.
+        /// The time window restricting how many call that can be done. Note that this time window is for fetching data from the API and that different endpoints might have different limits.
         /// </summary>
-        /// <value>The time window restricting how many call that can be done.</value>
+        /// <value>The time window restricting how many call that can be done. Note that this time window is for fetching data from the API and that different endpoints might have different limits.</value>
         [Required]
         [DataMember(Name="timeWindow", EmitDefaultValue=true)]
         public int TimeWindow { get; set; }
