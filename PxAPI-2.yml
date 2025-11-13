@@ -337,7 +337,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/SavedQuery"
+              $ref: "#/components/schemas/SavedQueryResponse"
       responses:
         "201":
           description: Saved query created and returned with the id specified.
