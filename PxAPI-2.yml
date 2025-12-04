@@ -811,6 +811,9 @@ components:
         label:
           type: string
           description: A textual name for the PathElement
+        sortCode:
+          type: string
+          description: A string for sorting the PathElement among its siblings
 
     Table:
       type: object
