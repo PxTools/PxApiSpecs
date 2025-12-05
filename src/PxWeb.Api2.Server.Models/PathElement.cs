@@ -43,6 +43,13 @@ namespace PxWeb.Api2.Server.Models
         public string Label { get; set; }
 
         /// <summary>
+        /// A string for sorting the PathElement among its siblings
+        /// </summary>
+        /// <value>A string for sorting the PathElement among its siblings</value>
+        [DataMember(Name="sortCode", EmitDefaultValue=false)]
+        public string? SortCode { get; set; }
+
+        /// <summary>
         /// Returns the string presentation of the object
         /// </summary>
         /// <returns>String presentation of the object</returns>
@@ -52,6 +59,7 @@ namespace PxWeb.Api2.Server.Models
             sb.Append("class PathElement {\n");
             sb.Append("  Id: ").Append(Id).Append("\n");
             sb.Append("  Label: ").Append(Label).Append("\n");
+            sb.Append("  SortCode: ").Append(SortCode).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -97,6 +105,11 @@ namespace PxWeb.Api2.Server.Models
                     Label == other.Label ||
                     Label != null &&
                     Label.Equals(other.Label)
+                ) && 
+                (
+                    SortCode == other.SortCode ||
+                    SortCode != null &&
+                    SortCode.Equals(other.SortCode)
                 );
         }
 
@@ -114,6 +127,8 @@ namespace PxWeb.Api2.Server.Models
                     hashCode = hashCode * 59 + Id.GetHashCode();
                     if (Label != null)
                     hashCode = hashCode * 59 + Label.GetHashCode();
+                    if (SortCode != null)
+                    hashCode = hashCode * 59 + SortCode.GetHashCode();
                 return hashCode;
             }
         }
