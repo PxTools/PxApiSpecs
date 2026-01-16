@@ -1349,6 +1349,11 @@ components:
           type: object
           additionalProperties:
             $ref: "#/components/schemas/BasePeriod"
+        alternativeText:
+          description: An alternative text for the dimension value
+          type: object
+          additionalProperties:
+            type: string
     strarray-by-str-dict:
       type: object
       additionalProperties:

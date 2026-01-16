@@ -104,6 +104,13 @@ namespace PxWeb.Api2.Server.Models
         public Dictionary<string, string> BasePeriod { get; set; }
 
         /// <summary>
+        /// An alternative text for the dimension value
+        /// </summary>
+        /// <value>An alternative text for the dimension value</value>
+        [DataMember(Name="alternativeText", EmitDefaultValue=false)]
+        public Dictionary<string, string> AlternativeText { get; set; }
+
+        /// <summary>
         /// Returns the string presentation of the object
         /// </summary>
         /// <returns>String presentation of the object</returns>
@@ -122,6 +129,7 @@ namespace PxWeb.Api2.Server.Models
             sb.Append("  PriceType: ").Append(PriceType).Append("\n");
             sb.Append("  Adjustment: ").Append(Adjustment).Append("\n");
             sb.Append("  BasePeriod: ").Append(BasePeriod).Append("\n");
+            sb.Append("  AlternativeText: ").Append(AlternativeText).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -220,6 +228,12 @@ namespace PxWeb.Api2.Server.Models
                     BasePeriod != null &&
                     other.BasePeriod != null &&
                     BasePeriod.SequenceEqual(other.BasePeriod)
+                ) && 
+                (
+                    AlternativeText == other.AlternativeText ||
+                    AlternativeText != null &&
+                    other.AlternativeText != null &&
+                    AlternativeText.SequenceEqual(other.AlternativeText)
                 );
         }
 
@@ -255,6 +269,8 @@ namespace PxWeb.Api2.Server.Models
                     hashCode = hashCode * 59 + Adjustment.GetHashCode();
                     if (BasePeriod != null)
                     hashCode = hashCode * 59 + BasePeriod.GetHashCode();
+                    if (AlternativeText != null)
+                    hashCode = hashCode * 59 + AlternativeText.GetHashCode();
                 return hashCode;
             }
         }
