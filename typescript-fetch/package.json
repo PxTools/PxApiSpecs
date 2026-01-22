@@ -1,0 +1,20 @@
+{
+  "name": "pxwebapi-client",
+  "version": "0.0.1",
+  "description": "OpenAPI client for PxWebApi 2.0",
+  "author": "OpenAPI-Generator",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/PxTools/PxApiSpecs.git"
+  },
+  "license": "Apache-2.0",
+  "main": "./dist/index.js",
+  "typings": "./dist/index.d.ts",
+  "scripts": {
+    "build": "tsc",
+    "prepare": "npm run build"
+  },
+  "devDependencies": {
+    "typescript": "^4.0 || ^5.0"
+  }
+}
