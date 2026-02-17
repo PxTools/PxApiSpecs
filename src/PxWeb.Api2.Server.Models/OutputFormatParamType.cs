@@ -21,9 +21,9 @@ using PxWeb.Api2.Server.Converters;
 namespace PxWeb.Api2.Server.Models
 { 
         /// <summary>
-        /// Parameters for the output format. * UseCodes: Can not be combined with UseTexts and UseCodesAndTexts. And only applicable for csv, html and xlsx output format. * UseTexts: Can not be combined with UsedCodes and UseCodesAndTexts. And only applicable for csv, html and xlsx output format. * UseCodesAndTexts: Can not be combined with UseCodess and UseTexts. And only applicable for csv, html and xlsx output format. * IncludeTitle: Only applicable for csv, html and xlsx output format. * SeparatorTab: Can not be combined with SeparatorSpace and SeparatorSemicolon. And only applicable for csv output format. * SeparatorSpace: Can not be combined with SeparatorTab and SeparatorSemicolon. And only applicable for csv output format. * SeparatorSemicolon: Can not be combined with SeparatorTab and SeparatorSpace. And only applicable for csv output format. 
+        /// Parameters for the output format. * UseCodes: Can not be combined with UseTexts and UseCodesAndTexts. And only applicable for csv, html and xlsx output format. * UseTexts: Can not be combined with UsedCodes and UseCodesAndTexts. And only applicable for csv, html and xlsx output format. * UseCodesAndTexts: Can not be combined with UseCodess and UseTexts. And only applicable for csv, html and xlsx output format. * IncludeTitle: Only applicable for csv, html and xlsx output format. * SeparatorTab: Can not be combined with SeparatorSpace and SeparatorSemicolon. And only applicable for csv output format. * SeparatorSpace: Can not be combined with SeparatorTab and SeparatorSemicolon. And only applicable for csv output format. * SeparatorSemicolon: Can not be combined with SeparatorTab and SeparatorSpace. And only applicable for csv output format. * ExcludeZerosAndMissingValues: Can be used by all formats but only have effect on csv, html and xlsx output format. 
         /// </summary>
-        /// <value>Parameters for the output format. * UseCodes: Can not be combined with UseTexts and UseCodesAndTexts. And only applicable for csv, html and xlsx output format. * UseTexts: Can not be combined with UsedCodes and UseCodesAndTexts. And only applicable for csv, html and xlsx output format. * UseCodesAndTexts: Can not be combined with UseCodess and UseTexts. And only applicable for csv, html and xlsx output format. * IncludeTitle: Only applicable for csv, html and xlsx output format. * SeparatorTab: Can not be combined with SeparatorSpace and SeparatorSemicolon. And only applicable for csv output format. * SeparatorSpace: Can not be combined with SeparatorTab and SeparatorSemicolon. And only applicable for csv output format. * SeparatorSemicolon: Can not be combined with SeparatorTab and SeparatorSpace. And only applicable for csv output format. </value>
+        /// <value>Parameters for the output format. * UseCodes: Can not be combined with UseTexts and UseCodesAndTexts. And only applicable for csv, html and xlsx output format. * UseTexts: Can not be combined with UsedCodes and UseCodesAndTexts. And only applicable for csv, html and xlsx output format. * UseCodesAndTexts: Can not be combined with UseCodess and UseTexts. And only applicable for csv, html and xlsx output format. * IncludeTitle: Only applicable for csv, html and xlsx output format. * SeparatorTab: Can not be combined with SeparatorSpace and SeparatorSemicolon. And only applicable for csv output format. * SeparatorSpace: Can not be combined with SeparatorTab and SeparatorSemicolon. And only applicable for csv output format. * SeparatorSemicolon: Can not be combined with SeparatorTab and SeparatorSpace. And only applicable for csv output format. * ExcludeZerosAndMissingValues: Can be used by all formats but only have effect on csv, html and xlsx output format. </value>
         [TypeConverter(typeof(CustomEnumConverter<OutputFormatParamType>))]
         [JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
         public enum OutputFormatParamType
@@ -69,6 +69,12 @@ namespace PxWeb.Api2.Server.Models
             /// Enum SeparatorSemicolonEnum for SeparatorSemicolon
             /// </summary>
             [EnumMember(Value = "SeparatorSemicolon")]
-            SeparatorSemicolonEnum = 7
+            SeparatorSemicolonEnum = 7,
+            
+            /// <summary>
+            /// Enum ExcludeZerosAndMissingValuesEnum for ExcludeZerosAndMissingValues
+            /// </summary>
+            [EnumMember(Value = "ExcludeZerosAndMissingValues")]
+            ExcludeZerosAndMissingValuesEnum = 8
         }
 }
