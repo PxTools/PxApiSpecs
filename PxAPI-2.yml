@@ -555,6 +555,7 @@ components:
         - SeparatorTab
         - SeparatorSpace
         - SeparatorSemicolon
+        - ExcludeZerosAndMissingValues
       description: |
         Parameters for the output format.
         * UseCodes: Can not be combined with UseTexts and UseCodesAndTexts. And only applicable for csv, html and xlsx output format.
@@ -564,7 +565,7 @@ components:
         * SeparatorTab: Can not be combined with SeparatorSpace and SeparatorSemicolon. And only applicable for csv output format.
         * SeparatorSpace: Can not be combined with SeparatorTab and SeparatorSemicolon. And only applicable for csv output format.
         * SeparatorSemicolon: Can not be combined with SeparatorTab and SeparatorSpace. And only applicable for csv output format.
-
+        * ExcludeZerosAndMissingValues: Can be used by all formats but only have effect on csv, html and xlsx output format.
     SavedQueryResponse:
       type: object
       required:
