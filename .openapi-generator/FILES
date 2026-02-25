@@ -26,6 +26,9 @@ src/PxWeb.Api2.Server.Models/KeyValuePair.cs
 src/PxWeb.Api2.Server.Models/Language.cs
 src/PxWeb.Api2.Server.Models/Link.cs
 src/PxWeb.Api2.Server.Models/MeasuringType.cs
+src/PxWeb.Api2.Server.Models/MetaidDimentionEntry.cs
+src/PxWeb.Api2.Server.Models/MetaidLink.cs
+src/PxWeb.Api2.Server.Models/MetaidLinksValue.cs
 src/PxWeb.Api2.Server.Models/Note.cs
 src/PxWeb.Api2.Server.Models/OutputFormatParamType.cs
 src/PxWeb.Api2.Server.Models/OutputFormatType.cs

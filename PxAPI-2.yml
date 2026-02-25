@@ -1282,6 +1282,8 @@ components:
             updateFrequency:
               description: How often a table is updated
               type: string
+            metaid-links:
+              $ref: '#/components/schemas/metaid-links'
         firstPeriod:
           description: Earliest time period in table
           type: string
@@ -1300,6 +1302,65 @@ components:
           description: A list of contacts associated with the table.
           items:
             $ref: "#/components/schemas/Contact"
+
+    metaid-links:
+        type: object
+        description: Dictionary where key is metadata-type (e.g statistics-homepage, about-statistics, definitions ) and value is an MetaLinkValue object.
+        additionalProperties:
+          type: object
+          properties:
+            dataset-links:
+              $ref: '#/components/schemas/array-of-metaid-link'
+            dimention-entries:
+              type: object
+              description: Dictionary where key is a dimention-code and value is a MetaidDimentionEntry object .
+              additionalProperties:
+                $ref: '#/components/schemas/metaid-dimention-entry'
+
+    metaid-dimention-entry:
+        type: object
+        description: Holds links for a dimention and or category.
+        properties:
+          dimension-links:
+              $ref: '#/components/schemas/array-of-metaid-link'
+          category-links:
+              $ref: '#/components/schemas/category-links'
+
+    category-links:
+        type: object
+        description: Dictionary where key is a category-code and value is a array of metaid-link.
+        additionalProperties:
+            $ref: '#/components/schemas/array-of-metaid-link'
+
+    array-of-metaid-link:
+        description: Array of metaid-link.
+        type: array
+        items:
+             $ref: '#/components/schemas/metaid-link'
+
+    metaid-link:
+        type: object
+        description: Represents a single MetaID link.
+        properties:
+          metaid:
+            type: string
+            description: Source Meta ID for this link
+          href:
+            type: string
+            format: uri
+            description: URL link
+          label:
+            type: string
+            description: Label for the link
+          type:
+            type: string
+            description: Type of the link, like text/htm
+        required:
+          - metaid
+          - href
+          - label
+          - type
+
     extension:
       description: extension at some level
       type: object

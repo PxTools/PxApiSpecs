@@ -161,6 +161,13 @@ namespace PxWeb.Api2.Server.Models
         public string? UpdateFrequency { get; set; }
 
         /// <summary>
+        /// Dictionary where key is metadata-type (e.g statistics-homepage, about-statistics, definitions ) and value is an MetaLinkValue object.
+        /// </summary>
+        /// <value>Dictionary where key is metadata-type (e.g statistics-homepage, about-statistics, definitions ) and value is an MetaLinkValue object.</value>
+        [DataMember(Name="metaid-links", EmitDefaultValue=false)]
+        public Dictionary<string, MetaidLinksValue> MetaidLinks { get; set; }
+
+        /// <summary>
         /// Returns the string presentation of the object
         /// </summary>
         /// <returns>String presentation of the object</returns>
@@ -187,6 +194,7 @@ namespace PxWeb.Api2.Server.Models
             sb.Append("  Survey: ").Append(Survey).Append("\n");
             sb.Append("  Link: ").Append(Link).Append("\n");
             sb.Append("  UpdateFrequency: ").Append(UpdateFrequency).Append("\n");
+            sb.Append("  MetaidLinks: ").Append(MetaidLinks).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -319,6 +327,12 @@ namespace PxWeb.Api2.Server.Models
                     UpdateFrequency == other.UpdateFrequency ||
                     UpdateFrequency != null &&
                     UpdateFrequency.Equals(other.UpdateFrequency)
+                ) && 
+                (
+                    MetaidLinks == other.MetaidLinks ||
+                    MetaidLinks != null &&
+                    other.MetaidLinks != null &&
+                    MetaidLinks.SequenceEqual(other.MetaidLinks)
                 );
         }
 
@@ -370,6 +384,8 @@ namespace PxWeb.Api2.Server.Models
                     hashCode = hashCode * 59 + Link.GetHashCode();
                     if (UpdateFrequency != null)
                     hashCode = hashCode * 59 + UpdateFrequency.GetHashCode();
+                    if (MetaidLinks != null)
+                    hashCode = hashCode * 59 + MetaidLinks.GetHashCode();
                 return hashCode;
             }
         }

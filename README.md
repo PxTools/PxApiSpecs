@@ -50,3 +50,7 @@ Windows:
 ```sh
 build.bat
 ```
+
+
+### To look at the templates: 
+docker run --rm -v ${PWD}:/local openapitools/openapi-generator-cli:v7.9.0 author template -g aspnetcore -o /local/templates-aspnetcore  
