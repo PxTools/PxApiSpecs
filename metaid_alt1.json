@@ -1,0 +1,295 @@
+{
+  "version": "2.0",
+  "class": "dataset",
+  "label": "12909: Doctor certified sickness absence for employees (per cent), PxcMetaTitleBy occupation, country background, contents PxcMetaTitleAnd quarter",
+  "source": "Statistics Norway",
+  "updated": "2026-02-26T07:00:00Z",
+  "note": [
+    "Large changes in the sickness absence rates from one year to another should be interpreted with caution. Occupations with few observations will experience large changes even if the change in sickness absence days are small in absolute numbers.",
+    "The table does not include stateless employees or employees with unknown country background."
+  ],
+  "role": {
+    "time": [
+      "Tid"
+    ],
+    "metric": [
+      "ContentsCode"
+    ]
+  },
+  "id": [
+    "Yrke",
+    "LandBakgr",
+    "ContentsCode",
+    "Tid"
+  ],
+  "size": [
+    2,
+    2,
+    2,
+    1
+  ],
+  "dimension": {
+    "Yrke": {
+      "label": "occupation",
+      "category": {
+        "index": {
+          "1": 0,
+          "2": 1
+        },
+        "label": {
+          "1": "Managers",
+          "2": "Professionals"
+        }
+      },
+      "extension": {
+        "elimination": false,
+        "show": "code_value"
+      },
+      "link": {
+        "describedby": [
+          {
+            "extension": {
+              "Yrke": "urn:ssb:classification:klass:7 urn:ssb:conceptvariable:vardok:1118"
+            }
+          }
+        ]
+      }
+    },
+    "LandBakgr": {
+      "label": "country background",
+      "category": {
+        "index": {
+          "999": 0,
+          "00": 1
+        },
+        "label": {
+          "999": "Total",
+          "00": "Nordic countries except Norway"
+        }
+      },
+      "extension": {
+        "elimination": true,
+        "eliminationValueCode": "999",
+        "show": "value"
+      },
+      "link": {
+        "describedby": [
+          {
+            "extension": {
+              "00": "urn:ssb:conceptvariable:vardok:007",
+              "LandBakgr": "urn:ssb:classification:klass:545"
+            }
+          }
+        ]
+      }
+    },
+    "ContentsCode": {
+      "label": "contents",
+      "category": {
+        "index": {
+          "Sykefraversprosent": 0,
+          "SykefraversprosEndr": 1
+        },
+        "label": {
+          "Sykefraversprosent": "Sickness absence rate (doctor certified)",
+          "SykefraversprosEndr": "Sickness absence rate (doctor certified), per cent change last year"
+        },
+        "unit": {
+          "Sykefraversprosent": {
+            "base": "per cent",
+            "decimals": 1
+          },
+          "SykefraversprosEndr": {
+            "base": "per cent",
+            "decimals": 1
+          }
+        }
+      },
+      "extension": {
+        "elimination": false,
+        "refperiod": {
+          "Sykefraversprosent": "Quarter",
+          "SykefraversprosEndr": "Quarter"
+        },
+        "show": "value",
+        "measuringType": {
+          "Sykefraversprosent": "Average",
+          "SykefraversprosEndr": "Average"
+        },
+        "priceType": {
+          "Sykefraversprosent": "NotApplicable",
+          "SykefraversprosEndr": "NotApplicable"
+        },
+        "adjustment": {
+          "Sykefraversprosent": "None",
+          "SykefraversprosEndr": "None"
+        }
+      },
+      "link": {
+        "describedby": [
+          {
+            "extension": {
+              "Sykefraversprosent": "urn:ssb:conceptvariable:vardok:2236",
+              "SykefraversprosEndr": "urn:ssb:conceptvariable:vardok:2236"
+            }
+          }
+        ]
+      }
+    },
+    "Tid": {
+      "label": "quarter",
+      "category": {
+        "index": {
+          "2024K4": 0
+        },
+        "label": {
+          "2024K4": "2024K4"
+        }
+      },
+      "extension": {
+        "elimination": false,
+        "show": "code"
+      }
+    }
+  },
+  "extension": {
+    "px": {
+      "infofile": "None",
+      "tableid": "12909",
+      "decimals": 1,
+      "official-statistics": false,
+      "aggregallowed": false,
+      "copyright": false,
+      "language": "en",
+      "contents": "12909: Doctor certified sickness absence for employees (per cent),",
+      "descriptiondefault": false,
+      "heading": [
+        "ContentsCode",
+        "Tid"
+      ],
+      "stub": [
+        "Yrke",
+        "LandBakgr"
+      ],
+      "matrix": "Sykefraversprosent",
+      "subject-code": "al",
+      "subject-area": "Labour market and earnings",
+      "metaid-links": {
+        "(gui-field =) statistics-homepage": {
+          "dataset-links": [
+            {
+              "metaid": "STATISTICS:sykefratot",
+              "href": "https://www.ssb.no/en/sykefratot",
+              "label": "Statistics homepage",
+              "type": "text/html"
+            }
+          ]
+        },
+        "(gui-field =) about-statistics": {
+          "dataset-links": [
+            {
+              "metaid": "STATISTICS:sykefratot",
+              "href": "https://www.ssb.no/en/sykefratot#om-statistikken",
+              "label": "About the statistics",
+              "type": "text/html"
+            }
+          ]
+        },
+        "(gui-field =) definitions": {
+          "dimention-entries": {
+            "Yrke": {
+              "dimension-links": [
+                {
+                  "metaid": "urn:ssb:classification:klass:7",
+                  "href": "https://www.ssb.no/en/klass/klassifikasjoner/7",
+                  "label": "Classification for variableLabel.",
+                  "type": "text/html"
+                },
+                {
+                  "metaid": "urn:ssb:conceptvariable:vardok:1118",
+                  "href": "https://www.ssb.no/a/metadata/conceptvariable/vardok/1118/en",
+                  "label": "Definition of variableLabel.",
+                  "type": "text/html"
+                }
+              ]
+            },
+            "LandBakgr": {
+              "dimension-links": [
+                {
+                  "metaid": "urn:ssb:classification:klass:545",
+                  "href": "https://www.ssb.no/en/klass/klassifikasjoner/545",
+                  "label": "Classification for variableLabel.",
+                  "type": "text/html"
+                }
+              ],
+              "category-links": {
+                "00": [
+                  {
+                    "metaid": "urn:ssb:conceptvariable:vardok:007",
+                    "href": "https://www.ssb.no/a/metadata/conceptvariable/vardok/007/en",
+                    "label": "Definition of valueLabel for vaiable variableLabel.",
+                    "type": "text/html"
+                  }
+                ]
+              }
+            },
+            "ContentsCode": {
+              "category-links": {
+                "Sykefraversprosent": [
+                  {
+                    "metaid": "urn:ssb:conceptvariable:vardok:2236",
+                    "href": "https://www.ssb.no/a/metadata/conceptvariable/vardok/2236/en",
+                    "label": "Definition of valueLabel for vaiable variableLabel.",
+                    "type": "text/html"
+                  }
+                ],
+                "SykefraversprosEndr": [
+                  {
+                    "metaid": "urn:ssb:conceptvariable:vardok:2236",
+                    "href": "https://www.ssb.no/a/metadata/conceptvariable/vardok/2236/en",
+                    "label": "Definition of valueLabel for vaiable variableLabel.",
+                    "type": "text/html"
+                  }
+                ]
+              }
+            }
+          }
+        }
+      }
+    },
+    "discontinued": null,
+    "contact": [
+      {
+        "name": "Unn H. Høydahl, Statistics Norway  +47 40 90 23 77",
+        "organization": "",
+        "phone": "",
+        "mail": "",
+        "raw": "Unn H. Høydahl, Statistics Norway  +47 40 90 23 77, #uhh@ssb.no "
+      },
+      {
+        "name": " Arbeidsmarked, Statistics Norway  +47 62 88 50 00",
+        "organization": "",
+        "phone": "",
+        "mail": "",
+        "raw": "# Arbeidsmarked, Statistics Norway  +47 62 88 50 00, #arbeidsmarked@ssb.no "
+      },
+      {
+        "name": "Stine Bakke, Statistics Norway  +47 91 52 62 51",
+        "organization": "",
+        "phone": "",
+        "mail": "",
+        "raw": "#Stine Bakke, Statistics Norway  +47 91 52 62 51, #eba@ssb.no "
+      }
+    ]
+  },
+  "value": [
+    4.9,
+    -2.6,
+    4.2,
+    3.7,
+    4.8,
+    -2.5,
+    5,
+    -2.5
+  ]
+}
