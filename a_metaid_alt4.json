@@ -263,28 +263,6 @@
       "matrix": "Sykefraversprosent",
       "subject-code": "al",
       "subject-area": "Labour market and earnings",
-      "metaid-links": [
-        {
-          "relation": "(gui-field =) statistics-homepage (sort of a IANA subclass)",
-          "dimension": null,
-          "catagory": null,
-          "metaid": "STATISTICS:sykefratot",
-          "href": "https://www.ssb.no/en/sykefratot",
-          "label": "Statistics homepage",
-          "type": "text/html"
-        },
-        {
-          "relation": "(gui-field =) about-statistics",
-          "dimension": null,
-          "catagory": null,
-          "metaid": "STATISTICS:sykefratot",
-          "href": "https://www.ssb.no/en/sykefratot#om-statistikken",
-          "label": "About the statistics",
-          "type": "text/html"
-        }
-
-
-      ],
       "discontinued": null,
       "contact": [
         {
