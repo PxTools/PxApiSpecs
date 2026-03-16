@@ -33,6 +33,8 @@ src/PxWeb.Api2.Server.Models/PageInfo.cs
 src/PxWeb.Api2.Server.Models/PathElement.cs
 src/PxWeb.Api2.Server.Models/PriceType.cs
 src/PxWeb.Api2.Server.Models/Problem.cs
+src/PxWeb.Api2.Server.Models/RelatedLink.cs
+src/PxWeb.Api2.Server.Models/RelatedLinkExtension.cs
 src/PxWeb.Api2.Server.Models/Role.cs
 src/PxWeb.Api2.Server.Models/SavedQuery.cs
 src/PxWeb.Api2.Server.Models/SavedQueryResponse.cs

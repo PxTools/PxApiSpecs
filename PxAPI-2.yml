@@ -1364,17 +1364,12 @@ components:
         uniqueItems: true
     jsonstat-link:
       type: object
-      additionalProperties:
-        type: array
-        items:
-          type: object
-          title: jsonstatLink
-          properties:
-            type:
-              type: string
-            href:
-              "$ref": "#/components/schemas/href"
-          additionalProperties: false
+      properties:
+        related:
+           type: array
+           items:
+              $ref: "#/components/schemas/RelatedLink"
+
     jsonstat-extension-link:
       type: object
       properties:
@@ -1390,9 +1385,39 @@ components:
                 additionalProperties:
                   description: A string
                   type: string
-
             additionalProperties: false
+        related:
+           type: array
+           items:
+              $ref: "#/components/schemas/RelatedLink"
       additionalProperties: false
+
+    RelatedLink:
+      type: object
+      properties:
+        extension:
+          type: object
+          properties:
+            relation:
+              type: string
+              example: "(gui-field =) definitions"
+            catagory:
+              type: string
+              nullable: true
+            metaid:
+              type: string
+              example: "urn:ssb:classification:klass:7"
+        href:
+          type: string
+          format: uri
+          example: "https://www.ssb.no/en/klass/klassifikasjoner/7"
+        label:
+          type: string
+          example: "Classification for variableLabel."
+        type:
+          type: string
+          example: "text/html"
+
     jsonstat-note:
       description: Spesification on json-stat.org -> [here](https://json-stat.org/full/#note)
       type: array

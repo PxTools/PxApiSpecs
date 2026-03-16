@@ -24,19 +24,27 @@ namespace PxWeb.Api2.Server.Models
     /// 
     /// </summary>
     [DataContract]
-    public class JsonstatExtensionLink : IEquatable<JsonstatExtensionLink>
+    public class RelatedLinkExtension : IEquatable<RelatedLinkExtension>
     {
         /// <summary>
-        /// Gets or Sets Describedby
+        /// Gets or Sets Relation
         /// </summary>
-        [DataMember(Name="describedby", EmitDefaultValue=false)]
-        public List<DimensionExtension> Describedby { get; set; }
+        /* <example>(gui-field &#x3D;) definitions</example> */
+        [DataMember(Name="relation", EmitDefaultValue=false)]
+        public string? Relation { get; set; }
 
         /// <summary>
-        /// Gets or Sets Related
+        /// Gets or Sets Catagory
         /// </summary>
-        [DataMember(Name="related", EmitDefaultValue=false)]
-        public List<RelatedLink> Related { get; set; }
+        [DataMember(Name="catagory", EmitDefaultValue=true)]
+        public string? Catagory { get; set; }
+
+        /// <summary>
+        /// Gets or Sets Metaid
+        /// </summary>
+        /* <example>urn:ssb:classification:klass:7</example> */
+        [DataMember(Name="metaid", EmitDefaultValue=false)]
+        public string? Metaid { get; set; }
 
         /// <summary>
         /// Returns the string presentation of the object
@@ -45,9 +53,10 @@ namespace PxWeb.Api2.Server.Models
         public override string ToString()
         {
             var sb = new StringBuilder();
-            sb.Append("class JsonstatExtensionLink {\n");
-            sb.Append("  Describedby: ").Append(Describedby).Append("\n");
-            sb.Append("  Related: ").Append(Related).Append("\n");
+            sb.Append("class RelatedLinkExtension {\n");
+            sb.Append("  Relation: ").Append(Relation).Append("\n");
+            sb.Append("  Catagory: ").Append(Catagory).Append("\n");
+            sb.Append("  Metaid: ").Append(Metaid).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -70,31 +79,34 @@ namespace PxWeb.Api2.Server.Models
         {
             if (obj is null) return false;
             if (ReferenceEquals(this, obj)) return true;
-            return obj.GetType() == GetType() && Equals((JsonstatExtensionLink)obj);
+            return obj.GetType() == GetType() && Equals((RelatedLinkExtension)obj);
         }
 
         /// <summary>
-        /// Returns true if JsonstatExtensionLink instances are equal
+        /// Returns true if RelatedLinkExtension instances are equal
         /// </summary>
-        /// <param name="other">Instance of JsonstatExtensionLink to be compared</param>
+        /// <param name="other">Instance of RelatedLinkExtension to be compared</param>
         /// <returns>Boolean</returns>
-        public bool Equals(JsonstatExtensionLink other)
+        public bool Equals(RelatedLinkExtension other)
         {
             if (other is null) return false;
             if (ReferenceEquals(this, other)) return true;
 
             return 
                 (
-                    Describedby == other.Describedby ||
-                    Describedby != null &&
-                    other.Describedby != null &&
-                    Describedby.SequenceEqual(other.Describedby)
+                    Relation == other.Relation ||
+                    Relation != null &&
+                    Relation.Equals(other.Relation)
                 ) && 
                 (
-                    Related == other.Related ||
-                    Related != null &&
-                    other.Related != null &&
-                    Related.SequenceEqual(other.Related)
+                    Catagory == other.Catagory ||
+                    Catagory != null &&
+                    Catagory.Equals(other.Catagory)
+                ) && 
+                (
+                    Metaid == other.Metaid ||
+                    Metaid != null &&
+                    Metaid.Equals(other.Metaid)
                 );
         }
 
@@ -108,10 +120,12 @@ namespace PxWeb.Api2.Server.Models
             {
                 var hashCode = 41;
                 // Suitable nullity checks etc, of course :)
-                    if (Describedby != null)
-                    hashCode = hashCode * 59 + Describedby.GetHashCode();
-                    if (Related != null)
-                    hashCode = hashCode * 59 + Related.GetHashCode();
+                    if (Relation != null)
+                    hashCode = hashCode * 59 + Relation.GetHashCode();
+                    if (Catagory != null)
+                    hashCode = hashCode * 59 + Catagory.GetHashCode();
+                    if (Metaid != null)
+                    hashCode = hashCode * 59 + Metaid.GetHashCode();
                 return hashCode;
             }
         }
@@ -119,12 +133,12 @@ namespace PxWeb.Api2.Server.Models
         #region Operators
         #pragma warning disable 1591
 
-        public static bool operator ==(JsonstatExtensionLink left, JsonstatExtensionLink right)
+        public static bool operator ==(RelatedLinkExtension left, RelatedLinkExtension right)
         {
             return Equals(left, right);
         }
 
-        public static bool operator !=(JsonstatExtensionLink left, JsonstatExtensionLink right)
+        public static bool operator !=(RelatedLinkExtension left, RelatedLinkExtension right)
         {
             return !Equals(left, right);
         }
