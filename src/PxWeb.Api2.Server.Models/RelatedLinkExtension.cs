@@ -27,22 +27,25 @@ namespace PxWeb.Api2.Server.Models
     public class RelatedLinkExtension : IEquatable<RelatedLinkExtension>
     {
         /// <summary>
-        /// Gets or Sets Relation
+        /// What type of information is the link to ( e.g. about-statistics, statistics-homepage, definition). Like the IANA relations, but for px.
         /// </summary>
-        /* <example>(gui-field &#x3D;) definitions</example> */
+        /// <value>What type of information is the link to ( e.g. about-statistics, statistics-homepage, definition). Like the IANA relations, but for px.</value>
+        /* <example>definitions</example> */
         [Required]
         [DataMember(Name="relation", EmitDefaultValue=false)]
         public string Relation { get; set; }
 
         /// <summary>
-        /// Gets or Sets Catagory
+        /// Non-null in the link applies to a spesific category. (Typically each contents variable has it own definition, in these cases category holds the contents variable.)
         /// </summary>
-        [DataMember(Name="catagory", EmitDefaultValue=true)]
-        public string? Catagory { get; set; }
+        /// <value>Non-null in the link applies to a spesific category. (Typically each contents variable has it own definition, in these cases category holds the contents variable.)</value>
+        [DataMember(Name="category", EmitDefaultValue=true)]
+        public string? Category { get; set; }
 
         /// <summary>
-        /// Gets or Sets Metaid
+        /// Metaid that was the source for this Link
         /// </summary>
+        /// <value>Metaid that was the source for this Link</value>
         /* <example>urn:ssb:classification:klass:7</example> */
         [Required]
         [DataMember(Name="metaid", EmitDefaultValue=false)]
@@ -57,7 +60,7 @@ namespace PxWeb.Api2.Server.Models
             var sb = new StringBuilder();
             sb.Append("class RelatedLinkExtension {\n");
             sb.Append("  Relation: ").Append(Relation).Append("\n");
-            sb.Append("  Catagory: ").Append(Catagory).Append("\n");
+            sb.Append("  Category: ").Append(Category).Append("\n");
             sb.Append("  Metaid: ").Append(Metaid).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
@@ -101,9 +104,9 @@ namespace PxWeb.Api2.Server.Models
                     Relation.Equals(other.Relation)
                 ) && 
                 (
-                    Catagory == other.Catagory ||
-                    Catagory != null &&
-                    Catagory.Equals(other.Catagory)
+                    Category == other.Category ||
+                    Category != null &&
+                    Category.Equals(other.Category)
                 ) && 
                 (
                     Metaid == other.Metaid ||
@@ -124,8 +127,8 @@ namespace PxWeb.Api2.Server.Models
                 // Suitable nullity checks etc, of course :)
                     if (Relation != null)
                     hashCode = hashCode * 59 + Relation.GetHashCode();
-                    if (Catagory != null)
-                    hashCode = hashCode * 59 + Catagory.GetHashCode();
+                    if (Category != null)
+                    hashCode = hashCode * 59 + Category.GetHashCode();
                     if (Metaid != null)
                     hashCode = hashCode * 59 + Metaid.GetHashCode();
                 return hashCode;

@@ -1394,30 +1394,37 @@ components:
 
     RelatedLink:
       type: object
+      description: A link to something outside the dataset. Created from a metaid.
       properties:
         extension:
           type: object
           properties:
             relation:
+              description: What type of information is the link to ( e.g. about-statistics, statistics-homepage, definition). Like the IANA relations, but for px.
               type: string
-              example: "(gui-field =) definitions"
-            catagory:
+              example: "definitions"
+            category:
+              description: Non-null in the link applies to a spesific category. (Typically each contents variable has it own definition, in these cases category holds the contents variable.)
               type: string
               nullable: true
             metaid:
+              description: Metaid that was the source for this Link 
               type: string
               example: "urn:ssb:classification:klass:7"
           required:
             - relation
             - metaid
         href:
+          description: The url
           type: string
           format: uri
           example: "https://www.ssb.no/en/klass/klassifikasjoner/7"
         label:
+          description: The click-bate text
           type: string
           example: "Classification for variableLabel."
         type:
+          description: Contenttype type
           type: string
           example: "text/html"
       required:

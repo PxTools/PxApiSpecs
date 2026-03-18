@@ -21,7 +21,7 @@ using PxWeb.Api2.Server.Converters;
 namespace PxWeb.Api2.Server.Models
 { 
     /// <summary>
-    /// 
+    /// A link to something outside the dataset. Created from a metaid.
     /// </summary>
     [DataContract]
     public class RelatedLink : IEquatable<RelatedLink>
@@ -34,24 +34,27 @@ namespace PxWeb.Api2.Server.Models
         public RelatedLinkExtension Extension { get; set; }
 
         /// <summary>
-        /// Gets or Sets Href
+        /// The url
         /// </summary>
+        /// <value>The url</value>
         /* <example>https://www.ssb.no/en/klass/klassifikasjoner/7</example> */
         [Required]
         [DataMember(Name="href", EmitDefaultValue=false)]
         public string Href { get; set; }
 
         /// <summary>
-        /// Gets or Sets Label
+        /// The click-bate text
         /// </summary>
+        /// <value>The click-bate text</value>
         /* <example>Classification for variableLabel.</example> */
         [Required]
         [DataMember(Name="label", EmitDefaultValue=false)]
         public string Label { get; set; }
 
         /// <summary>
-        /// Gets or Sets Type
+        /// Contenttype type
         /// </summary>
+        /// <value>Contenttype type</value>
         /* <example>text/html</example> */
         [Required]
         [DataMember(Name="type", EmitDefaultValue=false)]
