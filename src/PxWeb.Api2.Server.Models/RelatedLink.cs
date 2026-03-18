@@ -29,29 +29,33 @@ namespace PxWeb.Api2.Server.Models
         /// <summary>
         /// Gets or Sets Extension
         /// </summary>
+        [Required]
         [DataMember(Name="extension", EmitDefaultValue=false)]
-        public RelatedLinkExtension? Extension { get; set; }
+        public RelatedLinkExtension Extension { get; set; }
 
         /// <summary>
         /// Gets or Sets Href
         /// </summary>
         /* <example>https://www.ssb.no/en/klass/klassifikasjoner/7</example> */
+        [Required]
         [DataMember(Name="href", EmitDefaultValue=false)]
-        public string? Href { get; set; }
+        public string Href { get; set; }
 
         /// <summary>
         /// Gets or Sets Label
         /// </summary>
         /* <example>Classification for variableLabel.</example> */
+        [Required]
         [DataMember(Name="label", EmitDefaultValue=false)]
-        public string? Label { get; set; }
+        public string Label { get; set; }
 
         /// <summary>
         /// Gets or Sets Type
         /// </summary>
         /* <example>text/html</example> */
+        [Required]
         [DataMember(Name="type", EmitDefaultValue=false)]
-        public string? Type { get; set; }
+        public string Type { get; set; }
 
         /// <summary>
         /// Returns the string presentation of the object

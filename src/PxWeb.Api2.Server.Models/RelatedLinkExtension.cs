@@ -30,8 +30,9 @@ namespace PxWeb.Api2.Server.Models
         /// Gets or Sets Relation
         /// </summary>
         /* <example>(gui-field &#x3D;) definitions</example> */
+        [Required]
         [DataMember(Name="relation", EmitDefaultValue=false)]
-        public string? Relation { get; set; }
+        public string Relation { get; set; }
 
         /// <summary>
         /// Gets or Sets Catagory
@@ -43,8 +44,9 @@ namespace PxWeb.Api2.Server.Models
         /// Gets or Sets Metaid
         /// </summary>
         /* <example>urn:ssb:classification:klass:7</example> */
+        [Required]
         [DataMember(Name="metaid", EmitDefaultValue=false)]
-        public string? Metaid { get; set; }
+        public string Metaid { get; set; }
 
         /// <summary>
         /// Returns the string presentation of the object

@@ -1407,6 +1407,9 @@ components:
             metaid:
               type: string
               example: "urn:ssb:classification:klass:7"
+          required:
+            - relation
+            - metaid
         href:
           type: string
           format: uri
@@ -1417,7 +1420,11 @@ components:
         type:
           type: string
           example: "text/html"
-
+      required:
+        - extension
+        - href
+        - label
+        - type
     jsonstat-note:
       description: Spesification on json-stat.org -> [here](https://json-stat.org/full/#note)
       type: array
