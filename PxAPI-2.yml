@@ -1404,11 +1404,11 @@ components:
               type: string
               example: "definitions"
             category:
-              description: Non-null in the link applies to a spesific category. (Typically each contents variable has it own definition, in these cases category holds the contents variable.)
+              description: Non-null if the link applies to a spesific category. (Typically each contents variable has it own definition, in these cases category holds the contents variable.)
               type: string
               nullable: true
             metaid:
-              description: Metaid that was the source for this Link 
+              description: Metaid that was the source when creating this Link 
               type: string
               example: "urn:ssb:classification:klass:7"
           required:
@@ -1420,7 +1420,7 @@ components:
           format: uri
           example: "https://www.ssb.no/en/klass/klassifikasjoner/7"
         label:
-          description: The click-bate text
+          description: The text telling the user where the link leads to
           type: string
           example: "Classification for variableLabel."
         type:

@@ -43,9 +43,9 @@ namespace PxWeb.Api2.Server.Models
         public string Href { get; set; }
 
         /// <summary>
-        /// The click-bate text
+        /// The text telling the user where the link leads to
         /// </summary>
-        /// <value>The click-bate text</value>
+        /// <value>The text telling the user where the link leads to</value>
         /* <example>Classification for variableLabel.</example> */
         [Required]
         [DataMember(Name="label", EmitDefaultValue=false)]

@@ -36,16 +36,16 @@ namespace PxWeb.Api2.Server.Models
         public string Relation { get; set; }
 
         /// <summary>
-        /// Non-null in the link applies to a spesific category. (Typically each contents variable has it own definition, in these cases category holds the contents variable.)
+        /// Non-null if the link applies to a spesific category. (Typically each contents variable has it own definition, in these cases category holds the contents variable.)
         /// </summary>
-        /// <value>Non-null in the link applies to a spesific category. (Typically each contents variable has it own definition, in these cases category holds the contents variable.)</value>
+        /// <value>Non-null if the link applies to a spesific category. (Typically each contents variable has it own definition, in these cases category holds the contents variable.)</value>
         [DataMember(Name="category", EmitDefaultValue=true)]
         public string? Category { get; set; }
 
         /// <summary>
-        /// Metaid that was the source for this Link
+        /// Metaid that was the source when creating this Link
         /// </summary>
-        /// <value>Metaid that was the source for this Link</value>
+        /// <value>Metaid that was the source when creating this Link</value>
         /* <example>urn:ssb:classification:klass:7</example> */
         [Required]
         [DataMember(Name="metaid", EmitDefaultValue=false)]
