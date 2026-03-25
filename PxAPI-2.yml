@@ -1387,7 +1387,6 @@ components:
           items:
             type: object
             title: DimensionExtension
-
             properties:
               extension:
                 description: A extension object
