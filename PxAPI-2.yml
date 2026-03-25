@@ -1405,7 +1405,7 @@ components:
                 relation: statistics-homepage
                 metaid: "KORTNAVN:sykefratot"
               href: "https://www.ssb.no/sykefratot"
-              label: "Statistikkens hjemmeside"
+              label: "Homepage of the statistics"
               type: "text/html"
             description: A link to something outside the dataset. Created from PX keyword [META-ID](https://github.com/PxTools/PxFileFormat/blob/main/keywords/META-ID.md)
             properties:
