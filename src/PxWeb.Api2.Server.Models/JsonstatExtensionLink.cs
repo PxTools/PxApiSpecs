@@ -27,8 +27,9 @@ namespace PxWeb.Api2.Server.Models
     public class JsonstatExtensionLink : IEquatable<JsonstatExtensionLink>
     {
         /// <summary>
-        /// Gets or Sets Describedby
+        /// DeprecationWarning, please use RelatedLink instead
         /// </summary>
+        /// <value>DeprecationWarning, please use RelatedLink instead</value>
         [DataMember(Name="describedby", EmitDefaultValue=false)]
         public List<DimensionExtension> Describedby { get; set; }
 

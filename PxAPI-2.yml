@@ -1364,20 +1364,30 @@ components:
         uniqueItems: true
     jsonstat-link:
       type: object
-      properties:
-        related:
-           type: array
-           items:
-              $ref: "#/components/schemas/RelatedLink"
-
+      deprecated: true
+      description: DeprecationWarning, please use jsonstat-extension-link instead
+      additionalProperties:
+        type: array
+        items:
+          type: object
+          title: jsonstatLink
+          properties:
+            type:
+              type: string
+            href:
+              "$ref": "#/components/schemas/href"
+          additionalProperties: false
     jsonstat-extension-link:
       type: object
       properties:
         describedby:
           type: array
+          deprecated: true
+          description: DeprecationWarning, please use RelatedLink instead
           items:
             type: object
             title: DimensionExtension
+
             properties:
               extension:
                 description: A extension object
@@ -1387,51 +1397,52 @@ components:
                   type: string
             additionalProperties: false
         related:
-           type: array
-           items:
-              $ref: "#/components/schemas/RelatedLink"
-      additionalProperties: false
+          type: array
+          items:
+            type: object
+            title: RelatedLink
+            example: 
+              extension:
+                relation: statistics-homepage
+                metaid: "KORTNAVN:sykefratot"
+              href: "https://www.ssb.no/sykefratot"
+              label: "Statistikkens hjemmeside"
+              type: "text/html"
+            description: A link to something outside the dataset. Created from PX keyword [META-ID](https://github.com/PxTools/PxFileFormat/blob/main/keywords/META-ID.md)
+            properties:
+              extension:
+                type: object
+                properties:
+                  relation:
+                    description: What type of information is the link to ( e.g. about-statistics, statistics-homepage, definition). Like the IANA relations, but for px.
+                    type: string
+                    example: "definitions"
+                  category:
+                    description: Non-null if the link applies to a spesific category. (Typically each contents variable has it own definition, in these cases category holds the contents variable.)
+                    type: string
+                    nullable: true
+                  metaid:
+                    description: Metaid that was the source when creating this Link
+                    type: string
+                    example: "urn:ssb:classification:klass:7"
+                required:
+                  - relation
+                  - metaid
+              href:
+                $ref: "#/components/schemas/href"
+              label:
+                $ref: "#/components/schemas/label"
+              type:
+                description: Content-Type
+                type: string
+                example: "text/html"
+            required:
+              - extension
+              - href
+              - label
+              - type
+            additionalProperties: false
 
-    RelatedLink:
-      type: object
-      description: A link to something outside the dataset. Created from a metaid.
-      properties:
-        extension:
-          type: object
-          properties:
-            relation:
-              description: What type of information is the link to ( e.g. about-statistics, statistics-homepage, definition). Like the IANA relations, but for px.
-              type: string
-              example: "definitions"
-            category:
-              description: Non-null if the link applies to a spesific category. (Typically each contents variable has it own definition, in these cases category holds the contents variable.)
-              type: string
-              nullable: true
-            metaid:
-              description: Metaid that was the source when creating this Link 
-              type: string
-              example: "urn:ssb:classification:klass:7"
-          required:
-            - relation
-            - metaid
-        href:
-          description: The url
-          type: string
-          format: uri
-          example: "https://www.ssb.no/en/klass/klassifikasjoner/7"
-        label:
-          description: The text telling the user where the link leads to
-          type: string
-          example: "Classification for variableLabel."
-        type:
-          description: Contenttype type
-          type: string
-          example: "text/html"
-      required:
-        - extension
-        - href
-        - label
-        - type
     jsonstat-note:
       description: Spesification on json-stat.org -> [here](https://json-stat.org/full/#note)
       type: array
@@ -1603,7 +1614,7 @@ components:
         updated:
           "$ref": "#/components/schemas/updated"
         link:
-          "$ref": "#/components/schemas/jsonstat-link"
+          "$ref": "#/components/schemas/jsonstat-extension-link"
         note:
           description: Note for table
           $ref: "#/components/schemas/jsonstat-note"

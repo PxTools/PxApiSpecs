@@ -27,10 +27,17 @@ namespace PxWeb.Api2.Server.Models
     public class JsonstatLink : IEquatable<JsonstatLink>
     {
         /// <summary>
-        /// Gets or Sets Related
+        /// Gets or Sets Type
         /// </summary>
-        [DataMember(Name="related", EmitDefaultValue=false)]
-        public List<RelatedLink> Related { get; set; }
+        [DataMember(Name="type", EmitDefaultValue=false)]
+        public string? Type { get; set; }
+
+        /// <summary>
+        /// Specification on json-stat.org -&gt; [here](https://json-stat.org/full/#href)
+        /// </summary>
+        /// <value>Specification on json-stat.org -&gt; [here](https://json-stat.org/full/#href)</value>
+        [DataMember(Name="href", EmitDefaultValue=false)]
+        public string? Href { get; set; }
 
         /// <summary>
         /// Returns the string presentation of the object
@@ -40,7 +47,8 @@ namespace PxWeb.Api2.Server.Models
         {
             var sb = new StringBuilder();
             sb.Append("class JsonstatLink {\n");
-            sb.Append("  Related: ").Append(Related).Append("\n");
+            sb.Append("  Type: ").Append(Type).Append("\n");
+            sb.Append("  Href: ").Append(Href).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -78,10 +86,14 @@ namespace PxWeb.Api2.Server.Models
 
             return 
                 (
-                    Related == other.Related ||
-                    Related != null &&
-                    other.Related != null &&
-                    Related.SequenceEqual(other.Related)
+                    Type == other.Type ||
+                    Type != null &&
+                    Type.Equals(other.Type)
+                ) && 
+                (
+                    Href == other.Href ||
+                    Href != null &&
+                    Href.Equals(other.Href)
                 );
         }
 
@@ -95,8 +107,10 @@ namespace PxWeb.Api2.Server.Models
             {
                 var hashCode = 41;
                 // Suitable nullity checks etc, of course :)
-                    if (Related != null)
-                    hashCode = hashCode * 59 + Related.GetHashCode();
+                    if (Type != null)
+                    hashCode = hashCode * 59 + Type.GetHashCode();
+                    if (Href != null)
+                    hashCode = hashCode * 59 + Href.GetHashCode();
                 return hashCode;
             }
         }
