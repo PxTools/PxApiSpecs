@@ -27,10 +27,17 @@ namespace PxWeb.Api2.Server.Models
     public class JsonstatExtensionLink : IEquatable<JsonstatExtensionLink>
     {
         /// <summary>
-        /// Gets or Sets Describedby
+        /// DeprecationWarning, please use RelatedLink instead
         /// </summary>
+        /// <value>DeprecationWarning, please use RelatedLink instead</value>
         [DataMember(Name="describedby", EmitDefaultValue=false)]
         public List<DimensionExtension> Describedby { get; set; }
+
+        /// <summary>
+        /// Gets or Sets Related
+        /// </summary>
+        [DataMember(Name="related", EmitDefaultValue=false)]
+        public List<RelatedLink> Related { get; set; }
 
         /// <summary>
         /// Returns the string presentation of the object
@@ -41,6 +48,7 @@ namespace PxWeb.Api2.Server.Models
             var sb = new StringBuilder();
             sb.Append("class JsonstatExtensionLink {\n");
             sb.Append("  Describedby: ").Append(Describedby).Append("\n");
+            sb.Append("  Related: ").Append(Related).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -82,6 +90,12 @@ namespace PxWeb.Api2.Server.Models
                     Describedby != null &&
                     other.Describedby != null &&
                     Describedby.SequenceEqual(other.Describedby)
+                ) && 
+                (
+                    Related == other.Related ||
+                    Related != null &&
+                    other.Related != null &&
+                    Related.SequenceEqual(other.Related)
                 );
         }
 
@@ -97,6 +111,8 @@ namespace PxWeb.Api2.Server.Models
                 // Suitable nullity checks etc, of course :)
                     if (Describedby != null)
                     hashCode = hashCode * 59 + Describedby.GetHashCode();
+                    if (Related != null)
+                    hashCode = hashCode * 59 + Related.GetHashCode();
                 return hashCode;
             }
         }
