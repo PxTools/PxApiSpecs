@@ -27,14 +27,6 @@ namespace PxWeb.Api2.Server.Models
     public class TableResponse : IEquatable<TableResponse>
     {
         /// <summary>
-        /// The language code (ISO 639) for this response
-        /// </summary>
-        /// <value>The language code (ISO 639) for this response</value>
-        [Required]
-        [DataMember(Name="language", EmitDefaultValue=false)]
-        public string Language { get; set; }
-
-        /// <summary>
         /// Gets or Sets Id
         /// </summary>
         [Required]
@@ -153,6 +145,14 @@ namespace PxWeb.Api2.Server.Models
         public List<Link> Links { get; set; }
 
         /// <summary>
+        /// The language code (ISO 639) for this response
+        /// </summary>
+        /// <value>The language code (ISO 639) for this response</value>
+        [Required]
+        [DataMember(Name="language", EmitDefaultValue=false)]
+        public string Language { get; set; }
+
+        /// <summary>
         /// Returns the string presentation of the object
         /// </summary>
         /// <returns>String presentation of the object</returns>
@@ -160,7 +160,6 @@ namespace PxWeb.Api2.Server.Models
         {
             var sb = new StringBuilder();
             sb.Append("class TableResponse {\n");
-            sb.Append("  Language: ").Append(Language).Append("\n");
             sb.Append("  Id: ").Append(Id).Append("\n");
             sb.Append("  Label: ").Append(Label).Append("\n");
             sb.Append("  Description: ").Append(Description).Append("\n");
@@ -177,6 +176,7 @@ namespace PxWeb.Api2.Server.Models
             sb.Append("  TimeUnit: ").Append(TimeUnit).Append("\n");
             sb.Append("  Paths: ").Append(Paths).Append("\n");
             sb.Append("  Links: ").Append(Links).Append("\n");
+            sb.Append("  Language: ").Append(Language).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -213,11 +213,6 @@ namespace PxWeb.Api2.Server.Models
             if (ReferenceEquals(this, other)) return true;
 
             return 
-                (
-                    Language == other.Language ||
-                    Language != null &&
-                    Language.Equals(other.Language)
-                ) && 
                 (
                     Id == other.Id ||
                     Id != null &&
@@ -301,6 +296,11 @@ namespace PxWeb.Api2.Server.Models
                     Links != null &&
                     other.Links != null &&
                     Links.SequenceEqual(other.Links)
+                ) && 
+                (
+                    Language == other.Language ||
+                    Language != null &&
+                    Language.Equals(other.Language)
                 );
         }
 
@@ -314,8 +314,6 @@ namespace PxWeb.Api2.Server.Models
             {
                 var hashCode = 41;
                 // Suitable nullity checks etc, of course :)
-                    if (Language != null)
-                    hashCode = hashCode * 59 + Language.GetHashCode();
                     if (Id != null)
                     hashCode = hashCode * 59 + Id.GetHashCode();
                     if (Label != null)
@@ -348,6 +346,8 @@ namespace PxWeb.Api2.Server.Models
                     hashCode = hashCode * 59 + Paths.GetHashCode();
                     if (Links != null)
                     hashCode = hashCode * 59 + Links.GetHashCode();
+                    if (Language != null)
+                    hashCode = hashCode * 59 + Language.GetHashCode();
                 return hashCode;
             }
         }
