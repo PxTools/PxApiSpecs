@@ -27,6 +27,19 @@ namespace PxWeb.Api2.Server.Models
     public class SelectionResponse : IEquatable<SelectionResponse>
     {
         /// <summary>
+        /// Gets or Sets Selection
+        /// </summary>
+        [Required]
+        [DataMember(Name="selection", EmitDefaultValue=false)]
+        public List<VariableSelection> Selection { get; set; }
+
+        /// <summary>
+        /// Gets or Sets Placement
+        /// </summary>
+        [DataMember(Name="placement", EmitDefaultValue=false)]
+        public VariablePlacementType? Placement { get; set; }
+
+        /// <summary>
         /// The language code for the language used in this response
         /// </summary>
         /// <value>The language code for the language used in this response</value>
@@ -43,19 +56,6 @@ namespace PxWeb.Api2.Server.Models
         public List<Link> Links { get; set; }
 
         /// <summary>
-        /// Gets or Sets Selection
-        /// </summary>
-        [Required]
-        [DataMember(Name="selection", EmitDefaultValue=false)]
-        public List<VariableSelection> Selection { get; set; }
-
-        /// <summary>
-        /// Gets or Sets Placement
-        /// </summary>
-        [DataMember(Name="placement", EmitDefaultValue=false)]
-        public VariablePlacementType? Placement { get; set; }
-
-        /// <summary>
         /// Returns the string presentation of the object
         /// </summary>
         /// <returns>String presentation of the object</returns>
@@ -63,10 +63,10 @@ namespace PxWeb.Api2.Server.Models
         {
             var sb = new StringBuilder();
             sb.Append("class SelectionResponse {\n");
-            sb.Append("  Language: ").Append(Language).Append("\n");
-            sb.Append("  Links: ").Append(Links).Append("\n");
             sb.Append("  Selection: ").Append(Selection).Append("\n");
             sb.Append("  Placement: ").Append(Placement).Append("\n");
+            sb.Append("  Language: ").Append(Language).Append("\n");
+            sb.Append("  Links: ").Append(Links).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -104,17 +104,6 @@ namespace PxWeb.Api2.Server.Models
 
             return 
                 (
-                    Language == other.Language ||
-                    Language != null &&
-                    Language.Equals(other.Language)
-                ) && 
-                (
-                    Links == other.Links ||
-                    Links != null &&
-                    other.Links != null &&
-                    Links.SequenceEqual(other.Links)
-                ) && 
-                (
                     Selection == other.Selection ||
                     Selection != null &&
                     other.Selection != null &&
@@ -124,6 +113,17 @@ namespace PxWeb.Api2.Server.Models
                     Placement == other.Placement ||
                     Placement != null &&
                     Placement.Equals(other.Placement)
+                ) && 
+                (
+                    Language == other.Language ||
+                    Language != null &&
+                    Language.Equals(other.Language)
+                ) && 
+                (
+                    Links == other.Links ||
+                    Links != null &&
+                    other.Links != null &&
+                    Links.SequenceEqual(other.Links)
                 );
         }
 
@@ -137,14 +137,14 @@ namespace PxWeb.Api2.Server.Models
             {
                 var hashCode = 41;
                 // Suitable nullity checks etc, of course :)
-                    if (Language != null)
-                    hashCode = hashCode * 59 + Language.GetHashCode();
-                    if (Links != null)
-                    hashCode = hashCode * 59 + Links.GetHashCode();
                     if (Selection != null)
                     hashCode = hashCode * 59 + Selection.GetHashCode();
                     if (Placement != null)
                     hashCode = hashCode * 59 + Placement.GetHashCode();
+                    if (Language != null)
+                    hashCode = hashCode * 59 + Language.GetHashCode();
+                    if (Links != null)
+                    hashCode = hashCode * 59 + Links.GetHashCode();
                 return hashCode;
             }
         }
