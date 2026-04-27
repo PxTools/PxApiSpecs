@@ -1365,7 +1365,7 @@ components:
     jsonstat-link:
       type: object
       deprecated: true
-      description: DeprecationWarning, please use jsonstat-extension-link instead
+      description: DeprecationWarning, please do not use jsonstat-link, use jsonstat-extension-link instead
       additionalProperties:
         type: array
         items:
@@ -1383,7 +1383,7 @@ components:
         describedby:
           type: array
           deprecated: true
-          description: DeprecationWarning, please use RelatedLink instead
+          description: DeprecationWarning, please do not use items from describedby, use items from related instead
           items:
             type: object
             title: DimensionExtension
