@@ -1,0 +1,6 @@
+additionalProperties:
+  licenseName: Apache-2.0
+  npmName: pxwebapi-client
+  #npmRepository:
+  npmVersion: 0.0.1
+  snapshot: false
