@@ -127,8 +127,8 @@ paths:
         - Tables
       summary: Get the default selection for table by {id}.
       description: |
-            This is a technical parameter that is used by PxWeb for initial loading of tables.
-            Get information about the default selection for the /tables/{id}/data endpoint.
+        This is a technical parameter that is used by PxWeb for initial loading of tables.
+        Get information about the default selection for the /tables/{id}/data endpoint.
       operationId: GetDefaultSelection
       parameters:
         - $ref: "#/components/parameters/lang"
@@ -587,7 +587,6 @@ components:
           items:
             $ref: "#/components/schemas/Link"
 
-
     SavedQuery:
       type: object
       required:
@@ -800,6 +799,19 @@ components:
           type: string
           description: The language code (ISO 639) for this response
 
+    Variable:
+      type: object
+      required:
+        - "code"
+        - "label"
+      properties:
+        code:
+          type: string
+          description: The code for the variable
+        label:
+          type: string
+          description: The textual representation of the variable
+
     PathElement:
       type: object
       required:
@@ -826,6 +838,7 @@ components:
         - "firstPeriod"
         - "lastPeriod"
         - "variableNames"
+        - "variables"
         - "links"
       properties:
         id:
@@ -867,9 +880,15 @@ components:
           $ref: "#/components/schemas/TableCategory"
         variableNames:
           type: array
-          description: List of varibles name
+          deprecated: true
+          description: DeprecationWarning, please do not use `variableNames`, use `variables` instead
           items:
             type: string
+        variables:
+          type: array
+          description: List of variables
+          items:
+            $ref: "#/components/schemas/Variable"
         discontinued:
           $ref: "#/components/schemas/Discontinued"
         source:
@@ -955,7 +974,6 @@ components:
           type: array
           items:
             $ref: "#/components/schemas/Link"
-
 
     Note:
       type: object
@@ -1400,7 +1418,7 @@ components:
           items:
             type: object
             title: RelatedLink
-            example: 
+            example:
               extension:
                 relation: statistics-homepage
                 metaid: "KORTNAVN:sykefratot"
@@ -1563,11 +1581,11 @@ components:
       description: Indicates the time scale for the variable.
       type: string
       enum:
-      - Annual
-      - Quarterly
-      - Monthly
-      - Weekly
-      - Other
+        - Annual
+        - Quarterly
+        - Monthly
+        - Weekly
+        - Other
 
     BasePeriod:
       description: Base period for, for instance index series. Is shown with the footnote. If there is a contents variable the keyword is repeated for each value of the contents variable.
