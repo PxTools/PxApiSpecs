@@ -95,12 +95,20 @@ namespace PxWeb.Api2.Server.Models
         public TableCategory Category { get; set; }
 
         /// <summary>
-        /// List of varibles name
+        /// DeprecationWarning, please do not use &#x60;variableNames&#x60;, use &#x60;variables&#x60; instead
         /// </summary>
-        /// <value>List of varibles name</value>
+        /// <value>DeprecationWarning, please do not use &#x60;variableNames&#x60;, use &#x60;variables&#x60; instead</value>
         [Required]
         [DataMember(Name="variableNames", EmitDefaultValue=false)]
         public List<string> VariableNames { get; set; }
+
+        /// <summary>
+        /// List of variables
+        /// </summary>
+        /// <value>List of variables</value>
+        [Required]
+        [DataMember(Name="variables", EmitDefaultValue=false)]
+        public List<Variable> Variables { get; set; }
 
         /// <summary>
         /// If the table is discontinued or not. That is if it no longer updated with new figures.
@@ -162,6 +170,7 @@ namespace PxWeb.Api2.Server.Models
             sb.Append("  LastPeriod: ").Append(LastPeriod).Append("\n");
             sb.Append("  Category: ").Append(Category).Append("\n");
             sb.Append("  VariableNames: ").Append(VariableNames).Append("\n");
+            sb.Append("  Variables: ").Append(Variables).Append("\n");
             sb.Append("  Discontinued: ").Append(Discontinued).Append("\n");
             sb.Append("  Source: ").Append(Source).Append("\n");
             sb.Append("  SubjectCode: ").Append(SubjectCode).Append("\n");
@@ -257,6 +266,12 @@ namespace PxWeb.Api2.Server.Models
                     VariableNames.SequenceEqual(other.VariableNames)
                 ) && 
                 (
+                    Variables == other.Variables ||
+                    Variables != null &&
+                    other.Variables != null &&
+                    Variables.SequenceEqual(other.Variables)
+                ) && 
+                (
                     Discontinued == other.Discontinued ||
                     Discontinued != null &&
                     Discontinued.Equals(other.Discontinued)
@@ -320,6 +335,8 @@ namespace PxWeb.Api2.Server.Models
                     hashCode = hashCode * 59 + Category.GetHashCode();
                     if (VariableNames != null)
                     hashCode = hashCode * 59 + VariableNames.GetHashCode();
+                    if (Variables != null)
+                    hashCode = hashCode * 59 + Variables.GetHashCode();
                     if (Discontinued != null)
                     hashCode = hashCode * 59 + Discontinued.GetHashCode();
                     if (Source != null)

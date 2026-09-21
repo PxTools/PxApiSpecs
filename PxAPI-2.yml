@@ -799,6 +799,19 @@ components:
           type: string
           description: The language code (ISO 639) for this response
 
+    Variable:
+      type: object
+      required:
+        - "code"
+        - "label"
+      properties:
+        code:
+          type: string
+          description: The code for the variable
+        label:
+          type: string
+          description: The textual representation of the variable
+
     PathElement:
       type: object
       required:
@@ -875,14 +888,7 @@ components:
           type: array
           description: List of variables
           items:
-            type: object
-            properties:
-              id:
-                type: string
-                description: The code for the variable
-              label:
-                type: string
-                description: The display label for the variable
+            $ref: "#/components/schemas/Variable"
         discontinued:
           $ref: "#/components/schemas/Discontinued"
         source:
